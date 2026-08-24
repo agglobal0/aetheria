@@ -1,0 +1,12 @@
+{
+  "name": "aetheria-monika-chopra",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Prof. Monika Chopra - Life Lessons & Ethics Editorial Platform",
+  "scripts": {
+    "start": "node server/app.js",
+    "build": "cd client && npm run build",
+    "server": "cd server && npm start",
+    "postinstall": "cd server && npm install"
+  }
+}
