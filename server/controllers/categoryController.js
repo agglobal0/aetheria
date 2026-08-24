@@ -4,10 +4,10 @@ async function getAllCategories(req, res, next) {
   try {
     const pool = getPool();
     const [rows] = await pool.query(`
-      SELECT c.*, COUNT(e.id) as essay_count 
+      SELECT c.id, c.name, c.slug, c.description, c.accent_color, c.created_at, COUNT(e.id) as essay_count 
       FROM categories c 
       LEFT JOIN essays e ON e.category_id = c.id AND e.status = 'published'
-      GROUP BY c.id 
+      GROUP BY c.id, c.name, c.slug, c.description, c.accent_color, c.created_at
       ORDER BY c.name ASC
     `);
     res.json({ success: true, data: rows });
@@ -21,11 +21,11 @@ async function getCategoryBySlug(req, res, next) {
     const { slug } = req.params;
     const pool = getPool();
     const [rows] = await pool.query(`
-      SELECT c.*, COUNT(e.id) as essay_count 
+      SELECT c.id, c.name, c.slug, c.description, c.accent_color, c.created_at, COUNT(e.id) as essay_count 
       FROM categories c 
       LEFT JOIN essays e ON e.category_id = c.id AND e.status = 'published'
       WHERE c.slug = ?
-      GROUP BY c.id
+      GROUP BY c.id, c.name, c.slug, c.description, c.accent_color, c.created_at
     `, [slug]);
 
     if (rows.length === 0) {
