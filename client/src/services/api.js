@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-let rawBaseUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+const PRODUCTION_RENDER_URL = 'https://aetheria-4r21.onrender.com/api';
+let rawBaseUrl = import.meta.env.VITE_API_URL || PRODUCTION_RENDER_URL;
 rawBaseUrl = rawBaseUrl.trim().replace(/\/+$/, '');
 if (!rawBaseUrl.endsWith('/api')) {
   rawBaseUrl += '/api';
