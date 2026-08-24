@@ -33,15 +33,30 @@ async function seedDatabase(pool) {
       }
     }
 
-    // 2. Seed Default Admin User
-    const [existingUsers] = await pool.query('SELECT COUNT(*) as count FROM users');
-    if (existingUsers[0].count === 0) {
-      console.log('[Seed] Creating default admin user...');
-      const hashedPassword = await bcrypt.hash('adminpassword123', 10);
-      await pool.query(
-        'INSERT IGNORE INTO users (name, email, password, role) VALUES (?, ?, ?, ?)',
-        ['Editor in Chief', 'admin@aetheria.com', hashedPassword, 'admin']
-      );
+    // 2. Seed Default Admin User (Ensure admin@aetheria.com exists)
+    const [existingAdmin] = await pool.query('SELECT id FROM users WHERE email = ?', ['admin@aetheria.com']);
+    const hashedPassword = await bcrypt.hash('adminpassword123', 10);
+
+    if (existingAdmin.length === 0) {
+      console.log('[Seed] Creating default admin user (admin@aetheria.com)...');
+      try {
+        await pool.query(
+          'INSERT INTO users (name, email, password, password_hash, first_name, last_name, role_id, role) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
+          ['Editor in Chief', 'admin@aetheria.com', hashedPassword, hashedPassword, 'Editor', 'in Chief', 1, 'admin']
+        );
+      } catch (err) {
+        await pool.query(
+          'INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, ?)',
+          ['Editor in Chief', 'admin@aetheria.com', hashedPassword, 'admin']
+        );
+      }
+    } else {
+      console.log('[Seed] Resetting admin user password for admin@aetheria.com...');
+      try {
+        await pool.query('UPDATE users SET password = ?, password_hash = ?, role = ? WHERE email = ?', [hashedPassword, hashedPassword, 'admin', 'admin@aetheria.com']);
+      } catch (err) {
+        await pool.query('UPDATE users SET password = ?, role = ? WHERE email = ?', [hashedPassword, 'admin', 'admin@aetheria.com']);
+      }
     }
 
     // 3. Seed & Update Editorial Author (Prof. Monika Chopra)

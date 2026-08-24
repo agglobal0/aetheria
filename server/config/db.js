@@ -102,6 +102,15 @@ async function initDB() {
 async function createTablesIfNotExist() {
   if (!pool) return;
 
+  // Auto-migration for users table if it existed prior with different columns
+  try { await pool.query("ALTER TABLE users ADD COLUMN name VARCHAR(100) DEFAULT 'User'"); } catch (e) {}
+  try { await pool.query("ALTER TABLE users ADD COLUMN password VARCHAR(255)"); } catch (e) {}
+  try { await pool.query("ALTER TABLE users ADD COLUMN role ENUM('admin', 'editor', 'user') DEFAULT 'user'"); } catch (e) {}
+  try { await pool.query("ALTER TABLE users MODIFY COLUMN password_hash VARCHAR(255) NULL"); } catch (e) {}
+  try { await pool.query("ALTER TABLE users MODIFY COLUMN first_name VARCHAR(100) NULL"); } catch (e) {}
+  try { await pool.query("ALTER TABLE users MODIFY COLUMN last_name VARCHAR(100) NULL"); } catch (e) {}
+  try { await pool.query("ALTER TABLE users MODIFY COLUMN role_id INT NULL"); } catch (e) {}
+
   const tableDDLs = [
     `CREATE TABLE IF NOT EXISTS users (
       id INT AUTO_INCREMENT PRIMARY KEY,
