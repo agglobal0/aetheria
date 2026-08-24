@@ -9,7 +9,7 @@ services:
       - key: NODE_ENV
         value: production
       - key: DB_HOST
-        value: mysql-36d17ed-agglobalfacts-7141.aivencloud.com
+        value: mysql-36d17ed-agglobalfacts-7141.h.aivencloud.com
       - key: DB_PORT
         value: "25750"
       - key: DB_USER
