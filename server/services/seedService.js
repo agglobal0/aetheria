@@ -97,6 +97,7 @@ async function seedDatabase(pool) {
       const catMap = {};
       cats.forEach(c => { catMap[c.slug] = c.id; });
 
+      const primaryAuthorId = monikaAuthor[0]?.id || 1;
       const authMap = {};
       auths.forEach(a => { authMap[a.slug] = a.id; });
 
@@ -561,7 +562,7 @@ async function seedDatabase(pool) {
           ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'published', ?, ?, ?, ?, ?, NOW())`,
           [
             item.title, item.slug, item.subtitle, item.excerpt, item.content, item.featured_image,
-            item.author_id, item.category_id, item.featured, item.reading_time, item.views,
+            item.author_id || primaryAuthorId, item.category_id, item.featured, item.reading_time, item.views,
             item.seo_title, item.seo_description
           ]
         );
