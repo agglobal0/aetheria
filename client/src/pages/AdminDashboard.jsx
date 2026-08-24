@@ -545,22 +545,30 @@ export default function AdminDashboard() {
       {activeTab === 'contact' && (
         <div>
           <h2 className="serif-heading" style={{ fontSize: '1.6rem', marginBottom: '1.5rem' }}>Editorial Contact Inbox</h2>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-            {messages.map(m => (
-              <div key={m.id} style={{ padding: '1.5rem', backgroundColor: 'var(--bg-secondary)', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
-                  <div>
-                    <strong style={{ fontSize: '1.05rem', color: 'var(--text-primary)' }}>{m.subject}</strong>
-                    <div style={{ fontSize: '0.825rem', color: 'var(--text-muted)' }}>From: {m.name} ({m.email}) • {formatDate(m.created_at)}</div>
+          {messages.length === 0 ? (
+            <div style={{ padding: '3.5rem 2rem', textAlign: 'center', backgroundColor: 'var(--bg-secondary)', borderRadius: 'var(--radius-md)', border: '1px dashed var(--border-color)', color: 'var(--text-muted)' }}>
+              <Inbox size={44} style={{ marginBottom: '0.75rem', opacity: 0.5 }} />
+              <p style={{ fontSize: '1.05rem', fontWeight: '600', color: 'var(--text-primary)', marginBottom: '0.25rem' }}>No messages in inbox</p>
+              <p style={{ fontSize: '0.875rem' }}>Messages submitted through the Editorial Correspondence contact form will appear here.</p>
+            </div>
+          ) : (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              {messages.map(m => (
+                <div key={m.id} style={{ padding: '1.5rem', backgroundColor: 'var(--bg-secondary)', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
+                    <div>
+                      <strong style={{ fontSize: '1.05rem', color: 'var(--text-primary)' }}>{m.subject}</strong>
+                      <div style={{ fontSize: '0.825rem', color: 'var(--text-muted)' }}>From: {m.name} ({m.email}) • {formatDate(m.created_at)}</div>
+                    </div>
+                    <button onClick={() => handleDeleteMessage(m.id)} className="btn btn-outline" style={{ padding: '0.35rem 0.6rem', color: 'var(--accent-ethics)' }}><Trash2 size={14} /></button>
                   </div>
-                  <button onClick={() => handleDeleteMessage(m.id)} className="btn btn-outline" style={{ padding: '0.35rem 0.6rem', color: 'var(--accent-ethics)' }}><Trash2 size={14} /></button>
+                  <p style={{ fontSize: '0.925rem', color: 'var(--text-secondary)', lineHeight: '1.6', marginTop: '0.75rem', whiteSpace: 'pre-line' }}>
+                    {m.message}
+                  </p>
                 </div>
-                <p style={{ fontSize: '0.925rem', color: 'var(--text-secondary)', lineHeight: '1.6', marginTop: '0.75rem', whiteSpace: 'pre-line' }}>
-                  {m.message}
-                </p>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
         </div>
       )}
 
