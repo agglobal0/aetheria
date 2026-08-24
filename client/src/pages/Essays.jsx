@@ -1,0 +1,238 @@
+import React, { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
+import { Search, LayoutGrid, List, SlidersHorizontal } from 'lucide-react';
+import { essayService, categoryService } from '../services/api';
+import EssayCard from '../components/EssayCard';
+import Pagination from '../components/Pagination';
+import LoadingSkeleton from '../components/LoadingSkeleton';
+import EmptyState from '../components/EmptyState';
+
+export default function Essays() {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const initialCategory = searchParams.get('category') || '';
+  const initialSearch = searchParams.get('search') || '';
+
+  const [essays, setEssays] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [selectedCategory, setSelectedCategory] = useState(initialCategory);
+  const [searchQuery, setSearchQuery] = useState(initialSearch);
+  const [sortBy, setSortBy] = useState('newest');
+  const [layout, setLayout] = useState('grid');
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+
+  useEffect(() => {
+    async function fetchCategories() {
+      try {
+        const res = await categoryService.getAll();
+        if (res.data.success) {
+          setCategories(res.data.data);
+        }
+      } catch (err) {
+        console.error('Failed to fetch categories:', err);
+      }
+    }
+    fetchCategories();
+  }, []);
+
+  useEffect(() => {
+    async function fetchEssays() {
+      setLoading(true);
+      try {
+        const res = await essayService.getAll({
+          category: selectedCategory,
+          q: searchQuery,
+          sort: sortBy,
+          page,
+          limit: 9,
+          status: 'published'
+        });
+
+        if (res.data.success) {
+          setEssays(res.data.data);
+          setTotalPages(res.data.pagination.totalPages);
+        }
+      } catch (err) {
+        console.error('Failed to fetch essays:', err);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchEssays();
+  }, [selectedCategory, searchQuery, sortBy, page]);
+
+  const handleCategorySelect = (slug) => {
+    setSelectedCategory(slug);
+    setPage(1);
+    const newParams = new URLSearchParams(searchParams);
+    if (slug) newParams.set('category', slug);
+    else newParams.delete('category');
+    setSearchParams(newParams);
+  };
+
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    setPage(1);
+    const newParams = new URLSearchParams(searchParams);
+    if (searchQuery) newParams.set('search', searchQuery);
+    else newParams.delete('search');
+    setSearchParams(newParams);
+  };
+
+  return (
+    <div className="container" style={{ padding: '3rem 1.5rem 5rem 1.5rem' }}>
+
+      {/* Header */}
+      <div style={{ marginBottom: '3rem', textAlign: 'center' }}>
+        <h1 className="serif-heading" style={{ fontSize: '3rem', marginBottom: '0.75rem' }}>
+          Academic Essays
+        </h1>
+        <p style={{ fontFamily: 'var(--font-serif)', fontSize: '1.2rem', color: 'var(--text-secondary)', maxWidth: '580px', margin: '0 auto' }}>
+          Long-form academic and editorial essays by Professor Monika Chopra exploring ethics, human behaviour, technology, and life reflections.
+        </p>
+      </div>
+
+      {/* Filter & Search Bar */}
+      <div style={{
+        backgroundColor: 'var(--bg-secondary)',
+        border: '1px solid var(--border-color)',
+        borderRadius: 'var(--radius-md)',
+        padding: '1.25rem 1.5rem',
+        marginBottom: '3rem',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '1.25rem'
+      }}>
+
+        {/* Search & Sort Controls */}
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', alignItems: 'center', justifyContent: 'space-between' }}>
+
+          <form onSubmit={handleSearchSubmit} style={{ flex: '1', minWidth: '260px', display: 'flex', gap: '0.5rem' }}>
+            <div style={{ position: 'relative', width: '100%' }}>
+              <Search size={18} style={{ position: 'absolute', left: '1rem', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }} />
+              <input
+                type="text"
+                placeholder="Search essays by keyword..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                style={{
+                  width: '100%',
+                  padding: '0.65rem 1rem 0.65rem 2.5rem',
+                  fontSize: '0.9rem',
+                  borderRadius: 'var(--radius-sm)',
+                  border: '1px solid var(--border-color)',
+                  backgroundColor: 'var(--bg-input)',
+                  color: 'var(--text-primary)',
+                  outline: 'none'
+                }}
+              />
+            </div>
+            <button type="submit" className="btn btn-outline" style={{ padding: '0.65rem 1rem' }}>
+              Search
+            </button>
+          </form>
+
+          <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+            {/* Sort Dropdown */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
+              <SlidersHorizontal size={16} />
+              <select
+                value={sortBy}
+                onChange={(e) => { setSortBy(e.target.value); setPage(1); }}
+                style={{
+                  padding: '0.6rem 0.85rem',
+                  borderRadius: 'var(--radius-sm)',
+                  border: '1px solid var(--border-color)',
+                  backgroundColor: 'var(--bg-input)',
+                  color: 'var(--text-primary)',
+                  fontSize: '0.85rem',
+                  outline: 'none',
+                  cursor: 'pointer'
+                }}
+              >
+                <option value="newest">Sort by: Newest First</option>
+                <option value="oldest">Sort by: Oldest First</option>
+                <option value="views">Sort by: Most Viewed</option>
+              </select>
+            </div>
+
+            {/* Layout Toggle */}
+            <div style={{ display: 'flex', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-sm)', overflow: 'hidden' }}>
+              <button
+                onClick={() => setLayout('grid')}
+                style={{
+                  padding: '0.5rem 0.75rem',
+                  backgroundColor: layout === 'grid' ? 'var(--bg-tertiary)' : 'transparent',
+                  color: 'var(--text-primary)'
+                }}
+                title="Grid View"
+              >
+                <LayoutGrid size={18} />
+              </button>
+              <button
+                onClick={() => setLayout('list')}
+                style={{
+                  padding: '0.5rem 0.75rem',
+                  backgroundColor: layout === 'list' ? 'var(--bg-tertiary)' : 'transparent',
+                  color: 'var(--text-primary)'
+                }}
+                title="List View"
+              >
+                <List size={18} />
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+        {/* Category Pills */}
+        <div style={{ display: 'flex', gap: '0.6rem', flexWrap: 'wrap', alignItems: 'center', paddingTop: '0.5rem', borderTop: '1px solid var(--border-color)' }}>
+          <button
+            onClick={() => handleCategorySelect('')}
+            className={`btn ${selectedCategory === '' ? 'btn-primary' : 'btn-outline'}`}
+            style={{ padding: '0.4rem 1rem', fontSize: '0.825rem', borderRadius: 'var(--radius-full)' }}
+          >
+            All Essays
+          </button>
+
+          {categories.map(cat => (
+            <button
+              key={cat.id}
+              onClick={() => handleCategorySelect(cat.slug)}
+              className={`btn ${selectedCategory === cat.slug ? 'btn-primary' : 'btn-outline'}`}
+              style={{ padding: '0.4rem 1rem', fontSize: '0.825rem', borderRadius: 'var(--radius-full)' }}
+            >
+              {cat.name}
+            </button>
+          ))}
+        </div>
+
+      </div>
+
+      {/* Essays Stream */}
+      {loading ? (
+        <LoadingSkeleton type="grid" count={6} />
+      ) : essays.length === 0 ? (
+        <EmptyState
+          title="No essays found"
+          description="Try adjusting your search terms or category filter."
+          actionText="Browse All Essays"
+          actionLink="/essays"
+        />
+      ) : (
+        <>
+          <div className={layout === 'grid' ? 'grid-3' : ''}>
+            {essays.map(essay => (
+              <EssayCard key={essay.id} essay={essay} layout={layout} />
+            ))}
+          </div>
+
+          <Pagination page={page} totalPages={totalPages} onPageChange={(p) => setPage(p)} />
+        </>
+      )}
+
+    </div>
+  );
+}

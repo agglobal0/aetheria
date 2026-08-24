@@ -1,0 +1,406 @@
+/* ==========================================================================
+   Aetheria Editorial Design System — Motivational Ethics & Life Lessons
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+:root {
+  /* Fonts */
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-title: 'Cinzel', 'Playfair Display', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Default Palette: Warm Amber Wisdom (Light Mode) */
+  --bg-primary: #FAF6F0;
+  --bg-secondary: #FFFFFF;
+  --bg-tertiary: #F3EBE0;
+  --bg-input: #FFFFFF;
+  --text-primary: #2C221E;
+  --text-secondary: #6B5D54;
+  --text-muted: #9E8E84;
+  --border-color: #E8DEC3;
+  --border-hover: #D4C3A3;
+  --accent-primary: #B86B27;
+  --accent-hover: #96531B;
+  --accent-light: rgba(184, 107, 39, 0.12);
+  --nav-bg: rgba(250, 246, 240, 0.92);
+  --hero-glow: radial-gradient(circle at 50% 30%, rgba(212, 160, 89, 0.15), transparent 70%);
+
+  /* Category Accents */
+  --accent-ethics: #9B2C3B;
+  --accent-ethics-bg: rgba(155, 44, 59, 0.09);
+  --accent-human-behaviour: #2563EB;
+  --accent-human-behaviour-bg: rgba(37, 99, 235, 0.09);
+  --accent-life-reflection: #B86B27;
+  --accent-life-reflection-bg: rgba(184, 107, 39, 0.09);
+  --accent-technology: #0D9488;
+  --accent-technology-bg: rgba(13, 148, 136, 0.09);
+
+  /* Shadows */
+  --shadow-sm: 0 2px 10px rgba(184, 107, 39, 0.04);
+  --shadow-md: 0 8px 26px rgba(44, 34, 30, 0.06);
+  --shadow-lg: 0 16px 45px rgba(44, 34, 30, 0.09);
+  --shadow-gold: 0 8px 30px rgba(184, 107, 39, 0.18);
+
+  /* Layout */
+  --max-width: 1240px;
+  --reading-width: 740px;
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-full: 9999px;
+
+  /* Transitions */
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ==========================================================================
+   PALETTE SCHEMES (data-palette)
+   ========================================================================== */
+
+/* 1. Warm Amber Wisdom (Default Light & Dark) */
+[data-palette="amber"] {
+  --bg-primary: #FAF6F0;
+  --bg-secondary: #FFFFFF;
+  --bg-tertiary: #F3EBE0;
+  --text-primary: #2C221E;
+  --text-secondary: #6B5D54;
+  --border-color: #E8DEC3;
+  --accent-primary: #B86B27;
+  --accent-hover: #96531B;
+  --accent-light: rgba(184, 107, 39, 0.12);
+  --hero-glow: radial-gradient(circle at 50% 30%, rgba(212, 160, 89, 0.18), transparent 70%);
+}
+
+[data-theme="dark"][data-palette="amber"],
+[data-theme="dark"] {
+  --bg-primary: #141210;
+  --bg-secondary: #1E1A16;
+  --bg-tertiary: #28231D;
+  --bg-input: #231E19;
+  --text-primary: #F7ECE1;
+  --text-secondary: #C4B5A5;
+  --text-muted: #857667;
+  --border-color: #383026;
+  --border-hover: #54483B;
+  --accent-primary: #E09F53;
+  --accent-hover: #F2B46D;
+  --accent-light: rgba(224, 159, 83, 0.18);
+  --nav-bg: rgba(20, 18, 16, 0.92);
+  --hero-glow: radial-gradient(circle at 50% 30%, rgba(224, 159, 83, 0.12), transparent 70%);
+}
+
+/* 2. Emerald Growth (Forest & Gold) */
+[data-palette="emerald"] {
+  --bg-primary: #F4F7F4;
+  --bg-secondary: #FFFFFF;
+  --bg-tertiary: #E6EFE7;
+  --text-primary: #122B1E;
+  --text-secondary: #426050;
+  --border-color: #D0DFC3;
+  --accent-primary: #1B6B48;
+  --accent-hover: #125235;
+  --accent-light: rgba(27, 107, 72, 0.12);
+  --hero-glow: radial-gradient(circle at 50% 30%, rgba(27, 107, 72, 0.15), transparent 70%);
+}
+
+[data-theme="dark"][data-palette="emerald"] {
+  --bg-primary: #0B1712;
+  --bg-secondary: #13241C;
+  --bg-tertiary: #1A3026;
+  --bg-input: #152B20;
+  --text-primary: #E4F5ED;
+  --text-secondary: #A1C7B5;
+  --text-muted: #648D7A;
+  --border-color: #244537;
+  --border-hover: #3A6652;
+  --accent-primary: #52C993;
+  --accent-hover: #75DCAB;
+  --accent-light: rgba(82, 201, 147, 0.18);
+  --nav-bg: rgba(11, 23, 18, 0.92);
+  --hero-glow: radial-gradient(circle at 50% 30%, rgba(82, 201, 147, 0.12), transparent 70%);
+}
+
+/* 3. Midnight Starlight (Royal Velvet & Gold) */
+[data-palette="midnight"] {
+  --bg-primary: #0F172A;
+  --bg-secondary: #1E293B;
+  --bg-tertiary: #334155;
+  --bg-input: #1E293B;
+  --text-primary: #F8FAFC;
+  --text-secondary: #94A3B8;
+  --text-muted: #64748B;
+  --border-color: #334155;
+  --border-hover: #475569;
+  --accent-primary: #F59E0B;
+  --accent-hover: #FBBF24;
+  --accent-light: rgba(245, 158, 11, 0.18);
+  --nav-bg: rgba(15, 23, 42, 0.92);
+  --hero-glow: radial-gradient(circle at 50% 30%, rgba(245, 158, 11, 0.15), transparent 70%);
+}
+
+/* 4. Terracotta Reflection (Earth & Warm Rose) */
+[data-palette="terracotta"] {
+  --bg-primary: #FAF5F3;
+  --bg-secondary: #FFFFFF;
+  --bg-tertiary: #F5EAE6;
+  --text-primary: #381E19;
+  --text-secondary: #704B44;
+  --border-color: #EBDAD5;
+  --accent-primary: #C05638;
+  --accent-hover: #9E4025;
+  --accent-light: rgba(192, 86, 56, 0.12);
+  --hero-glow: radial-gradient(circle at 50% 30%, rgba(192, 86, 56, 0.15), transparent 70%);
+}
+
+[data-theme="dark"][data-palette="terracotta"] {
+  --bg-primary: #1C1210;
+  --bg-secondary: #2B1D19;
+  --bg-tertiary: #382723;
+  --bg-input: #2D1E1A;
+  --text-primary: #FDF0ED;
+  --text-secondary: #D4B6B0;
+  --text-muted: #8E6D66;
+  --border-color: #45302B;
+  --border-hover: #634741;
+  --accent-primary: #E87A5D;
+  --accent-hover: #F2957C;
+  --accent-light: rgba(232, 122, 93, 0.18);
+  --nav-bg: rgba(28, 18, 16, 0.92);
+  --hero-glow: radial-gradient(circle at 50% 30%, rgba(232, 122, 93, 0.12), transparent 70%);
+}
+
+
+/* ==========================================================================
+   GLOBAL BASE & TYPOGRAPHY
+   ========================================================================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.65;
+  transition: background-color var(--transition-normal), color var(--transition-normal);
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+button {
+  font-family: var(--font-sans);
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+input, textarea, select {
+  font-family: var(--font-sans);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Utility Containers */
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.reading-container {
+  width: 100%;
+  max-width: var(--reading-width);
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+
+/* Editorial Typography */
+.serif-heading {
+  font-family: var(--font-title);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+.editorial-body {
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+  line-height: 1.88;
+  color: var(--text-primary);
+}
+
+.editorial-body p {
+  margin-bottom: 1.75rem;
+}
+
+.editorial-body h2 {
+  font-family: var(--font-title);
+  font-size: 1.85rem;
+  margin-top: 2.75rem;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+}
+
+.editorial-quote {
+  border-left: 3px solid var(--accent-primary);
+  padding: 1.5rem 0 1.5rem 1.75rem;
+  margin: 2.5rem 0;
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  font-style: italic;
+  line-height: 1.6;
+  color: var(--text-primary);
+  background-color: var(--accent-light);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+}
+
+/* Category Badges */
+.category-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.85rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: var(--radius-full);
+  transition: all var(--transition-fast);
+}
+
+.category-ethics {
+  color: var(--accent-ethics);
+  background-color: var(--accent-ethics-bg);
+}
+.category-human-behaviour {
+  color: var(--accent-human-behaviour);
+  background-color: var(--accent-human-behaviour-bg);
+}
+.category-life-reflection {
+  color: var(--accent-life-reflection);
+  background-color: var(--accent-life-reflection-bg);
+}
+.category-technology {
+  color: var(--accent-technology);
+  background-color: var(--accent-technology-bg);
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.85rem 1.65rem;
+  font-size: 0.925rem;
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-normal);
+}
+
+.btn-primary {
+  background-color: var(--accent-primary);
+  color: #FFFFFF;
+  box-shadow: var(--shadow-sm);
+}
+.btn-primary:hover {
+  background-color: var(--accent-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-gold);
+}
+
+.btn-outline {
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  background-color: var(--bg-secondary);
+}
+.btn-outline:hover {
+  border-color: var(--accent-primary);
+  color: var(--accent-primary);
+  background-color: var(--accent-light);
+  transform: translateY(-1px);
+}
+
+/* Navigation Header */
+.nav-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--nav-bg);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border-color);
+  transition: all var(--transition-normal);
+}
+
+/* Grid Layouts */
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+}
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+.grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+@media (max-width: 1024px) {
+  .grid-4 { grid-template-columns: repeat(2, 1fr); }
+  .grid-3 { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 640px) {
+  .grid-4, .grid-3, .grid-2 { grid-template-columns: 1fr; }
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Skeleton Loading */
+@keyframes skeletonPulse {
+  0% { opacity: 0.6; }
+  50% { opacity: 0.3; }
+  100% { opacity: 0.6; }
+}
+
+.skeleton {
+  background-color: var(--border-color);
+  border-radius: var(--radius-sm);
+  animation: skeletonPulse 1.5s infinite ease-in-out;
+}
+
