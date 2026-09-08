@@ -5,8 +5,8 @@ import { useAuth } from '../context/AuthContext';
 import Breadcrumbs from '../components/Breadcrumbs';
 
 export default function Login() {
-  const [email, setEmail] = useState('admin@aetheria.com');
-  const [password, setPassword] = useState('adminpassword123');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const { login } = useAuth();
@@ -14,11 +14,16 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!email.trim() || !password.trim()) {
+      setError('Please enter your email and password.');
+      return;
+    }
+
     setError('');
     setLoading(true);
 
     try {
-      await login(email, password);
+      await login(email.trim(), password);
       navigate('/admin');
     } catch (err) {
       setError(err.message || 'Invalid credentials');
@@ -85,12 +90,14 @@ export default function Login() {
                 <input
                   type="email"
                   required
+                  placeholder="name@example.com"
+                  autoComplete="username"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   style={{
                     width: '100%',
                     padding: '0.75rem 0.75rem 0.75rem 2.5rem',
-                    fontSize: '0.9rem',
+                    fontSize: '1rem',
                     borderRadius: 'var(--radius-sm)',
                     border: '1px solid var(--border-color)',
                     backgroundColor: 'var(--bg-input)',
@@ -110,12 +117,14 @@ export default function Login() {
                 <input
                   type="password"
                   required
+                  placeholder="••••••••••••"
+                  autoComplete="current-password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   style={{
                     width: '100%',
                     padding: '0.75rem 0.75rem 0.75rem 2.5rem',
-                    fontSize: '0.9rem',
+                    fontSize: '1rem',
                     borderRadius: 'var(--radius-sm)',
                     border: '1px solid var(--border-color)',
                     backgroundColor: 'var(--bg-input)',
@@ -135,10 +144,6 @@ export default function Login() {
               {loading ? 'Authenticating...' : 'Sign In as Admin'}
             </button>
           </form>
-
-          <div style={{ marginTop: '1.75rem', paddingTop: '1.25rem', borderTop: '1px solid var(--border-color)', fontSize: '0.8rem', color: 'var(--text-muted)' }}>
-            Demo credentials: <strong>admin@aetheria.com</strong> / <strong>adminpassword123</strong>
-          </div>
         </div>
       </div>
     </div>
