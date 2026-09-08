@@ -39,40 +39,40 @@ export default function NewsletterForm() {
       backgroundColor: 'var(--bg-secondary)',
       border: '1px solid var(--border-color)',
       borderRadius: 'var(--radius-lg)',
-      padding: '3.5rem 2.5rem',
-      margin: '4rem 0',
+      padding: 'clamp(2rem, 5vw, 3.5rem) clamp(1.25rem, 4vw, 2.5rem)',
+      margin: 'clamp(3rem, 6vw, 4rem) 0',
       textAlign: 'center',
       position: 'relative'
     }} className="animate-fade-in">
       <div style={{ maxWidth: '640px', margin: '0 auto' }}>
         
         <div style={{
-          width: '48px',
-          height: '48px',
+          width: '44px',
+          height: '44px',
           borderRadius: '50%',
           backgroundColor: 'var(--bg-tertiary)',
           border: '1px solid var(--border-color)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          margin: '0 auto 1.5rem auto',
+          margin: '0 auto 1.25rem auto',
           color: 'var(--text-primary)'
         }}>
-          <Mail size={22} />
+          <Mail size={20} />
         </div>
 
-        <h3 className="serif-heading" style={{ fontSize: '2.2rem', marginBottom: '0.75rem', fontWeight: '700' }}>
+        <h3 className="serif-heading" style={{ fontSize: 'clamp(1.5rem, 4vw, 2.2rem)', marginBottom: '0.75rem', fontWeight: '700' }}>
           The Sunday Reflections
         </h3>
 
         <p style={{
           fontFamily: 'var(--font-serif)',
-          fontSize: '1.1rem',
+          fontSize: 'clamp(0.95rem, 2.5vw, 1.1rem)',
           color: 'var(--text-secondary)',
           lineHeight: '1.6',
-          marginBottom: '2rem'
+          marginBottom: '1.75rem'
         }}>
-          Delivered every Sunday morning: one deep-dive essay on ethics, human behavior, technology, or life, with zero spam or promotional noise.
+          Delivered every Sunday morning: one deep-dive essay on ethics, human behavior, technology, or life, with zero promotional noise.
         </p>
 
         {status === 'success' ? (
@@ -80,21 +80,21 @@ export default function NewsletterForm() {
             display: 'inline-flex',
             alignItems: 'center',
             gap: '0.6rem',
-            padding: '1rem 1.75rem',
+            padding: '0.85rem 1.5rem',
             borderRadius: 'var(--radius-md)',
             backgroundColor: 'rgba(46, 139, 128, 0.15)',
             border: '1px solid rgba(46, 139, 128, 0.3)',
             color: 'var(--accent-technology)',
-            fontSize: '0.95rem',
+            fontSize: '0.925rem',
             fontWeight: '600'
           }}>
-            <CheckCircle size={18} /> Thank you for subscribing to Aetheria Essays.
+            <CheckCircle size={18} /> Thank you for subscribing to Prof. Monika Chopra's journal.
           </div>
         ) : (
-          <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem', alignItems: 'center' }}>
-            <div style={{
+          <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', alignItems: 'center' }}>
+            <div className="newsletter-form-row" style={{
               display: 'flex',
-              gap: '0.75rem',
+              gap: '0.6rem',
               width: '100%',
               maxWidth: '480px',
               flexWrap: 'wrap'
@@ -108,9 +108,9 @@ export default function NewsletterForm() {
                 disabled={status === 'loading'}
                 style={{
                   flex: 1,
-                  minWidth: '240px',
-                  padding: '0.85rem 1.25rem',
-                  fontSize: '0.95rem',
+                  minWidth: '220px',
+                  padding: '0.8rem 1.15rem',
+                  fontSize: '1rem',
                   borderRadius: 'var(--radius-sm)',
                   border: '1px solid var(--border-color)',
                   backgroundColor: 'var(--bg-input)',
@@ -122,7 +122,7 @@ export default function NewsletterForm() {
                 type="submit"
                 disabled={status === 'loading'}
                 className="btn btn-primary"
-                style={{ padding: '0.85rem 1.5rem', whiteSpace: 'nowrap', gap: '0.4rem' }}
+                style={{ padding: '0.8rem 1.4rem', whiteSpace: 'nowrap', gap: '0.4rem', fontSize: '0.9rem' }}
               >
                 {status === 'loading' ? 'Subscribing...' : <>Subscribe <ArrowRight size={16} /></>}
               </button>
@@ -134,8 +134,8 @@ export default function NewsletterForm() {
                 alignItems: 'center',
                 gap: '0.4rem',
                 color: 'var(--accent-ethics)',
-                fontSize: '0.875rem',
-                marginTop: '0.5rem'
+                fontSize: '0.85rem',
+                marginTop: '0.4rem'
               }}>
                 <AlertCircle size={14} /> {errorMessage}
               </div>
@@ -144,6 +144,18 @@ export default function NewsletterForm() {
         )}
 
       </div>
+
+      <style>{`
+        @media (max-width: 520px) {
+          .newsletter-form-row {
+            flex-direction: column !important;
+          }
+          .newsletter-form-row input,
+          .newsletter-form-row button {
+            width: 100% !important;
+          }
+        }
+      `}</style>
     </div>
   );
 }

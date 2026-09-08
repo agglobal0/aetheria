@@ -61,7 +61,7 @@ export default function DailyWisdom() {
       backgroundColor: 'var(--bg-secondary)',
       border: '1px solid var(--border-color)',
       borderRadius: 'var(--radius-lg)',
-      padding: '2.5rem',
+      padding: 'clamp(1.25rem, 4vw, 2.5rem)',
       boxShadow: 'var(--shadow-md)',
       position: 'relative',
       overflow: 'hidden',
@@ -79,8 +79,16 @@ export default function DailyWisdom() {
         pointerEvents: 'none'
       }} />
 
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+      {/* Header bar */}
+      <div style={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginBottom: '1.25rem',
+        flexWrap: 'wrap',
+        gap: '0.6rem'
+      }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
           <span className="category-badge category-life-reflection">
             <Sparkles size={13} /> Daily Life Lesson
           </span>
@@ -113,24 +121,27 @@ export default function DailyWisdom() {
       {/* Main Quote */}
       <blockquote style={{
         fontFamily: 'var(--font-title)',
-        fontSize: 'clamp(1.25rem, 3vw, 1.7rem)',
+        fontSize: 'clamp(1.15rem, 3.2vw, 1.65rem)',
         lineHeight: '1.45',
         color: 'var(--text-primary)',
         marginBottom: '1.25rem',
-        fontWeight: '600'
+        fontWeight: '600',
+        overflowWrap: 'break-word',
+        wordBreak: 'break-word'
       }}>
         "{current.quote}"
       </blockquote>
 
       {/* Core Lesson Summary */}
       <div style={{
-        fontSize: '1rem',
+        fontSize: '0.95rem',
         color: 'var(--text-secondary)',
         lineHeight: '1.6',
-        marginBottom: '1.75rem',
+        marginBottom: '1.5rem',
         fontFamily: 'var(--font-sans)',
         paddingLeft: '0.75rem',
-        borderLeft: '2px solid var(--accent-primary)'
+        borderLeft: '2px solid var(--accent-primary)',
+        overflowWrap: 'break-word'
       }}>
         <strong>Key takeaway:</strong> {current.lesson}
       </div>
@@ -139,37 +150,45 @@ export default function DailyWisdom() {
       {showReflection && (
         <div style={{
           backgroundColor: 'var(--bg-tertiary)',
-          padding: '1.25rem',
+          padding: '1.15rem',
           borderRadius: 'var(--radius-md)',
           marginBottom: '1.5rem',
           animation: 'fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1)'
         }}>
-          <div style={{ fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.1em', fontWeight: '700', color: 'var(--accent-primary)', marginBottom: '0.4rem' }}>
+          <div style={{ fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.1em', fontWeight: '700', color: 'var(--accent-primary)', marginBottom: '0.35rem' }}>
             Today's Reflection Question
           </div>
-          <div style={{ fontFamily: 'var(--font-serif)', fontSize: '1.05rem', color: 'var(--text-primary)' }}>
+          <div style={{ fontFamily: 'var(--font-serif)', fontSize: '1rem', color: 'var(--text-primary)', lineHeight: '1.6' }}>
             "{current.reflection}"
           </div>
         </div>
       )}
 
       {/* Actions Bar */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '1rem', borderTop: '1px solid var(--border-color)', flexWrap: 'wrap', gap: '0.75rem' }}>
-        <div style={{ display: 'flex', gap: '0.5rem' }}>
+      <div style={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        paddingTop: '1rem',
+        borderTop: '1px solid var(--border-color)',
+        flexWrap: 'wrap',
+        gap: '0.6rem'
+      }}>
+        <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
           <button
             onClick={() => setShowReflection(!showReflection)}
             className="btn btn-outline"
-            style={{ padding: '0.45rem 0.9rem', fontSize: '0.825rem' }}
+            style={{ padding: '0.45rem 0.85rem', fontSize: '0.8rem' }}
           >
-            <BookOpen size={14} /> {showReflection ? 'Hide Reflection' : 'Reflect on This'}
+            <BookOpen size={14} /> {showReflection ? 'Hide' : 'Reflect'}
           </button>
 
           <button
             onClick={() => setLiked(!liked)}
             className="btn btn-outline"
             style={{
-              padding: '0.45rem 0.9rem',
-              fontSize: '0.825rem',
+              padding: '0.45rem 0.85rem',
+              fontSize: '0.8rem',
               color: liked ? '#E11D48' : 'var(--text-primary)',
               borderColor: liked ? '#FDA4AF' : 'var(--border-color)'
             }}
@@ -181,7 +200,7 @@ export default function DailyWisdom() {
         <button
           onClick={handleCopy}
           className="btn btn-primary"
-          style={{ padding: '0.45rem 0.9rem', fontSize: '0.825rem' }}
+          style={{ padding: '0.45rem 0.95rem', fontSize: '0.8rem' }}
         >
           {copied ? <Check size={14} /> : <Copy size={14} />}
           {copied ? 'Copied Lesson!' : 'Share Wisdom'}

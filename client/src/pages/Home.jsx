@@ -52,10 +52,10 @@ export default function Home() {
     <div>
       {/* Motivational Editorial Hero Section */}
       <section style={{
-        padding: '5rem 0 4.5rem 0',
+        padding: 'clamp(3rem, 6vw, 5rem) 0 clamp(2.5rem, 5vw, 4.5rem) 0',
         textAlign: 'center',
         borderBottom: '1px solid var(--border-color)',
-        marginBottom: '4rem',
+        marginBottom: 'clamp(2.5rem, 5vw, 4rem)',
         background: 'var(--hero-glow)'
       }} className="animate-fade-in">
         <div className="reading-container">
@@ -63,47 +63,51 @@ export default function Home() {
             display: 'inline-flex',
             alignItems: 'center',
             gap: '0.4rem',
-            padding: '0.4rem 0.95rem',
+            padding: '0.35rem 0.85rem',
             borderRadius: 'var(--radius-full)',
             backgroundColor: 'var(--accent-light)',
             color: 'var(--accent-primary)',
-            fontSize: '0.8rem',
+            fontSize: '0.75rem',
             fontWeight: '700',
-            letterSpacing: '0.14em',
+            letterSpacing: '0.12em',
             textTransform: 'uppercase',
-            marginBottom: '1.75rem'
+            marginBottom: '1.5rem',
+            maxWidth: '100%',
+            overflowWrap: 'break-word',
+            lineHeight: '1.4'
           }}>
-            <Sparkles size={14} /> Prof. Monika Chopra • Life Lessons & Moral Wisdom
+            <Sparkles size={13} style={{ flexShrink: 0 }} />
+            <span>Prof. Monika Chopra • Life Lessons & Moral Wisdom</span>
           </div>
 
           <h1 className="serif-heading" style={{
-            fontSize: 'clamp(2.5rem, 6vw, 4.2rem)',
+            fontSize: 'clamp(2.1rem, 5.8vw, 4.2rem)',
             fontWeight: '700',
-            lineHeight: '1.12',
+            lineHeight: '1.14',
             color: 'var(--text-primary)',
-            marginBottom: '1.5rem',
-            letterSpacing: '-0.03em'
+            marginBottom: '1.25rem',
+            letterSpacing: '-0.02em'
           }}>
             Wisdom to Live & Lead with Purpose.
           </h1>
 
           <p style={{
             fontFamily: 'var(--font-serif)',
-            fontSize: '1.25rem',
+            fontSize: 'clamp(1.05rem, 2.5vw, 1.25rem)',
             lineHeight: '1.7',
             color: 'var(--text-secondary)',
-            marginBottom: '2.5rem',
+            marginBottom: '2rem',
             maxWidth: '650px',
-            margin: '0 auto 2.5rem auto'
+            margin: '0 auto 2rem auto'
           }}>
             Inspiring reflections on ethical friction, human resilience, quiet character, and the timeless lessons that shape meaningful lives.
           </p>
 
-          <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <Link to="/essays" className="btn btn-primary" style={{ padding: '0.9rem 2rem', fontSize: '0.95rem' }}>
-              Explore Life Lessons <ArrowRight size={18} />
+          <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+            <Link to="/essays" className="btn btn-primary" style={{ padding: '0.85rem 1.75rem', fontSize: '0.925rem' }}>
+              Explore Life Lessons <ArrowRight size={17} />
             </Link>
-            <a href="#daily-wisdom" className="btn btn-outline" style={{ padding: '0.9rem 2rem', fontSize: '0.95rem' }}>
+            <a href="#daily-wisdom" className="btn btn-outline" style={{ padding: '0.85rem 1.75rem', fontSize: '0.925rem' }}>
               Daily Reflection
             </a>
           </div>
@@ -116,16 +120,16 @@ export default function Home() {
         ) : (
           <>
             {/* Daily Wisdom Widget */}
-            <section id="daily-wisdom" style={{ marginBottom: '5rem' }}>
+            <section id="daily-wisdom" style={{ marginBottom: 'clamp(3rem, 5vw, 5rem)' }}>
               <DailyWisdom />
             </section>
 
             {/* Featured Article Section */}
             {featuredEssay && (
-              <section style={{ marginBottom: '5rem' }}>
-                <div style={{ marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              <section style={{ marginBottom: 'clamp(3rem, 5vw, 5rem)' }}>
+                <div style={{ marginBottom: '1.25rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                   <ShieldCheck size={18} style={{ color: 'var(--accent-primary)' }} />
-                  <span style={{ fontSize: '0.8rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--text-muted)', fontWeight: '700' }}>
+                  <span style={{ fontSize: '0.75rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--text-muted)', fontWeight: '700' }}>
                     Featured Moral Essay
                   </span>
                 </div>
@@ -137,12 +141,12 @@ export default function Home() {
             <WisdomNavigator />
 
             {/* Four Core Spheres Grid */}
-            <section style={{ marginBottom: '6rem' }}>
-              <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
+            <section style={{ marginBottom: 'clamp(3.5rem, 6vw, 6rem)' }}>
+              <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
                 <span style={{ fontSize: '0.75rem', letterSpacing: '0.18em', textTransform: 'uppercase', color: 'var(--accent-primary)', fontWeight: '700' }}>
                   Character & Wisdom Pillars
                 </span>
-                <h2 className="serif-heading" style={{ fontSize: '2.2rem', marginTop: '0.3rem' }}>
+                <h2 className="serif-heading" style={{ fontSize: 'clamp(1.6rem, 3.8vw, 2.2rem)', marginTop: '0.3rem' }}>
                   Explore the Four Spheres of Wisdom
                 </h2>
               </div>
@@ -155,13 +159,13 @@ export default function Home() {
             </section>
 
             {/* Latest Essays Grid */}
-            <section id="latest" style={{ marginBottom: '6rem' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '2.5rem' }}>
+            <section id="latest" style={{ marginBottom: 'clamp(3.5rem, 6vw, 6rem)' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '2rem', flexWrap: 'wrap', gap: '0.75rem' }}>
                 <div>
                   <span style={{ fontSize: '0.75rem', letterSpacing: '0.18em', textTransform: 'uppercase', color: 'var(--text-muted)', fontWeight: '700' }}>
                     Reflective Scholarship
                   </span>
-                  <h2 className="serif-heading" style={{ fontSize: '2.2rem', marginTop: '0.3rem' }}>
+                  <h2 className="serif-heading" style={{ fontSize: 'clamp(1.6rem, 3.8vw, 2.2rem)', marginTop: '0.25rem' }}>
                     Latest Life Lessons & Essays
                   </h2>
                 </div>
@@ -188,4 +192,3 @@ export default function Home() {
     </div>
   );
 }
-

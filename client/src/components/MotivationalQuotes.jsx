@@ -57,40 +57,44 @@ export default function MotivationalQuotes() {
       backgroundColor: 'var(--bg-secondary)',
       border: '1px solid var(--border-color)',
       borderRadius: 'var(--radius-lg)',
-      padding: '4rem 2.5rem',
-      margin: '5rem 0',
+      padding: 'clamp(2rem, 5vw, 4rem) clamp(1.25rem, 4vw, 2.5rem)',
+      margin: 'clamp(3rem, 6vw, 5rem) 0',
       textAlign: 'center',
       position: 'relative',
       boxShadow: 'var(--shadow-md)'
     }}>
       <div style={{ maxWidth: '800px', margin: '0 auto' }}>
-        <Quote size={44} style={{ color: 'var(--accent-primary)', marginBottom: '1rem', opacity: 0.8 }} />
+        <Quote size={38} style={{ color: 'var(--accent-primary)', marginBottom: '0.75rem', opacity: 0.8 }} />
 
-        <span className="category-badge category-life-reflection" style={{ marginBottom: '1.5rem' }}>
-          {current.pillar}
-        </span>
+        <div style={{ marginBottom: '1.25rem' }}>
+          <span className="category-badge category-life-reflection">
+            {current.pillar}
+          </span>
+        </div>
 
         <blockquote style={{
           fontFamily: 'var(--font-title)',
-          fontSize: 'clamp(1.35rem, 3.5vw, 2.1rem)',
+          fontSize: 'clamp(1.15rem, 3.2vw, 1.85rem)',
           fontStyle: 'italic',
           lineHeight: '1.45',
           color: 'var(--text-primary)',
-          marginBottom: '1.75rem',
-          minHeight: '110px',
+          marginBottom: '1.5rem',
+          minHeight: '90px',
           display: 'flex',
           alignItems: 'center',
-          justifyContent: 'center'
+          justifyContent: 'center',
+          overflowWrap: 'break-word',
+          wordBreak: 'break-word'
         }}>
           "{current.quote}"
         </blockquote>
 
-        <cite style={{ fontSize: '0.9rem', fontStyle: 'normal', letterSpacing: '0.08em', textTransform: 'uppercase', fontWeight: '600', color: 'var(--text-muted)', display: 'block', marginBottom: '2rem' }}>
+        <cite style={{ fontSize: '0.85rem', fontStyle: 'normal', letterSpacing: '0.08em', textTransform: 'uppercase', fontWeight: '600', color: 'var(--text-muted)', display: 'block', marginBottom: '1.75rem' }}>
           — Prof. Monika Chopra, <em>{current.context}</em>
         </cite>
 
         {/* Carousel & Action Buttons */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.75rem' }}>
           <div style={{ display: 'flex', gap: '0.5rem' }}>
             <button
               onClick={prevQuote}
@@ -104,6 +108,7 @@ export default function MotivationalQuotes() {
                 alignItems: 'center',
                 justifyContent: 'center',
                 color: 'var(--text-primary)',
+                backgroundColor: 'var(--bg-primary)',
                 cursor: 'pointer'
               }}
             >
@@ -121,6 +126,7 @@ export default function MotivationalQuotes() {
                 alignItems: 'center',
                 justifyContent: 'center',
                 color: 'var(--text-primary)',
+                backgroundColor: 'var(--bg-primary)',
                 cursor: 'pointer'
               }}
             >
@@ -128,7 +134,7 @@ export default function MotivationalQuotes() {
             </button>
           </div>
 
-          <div style={{ display: 'flex', gap: '0.4rem' }}>
+          <div style={{ display: 'flex', gap: '0.4rem', alignItems: 'center' }}>
             {MOTIVATIONAL_QUOTES.map((_, i) => (
               <span
                 key={i}
@@ -148,10 +154,10 @@ export default function MotivationalQuotes() {
           <button
             onClick={handleShare}
             className="btn btn-outline"
-            style={{ padding: '0.4rem 0.9rem', fontSize: '0.825rem' }}
+            style={{ padding: '0.4rem 0.85rem', fontSize: '0.8rem' }}
           >
             {copied ? <Check size={14} /> : <Share2 size={14} />}
-            {copied ? 'Copied Quote!' : 'Copy Quote'}
+            {copied ? 'Copied!' : 'Share Quote'}
           </button>
         </div>
       </div>

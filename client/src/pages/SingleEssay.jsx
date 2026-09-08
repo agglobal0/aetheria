@@ -161,50 +161,50 @@ export default function SingleEssay() {
           {/* Previous / Next Navigation */}
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(2, 1fr)',
-            gap: '1.5rem',
-            margin: '3rem 0'
+            gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+            gap: '1rem',
+            margin: '2.5rem 0'
           }}>
             {essay.prev ? (
               <Link to={`/essay/${essay.prev.slug}`} style={{
                 backgroundColor: 'var(--bg-secondary)',
                 border: '1px solid var(--border-color)',
                 borderRadius: 'var(--radius-sm)',
-                padding: '1.25rem',
+                padding: '1.15rem',
                 textDecoration: 'none',
                 display: 'flex',
                 flexDirection: 'column',
-                gap: '0.4rem'
+                gap: '0.35rem'
               }}>
                 <span style={{ fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
                   <ArrowLeft size={12} /> Previous Essay
                 </span>
-                <span style={{ fontFamily: 'var(--font-serif)', fontSize: '1.05rem', fontWeight: '600', color: 'var(--text-primary)', lineClamp: 1, WebkitLineClamp: 1, display: '-webkit-box', WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
+                <span style={{ fontFamily: 'var(--font-serif)', fontSize: '0.975rem', fontWeight: '600', color: 'var(--text-primary)', lineClamp: 1, WebkitLineClamp: 1, display: '-webkit-box', WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
                   {essay.prev.title}
                 </span>
               </Link>
-            ) : <div />}
+            ) : null}
 
             {essay.next ? (
               <Link to={`/essay/${essay.next.slug}`} style={{
                 backgroundColor: 'var(--bg-secondary)',
                 border: '1px solid var(--border-color)',
                 borderRadius: 'var(--radius-sm)',
-                padding: '1.25rem',
+                padding: '1.15rem',
                 textDecoration: 'none',
                 display: 'flex',
                 flexDirection: 'column',
-                gap: '0.4rem',
+                gap: '0.35rem',
                 textAlign: 'right'
               }}>
                 <span style={{ fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: '0.3rem' }}>
                   Next Essay <ArrowRight size={12} />
                 </span>
-                <span style={{ fontFamily: 'var(--font-serif)', fontSize: '1.05rem', fontWeight: '600', color: 'var(--text-primary)', lineClamp: 1, WebkitLineClamp: 1, display: '-webkit-box', WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
+                <span style={{ fontFamily: 'var(--font-serif)', fontSize: '0.975rem', fontWeight: '600', color: 'var(--text-primary)', lineClamp: 1, WebkitLineClamp: 1, display: '-webkit-box', WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
                   {essay.next.title}
                 </span>
               </Link>
-            ) : <div />}
+            ) : null}
           </div>
 
           {/* Interactive Comments Section */}

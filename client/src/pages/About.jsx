@@ -15,10 +15,10 @@ export default function About() {
           <span className="category-badge category-life-reflection" style={{ marginBottom: '1rem' }}>
             <Sparkles size={13} /> Scholar, Mentor & Essayist
           </span>
-          <h1 className="serif-heading" style={{ fontSize: '3.2rem', marginTop: '0.4rem', marginBottom: '1.25rem' }}>
+          <h1 className="serif-heading" style={{ fontSize: 'clamp(2rem, 5vw, 3.2rem)', marginTop: '0.4rem', marginBottom: '1.25rem' }}>
             Professor Monika Chopra
           </h1>
-          <p style={{ fontFamily: 'var(--font-serif)', fontSize: '1.25rem', color: 'var(--text-secondary)', lineHeight: '1.75' }}>
+          <p style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.05rem, 2.5vw, 1.25rem)', color: 'var(--text-secondary)', lineHeight: '1.75' }}>
             Dedicated to motivating others through reflective wisdom, ethical clarity, human resilience, and life lessons that endure.
           </p>
         </div>

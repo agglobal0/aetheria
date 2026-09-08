@@ -14,11 +14,15 @@ export default function ThemeToggle() {
       }
     }
     document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    document.addEventListener('touchstart', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('touchstart', handleClickOutside);
+    };
   }, []);
 
   return (
-    <div ref={dropdownRef} style={{ position: 'relative', display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
+    <div ref={dropdownRef} style={{ position: 'relative', display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}>
       {/* Light/Dark Toggle */}
       <button
         onClick={toggleTheme}
@@ -48,36 +52,35 @@ export default function ThemeToggle() {
         style={{
           display: 'inline-flex',
           alignItems: 'center',
-          gap: '0.35rem',
-          padding: '0.45rem 0.75rem',
+          justifyContent: 'center',
+          width: '38px',
+          height: '38px',
           borderRadius: 'var(--radius-full)',
           color: 'var(--text-primary)',
           border: '1px solid var(--border-color)',
           backgroundColor: 'var(--bg-secondary)',
-          fontSize: '0.8rem',
-          fontWeight: '600',
           cursor: 'pointer',
           transition: 'all var(--transition-fast)'
         }}
         title="Choose Motivational Palette"
       >
-        <Palette size={16} style={{ color: 'var(--accent-primary)' }} />
-        <span style={{ display: 'none', '@media (min-width: 640px)': { display: 'inline' } }}>Palette</span>
+        <Palette size={18} style={{ color: 'var(--accent-primary)' }} />
       </button>
 
       {/* Dropdown Menu */}
       {open && (
         <div style={{
           position: 'absolute',
-          top: '120%',
+          top: '125%',
           right: 0,
-          width: '240px',
+          width: '230px',
+          maxWidth: 'calc(100vw - 2rem)',
           backgroundColor: 'var(--bg-secondary)',
           border: '1px solid var(--border-color)',
           borderRadius: 'var(--radius-md)',
           boxShadow: 'var(--shadow-lg)',
           padding: '0.75rem',
-          zIndex: 1000,
+          zIndex: 100000,
           animation: 'fadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1)'
         }}>
           <div style={{
@@ -89,7 +92,7 @@ export default function ThemeToggle() {
             marginBottom: '0.5rem',
             padding: '0 0.25rem'
           }}>
-            Motivational Theme Palettes
+            Theme Palettes
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.35rem' }}>
@@ -106,7 +109,7 @@ export default function ThemeToggle() {
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'space-between',
-                    padding: '0.5rem 0.65rem',
+                    padding: '0.55rem 0.65rem',
                     borderRadius: 'var(--radius-sm)',
                     backgroundColor: isActive ? 'var(--accent-light)' : 'transparent',
                     color: isActive ? 'var(--accent-primary)' : 'var(--text-primary)',
@@ -123,7 +126,8 @@ export default function ThemeToggle() {
                       height: '14px',
                       borderRadius: '50%',
                       backgroundColor: p.color,
-                      border: '1px solid rgba(0,0,0,0.1)'
+                      border: '1px solid rgba(0,0,0,0.15)',
+                      display: 'inline-block'
                     }} />
                     {p.name}
                   </div>
@@ -137,4 +141,3 @@ export default function ThemeToggle() {
     </div>
   );
 }
-
