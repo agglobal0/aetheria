@@ -14,7 +14,11 @@ services:
         value: "25750"
       - key: DB_USER
         value: avnadmin
+      - key: DB_PASSWORD
+        value: AVNS_nvCs_a5CkuwqWaS0r3u
       - key: DB_NAME
         value: defaultdb
       - key: DB_SSL
         value: "true"
+      - key: JWT_SECRET
+        value: aetheria_editorial_secret_key_2026_super_secure
