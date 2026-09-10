@@ -1,5 +1,3 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import {
   ArrowRight,
   Scale,
@@ -11,9 +9,12 @@ import {
   Sprout,
   Library,
   Mail,
-  CheckCircle2
+  CheckCircle2,
+  AlertCircle,
+  Loader2
 } from 'lucide-react';
 import { LeafIcon, LeafBullet } from '../components/BrandIcons';
+import { newsletterService } from '../services/api';
 import {
   heroDeskImg,
   profPortraitImg,
@@ -27,13 +28,47 @@ import {
 
 export default function Home() {
   const [email, setEmail] = useState('');
-  const [subscribed, setSubscribed] = useState(false);
+  const [subscribeStatus, setSubscribeStatus] = useState('idle'); // 'idle' | 'loading' | 'success' | 'error'
+  const [feedbackMessage, setFeedbackMessage] = useState('');
 
-  const handleSubscribe = (e) => {
+  const validateEmail = (val) => {
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    return emailRegex.test(val.trim());
+  };
+
+  const handleSubscribe = async (e) => {
     e.preventDefault();
-    if (email.trim()) {
-      setSubscribed(true);
-      setEmail('');
+    const cleanEmail = email.trim();
+
+    if (!cleanEmail) {
+      setSubscribeStatus('error');
+      setFeedbackMessage('Please enter your email address.');
+      return;
+    }
+
+    if (!validateEmail(cleanEmail)) {
+      setSubscribeStatus('error');
+      setFeedbackMessage('Please enter a valid email address (e.g., name@gmail.com).');
+      return;
+    }
+
+    setSubscribeStatus('loading');
+    setFeedbackMessage('');
+
+    try {
+      const res = await newsletterService.subscribe(cleanEmail);
+      if (res.data?.success) {
+        setSubscribeStatus('success');
+        setFeedbackMessage(res.data.message || 'Thank you for subscribing! A thought worth carrying will arrive in your inbox.');
+        setEmail('');
+      } else {
+        setSubscribeStatus('error');
+        setFeedbackMessage(res.data?.message || 'Subscription could not be completed. Please try again.');
+      }
+    } catch (err) {
+      console.error('Newsletter error:', err);
+      setSubscribeStatus('error');
+      setFeedbackMessage(err.response?.data?.message || 'Subscription failed. Please check your connection and try again.');
     }
   };
 
@@ -901,19 +936,37 @@ export default function Home() {
                 Every 10–14 days, receive one thoughtful reflection — something to pause over, question and perhaps see differently.
               </p>
 
-              {subscribed ? (
+              {subscribeStatus === 'success' ? (
                 <div style={{
-                  padding: '0.85rem',
+                  padding: '1rem 0.85rem',
                   borderRadius: '8px',
                   backgroundColor: 'rgba(56, 115, 70, 0.12)',
                   color: '#245E33',
                   fontSize: '0.85rem',
                   display: 'flex',
+                  flexDirection: 'column',
                   alignItems: 'center',
-                  justifyContent: 'center',
-                  gap: '0.4rem'
+                  gap: '0.5rem',
+                  marginBottom: '1rem'
                 }}>
-                  <CheckCircle2 size={16} /> Thank you for subscribing!
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontWeight: '600' }}>
+                    <CheckCircle2 size={18} /> Thank you for subscribing!
+                  </div>
+                  <div style={{ fontSize: '0.78rem', color: '#2D6B3D', textAlign: 'center' }}>
+                    {feedbackMessage}
+                  </div>
+                  <button
+                    onClick={() => { setSubscribeStatus('idle'); setFeedbackMessage(''); }}
+                    style={{
+                      marginTop: '0.35rem',
+                      fontSize: '0.74rem',
+                      textDecoration: 'underline',
+                      color: '#245E33',
+                      cursor: 'pointer'
+                    }}
+                  >
+                    Subscribe another email
+                  </button>
                 </div>
               ) : (
                 <form onSubmit={handleSubscribe} style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', marginBottom: '1rem' }}>
@@ -921,14 +974,20 @@ export default function Home() {
                     <input
                       type="email"
                       required
-                      placeholder="Your email address"
+                      placeholder="Your email address (e.g. name@gmail.com)"
                       value={email}
-                      onChange={(e) => setEmail(e.target.value)}
+                      onChange={(e) => {
+                        setEmail(e.target.value);
+                        if (subscribeStatus === 'error') {
+                          setSubscribeStatus('idle');
+                          setFeedbackMessage('');
+                        }
+                      }}
                       style={{
                         flex: 1,
                         padding: '0.65rem 0.85rem',
                         fontSize: '0.85rem',
-                        border: '1px solid var(--border-color)',
+                        border: subscribeStatus === 'error' ? '1px solid #D32F2F' : '1px solid var(--border-color)',
                         borderRadius: '6px',
                         outline: 'none',
                         backgroundColor: 'var(--bg-secondary)',
@@ -937,16 +996,41 @@ export default function Home() {
                     />
                     <button
                       type="submit"
+                      disabled={subscribeStatus === 'loading'}
                       className="btn-dark-green"
                       style={{
                         padding: '0.65rem 1.1rem',
                         fontSize: '0.82rem',
-                        borderRadius: '6px'
+                        borderRadius: '6px',
+                        opacity: subscribeStatus === 'loading' ? 0.7 : 1,
+                        cursor: subscribeStatus === 'loading' ? 'wait' : 'pointer',
+                        whiteSpace: 'nowrap'
                       }}
                     >
-                      Subscribe
+                      {subscribeStatus === 'loading' ? (
+                        <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.3rem' }}>
+                          <Loader2 size={13} className="animate-spin" /> Subscribing...
+                        </span>
+                      ) : (
+                        'Subscribe'
+                      )}
                     </button>
                   </div>
+
+                  {subscribeStatus === 'error' && (
+                    <div style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '0.35rem',
+                      fontSize: '0.78rem',
+                      color: '#D32F2F',
+                      textAlign: 'left',
+                      padding: '0.2rem 0.35rem'
+                    }}>
+                      <AlertCircle size={14} style={{ flexShrink: 0 }} />
+                      <span>{feedbackMessage}</span>
+                    </div>
+                  )}
                 </form>
               )}
 
