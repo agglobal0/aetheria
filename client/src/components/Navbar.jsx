@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { Search, Menu, X, ChevronDown, BookOpen, User, Mail, Sparkles, Scale, Users, Compass, Cpu, Feather } from 'lucide-react';
 import { LotusLogo } from './BrandIcons';
-import ThemeToggle from './ThemeToggle';
 import { useAuth } from '../context/AuthContext';
 
 export default function Navbar() {
@@ -255,16 +254,16 @@ export default function Navbar() {
           })}
         </nav>
 
-        {/* Right Action Icons: Search, ThemeToggle, Hamburger */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', flexShrink: 0 }}>
+        {/* Right Action Icons: Search & Menu */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexShrink: 0 }}>
           {/* Search Trigger */}
           <button
             onClick={() => setSearchOpen(!searchOpen)}
             aria-label="Search articles"
             style={{
               color: 'var(--text-primary)',
-              width: '36px',
-              height: '36px',
+              width: '38px',
+              height: '38px',
               borderRadius: 'var(--radius-full)',
               display: 'inline-flex',
               alignItems: 'center',
@@ -277,29 +276,28 @@ export default function Navbar() {
             onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--bg-tertiary)'}
             onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
           >
-            <Search size={18} />
+            <Search size={19} />
           </button>
 
-          {/* Theme Toggle (dark/light) */}
-          <ThemeToggle />
-
-          {/* Mobile Hamburger Toggle */}
+          {/* Menu Drawer Toggle */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle Menu"
             style={{
               color: 'var(--text-primary)',
               cursor: 'pointer',
-              width: '36px',
-              height: '36px',
+              width: '38px',
+              height: '38px',
               borderRadius: 'var(--radius-full)',
               display: 'inline-flex',
               alignItems: 'center',
               justifyContent: 'center',
               border: 'none',
-              backgroundColor: 'transparent'
+              backgroundColor: 'transparent',
+              transition: 'background 0.2s ease'
             }}
-            className="mobile-menu-trigger"
+            onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--bg-tertiary)'}
+            onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
           >
             {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
