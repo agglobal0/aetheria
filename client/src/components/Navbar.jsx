@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { Search, Menu, X, ChevronDown, BookOpen, User, Mail, Sparkles, Scale, Users, Compass, Cpu, Feather } from 'lucide-react';
+import { Search, Menu, X } from 'lucide-react';
 import { LotusLogo } from './BrandIcons';
+import ThemeToggle from './ThemeToggle';
 import { useAuth } from '../context/AuthContext';
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
-  const [openDropdown, setOpenDropdown] = useState(null);
   const { user, isAdmin } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
@@ -17,7 +17,6 @@ export default function Navbar() {
   useEffect(() => {
     setMobileMenuOpen(false);
     setSearchOpen(false);
-    setOpenDropdown(null);
   }, [location.pathname]);
 
   // Lock body scroll on mobile drawer
@@ -48,67 +47,12 @@ export default function Navbar() {
   const navLinks = [
     { name: 'Home', path: '/', isHome: true },
     { name: 'About', path: '/about' },
-    {
-      name: 'Reflections',
-      path: '/category/life-reflection',
-      hasDropdown: true,
-      items: [
-        { label: 'All Life Reflections', path: '/category/life-reflection' },
-        { label: 'Wisdom in Few Words', path: '/essays' },
-        { label: 'Life Perspectives', path: '/essays' }
-      ]
-    },
-    {
-      name: 'Human Behaviour',
-      path: '/category/human-behaviour',
-      hasDropdown: true,
-      items: [
-        { label: 'Human Behaviour Essays', path: '/category/human-behaviour' },
-        { label: 'Understanding People', path: '/category/human-behaviour' },
-        { label: 'Emotional Resilience', path: '/category/human-behaviour' }
-      ]
-    },
-    {
-      name: 'Ethics',
-      path: '/category/ethics',
-      hasDropdown: true,
-      items: [
-        { label: 'Ethics & Dilemmas', path: '/category/ethics' },
-        { label: 'Moral Philosophy', path: '/category/ethics' },
-        { label: 'Right and Wrong', path: '/category/ethics' }
-      ]
-    },
-    {
-      name: 'Technology & Humanity',
-      path: '/category/technology',
-      hasDropdown: true,
-      items: [
-        { label: 'Technology & Humanity', path: '/category/technology' },
-        { label: 'Digital Ethics', path: '/category/technology' },
-        { label: 'Mindful Technology', path: '/category/technology' }
-      ]
-    },
-    {
-      name: 'Stories',
-      path: '/essays',
-      hasDropdown: true,
-      items: [
-        { label: 'Stories & Experiences', path: '/essays' },
-        { label: 'Teaching Moments', path: '/essays' },
-        { label: 'Observations from Life', path: '/essays' }
-      ]
-    },
-    {
-      name: 'More',
-      path: '/contact',
-      hasDropdown: true,
-      items: [
-        { label: 'Editorial Ethos', path: '/about' },
-        { label: 'Contact', path: '/contact' },
-        { label: 'Search Archive', path: '/search' },
-        { label: 'Admin Login', path: '/login' }
-      ]
-    }
+    { name: 'Reflections', path: '/category/life-reflection' },
+    { name: 'Human Behaviour', path: '/category/human-behaviour' },
+    { name: 'Ethics', path: '/category/ethics' },
+    { name: 'Technology & Humanity', path: '/category/technology' },
+    { name: 'Stories', path: '/essays' },
+    { name: 'More', path: '/contact' }
   ];
 
   return (
@@ -166,7 +110,7 @@ export default function Navbar() {
           </div>
         </Link>
 
-        {/* Desktop Navigation Links */}
+        {/* Desktop Navigation Links (Direct clickable links without dropdowns) */}
         <nav className="desktop-nav-ref" style={{
           display: 'none',
           alignItems: 'center',
@@ -175,86 +119,35 @@ export default function Navbar() {
           {navLinks.map((item, idx) => {
             const isActive = location.pathname === item.path || (item.isHome && location.pathname === '/');
             return (
-              <div
+              <Link
                 key={idx}
-                className="nav-dropdown-item"
-                onMouseEnter={() => setOpenDropdown(item.name)}
-                onMouseLeave={() => setOpenDropdown(null)}
-                style={{ position: 'relative', display: 'flex', alignItems: 'center' }}
+                to={item.path}
+                style={{
+                  fontSize: '0.86rem',
+                  fontWeight: isActive ? '600' : '450',
+                  color: isActive ? 'var(--text-primary)' : 'var(--text-secondary)',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  padding: '0.4rem 0.1rem',
+                  borderBottom: isActive ? '2px solid var(--text-primary)' : '2px solid transparent',
+                  transition: 'all 0.2s ease',
+                  whiteSpace: 'nowrap',
+                  textDecoration: 'none'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.color = 'var(--text-primary)';
+                }}
+                onMouseLeave={(e) => {
+                  if (!isActive) e.currentTarget.style.color = 'var(--text-secondary)';
+                }}
               >
-                <Link
-                  to={item.path}
-                  style={{
-                    fontSize: '0.86rem',
-                    fontWeight: isActive ? '600' : '450',
-                    color: isActive ? 'var(--text-primary)' : 'var(--text-secondary)',
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: '0.2rem',
-                    padding: '0.4rem 0.1rem',
-                    borderBottom: isActive ? '2px solid var(--text-primary)' : '2px solid transparent',
-                    transition: 'all 0.2s ease',
-                    whiteSpace: 'nowrap'
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.color = 'var(--text-primary)';
-                  }}
-                  onMouseLeave={(e) => {
-                    if (!isActive) e.currentTarget.style.color = 'var(--text-secondary)';
-                  }}
-                >
-                  <span>{item.name}</span>
-                  {item.hasDropdown && (
-                    <ChevronDown size={13} style={{ opacity: 0.6, marginTop: '1px' }} />
-                  )}
-                </Link>
-
-                {/* Submenu Dropdown */}
-                {item.hasDropdown && openDropdown === item.name && (
-                  <div style={{
-                    position: 'absolute',
-                    top: '100%',
-                    left: 0,
-                    minWidth: '210px',
-                    backgroundColor: 'var(--bg-secondary)',
-                    border: '1px solid var(--border-color)',
-                    borderRadius: '8px',
-                    boxShadow: '0 10px 25px rgba(0,0,0,0.08)',
-                    padding: '0.5rem 0',
-                    zIndex: 1100,
-                    animation: 'fadeIn 0.15s ease'
-                  }}>
-                    {item.items.map((sub, sIdx) => (
-                      <Link
-                        key={sIdx}
-                        to={sub.path}
-                        style={{
-                          display: 'block',
-                          padding: '0.55rem 1rem',
-                          fontSize: '0.84rem',
-                          color: 'var(--text-secondary)',
-                          transition: 'background 0.15s ease, color 0.15s ease'
-                        }}
-                        onMouseEnter={(e) => {
-                          e.currentTarget.style.backgroundColor = 'var(--bg-tertiary)';
-                          e.currentTarget.style.color = 'var(--text-primary)';
-                        }}
-                        onMouseLeave={(e) => {
-                          e.currentTarget.style.backgroundColor = 'transparent';
-                          e.currentTarget.style.color = 'var(--text-secondary)';
-                        }}
-                      >
-                        {sub.label}
-                      </Link>
-                    ))}
-                  </div>
-                )}
-              </div>
+                <span>{item.name}</span>
+              </Link>
             );
           })}
         </nav>
 
-        {/* Right Action Icons: Search & Menu */}
+        {/* Right Action Icons: Search, Theme Toggle, and Menu Drawer */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexShrink: 0 }}>
           {/* Search Trigger */}
           <button
@@ -279,7 +172,10 @@ export default function Navbar() {
             <Search size={19} />
           </button>
 
-          {/* Menu Drawer Toggle */}
+          {/* Working Theme Toggle */}
+          <ThemeToggle />
+
+          {/* Mobile Menu Drawer Toggle */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle Menu"
@@ -296,6 +192,7 @@ export default function Navbar() {
               backgroundColor: 'transparent',
               transition: 'background 0.2s ease'
             }}
+            className="mobile-menu-trigger"
             onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--bg-tertiary)'}
             onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
           >
@@ -378,7 +275,6 @@ export default function Navbar() {
                 className="mobile-nav-link"
               >
                 <span>{item.name}</span>
-                <ChevronDown size={16} style={{ opacity: 0.6, transform: 'rotate(-90deg)' }} />
               </Link>
             ))}
           </div>
