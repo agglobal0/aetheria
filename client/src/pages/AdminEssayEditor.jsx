@@ -157,7 +157,7 @@ export default function AdminEssayEditor() {
   }
 
   return (
-    <div className="container" style={{ padding: '2.5rem 1.5rem 6rem 1.5rem' }}>
+    <div className="container" style={{ padding: 'clamp(1.5rem, 3vw, 2.5rem) clamp(1rem, 2.5vw, 1.5rem) 5rem clamp(1rem, 2.5vw, 1.5rem)' }}>
       <Breadcrumbs items={[{ label: 'Admin Dashboard', link: '/admin' }, { label: isEditing ? 'Edit Essay' : 'New Essay' }]} />
 
       <form onSubmit={handleSubmit}>
@@ -165,18 +165,18 @@ export default function AdminEssayEditor() {
         {/* Editor Top Control Bar */}
         <div style={{
           display: 'flex',
-          justify: 'space-between',
+          justifyContent: 'space-between',
           alignItems: 'center',
           backgroundColor: 'var(--bg-secondary)',
           border: '1px solid var(--border-color)',
           borderRadius: 'var(--radius-md)',
-          padding: '1.25rem 2rem',
-          marginBottom: '2.5rem',
+          padding: 'clamp(1rem, 2.5vw, 1.5rem) clamp(1rem, 3vw, 2rem)',
+          marginBottom: '2rem',
           flexWrap: 'wrap',
           gap: '1rem'
         }}>
           <div>
-            <h1 className="serif-heading" style={{ fontSize: '1.8rem' }}>
+            <h1 className="serif-heading" style={{ fontSize: 'clamp(1.3rem, 3vw, 1.8rem)' }}>
               {isEditing ? 'Edit Essay' : 'Compose New Essay'}
             </h1>
             <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
@@ -184,17 +184,17 @@ export default function AdminEssayEditor() {
             </span>
           </div>
 
-          <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
-            <Link to="/admin" className="btn btn-outline" style={{ gap: '0.4rem' }}>
+          <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center', flexWrap: 'wrap' }}>
+            <Link to="/admin" className="btn btn-outline" style={{ gap: '0.4rem', padding: '0.55rem 0.9rem', fontSize: '0.85rem' }}>
               <ArrowLeft size={16} /> Cancel
             </Link>
-            <button type="submit" disabled={saving} className="btn btn-primary" style={{ gap: '0.5rem' }}>
-              <Save size={18} /> {saving ? 'Saving...' : 'Save & Publish'}
+            <button type="submit" disabled={saving} className="btn btn-primary" style={{ gap: '0.5rem', padding: '0.55rem 1.1rem', fontSize: '0.85rem' }}>
+              <Save size={16} /> {saving ? 'Saving...' : 'Save & Publish'}
             </button>
           </div>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)', gap: '2.5rem' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)', gap: 'clamp(1.5rem, 3vw, 2.5rem)' }}>
           
           {/* Main Content Area */}
           <div style={{ gridColumn: 'span 8' }} className="editor-main">
@@ -213,7 +213,7 @@ export default function AdminEssayEditor() {
                   width: '100%',
                   padding: '0.85rem 1rem',
                   fontFamily: 'var(--font-serif)',
-                  fontSize: '1.5rem',
+                  fontSize: 'clamp(1.2rem, 3vw, 1.5rem)',
                   fontWeight: '700',
                   borderRadius: 'var(--radius-sm)',
                   border: '1px solid var(--border-color)',
@@ -237,7 +237,7 @@ export default function AdminEssayEditor() {
                   width: '100%',
                   padding: '0.75rem 1rem',
                   fontFamily: 'var(--font-serif)',
-                  fontSize: '1.1rem',
+                  fontSize: 'clamp(0.95rem, 2.5vw, 1.1rem)',
                   borderRadius: 'var(--radius-sm)',
                   border: '1px solid var(--border-color)',
                   backgroundColor: 'var(--bg-input)',
@@ -252,6 +252,7 @@ export default function AdminEssayEditor() {
               display: 'flex',
               gap: '0.5rem',
               alignItems: 'center',
+              flexWrap: 'wrap',
               marginBottom: '0.5rem',
               padding: '0.5rem 0.75rem',
               backgroundColor: 'var(--bg-tertiary)',
@@ -259,7 +260,7 @@ export default function AdminEssayEditor() {
               border: '1px solid var(--border-color)',
               borderBottom: 'none'
             }}>
-              <span style={{ fontSize: '0.75rem', fontWeight: '600', color: 'var(--text-muted)', marginRight: '0.5rem' }}>
+              <span style={{ fontSize: '0.75rem', fontWeight: '600', color: 'var(--text-muted)', marginRight: '0.3rem' }}>
                 Rich Format Helpers:
               </span>
               <button type="button" onClick={() => handleInsertHtml('h2')} className="btn btn-outline" style={{ padding: '0.25rem 0.6rem', fontSize: '0.75rem' }}>+ H2 Section</button>
@@ -276,9 +277,9 @@ export default function AdminEssayEditor() {
                 onChange={handleContentChange}
                 style={{
                   width: '100%',
-                  padding: '1.25rem',
+                  padding: 'clamp(0.85rem, 2vw, 1.25rem)',
                   fontFamily: 'var(--font-serif)',
-                  fontSize: '1.1rem',
+                  fontSize: 'clamp(0.95rem, 2vw, 1.05rem)',
                   lineHeight: '1.7',
                   borderRadius: '0 0 var(--radius-sm) var(--radius-sm)',
                   border: '1px solid var(--border-color)',
@@ -295,7 +296,7 @@ export default function AdminEssayEditor() {
               backgroundColor: 'var(--bg-secondary)',
               borderRadius: 'var(--radius-md)',
               border: '1px solid var(--border-color)',
-              padding: '1.5rem',
+              padding: 'clamp(1rem, 2.5vw, 1.5rem)',
               marginTop: '2rem'
             }}>
               <h3 style={{ fontSize: '1rem', fontWeight: '600', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
@@ -335,10 +336,10 @@ export default function AdminEssayEditor() {
               backgroundColor: 'var(--bg-secondary)',
               borderRadius: 'var(--radius-md)',
               border: '1px solid var(--border-color)',
-              padding: '1.75rem',
+              padding: 'clamp(1.25rem, 3vw, 1.75rem)',
               display: 'flex',
               flexDirection: 'column',
-              gap: '1.5rem',
+              gap: '1.25rem',
               position: 'sticky',
               top: '6rem'
             }}>
@@ -386,8 +387,6 @@ export default function AdminEssayEditor() {
                 </select>
               </div>
 
-
-
               <div>
                 <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: '600', marginBottom: '0.4rem', color: 'var(--text-muted)' }}>
                   URL Slug *
@@ -424,6 +423,7 @@ export default function AdminEssayEditor() {
         @media (max-width: 900px) {
           .editor-main { grid-column: span 12 !important; }
           .editor-sidebar { grid-column: span 12 !important; }
+          .editor-sidebar > div { position: static !important; }
         }
       `}</style>
     </div>

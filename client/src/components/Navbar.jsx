@@ -71,46 +71,50 @@ export default function Navbar() {
         alignItems: 'center',
         justifyContent: 'space-between',
         height: '4.85rem',
-        gap: '0.75rem'
+        gap: '0.5rem'
       }}>
 
         {/* Brand Logo */}
         <Link to="/" style={{
           display: 'flex',
           alignItems: 'center',
-          gap: '0.75rem',
+          gap: '0.65rem',
           textDecoration: 'none',
           minWidth: 0,
-          flexShrink: 0
+          flexShrink: 1
         }}>
-          <LotusLogo size={36} color="var(--accent-gold)" />
-          <div style={{ display: 'flex', flexDirection: 'column' }}>
+          <LotusLogo size={34} color="var(--accent-gold)" />
+          <div style={{ display: 'flex', flexDirection: 'column', minWidth: 0 }}>
             <span style={{
               fontFamily: 'var(--font-cormorant)',
-              fontSize: 'clamp(1.15rem, 2vw, 1.45rem)',
+              fontSize: 'clamp(1.05rem, 3.8vw, 1.45rem)',
               fontWeight: '700',
               color: 'var(--text-primary)',
               lineHeight: '1.1',
               letterSpacing: '-0.01em',
-              whiteSpace: 'nowrap'
+              whiteSpace: 'nowrap',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis'
             }}>
               Prof. Monika Chopra
             </span>
-            <span style={{
-              fontSize: '0.68rem',
-              letterSpacing: '0.08em',
+            <span className="navbar-brand-subtitle" style={{
+              fontSize: '0.65rem',
+              letterSpacing: '0.06em',
               color: 'var(--text-secondary)',
               fontWeight: '500',
               marginTop: '0.1rem',
               lineHeight: '1',
-              whiteSpace: 'nowrap'
+              whiteSpace: 'nowrap',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis'
             }}>
-              Life Lessons <span style={{ opacity: 0.5, margin: '0 0.2rem' }}>|</span> Moral Wisdom
+              Life Lessons <span style={{ opacity: 0.5, margin: '0 0.15rem' }}>|</span> Moral Wisdom
             </span>
           </div>
         </Link>
 
-        {/* Desktop Navigation Links (Direct clickable links without dropdowns) */}
+        {/* Desktop Navigation Links */}
         <nav className="desktop-nav-ref" style={{
           display: 'none',
           alignItems: 'center',
@@ -148,7 +152,7 @@ export default function Navbar() {
         </nav>
 
         {/* Right Action Icons: Search, Theme Toggle, and Menu Drawer */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexShrink: 0 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', flexShrink: 0 }}>
           {/* Search Trigger */}
           <button
             onClick={() => setSearchOpen(!searchOpen)}
@@ -163,13 +167,14 @@ export default function Navbar() {
               justifyContent: 'center',
               cursor: 'pointer',
               border: 'none',
-              backgroundColor: 'transparent',
-              transition: 'background 0.2s ease'
+              backgroundColor: searchOpen ? 'var(--bg-tertiary)' : 'transparent',
+              transition: 'background 0.2s ease',
+              touchAction: 'manipulation'
             }}
             onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--bg-tertiary)'}
-            onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
+            onMouseLeave={(e) => { if (!searchOpen) e.currentTarget.style.backgroundColor = 'transparent'; }}
           >
-            <Search size={19} />
+            <Search size={18} />
           </button>
 
           {/* Working Theme Toggle */}
@@ -189,12 +194,13 @@ export default function Navbar() {
               alignItems: 'center',
               justifyContent: 'center',
               border: 'none',
-              backgroundColor: 'transparent',
-              transition: 'background 0.2s ease'
+              backgroundColor: mobileMenuOpen ? 'var(--bg-tertiary)' : 'transparent',
+              transition: 'background 0.2s ease',
+              touchAction: 'manipulation'
             }}
             className="mobile-menu-trigger"
             onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--bg-tertiary)'}
-            onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
+            onMouseLeave={(e) => { if (!mobileMenuOpen) e.currentTarget.style.backgroundColor = 'transparent'; }}
           >
             {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
@@ -221,14 +227,14 @@ export default function Navbar() {
                 style={{
                   width: '100%',
                   padding: '0.6rem 0.5rem',
-                  fontSize: '0.95rem',
+                  fontSize: '16px',
                   border: 'none',
                   outline: 'none',
                   backgroundColor: 'transparent',
                   color: 'var(--text-primary)'
                 }}
               />
-              <button type="submit" className="btn btn-dark-green" style={{ padding: '0.45rem 1.2rem', fontSize: '0.85rem', flexShrink: 0 }}>
+              <button type="submit" className="btn btn-dark-green" style={{ padding: '0.45rem 1.1rem', fontSize: '0.85rem', flexShrink: 0 }}>
                 Search
               </button>
             </form>
@@ -240,7 +246,7 @@ export default function Navbar() {
       {mobileMenuOpen && (
         <div className="mobile-nav-overlay animate-fade-in">
           {/* Quick Search */}
-          <form onSubmit={handleSearchSubmit} style={{ display: 'flex', gap: '0.5rem' }}>
+          <form onSubmit={handleSearchSubmit} style={{ display: 'flex', gap: '0.5rem', width: '100%' }}>
             <div style={{ position: 'relative', width: '100%' }}>
               <Search size={18} style={{ position: 'absolute', left: '0.85rem', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }} />
               <input
@@ -251,7 +257,7 @@ export default function Navbar() {
                 style={{
                   width: '100%',
                   padding: '0.75rem 0.75rem 0.75rem 2.4rem',
-                  fontSize: '0.95rem',
+                  fontSize: '16px',
                   borderRadius: 'var(--radius-sm)',
                   border: '1px solid var(--border-color)',
                   backgroundColor: 'var(--bg-secondary)',
@@ -260,23 +266,32 @@ export default function Navbar() {
                 }}
               />
             </div>
-            <button type="submit" className="btn btn-dark-green" style={{ padding: '0.75rem 1rem', fontSize: '0.875rem' }}>
+            <button type="submit" className="btn btn-dark-green" style={{ padding: '0.75rem 1.15rem', fontSize: '0.875rem', flexShrink: 0 }}>
               Go
             </button>
           </form>
 
           {/* Navigation Items */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-            {navLinks.map((item, idx) => (
-              <Link
-                key={idx}
-                to={item.path}
-                onClick={() => setMobileMenuOpen(false)}
-                className="mobile-nav-link"
-              >
-                <span>{item.name}</span>
-              </Link>
-            ))}
+            {navLinks.map((item, idx) => {
+              const isActive = location.pathname === item.path || (item.isHome && location.pathname === '/');
+              return (
+                <Link
+                  key={idx}
+                  to={item.path}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="mobile-nav-link"
+                  style={{
+                    backgroundColor: isActive ? 'var(--accent-light)' : 'var(--bg-secondary)',
+                    borderColor: isActive ? 'var(--accent-primary)' : 'var(--border-color)',
+                    color: isActive ? 'var(--accent-primary)' : 'var(--text-primary)'
+                  }}
+                >
+                  <span>{item.name}</span>
+                  <span style={{ fontSize: '1rem', opacity: 0.5 }}>›</span>
+                </Link>
+              );
+            })}
           </div>
         </div>
       )}
@@ -289,6 +304,11 @@ export default function Navbar() {
         @media (max-width: 1039px) {
           .desktop-nav-ref { display: none !important; }
           .mobile-menu-trigger { display: inline-flex !important; }
+        }
+        @media (max-width: 360px) {
+          .navbar-brand-subtitle {
+            display: none !important;
+          }
         }
       `}</style>
     </header>

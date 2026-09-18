@@ -67,24 +67,24 @@ export default function SingleEssay() {
     <div>
       <ReadingProgress />
 
-      <article style={{ padding: '2.5rem 0 5rem 0' }}>
+      <article style={{ padding: 'clamp(1.5rem, 4vw, 2.5rem) 0 clamp(3rem, 6vw, 5rem) 0' }}>
         <div className="reading-container">
           
           <Breadcrumbs items={[{ label: essay.category_name, link: `/category/${essay.category_slug}` }, { label: essay.title }]} />
 
           {/* Article Header */}
-          <header style={{ marginBottom: '2.5rem' }}>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.25rem' }}>
+          <header style={{ marginBottom: 'clamp(1.75rem, 4vw, 2.5rem)' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1rem' }}>
               <Link to={`/category/${essay.category_slug}`} className={`category-badge ${getCategoryClass(essay.category_slug)}`}>
                 {essay.category_name}
               </Link>
             </div>
 
             <h1 className="serif-heading" style={{
-              fontSize: 'clamp(2.2rem, 5vw, 3.4rem)',
+              fontSize: 'clamp(1.75rem, 4.5vw, 3.2rem)',
               fontWeight: '700',
-              lineHeight: '1.15',
-              marginBottom: '1.25rem',
+              lineHeight: '1.18',
+              marginBottom: '1rem',
               color: 'var(--text-primary)',
               letterSpacing: '-0.02em'
             }}>
@@ -94,10 +94,10 @@ export default function SingleEssay() {
             {essay.subtitle && (
               <p style={{
                 fontFamily: 'var(--font-serif)',
-                fontSize: '1.3rem',
+                fontSize: 'clamp(1.05rem, 2.2vw, 1.25rem)',
                 lineHeight: '1.6',
                 color: 'var(--text-secondary)',
-                marginBottom: '2rem',
+                marginBottom: '1.75rem',
                 fontStyle: 'italic'
               }}>
                 {essay.subtitle}
@@ -109,16 +109,16 @@ export default function SingleEssay() {
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
-              paddingTop: '1.5rem',
-              paddingBottom: '1.5rem',
+              paddingTop: '1.25rem',
+              paddingBottom: '1.25rem',
               borderTop: '1px solid var(--border-color)',
               borderBottom: '1px solid var(--border-color)',
               flexWrap: 'wrap',
-              gap: '1rem'
+              gap: '0.75rem'
             }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
                 <div>
-                  <span style={{ fontWeight: '600', color: 'var(--text-primary)', fontSize: '0.95rem', display: 'block' }}>
+                  <span style={{ fontWeight: '600', color: 'var(--text-primary)', fontSize: '0.925rem', display: 'block' }}>
                     Prof. Monika Chopra
                   </span>
                   <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
@@ -130,7 +130,7 @@ export default function SingleEssay() {
           </header>
 
           {/* Social Share */}
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2.5rem', flexWrap: 'wrap', gap: '1rem' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem', flexWrap: 'wrap', gap: '1rem' }}>
             <SocialShare title={essay.title} />
           </div>
 
@@ -142,13 +142,15 @@ export default function SingleEssay() {
 
           {/* Bottom Social Share */}
           <div style={{
-            padding: '1.5rem 0',
-            marginTop: '3.5rem',
+            padding: '1.25rem 0',
+            marginTop: '3rem',
             borderTop: '1px solid var(--border-color)',
             borderBottom: '1px solid var(--border-color)',
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'space-between'
+            justifyContent: 'space-between',
+            flexWrap: 'wrap',
+            gap: '0.75rem'
           }}>
             <span style={{ fontSize: '0.9rem', fontWeight: '600', color: 'var(--text-primary)' }}>
               Enjoyed this essay? Share it:
@@ -156,12 +158,10 @@ export default function SingleEssay() {
             <SocialShare title={essay.title} />
           </div>
 
-
-
           {/* Previous / Next Navigation */}
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 220px), 1fr))',
             gap: '1rem',
             margin: '2.5rem 0'
           }}>
@@ -215,9 +215,9 @@ export default function SingleEssay() {
 
       {/* Related Essays Stream */}
       {essay.related && essay.related.length > 0 && (
-        <section style={{ backgroundColor: 'var(--bg-tertiary)', padding: '5rem 0', borderTop: '1px solid var(--border-color)' }}>
+        <section style={{ backgroundColor: 'var(--bg-tertiary)', padding: 'clamp(2.5rem, 5vw, 4.5rem) 0', borderTop: '1px solid var(--border-color)' }}>
           <div className="container">
-            <h3 className="serif-heading" style={{ fontSize: '2rem', marginBottom: '2.5rem', textAlign: 'center' }}>
+            <h3 className="serif-heading" style={{ fontSize: 'clamp(1.5rem, 3.5vw, 2rem)', marginBottom: '2rem', textAlign: 'center' }}>
               Further Reading in {essay.category_name}
             </h3>
             <div className="grid-3">

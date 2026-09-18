@@ -173,7 +173,7 @@ export default function AdminDashboard() {
   };
 
   return (
-    <div className="container" style={{ padding: '2.5rem 1.5rem 6rem 1.5rem' }}>
+    <div className="container" style={{ padding: 'clamp(1.5rem, 3vw, 2.5rem) clamp(1rem, 2.5vw, 1.5rem) 5rem clamp(1rem, 2.5vw, 1.5rem)' }}>
       <Breadcrumbs items={[{ label: 'Admin Dashboard' }]} />
 
       {/* Admin Top Header */}
@@ -181,34 +181,34 @@ export default function AdminDashboard() {
         backgroundColor: 'var(--bg-secondary)',
         borderRadius: 'var(--radius-lg)',
         border: '1px solid var(--border-color)',
-        padding: '2rem 2.5rem',
-        marginBottom: '3rem',
+        padding: 'clamp(1.25rem, 3vw, 2rem) clamp(1.25rem, 3vw, 2.5rem)',
+        marginBottom: '2.5rem',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
         flexWrap: 'wrap',
-        gap: '1.5rem'
+        gap: '1.25rem'
       }}>
         <div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.4rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.4rem', flexWrap: 'wrap' }}>
             <ShieldCheck size={22} className="category-ethics" />
-            <h1 className="serif-heading" style={{ fontSize: '2.2rem' }}>
+            <h1 className="serif-heading" style={{ fontSize: 'clamp(1.4rem, 3.5vw, 2.2rem)' }}>
               Editorial Control Room
             </h1>
           </div>
-          <p style={{ color: 'var(--text-secondary)', fontSize: '0.925rem' }}>
+          <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', wordBreak: 'break-word' }}>
             Logged in as <strong>{user?.name || 'Administrator'}</strong> ({user?.email})
           </p>
         </div>
 
-        <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center', flexWrap: 'wrap' }}>
-          <Link to="/admin/essay/new?type=essay" className="btn btn-primary" style={{ gap: '0.4rem', fontSize: '0.85rem' }}>
+        <div style={{ display: 'flex', gap: '0.6rem', alignItems: 'center', flexWrap: 'wrap' }}>
+          <Link to="/admin/essay/new?type=essay" className="btn btn-primary" style={{ gap: '0.4rem', fontSize: '0.85rem', padding: '0.5rem 0.9rem' }}>
             <Plus size={16} /> New Essay
           </Link>
-          <Link to="/admin/essay/new?type=blog" className="btn btn-outline" style={{ gap: '0.4rem', fontSize: '0.85rem' }}>
+          <Link to="/admin/essay/new?type=blog" className="btn btn-outline" style={{ gap: '0.4rem', fontSize: '0.85rem', padding: '0.5rem 0.9rem' }}>
             <Plus size={16} /> New Blog
           </Link>
-          <button onClick={logout} className="btn btn-outline" style={{ gap: '0.4rem', fontSize: '0.85rem' }}>
+          <button onClick={logout} className="btn btn-outline" style={{ gap: '0.4rem', fontSize: '0.85rem', padding: '0.5rem 0.9rem' }}>
             <LogOut size={16} /> Sign Out
           </button>
         </div>
@@ -218,46 +218,46 @@ export default function AdminDashboard() {
       {stats && (
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
-          gap: '1.25rem',
-          marginBottom: '3rem'
+          gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 140px), 1fr))',
+          gap: '1rem',
+          marginBottom: '2.5rem'
         }}>
-          <div style={{ padding: '1.25rem', backgroundColor: 'var(--bg-secondary)', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)' }}>
+          <div style={{ padding: '1.25rem 1rem', backgroundColor: 'var(--bg-secondary)', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)' }}>
             <span style={{ fontSize: '0.75rem', textTransform: 'uppercase', color: 'var(--text-muted)', fontWeight: '700' }}>Essays</span>
-            <span style={{ display: 'block', fontSize: '2rem', fontWeight: '700', fontFamily: 'var(--font-serif)', marginTop: '0.3rem' }}>{stats.essays.total}</span>
-            <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Academic essays</span>
+            <span style={{ display: 'block', fontSize: 'clamp(1.5rem, 3vw, 2rem)', fontWeight: '700', fontFamily: 'var(--font-serif)', marginTop: '0.3rem' }}>{stats.essays.total}</span>
+            <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Academic essays</span>
           </div>
 
-          <div style={{ padding: '1.25rem', backgroundColor: 'var(--bg-secondary)', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)' }}>
+          <div style={{ padding: '1.25rem 1rem', backgroundColor: 'var(--bg-secondary)', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)' }}>
             <span style={{ fontSize: '0.75rem', textTransform: 'uppercase', color: 'var(--text-muted)', fontWeight: '700' }}>Blogs</span>
-            <span style={{ display: 'block', fontSize: '2rem', fontWeight: '700', fontFamily: 'var(--font-serif)', marginTop: '0.3rem' }}>{stats.blogs?.total || 0}</span>
-            <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Blog posts</span>
+            <span style={{ display: 'block', fontSize: 'clamp(1.5rem, 3vw, 2rem)', fontWeight: '700', fontFamily: 'var(--font-serif)', marginTop: '0.3rem' }}>{stats.blogs?.total || 0}</span>
+            <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Blog posts</span>
           </div>
 
-          <div style={{ padding: '1.25rem', backgroundColor: 'var(--bg-secondary)', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)' }}>
+          <div style={{ padding: '1.25rem 1rem', backgroundColor: 'var(--bg-secondary)', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)' }}>
             <span style={{ fontSize: '0.75rem', textTransform: 'uppercase', color: 'var(--text-muted)', fontWeight: '700' }}>Categories</span>
-            <span style={{ display: 'block', fontSize: '2rem', fontWeight: '700', fontFamily: 'var(--font-serif)', marginTop: '0.3rem' }}>{stats.categories}</span>
-            <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Editorial categories</span>
+            <span style={{ display: 'block', fontSize: 'clamp(1.5rem, 3vw, 2rem)', fontWeight: '700', fontFamily: 'var(--font-serif)', marginTop: '0.3rem' }}>{stats.categories}</span>
+            <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Editorial categories</span>
           </div>
 
-          <div style={{ padding: '1.25rem', backgroundColor: 'var(--bg-secondary)', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)' }}>
+          <div style={{ padding: '1.25rem 1rem', backgroundColor: 'var(--bg-secondary)', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)' }}>
             <span style={{ fontSize: '0.75rem', textTransform: 'uppercase', color: 'var(--text-muted)', fontWeight: '700' }}>Subscribers</span>
-            <span style={{ display: 'block', fontSize: '2rem', fontWeight: '700', fontFamily: 'var(--font-serif)', marginTop: '0.3rem' }}>{stats.subscribers}</span>
-            <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Sunday Newsletter</span>
+            <span style={{ display: 'block', fontSize: 'clamp(1.5rem, 3vw, 2rem)', fontWeight: '700', fontFamily: 'var(--font-serif)', marginTop: '0.3rem' }}>{stats.subscribers}</span>
+            <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Sunday Newsletter</span>
           </div>
 
-          <div style={{ padding: '1.25rem', backgroundColor: 'var(--bg-secondary)', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)' }}>
+          <div style={{ padding: '1.25rem 1rem', backgroundColor: 'var(--bg-secondary)', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)' }}>
             <span style={{ fontSize: '0.75rem', textTransform: 'uppercase', color: 'var(--text-muted)', fontWeight: '700' }}>Comments</span>
-            <span style={{ display: 'block', fontSize: '2rem', fontWeight: '700', fontFamily: 'var(--font-serif)', marginTop: '0.3rem' }}>{stats.comments}</span>
-            <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Reader thoughts</span>
+            <span style={{ display: 'block', fontSize: 'clamp(1.5rem, 3vw, 2rem)', fontWeight: '700', fontFamily: 'var(--font-serif)', marginTop: '0.3rem' }}>{stats.comments}</span>
+            <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Reader thoughts</span>
           </div>
 
-          <div style={{ padding: '1.25rem', backgroundColor: 'var(--bg-secondary)', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)' }}>
-            <span style={{ fontSize: '0.75rem', textTransform: 'uppercase', color: 'var(--text-muted)', fontWeight: '700' }}>Inbox Messages</span>
-            <span style={{ display: 'block', fontSize: '2rem', fontWeight: '700', fontFamily: 'var(--font-serif)', marginTop: '0.3rem', color: stats.unreadMessages > 0 ? 'var(--accent-ethics)' : 'inherit' }}>
+          <div style={{ padding: '1.25rem 1rem', backgroundColor: 'var(--bg-secondary)', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)' }}>
+            <span style={{ fontSize: '0.75rem', textTransform: 'uppercase', color: 'var(--text-muted)', fontWeight: '700' }}>Inbox</span>
+            <span style={{ display: 'block', fontSize: 'clamp(1.5rem, 3vw, 2rem)', fontWeight: '700', fontFamily: 'var(--font-serif)', marginTop: '0.3rem', color: stats.unreadMessages > 0 ? 'var(--accent-ethics)' : 'inherit' }}>
               {stats.unreadMessages}
             </span>
-            <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Unread contact queries</span>
+            <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Unread contact queries</span>
           </div>
         </div>
       )}
@@ -265,11 +265,13 @@ export default function AdminDashboard() {
       {/* Navigation Tabs */}
       <div style={{
         display: 'flex',
-        gap: '0.75rem',
+        gap: '0.5rem',
         borderBottom: '1px solid var(--border-color)',
-        marginBottom: '2.5rem',
+        marginBottom: '2rem',
         overflowX: 'auto',
-        paddingBottom: '0.5rem'
+        WebkitOverflowScrolling: 'touch',
+        paddingBottom: '0.5rem',
+        scrollbarWidth: 'thin'
       }}>
         {[
           { id: 'essays', label: 'Essays', icon: FileText },
@@ -287,14 +289,17 @@ export default function AdminDashboard() {
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
-                gap: '0.5rem',
-                padding: '0.75rem 1.25rem',
-                fontSize: '0.9rem',
+                gap: '0.45rem',
+                padding: '0.65rem 1rem',
+                fontSize: '0.85rem',
                 fontWeight: '600',
+                whiteSpace: 'nowrap',
+                flexShrink: 0,
                 borderRadius: 'var(--radius-sm) var(--radius-sm) 0 0',
                 borderBottom: activeTab === tab.id ? '2px solid var(--text-primary)' : '2px solid transparent',
                 color: activeTab === tab.id ? 'var(--text-primary)' : 'var(--text-muted)',
-                backgroundColor: activeTab === tab.id ? 'var(--bg-secondary)' : 'transparent'
+                backgroundColor: activeTab === tab.id ? 'var(--bg-secondary)' : 'transparent',
+                cursor: 'pointer'
               }}
             >
               <Icon size={16} /> {tab.label}
@@ -306,32 +311,32 @@ export default function AdminDashboard() {
       {/* Tab 1: Essays Table */}
       {activeTab === 'essays' && (
         <div>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
-            <h2 className="serif-heading" style={{ fontSize: '1.6rem' }}>All Published & Draft Essays</h2>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem', flexWrap: 'wrap', gap: '0.75rem' }}>
+            <h2 className="serif-heading" style={{ fontSize: 'clamp(1.3rem, 3vw, 1.6rem)' }}>All Published & Draft Essays</h2>
             <Link to="/admin/essay/new?type=essay" className="btn btn-primary" style={{ padding: '0.5rem 1rem', fontSize: '0.85rem' }}>
               <Plus size={16} /> New Essay
             </Link>
           </div>
 
-          <div style={{ overflowX: 'auto', backgroundColor: 'var(--bg-secondary)', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)' }}>
-            <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.9rem' }}>
+          <div className="table-responsive" style={{ backgroundColor: 'var(--bg-secondary)', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)' }}>
+            <table style={{ width: '100%', minWidth: '560px', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.9rem' }}>
               <thead>
                 <tr style={{ borderBottom: '1px solid var(--border-color)', backgroundColor: 'var(--bg-tertiary)' }}>
-                  <th style={{ padding: '1rem' }}>Article</th>
-                  <th style={{ padding: '1rem' }}>Category</th>
-                  <th style={{ padding: '1rem' }}>Status</th>
-                  <th style={{ padding: '1rem', textAlign: 'right' }}>Actions</th>
+                  <th style={{ padding: '0.9rem 1rem' }}>Article</th>
+                  <th style={{ padding: '0.9rem 1rem' }}>Category</th>
+                  <th style={{ padding: '0.9rem 1rem' }}>Status</th>
+                  <th style={{ padding: '0.9rem 1rem', textAlign: 'right' }}>Actions</th>
                 </tr>
               </thead>
               <tbody>
                 {essays.map(essay => (
                   <tr key={essay.id} style={{ borderBottom: '1px solid var(--border-color)' }}>
-                    <td style={{ padding: '1rem' }}>
-                      <strong style={{ display: 'block', color: 'var(--text-primary)' }}>{essay.title}</strong>
+                    <td style={{ padding: '0.9rem 1rem' }}>
+                      <strong style={{ display: 'block', color: 'var(--text-primary)', wordBreak: 'break-word' }}>{essay.title}</strong>
                       <span style={{ fontSize: '0.775rem', color: 'var(--text-muted)' }}>{formatDate(essay.published_at)}</span>
                     </td>
-                    <td style={{ padding: '1rem' }}>{essay.category_name}</td>
-                    <td style={{ padding: '1rem' }}>
+                    <td style={{ padding: '0.9rem 1rem', whiteSpace: 'nowrap' }}>{essay.category_name}</td>
+                    <td style={{ padding: '0.9rem 1rem', whiteSpace: 'nowrap' }}>
                       <span style={{
                         padding: '0.2rem 0.6rem',
                         borderRadius: 'var(--radius-full)',
@@ -344,8 +349,8 @@ export default function AdminDashboard() {
                         {essay.status}
                       </span>
                     </td>
-                    <td style={{ padding: '1rem', textAlign: 'right' }}>
-                      <div style={{ display: 'flex', gap: '0.5rem', justifyContent: 'flex-end' }}>
+                    <td style={{ padding: '0.9rem 1rem', textAlign: 'right' }}>
+                      <div style={{ display: 'flex', gap: '0.4rem', justifyContent: 'flex-end' }}>
                         <Link to={`/essay/${essay.slug}`} target="_blank" className="btn btn-outline" style={{ padding: '0.35rem 0.6rem' }} title="View">
                           <Eye size={14} />
                         </Link>
@@ -368,32 +373,32 @@ export default function AdminDashboard() {
       {/* Tab 2: Blogs Table */}
       {activeTab === 'blogs' && (
         <div>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
-            <h2 className="serif-heading" style={{ fontSize: '1.6rem' }}>All Published & Draft Blogs</h2>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem', flexWrap: 'wrap', gap: '0.75rem' }}>
+            <h2 className="serif-heading" style={{ fontSize: 'clamp(1.3rem, 3vw, 1.6rem)' }}>All Published & Draft Blogs</h2>
             <Link to="/admin/essay/new?type=blog" className="btn btn-primary" style={{ padding: '0.5rem 1rem', fontSize: '0.85rem' }}>
               <Plus size={16} /> New Blog
             </Link>
           </div>
 
-          <div style={{ overflowX: 'auto', backgroundColor: 'var(--bg-secondary)', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)' }}>
-            <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.9rem' }}>
+          <div className="table-responsive" style={{ backgroundColor: 'var(--bg-secondary)', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)' }}>
+            <table style={{ width: '100%', minWidth: '560px', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.9rem' }}>
               <thead>
                 <tr style={{ borderBottom: '1px solid var(--border-color)', backgroundColor: 'var(--bg-tertiary)' }}>
-                  <th style={{ padding: '1rem' }}>Blog Post</th>
-                  <th style={{ padding: '1rem' }}>Category</th>
-                  <th style={{ padding: '1rem' }}>Status</th>
-                  <th style={{ padding: '1rem', textAlign: 'right' }}>Actions</th>
+                  <th style={{ padding: '0.9rem 1rem' }}>Blog Post</th>
+                  <th style={{ padding: '0.9rem 1rem' }}>Category</th>
+                  <th style={{ padding: '0.9rem 1rem' }}>Status</th>
+                  <th style={{ padding: '0.9rem 1rem', textAlign: 'right' }}>Actions</th>
                 </tr>
               </thead>
               <tbody>
                 {blogs.map(blog => (
                   <tr key={blog.id} style={{ borderBottom: '1px solid var(--border-color)' }}>
-                    <td style={{ padding: '1rem' }}>
-                      <strong style={{ display: 'block', color: 'var(--text-primary)' }}>{blog.title}</strong>
+                    <td style={{ padding: '0.9rem 1rem' }}>
+                      <strong style={{ display: 'block', color: 'var(--text-primary)', wordBreak: 'break-word' }}>{blog.title}</strong>
                       <span style={{ fontSize: '0.775rem', color: 'var(--text-muted)' }}>{formatDate(blog.published_at)}</span>
                     </td>
-                    <td style={{ padding: '1rem' }}>{blog.category_name}</td>
-                    <td style={{ padding: '1rem' }}>
+                    <td style={{ padding: '0.9rem 1rem', whiteSpace: 'nowrap' }}>{blog.category_name}</td>
+                    <td style={{ padding: '0.9rem 1rem', whiteSpace: 'nowrap' }}>
                       <span style={{
                         padding: '0.2rem 0.6rem',
                         borderRadius: 'var(--radius-full)',
@@ -406,8 +411,8 @@ export default function AdminDashboard() {
                         {blog.status}
                       </span>
                     </td>
-                    <td style={{ padding: '1rem', textAlign: 'right' }}>
-                      <div style={{ display: 'flex', gap: '0.5rem', justifyContent: 'flex-end' }}>
+                    <td style={{ padding: '0.9rem 1rem', textAlign: 'right' }}>
+                      <div style={{ display: 'flex', gap: '0.4rem', justifyContent: 'flex-end' }}>
                         <Link to={`/essay/${blog.slug}`} target="_blank" className="btn btn-outline" style={{ padding: '0.35rem 0.6rem' }} title="View">
                           <Eye size={14} />
                         </Link>
@@ -427,36 +432,36 @@ export default function AdminDashboard() {
         </div>
       )}
 
-      {/* Tab 2: Categories */}
+      {/* Tab 3: Categories */}
       {activeTab === 'categories' && (
         <div>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
-            <h2 className="serif-heading" style={{ fontSize: '1.6rem' }}>Editorial Categories</h2>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem', flexWrap: 'wrap', gap: '0.75rem' }}>
+            <h2 className="serif-heading" style={{ fontSize: 'clamp(1.3rem, 3vw, 1.6rem)' }}>Editorial Categories</h2>
             <button onClick={() => { setEditingCat(null); setCatFormData({ name: '', slug: '', description: '', accent_color: '#8B263E' }); setCatModalOpen(true); }} className="btn btn-primary" style={{ padding: '0.5rem 1rem', fontSize: '0.85rem' }}>
               <Plus size={16} /> Add Category
             </button>
           </div>
 
-          <div style={{ overflowX: 'auto', backgroundColor: 'var(--bg-secondary)', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)' }}>
-            <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.9rem' }}>
+          <div className="table-responsive" style={{ backgroundColor: 'var(--bg-secondary)', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)' }}>
+            <table style={{ width: '100%', minWidth: '560px', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.9rem' }}>
               <thead>
                 <tr style={{ borderBottom: '1px solid var(--border-color)', backgroundColor: 'var(--bg-tertiary)' }}>
-                  <th style={{ padding: '1rem' }}>Category</th>
-                  <th style={{ padding: '1rem' }}>Slug</th>
-                  <th style={{ padding: '1rem' }}>Description</th>
-                  <th style={{ padding: '1rem' }}>Essays</th>
-                  <th style={{ padding: '1rem', textAlign: 'right' }}>Actions</th>
+                  <th style={{ padding: '0.9rem 1rem' }}>Category</th>
+                  <th style={{ padding: '0.9rem 1rem' }}>Slug</th>
+                  <th style={{ padding: '0.9rem 1rem' }}>Description</th>
+                  <th style={{ padding: '0.9rem 1rem' }}>Essays</th>
+                  <th style={{ padding: '0.9rem 1rem', textAlign: 'right' }}>Actions</th>
                 </tr>
               </thead>
               <tbody>
                 {categories.map(cat => (
                   <tr key={cat.id} style={{ borderBottom: '1px solid var(--border-color)' }}>
-                    <td style={{ padding: '1rem', fontWeight: '600', color: cat.accent_color }}>{cat.name}</td>
-                    <td style={{ padding: '1rem' }}><code>{cat.slug}</code></td>
-                    <td style={{ padding: '1rem', color: 'var(--text-secondary)' }}>{cat.description}</td>
-                    <td style={{ padding: '1rem' }}>{cat.essay_count || 0}</td>
-                    <td style={{ padding: '1rem', textAlign: 'right' }}>
-                      <div style={{ display: 'flex', gap: '0.5rem', justifyContent: 'flex-end' }}>
+                    <td style={{ padding: '0.9rem 1rem', fontWeight: '600', color: cat.accent_color }}>{cat.name}</td>
+                    <td style={{ padding: '0.9rem 1rem' }}><code>{cat.slug}</code></td>
+                    <td style={{ padding: '0.9rem 1rem', color: 'var(--text-secondary)' }}>{cat.description}</td>
+                    <td style={{ padding: '0.9rem 1rem' }}>{cat.essay_count || 0}</td>
+                    <td style={{ padding: '0.9rem 1rem', textAlign: 'right' }}>
+                      <div style={{ display: 'flex', gap: '0.4rem', justifyContent: 'flex-end' }}>
                         <button onClick={() => { setEditingCat(cat); setCatFormData(cat); setCatModalOpen(true); }} className="btn btn-outline" style={{ padding: '0.35rem 0.6rem' }}>
                           <Edit size={14} />
                         </button>
@@ -473,27 +478,35 @@ export default function AdminDashboard() {
         </div>
       )}
 
-
-
       {/* Tab 4: Comments */}
       {activeTab === 'comments' && (
         <div>
-          <h2 className="serif-heading" style={{ fontSize: '1.6rem', marginBottom: '1.5rem' }}>Reader Comments Moderation</h2>
+          <h2 className="serif-heading" style={{ fontSize: 'clamp(1.3rem, 3vw, 1.6rem)', marginBottom: '1.25rem' }}>Reader Comments Moderation</h2>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             {comments.map(c => (
-              <div key={c.id} style={{ padding: '1.25rem', backgroundColor: 'var(--bg-secondary)', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)', display: 'flex', justifyContent: 'space-between', gap: '1.5rem', alignItems: 'flex-start' }}>
-                <div>
-                  <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center', marginBottom: '0.4rem' }}>
+              <div key={c.id} style={{
+                padding: 'clamp(1rem, 2.5vw, 1.25rem)',
+                backgroundColor: 'var(--bg-secondary)',
+                borderRadius: 'var(--radius-md)',
+                border: '1px solid var(--border-color)',
+                display: 'flex',
+                justifyContent: 'space-between',
+                gap: '1rem',
+                alignItems: 'flex-start',
+                flexWrap: 'wrap'
+              }}>
+                <div style={{ flex: 1, minWidth: '220px' }}>
+                  <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center', marginBottom: '0.4rem', flexWrap: 'wrap' }}>
                     <strong style={{ fontSize: '0.95rem' }}>{c.name}</strong>
                     <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>({c.email})</span>
                     <span style={{ fontSize: '0.75rem', padding: '0.15rem 0.5rem', borderRadius: 'var(--radius-full)', backgroundColor: c.status === 'approved' ? 'rgba(46,139,128,0.15)' : 'rgba(139,38,62,0.15)', color: c.status === 'approved' ? 'var(--accent-technology)' : 'var(--accent-ethics)' }}>
                       {c.status}
                     </span>
                   </div>
-                  <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', marginBottom: '0.5rem' }}>"{c.content}"</p>
+                  <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', marginBottom: '0.5rem', wordBreak: 'break-word' }}>"{c.content}"</p>
                   <span style={{ fontSize: '0.775rem', color: 'var(--text-muted)' }}>Essay: <em>{c.essay_title}</em> • {formatDate(c.created_at)}</span>
                 </div>
-                <div style={{ display: 'flex', gap: '0.4rem' }}>
+                <div style={{ display: 'flex', gap: '0.4rem', flexShrink: 0 }}>
                   {c.status !== 'approved' && (
                     <button onClick={() => handleCommentStatus(c.id, 'approved')} className="btn btn-outline" style={{ padding: '0.35rem 0.6rem', color: 'var(--accent-technology)' }} title="Approve"><CheckCircle size={14} /></button>
                   )}
@@ -511,28 +524,28 @@ export default function AdminDashboard() {
       {/* Tab 5: Subscribers */}
       {activeTab === 'newsletter' && (
         <div>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
-            <h2 className="serif-heading" style={{ fontSize: '1.6rem' }}>Sunday Newsletter Subscribers</h2>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem', flexWrap: 'wrap', gap: '0.75rem' }}>
+            <h2 className="serif-heading" style={{ fontSize: 'clamp(1.3rem, 3vw, 1.6rem)' }}>Sunday Newsletter Subscribers</h2>
             <button onClick={handleExportSubscribers} className="btn btn-outline" style={{ gap: '0.4rem', fontSize: '0.85rem' }}>
               <Download size={16} /> Export CSV ({subscribers.length})
             </button>
           </div>
 
-          <div style={{ overflowX: 'auto', backgroundColor: 'var(--bg-secondary)', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)' }}>
-            <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.9rem' }}>
+          <div className="table-responsive" style={{ backgroundColor: 'var(--bg-secondary)', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)' }}>
+            <table style={{ width: '100%', minWidth: '480px', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.9rem' }}>
               <thead>
                 <tr style={{ borderBottom: '1px solid var(--border-color)', backgroundColor: 'var(--bg-tertiary)' }}>
-                  <th style={{ padding: '1rem' }}>Email</th>
-                  <th style={{ padding: '1rem' }}>Subscribed Date</th>
-                  <th style={{ padding: '1rem' }}>Status</th>
+                  <th style={{ padding: '0.9rem 1rem' }}>Email</th>
+                  <th style={{ padding: '0.9rem 1rem' }}>Subscribed Date</th>
+                  <th style={{ padding: '0.9rem 1rem' }}>Status</th>
                 </tr>
               </thead>
               <tbody>
                 {subscribers.map(s => (
                   <tr key={s.id} style={{ borderBottom: '1px solid var(--border-color)' }}>
-                    <td style={{ padding: '1rem', fontWeight: '500' }}>{s.email}</td>
-                    <td style={{ padding: '1rem' }}>{formatDate(s.subscribed_at)}</td>
-                    <td style={{ padding: '1rem' }}>{s.status}</td>
+                    <td style={{ padding: '0.9rem 1rem', fontWeight: '500', wordBreak: 'break-word' }}>{s.email}</td>
+                    <td style={{ padding: '0.9rem 1rem' }}>{formatDate(s.subscribed_at)}</td>
+                    <td style={{ padding: '0.9rem 1rem' }}>{s.status}</td>
                   </tr>
                 ))}
               </tbody>
@@ -544,9 +557,9 @@ export default function AdminDashboard() {
       {/* Tab 6: Contact Messages */}
       {activeTab === 'contact' && (
         <div>
-          <h2 className="serif-heading" style={{ fontSize: '1.6rem', marginBottom: '1.5rem' }}>Editorial Contact Inbox</h2>
+          <h2 className="serif-heading" style={{ fontSize: 'clamp(1.3rem, 3vw, 1.6rem)', marginBottom: '1.25rem' }}>Editorial Contact Inbox</h2>
           {messages.length === 0 ? (
-            <div style={{ padding: '3.5rem 2rem', textAlign: 'center', backgroundColor: 'var(--bg-secondary)', borderRadius: 'var(--radius-md)', border: '1px dashed var(--border-color)', color: 'var(--text-muted)' }}>
+            <div style={{ padding: '3.5rem 1.5rem', textAlign: 'center', backgroundColor: 'var(--bg-secondary)', borderRadius: 'var(--radius-md)', border: '1px dashed var(--border-color)', color: 'var(--text-muted)' }}>
               <Inbox size={44} style={{ marginBottom: '0.75rem', opacity: 0.5 }} />
               <p style={{ fontSize: '1.05rem', fontWeight: '600', color: 'var(--text-primary)', marginBottom: '0.25rem' }}>No messages in inbox</p>
               <p style={{ fontSize: '0.875rem' }}>Messages submitted through the Editorial Correspondence contact form will appear here.</p>
@@ -554,15 +567,15 @@ export default function AdminDashboard() {
           ) : (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               {messages.map(m => (
-                <div key={m.id} style={{ padding: '1.5rem', backgroundColor: 'var(--bg-secondary)', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)' }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
+                <div key={m.id} style={{ padding: 'clamp(1rem, 2.5vw, 1.5rem)', backgroundColor: 'var(--bg-secondary)', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem', flexWrap: 'wrap', gap: '0.5rem' }}>
                     <div>
-                      <strong style={{ fontSize: '1.05rem', color: 'var(--text-primary)' }}>{m.subject}</strong>
-                      <div style={{ fontSize: '0.825rem', color: 'var(--text-muted)' }}>From: {m.name} ({m.email}) • {formatDate(m.created_at)}</div>
+                      <strong style={{ fontSize: '1.05rem', color: 'var(--text-primary)', wordBreak: 'break-word' }}>{m.subject}</strong>
+                      <div style={{ fontSize: '0.825rem', color: 'var(--text-muted)', wordBreak: 'break-word' }}>From: {m.name} ({m.email}) • {formatDate(m.created_at)}</div>
                     </div>
                     <button onClick={() => handleDeleteMessage(m.id)} className="btn btn-outline" style={{ padding: '0.35rem 0.6rem', color: 'var(--accent-ethics)' }}><Trash2 size={14} /></button>
                   </div>
-                  <p style={{ fontSize: '0.925rem', color: 'var(--text-secondary)', lineHeight: '1.6', marginTop: '0.75rem', whiteSpace: 'pre-line' }}>
+                  <p style={{ fontSize: '0.925rem', color: 'var(--text-secondary)', lineHeight: '1.6', marginTop: '0.75rem', whiteSpace: 'pre-line', wordBreak: 'break-word' }}>
                     {m.message}
                   </p>
                 </div>
@@ -575,7 +588,7 @@ export default function AdminDashboard() {
       {/* Category Modal */}
       {catModalOpen && (
         <div style={{ position: 'fixed', inset: 0, backgroundColor: 'rgba(0,0,0,0.5)', zIndex: 999, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1rem' }}>
-          <form onSubmit={handleSaveCategory} style={{ backgroundColor: 'var(--bg-secondary)', padding: '2rem', borderRadius: 'var(--radius-md)', width: '100%', maxWidth: '480px', border: '1px solid var(--border-color)' }}>
+          <form onSubmit={handleSaveCategory} style={{ backgroundColor: 'var(--bg-secondary)', padding: 'clamp(1.25rem, 3vw, 2rem)', borderRadius: 'var(--radius-md)', width: '100%', maxWidth: '480px', maxHeight: '90vh', overflowY: 'auto', border: '1px solid var(--border-color)' }}>
             <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.4rem', marginBottom: '1.25rem' }}>{editingCat ? 'Edit Category' : 'New Category'}</h3>
             <div style={{ marginBottom: '1rem' }}>
               <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: '600', marginBottom: '0.3rem' }}>Name</label>

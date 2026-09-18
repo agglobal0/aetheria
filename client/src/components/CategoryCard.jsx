@@ -32,7 +32,7 @@ export default function CategoryCard({ category }) {
         backgroundColor: 'var(--bg-secondary)',
         borderRadius: 'var(--radius-md)',
         border: '1px solid var(--border-color)',
-        padding: '2rem',
+        padding: 'clamp(1.25rem, 3vw, 2rem)',
         textDecoration: 'none',
         transition: 'all var(--transition-normal)',
         position: 'relative',

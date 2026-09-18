@@ -82,14 +82,14 @@ export default function Essays() {
   };
 
   return (
-    <div className="container" style={{ padding: '3rem 1.5rem 5rem 1.5rem' }}>
+    <div className="container" style={{ padding: 'clamp(2rem, 4vw, 3rem) clamp(0.875rem, 3vw, 1.5rem) 5rem clamp(0.875rem, 3vw, 1.5rem)' }}>
 
       {/* Header */}
-      <div style={{ marginBottom: '3rem', textAlign: 'center' }}>
-        <h1 className="serif-heading" style={{ fontSize: '3rem', marginBottom: '0.75rem' }}>
+      <div style={{ marginBottom: 'clamp(2rem, 4vw, 3rem)', textAlign: 'center' }}>
+        <h1 className="serif-heading" style={{ fontSize: 'clamp(2rem, 4.5vw, 3rem)', marginBottom: '0.75rem' }}>
           Academic Essays
         </h1>
-        <p style={{ fontFamily: 'var(--font-serif)', fontSize: '1.2rem', color: 'var(--text-secondary)', maxWidth: '580px', margin: '0 auto' }}>
+        <p style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(1rem, 2vw, 1.2rem)', color: 'var(--text-secondary)', maxWidth: '580px', margin: '0 auto' }}>
           Long-form academic and editorial essays by Professor Monika Chopra exploring ethics, human behaviour, technology, and life reflections.
         </p>
       </div>
@@ -99,19 +99,19 @@ export default function Essays() {
         backgroundColor: 'var(--bg-secondary)',
         border: '1px solid var(--border-color)',
         borderRadius: 'var(--radius-md)',
-        padding: '1.25rem 1.5rem',
-        marginBottom: '3rem',
+        padding: 'clamp(1rem, 3vw, 1.5rem)',
+        marginBottom: 'clamp(2rem, 4vw, 3rem)',
         display: 'flex',
         flexDirection: 'column',
-        gap: '1.25rem'
+        gap: '1rem'
       }}>
 
         {/* Search & Sort Controls */}
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', alignItems: 'center', justifyContent: 'space-between' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem', alignItems: 'center', justifyContent: 'space-between' }}>
 
-          <form onSubmit={handleSearchSubmit} style={{ flex: '1', minWidth: '260px', display: 'flex', gap: '0.5rem' }}>
+          <form onSubmit={handleSearchSubmit} style={{ flex: '1', minWidth: '220px', display: 'flex', gap: '0.5rem' }}>
             <div style={{ position: 'relative', width: '100%' }}>
-              <Search size={18} style={{ position: 'absolute', left: '1rem', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }} />
+              <Search size={18} style={{ position: 'absolute', left: '0.85rem', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }} />
               <input
                 type="text"
                 placeholder="Search essays by keyword..."
@@ -119,8 +119,8 @@ export default function Essays() {
                 onChange={(e) => setSearchQuery(e.target.value)}
                 style={{
                   width: '100%',
-                  padding: '0.65rem 1rem 0.65rem 2.5rem',
-                  fontSize: '0.9rem',
+                  padding: '0.65rem 0.85rem 0.65rem 2.4rem',
+                  fontSize: '16px',
                   borderRadius: 'var(--radius-sm)',
                   border: '1px solid var(--border-color)',
                   backgroundColor: 'var(--bg-input)',
@@ -129,12 +129,12 @@ export default function Essays() {
                 }}
               />
             </div>
-            <button type="submit" className="btn btn-outline" style={{ padding: '0.65rem 1rem' }}>
+            <button type="submit" className="btn btn-outline" style={{ padding: '0.65rem 1rem', flexShrink: 0 }}>
               Search
             </button>
           </form>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexWrap: 'wrap' }}>
             {/* Sort Dropdown */}
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
               <SlidersHorizontal size={16} />
@@ -142,12 +142,12 @@ export default function Essays() {
                 value={sortBy}
                 onChange={(e) => { setSortBy(e.target.value); setPage(1); }}
                 style={{
-                  padding: '0.6rem 0.85rem',
+                  padding: '0.6rem 0.75rem',
                   borderRadius: 'var(--radius-sm)',
                   border: '1px solid var(--border-color)',
                   backgroundColor: 'var(--bg-input)',
                   color: 'var(--text-primary)',
-                  fontSize: '0.85rem',
+                  fontSize: '16px',
                   outline: 'none',
                   cursor: 'pointer'
                 }}
@@ -165,9 +165,11 @@ export default function Essays() {
                 style={{
                   padding: '0.5rem 0.75rem',
                   backgroundColor: layout === 'grid' ? 'var(--bg-tertiary)' : 'transparent',
-                  color: 'var(--text-primary)'
+                  color: 'var(--text-primary)',
+                  cursor: 'pointer'
                 }}
                 title="Grid View"
+                aria-label="Grid View"
               >
                 <LayoutGrid size={18} />
               </button>
@@ -176,9 +178,11 @@ export default function Essays() {
                 style={{
                   padding: '0.5rem 0.75rem',
                   backgroundColor: layout === 'list' ? 'var(--bg-tertiary)' : 'transparent',
-                  color: 'var(--text-primary)'
+                  color: 'var(--text-primary)',
+                  cursor: 'pointer'
                 }}
                 title="List View"
+                aria-label="List View"
               >
                 <List size={18} />
               </button>
@@ -188,11 +192,18 @@ export default function Essays() {
         </div>
 
         {/* Category Pills */}
-        <div style={{ display: 'flex', gap: '0.6rem', flexWrap: 'wrap', alignItems: 'center', paddingTop: '0.5rem', borderTop: '1px solid var(--border-color)' }}>
+        <div style={{
+          display: 'flex',
+          gap: '0.5rem',
+          flexWrap: 'wrap',
+          alignItems: 'center',
+          paddingTop: '0.75rem',
+          borderTop: '1px solid var(--border-color)'
+        }}>
           <button
             onClick={() => handleCategorySelect('')}
             className={`btn ${selectedCategory === '' ? 'btn-primary' : 'btn-outline'}`}
-            style={{ padding: '0.4rem 1rem', fontSize: '0.825rem', borderRadius: 'var(--radius-full)' }}
+            style={{ padding: '0.4rem 0.9rem', fontSize: '0.825rem', borderRadius: 'var(--radius-full)', minHeight: '34px' }}
           >
             All Essays
           </button>
@@ -202,7 +213,7 @@ export default function Essays() {
               key={cat.id}
               onClick={() => handleCategorySelect(cat.slug)}
               className={`btn ${selectedCategory === cat.slug ? 'btn-primary' : 'btn-outline'}`}
-              style={{ padding: '0.4rem 1rem', fontSize: '0.825rem', borderRadius: 'var(--radius-full)' }}
+              style={{ padding: '0.4rem 0.9rem', fontSize: '0.825rem', borderRadius: 'var(--radius-full)', minHeight: '34px' }}
             >
               {cat.name}
             </button>

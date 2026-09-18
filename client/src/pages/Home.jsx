@@ -148,12 +148,12 @@ export default function Home() {
       {/* =========================================================================
           2. SECTION: "Why This Space?" & "Explore by Theme"
           ========================================================================= */}
-      <section style={{ padding: '4.5rem 0 3.5rem 0' }}>
+      <section style={{ padding: 'clamp(2.5rem, 5vw, 4.5rem) 0 clamp(2rem, 4vw, 3.5rem) 0' }}>
         <div className="container">
           <div style={{
             display: 'grid',
             gridTemplateColumns: 'minmax(280px, 38%) 1fr',
-            gap: '3.5rem',
+            gap: 'clamp(2rem, 4vw, 3.5rem)',
             alignItems: 'start'
           }} className="ref-two-col-grid">
 
@@ -163,7 +163,7 @@ export default function Home() {
                 <LeafIcon size={22} color="#5C7A60" />
                 <h2 style={{
                   fontFamily: 'var(--font-cormorant)',
-                  fontSize: '2rem',
+                  fontSize: 'clamp(1.6rem, 3.5vw, 2rem)',
                   fontWeight: '700',
                   color: 'var(--text-primary)',
                   letterSpacing: '-0.01em'
@@ -244,10 +244,10 @@ export default function Home() {
 
             {/* Right Column: Explore by Theme */}
             <div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.75rem' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.5rem' }}>
                 <h3 style={{
                   fontFamily: 'var(--font-cormorant)',
-                  fontSize: '1.6rem',
+                  fontSize: 'clamp(1.35rem, 3vw, 1.6rem)',
                   fontWeight: '600',
                   color: 'var(--text-primary)',
                   letterSpacing: '-0.01em'
@@ -406,12 +406,12 @@ export default function Home() {
       {/* =========================================================================
           3. SECTION: "Featured Reflection" & "More Reflections"
           ========================================================================= */}
-      <section style={{ padding: '2.5rem 0 4.5rem 0' }}>
+      <section style={{ padding: 'clamp(1.5rem, 3vw, 2.5rem) 0 clamp(2.5rem, 5vw, 4.5rem) 0' }}>
         <div className="container">
           <div style={{
             display: 'grid',
             gridTemplateColumns: 'minmax(300px, 62%) 1fr',
-            gap: '2.5rem',
+            gap: 'clamp(1.75rem, 3.5vw, 2.5rem)',
             alignItems: 'start'
           }} className="ref-reflections-grid">
 
@@ -431,18 +431,18 @@ export default function Home() {
 
               {/* Right Sub-Column (Text) */}
               <div style={{
-                padding: '2.5rem 2.2rem',
+                padding: 'clamp(1.5rem, 3vw, 2.5rem) clamp(1.25rem, 2.5vw, 2.2rem)',
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'center'
               }}>
                 <h3 style={{
                   fontFamily: 'var(--font-cormorant)',
-                  fontSize: 'clamp(1.5rem, 2.3vw, 1.95rem)',
+                  fontSize: 'clamp(1.35rem, 2.3vw, 1.95rem)',
                   fontWeight: '700',
                   lineHeight: '1.22',
                   color: 'var(--text-primary)',
-                  marginBottom: '1.25rem'
+                  marginBottom: '1rem'
                 }}>
                   The Freedom That Begins When Expectations End
                 </h3>
@@ -451,7 +451,7 @@ export default function Home() {
                   fontSize: '0.88rem',
                   lineHeight: '1.65',
                   color: 'var(--text-secondary)',
-                  marginBottom: '1rem'
+                  marginBottom: '0.85rem'
                 }}>
                   We often think expectations connect us to people. Sometimes, they are exactly what makes us dependent on them.
                 </p>
@@ -460,7 +460,7 @@ export default function Home() {
                   fontSize: '0.88rem',
                   lineHeight: '1.65',
                   color: 'var(--text-secondary)',
-                  marginBottom: '1.75rem'
+                  marginBottom: '1.5rem'
                 }}>
                   When we stop measuring our worth through what others give, acknowledge or return, something changes. We begin to live by choice rather than expectation.
                 </p>
@@ -486,15 +486,15 @@ export default function Home() {
                 MORE REFLECTIONS
               </div>
 
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.15rem' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                 {moreReflections.map((item, idx) => (
                   <Link
                     key={idx}
                     to="/essays"
                     style={{
                       display: 'grid',
-                      gridTemplateColumns: '70px 1fr',
-                      gap: '1rem',
+                      gridTemplateColumns: '64px 1fr',
+                      gap: '0.85rem',
                       alignItems: 'center',
                       textDecoration: 'none',
                       padding: '0.4rem',
@@ -507,20 +507,22 @@ export default function Home() {
                       src={item.image}
                       alt={item.title}
                       style={{
-                        width: '70px',
-                        height: '56px',
+                        width: '64px',
+                        height: '52px',
                         objectFit: 'cover',
                         borderRadius: '6px'
                       }}
                     />
-                    <div>
+                    <div style={{ minWidth: 0 }}>
                       <h4 style={{
                         fontFamily: 'var(--font-cormorant)',
                         fontSize: '0.98rem',
                         fontWeight: '600',
                         color: 'var(--text-primary)',
                         lineHeight: '1.25',
-                        marginBottom: '0.2rem'
+                        marginBottom: '0.2rem',
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis'
                       }}>
                         {item.title}
                       </h4>
@@ -543,7 +545,7 @@ export default function Home() {
       {/* =========================================================================
           4. SECTION: "A Thought to Carry" Watercolor Banner
           ========================================================================= */}
-      <section style={{ padding: '0 0 4.5rem 0' }}>
+      <section style={{ padding: '0 0 clamp(2.5rem, 5vw, 4.5rem) 0' }}>
         <div className="container">
           <div className="thought-quote-banner">
             <div style={{
@@ -557,9 +559,9 @@ export default function Home() {
             }}>
 
               {/* Left Botanical Motif + Quote */}
-              <div style={{ display: 'flex', gap: '1.75rem', alignItems: 'center', maxWidth: '820px' }}>
-                <div style={{ display: 'none', smDisplay: 'block' }} className="ref-botanical-leaf">
-                  <LeafIcon size={46} color="#658869" />
+              <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'center', maxWidth: '820px' }}>
+                <div className="ref-botanical-leaf">
+                  <LeafIcon size={44} color="#658869" />
                 </div>
 
                 <div>
@@ -569,7 +571,7 @@ export default function Home() {
                     fontWeight: '600',
                     letterSpacing: '0.08em',
                     color: '#4B6B4F',
-                    marginBottom: '0.6rem'
+                    marginBottom: '0.5rem'
                   }}>
                     A Thought to Carry
                   </div>
@@ -622,12 +624,12 @@ export default function Home() {
       {/* =========================================================================
           5. SECTION: "The Person Behind the Words" & "Read • Reflect • Rethink"
           ========================================================================= */}
-      <section style={{ padding: '0 0 5rem 0' }}>
+      <section style={{ padding: '0 0 clamp(3rem, 6vw, 5rem) 0' }}>
         <div className="container">
           <div style={{
             display: 'grid',
             gridTemplateColumns: 'minmax(300px, 56%) 1fr',
-            gap: '3.5rem',
+            gap: 'clamp(2rem, 4vw, 3.5rem)',
             alignItems: 'start'
           }} className="ref-bio-feature-grid">
 
@@ -701,11 +703,11 @@ export default function Home() {
             </div>
 
             {/* Right: Read • Reflect • Rethink Features List */}
-            <div style={{ paddingLeft: '0.5rem' }}>
+            <div className="ref-feature-col">
               <div style={{ marginBottom: '1.5rem' }}>
                 <h3 style={{
                   fontFamily: 'var(--font-cormorant)',
-                  fontSize: '1.6rem',
+                  fontSize: 'clamp(1.35rem, 3vw, 1.6rem)',
                   fontWeight: '700',
                   color: 'var(--text-primary)',
                   letterSpacing: '0.02em',
@@ -719,7 +721,7 @@ export default function Home() {
               </div>
 
               {/* 4 Feature Items */}
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem', marginBottom: '1.75rem' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.1rem', marginBottom: '1.75rem' }}>
 
                 {/* Item 1 */}
                 <div style={{ display: 'flex', gap: '0.9rem', alignItems: 'flex-start' }}>
@@ -864,7 +866,7 @@ export default function Home() {
             <div>
               <h3 style={{
                 fontFamily: 'var(--font-cormorant)',
-                fontSize: '2rem',
+                fontSize: 'clamp(1.6rem, 3.5vw, 2rem)',
                 fontWeight: '700',
                 color: '#FFFFFF',
                 marginBottom: '1rem'
@@ -972,7 +974,7 @@ export default function Home() {
                 </div>
               ) : (
                 <form onSubmit={handleSubscribe} style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', marginBottom: '1rem' }}>
-                  <div style={{ display: 'flex', gap: '0.35rem' }}>
+                  <div className="ref-newsletter-form-row" style={{ display: 'flex', gap: '0.35rem' }}>
                     <input
                       type="email"
                       required
@@ -988,12 +990,13 @@ export default function Home() {
                       style={{
                         flex: 1,
                         padding: '0.65rem 0.85rem',
-                        fontSize: '0.85rem',
+                        fontSize: '16px',
                         border: subscribeStatus === 'error' ? '1px solid #D32F2F' : '1px solid var(--border-color)',
                         borderRadius: '6px',
                         outline: 'none',
                         backgroundColor: 'var(--bg-secondary)',
-                        color: 'var(--text-primary)'
+                        color: 'var(--text-primary)',
+                        minWidth: 0
                       }}
                     />
                     <button
@@ -1055,7 +1058,7 @@ export default function Home() {
               <h4 style={{
                 fontFamily: 'var(--font-cormorant)',
                 fontStyle: 'italic',
-                fontSize: '1.65rem',
+                fontSize: 'clamp(1.35rem, 3vw, 1.65rem)',
                 fontWeight: '600',
                 color: '#FFFFFF',
                 lineHeight: '1.25',
@@ -1105,10 +1108,13 @@ export default function Home() {
 
       {/* Responsive Layout Styles */}
       <style>{`
+        .ref-botanical-leaf {
+          display: block;
+        }
         @media (max-width: 960px) {
           .ref-two-col-grid {
             grid-template-columns: 1fr !important;
-            gap: 2.5rem !important;
+            gap: 2.25rem !important;
           }
           .ref-themes-grid {
             grid-template-columns: repeat(2, 1fr) !important;
@@ -1119,17 +1125,27 @@ export default function Home() {
           .ref-bio-feature-grid {
             grid-template-columns: 1fr !important;
           }
+          .ref-feature-col {
+            padding-left: 0 !important;
+          }
           .ref-three-panel-grid {
             grid-template-columns: 1fr !important;
-            gap: 3rem !important;
+            gap: 2.5rem !important;
           }
         }
-        @media (max-width: 580px) {
+        @media (max-width: 600px) {
           .ref-themes-grid {
             grid-template-columns: 1fr !important;
           }
           .ref-botanical-leaf {
             display: none !important;
+          }
+          .ref-newsletter-form-row {
+            flex-direction: column !important;
+          }
+          .ref-newsletter-form-row input,
+          .ref-newsletter-form-row button {
+            width: 100% !important;
           }
         }
         .ref-more-item:hover {

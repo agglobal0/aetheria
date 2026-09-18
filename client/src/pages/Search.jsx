@@ -47,17 +47,17 @@ export default function Search() {
   };
 
   return (
-    <div className="container" style={{ padding: '3rem 1.5rem 5rem 1.5rem' }}>
+    <div className="container" style={{ padding: 'clamp(2rem, 4vw, 3rem) clamp(0.875rem, 3vw, 1.5rem) 5rem clamp(0.875rem, 3vw, 1.5rem)' }}>
       <Breadcrumbs items={[{ label: 'Search Results' }]} />
 
-      <div style={{ maxWidth: '680px', margin: '0 auto 3.5rem auto', textAlign: 'center' }}>
-        <h1 className="serif-heading" style={{ fontSize: '2.5rem', marginBottom: '1.25rem' }}>
+      <div style={{ maxWidth: '680px', margin: '0 auto clamp(2rem, 4vw, 3.5rem) auto', textAlign: 'center' }}>
+        <h1 className="serif-heading" style={{ fontSize: 'clamp(1.85rem, 4.5vw, 2.5rem)', marginBottom: '1rem' }}>
           Search Aetheria
         </h1>
 
-        <form onSubmit={handleSearchSubmit} style={{ display: 'flex', gap: '0.75rem' }}>
+        <form onSubmit={handleSearchSubmit} className="search-page-form" style={{ display: 'flex', gap: '0.6rem' }}>
           <div style={{ position: 'relative', width: '100%' }}>
-            <SearchIcon size={20} style={{ position: 'absolute', left: '1.2rem', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }} />
+            <SearchIcon size={18} style={{ position: 'absolute', left: '1rem', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }} />
             <input
               type="text"
               placeholder="Search essays by title, topic, author, or keyword..."
@@ -65,8 +65,8 @@ export default function Search() {
               onChange={(e) => setSearchInput(e.target.value)}
               style={{
                 width: '100%',
-                padding: '0.85rem 1rem 0.85rem 2.8rem',
-                fontSize: '1rem',
+                padding: '0.8rem 1rem 0.8rem 2.6rem',
+                fontSize: '16px',
                 borderRadius: 'var(--radius-sm)',
                 border: '1px solid var(--border-color)',
                 backgroundColor: 'var(--bg-input)',
@@ -75,7 +75,7 @@ export default function Search() {
               }}
             />
           </div>
-          <button type="submit" className="btn btn-primary" style={{ padding: '0.85rem 1.75rem' }}>
+          <button type="submit" className="btn btn-primary" style={{ padding: '0.8rem 1.5rem', flexShrink: 0 }}>
             Search
           </button>
         </form>
@@ -110,6 +110,17 @@ export default function Search() {
           ))}
         </div>
       )}
+
+      <style>{`
+        @media (max-width: 480px) {
+          .search-page-form {
+            flex-direction: column !important;
+          }
+          .search-page-form button {
+            width: 100% !important;
+          }
+        }
+      `}</style>
     </div>
   );
 }

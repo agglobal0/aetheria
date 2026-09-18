@@ -80,7 +80,7 @@ export default function Category() {
   const remainingEssays = essays.filter(e => e.id !== featured?.id);
 
   return (
-    <div className="container" style={{ padding: '2.5rem 1.5rem 5rem 1.5rem' }}>
+    <div className="container" style={{ padding: 'clamp(2rem, 4vw, 2.5rem) clamp(0.875rem, 3vw, 1.5rem) 5rem clamp(0.875rem, 3vw, 1.5rem)' }}>
       <Breadcrumbs items={[{ label: 'Categories', link: '/essays' }, { label: category.name }]} />
 
       {/* Category Landing Banner */}
@@ -88,8 +88,8 @@ export default function Category() {
         backgroundColor: 'var(--bg-secondary)',
         borderRadius: 'var(--radius-lg)',
         border: '1px solid var(--border-color)',
-        padding: '3.5rem 2.5rem',
-        marginBottom: '4rem',
+        padding: 'clamp(1.75rem, 4vw, 3.5rem) clamp(1.25rem, 3vw, 2.5rem)',
+        marginBottom: 'clamp(2.5rem, 5vw, 4rem)',
         position: 'relative',
         overflow: 'hidden'
       }} className="animate-fade-in">
@@ -102,39 +102,40 @@ export default function Category() {
           backgroundColor: category.accent_color || 'var(--text-primary)'
         }} />
 
-        <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '2rem', flexWrap: 'wrap' }}>
-          <div style={{ flex: '1', minWidth: '280px' }}>
+        <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '1.5rem', flexWrap: 'wrap' }}>
+          <div style={{ flex: '1', minWidth: 'min(100%, 280px)' }}>
             <div style={{
               display: 'inline-flex',
-              padding: '0.8rem',
+              padding: '0.75rem',
               borderRadius: '50%',
               backgroundColor: 'var(--bg-tertiary)',
               color: category.accent_color || 'var(--text-primary)',
-              marginBottom: '1.25rem'
+              marginBottom: '1rem'
             }}>
               {getCategoryIcon(category.slug)}
             </div>
 
-            <h1 className="serif-heading" style={{ fontSize: '3rem', marginBottom: '1rem', color: 'var(--text-primary)' }}>
+            <h1 className="serif-heading" style={{ fontSize: 'clamp(2rem, 4.5vw, 3rem)', marginBottom: '0.85rem', color: 'var(--text-primary)' }}>
               {category.name}
             </h1>
 
-            <p style={{ fontFamily: 'var(--font-serif)', fontSize: '1.25rem', lineHeight: '1.7', color: 'var(--text-secondary)', maxWidth: '680px' }}>
+            <p style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(1rem, 2vw, 1.25rem)', lineHeight: '1.7', color: 'var(--text-secondary)', maxWidth: '680px' }}>
               {category.description}
             </p>
           </div>
 
           <div style={{
             backgroundColor: 'var(--bg-tertiary)',
-            padding: '1.25rem 2rem',
+            padding: '1rem 1.75rem',
             borderRadius: 'var(--radius-md)',
             border: '1px solid var(--border-color)',
-            textAlign: 'center'
+            textAlign: 'center',
+            alignSelf: 'flex-start'
           }}>
-            <span style={{ fontSize: '2.5rem', fontWeight: '700', fontFamily: 'var(--font-serif)', color: category.accent_color || 'var(--text-primary)', display: 'block' }}>
+            <span style={{ fontSize: '2.2rem', fontWeight: '700', fontFamily: 'var(--font-serif)', color: category.accent_color || 'var(--text-primary)', display: 'block', lineHeight: '1.1' }}>
               {category.essay_count || essays.length}
             </span>
-            <span style={{ fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.1em', fontWeight: '600', color: 'var(--text-muted)' }}>
+            <span style={{ fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.1em', fontWeight: '600', color: 'var(--text-muted)' }}>
               Published Essays
             </span>
           </div>
@@ -143,8 +144,8 @@ export default function Category() {
 
       {/* Featured Essay in Category */}
       {featured && (
-        <section style={{ marginBottom: '5rem' }}>
-          <h2 style={{ fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.15em', color: 'var(--text-muted)', fontWeight: '700', marginBottom: '1.5rem' }}>
+        <section style={{ marginBottom: 'clamp(3rem, 5vw, 5rem)' }}>
+          <h2 style={{ fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.15em', color: 'var(--text-muted)', fontWeight: '700', marginBottom: '1.25rem' }}>
             Featured in {category.name}
           </h2>
           <FeaturedEssay essay={featured} />
@@ -153,7 +154,7 @@ export default function Category() {
 
       {/* Main Essays Stream */}
       <div>
-        <h2 className="serif-heading" style={{ fontSize: '1.8rem', marginBottom: '2rem' }}>
+        <h2 className="serif-heading" style={{ fontSize: 'clamp(1.5rem, 3.5vw, 1.8rem)', marginBottom: '1.75rem' }}>
           All Essays in {category.name}
         </h2>
 

@@ -33,21 +33,21 @@ export default function Login() {
   };
 
   return (
-    <div className="container" style={{ padding: '4rem 1.5rem 6rem 1.5rem' }}>
+    <div className="container" style={{ padding: 'clamp(2rem, 5vw, 4rem) clamp(0.875rem, 3vw, 1.5rem) 6rem clamp(0.875rem, 3vw, 1.5rem)' }}>
       <Breadcrumbs items={[{ label: 'Admin Authentication' }]} />
 
-      <div style={{ maxWidth: '420px', margin: '0 auto' }}>
+      <div style={{ maxWidth: '420px', margin: '0 auto', width: '100%' }}>
         <div style={{
           backgroundColor: 'var(--bg-secondary)',
           borderRadius: 'var(--radius-lg)',
           border: '1px solid var(--border-color)',
-          padding: '2.5rem 2rem',
+          padding: 'clamp(1.5rem, 4vw, 2.5rem) clamp(1.25rem, 3.5vw, 2rem)',
           textAlign: 'center'
         }} className="animate-fade-in">
           
           <div style={{
             display: 'inline-flex',
-            padding: '0.8rem',
+            padding: '0.75rem',
             borderRadius: '50%',
             backgroundColor: 'var(--bg-tertiary)',
             color: 'var(--text-primary)',
@@ -56,10 +56,10 @@ export default function Login() {
             <ShieldCheck size={28} />
           </div>
 
-          <h1 className="serif-heading" style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>
+          <h1 className="serif-heading" style={{ fontSize: 'clamp(1.6rem, 4vw, 2rem)', marginBottom: '0.5rem' }}>
             Editorial Portal
           </h1>
-          <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', marginBottom: '2rem' }}>
+          <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', marginBottom: '1.75rem' }}>
             Sign in to access the Aetheria Admin Dashboard.
           </p>
 
@@ -96,8 +96,8 @@ export default function Login() {
                   onChange={(e) => setEmail(e.target.value)}
                   style={{
                     width: '100%',
-                    padding: '0.75rem 0.75rem 0.75rem 2.5rem',
-                    fontSize: '1rem',
+                    padding: '0.75rem 0.75rem 0.75rem 2.4rem',
+                    fontSize: '16px',
                     borderRadius: 'var(--radius-sm)',
                     border: '1px solid var(--border-color)',
                     backgroundColor: 'var(--bg-input)',
@@ -123,8 +123,8 @@ export default function Login() {
                   onChange={(e) => setPassword(e.target.value)}
                   style={{
                     width: '100%',
-                    padding: '0.75rem 0.75rem 0.75rem 2.5rem',
-                    fontSize: '1rem',
+                    padding: '0.75rem 0.75rem 0.75rem 2.4rem',
+                    fontSize: '16px',
                     borderRadius: 'var(--radius-sm)',
                     border: '1px solid var(--border-color)',
                     backgroundColor: 'var(--bg-input)',
