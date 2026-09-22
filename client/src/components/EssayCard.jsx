@@ -14,6 +14,8 @@ export default function EssayCard({ essay, layout = 'grid' }) {
     }
   };
 
+  const isBlog = essay.type === 'blog';
+
   if (layout === 'list') {
     return (
       <article style={{
@@ -25,10 +27,22 @@ export default function EssayCard({ essay, layout = 'grid' }) {
         alignItems: 'flex-start'
       }} className="animate-fade-in">
         <div style={{ flex: 1 }}>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '0.5rem', flexWrap: 'wrap' }}>
             <Link to={`/category/${essay.category_slug}`} className={`category-badge ${getCategoryClass(essay.category_slug)}`}>
               {essay.category_name}
             </Link>
+            <span style={{
+              fontSize: '0.725rem',
+              fontWeight: '700',
+              padding: '0.15rem 0.55rem',
+              borderRadius: 'var(--radius-full)',
+              backgroundColor: isBlog ? 'rgba(43, 89, 195, 0.1)' : 'rgba(139, 38, 62, 0.1)',
+              color: isBlog ? '#2B59C3' : '#8B263E',
+              letterSpacing: '0.02em',
+              textTransform: 'uppercase'
+            }}>
+              {isBlog ? 'Reflective Blog' : 'Academic Essay'}
+            </span>
           </div>
           <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.25rem', fontWeight: '600', marginBottom: '0.4rem', lineHeight: '1.3' }}>
             <Link to={`/essay/${essay.slug}`} style={{ color: 'var(--text-primary)' }}>
@@ -42,6 +56,12 @@ export default function EssayCard({ essay, layout = 'grid' }) {
             <span>By Prof. Monika Chopra</span>
             <span>•</span>
             <span>{formatDate(essay.published_at)}</span>
+            {essay.reading_time && (
+              <>
+                <span>•</span>
+                <span>{essay.reading_time} min read</span>
+              </>
+            )}
           </div>
         </div>
       </article>
@@ -63,10 +83,22 @@ export default function EssayCard({ essay, layout = 'grid' }) {
     className="animate-fade-in"
     >
       <div style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', flex: 1 }}>
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.75rem' }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.75rem', flexWrap: 'wrap', gap: '0.4rem' }}>
           <Link to={`/category/${essay.category_slug}`} className={`category-badge ${getCategoryClass(essay.category_slug)}`}>
             {essay.category_name}
           </Link>
+          <span style={{
+            fontSize: '0.7rem',
+            fontWeight: '700',
+            padding: '0.15rem 0.5rem',
+            borderRadius: 'var(--radius-full)',
+            backgroundColor: isBlog ? 'rgba(43, 89, 195, 0.1)' : 'rgba(139, 38, 62, 0.1)',
+            color: isBlog ? '#2B59C3' : '#8B263E',
+            letterSpacing: '0.02em',
+            textTransform: 'uppercase'
+          }}>
+            {isBlog ? 'Reflective Blog' : 'Academic Essay'}
+          </span>
         </div>
 
         <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.35rem', fontWeight: '600', marginBottom: '0.6rem', lineHeight: '1.3' }}>

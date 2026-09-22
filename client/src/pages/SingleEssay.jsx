@@ -74,10 +74,22 @@ export default function SingleEssay() {
 
           {/* Article Header */}
           <header style={{ marginBottom: 'clamp(1.75rem, 4vw, 2.5rem)' }}>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1rem' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem', flexWrap: 'wrap' }}>
               <Link to={`/category/${essay.category_slug}`} className={`category-badge ${getCategoryClass(essay.category_slug)}`}>
                 {essay.category_name}
               </Link>
+              <span style={{
+                fontSize: '0.75rem',
+                fontWeight: '700',
+                padding: '0.2rem 0.65rem',
+                borderRadius: 'var(--radius-full)',
+                backgroundColor: essay.type === 'blog' ? 'rgba(43, 89, 195, 0.12)' : 'rgba(139, 38, 62, 0.12)',
+                color: essay.type === 'blog' ? '#2B59C3' : '#8B263E',
+                letterSpacing: '0.04em',
+                textTransform: 'uppercase'
+              }}>
+                {essay.type === 'blog' ? 'Reflective Blog Post' : 'Academic Essay'}
+              </span>
             </div>
 
             <h1 className="serif-heading" style={{

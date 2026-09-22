@@ -46,13 +46,14 @@ export default function Navbar() {
 
   const navLinks = [
     { name: 'Home', path: '/', isHome: true },
-    { name: 'About', path: '/about' },
+    { name: 'Essays', path: '/essays' },
+    { name: 'Blogs', path: '/blogs' },
     { name: 'Reflections', path: '/category/life-reflection' },
     { name: 'Human Behaviour', path: '/category/human-behaviour' },
     { name: 'Ethics', path: '/category/ethics' },
     { name: 'Technology & Humanity', path: '/category/technology' },
-    { name: 'Stories', path: '/essays' },
-    { name: 'More', path: '/contact' }
+    { name: 'About', path: '/about' },
+    { name: 'Contact', path: '/contact' }
   ];
 
   return (

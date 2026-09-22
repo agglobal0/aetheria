@@ -17,6 +17,8 @@ export default function Category() {
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
+  const [typeFilter, setTypeFilter] = useState('all'); // 'all' | 'essay' | 'blog'
+
   const getCategoryIcon = (catSlug) => {
     switch (catSlug) {
       case 'ethics': return <Compass size={40} />;
@@ -31,9 +33,19 @@ export default function Category() {
     async function loadCategoryData() {
       setLoading(true);
       try {
+        const queryPayload = {
+          category: slug,
+          page,
+          limit: 9,
+          status: 'published'
+        };
+        if (typeFilter !== 'all') {
+          queryPayload.type = typeFilter;
+        }
+
         const [catRes, essaysRes, popRes] = await Promise.all([
           categoryService.getBySlug(slug),
-          essayService.getAll({ category: slug, page, limit: 9, status: 'published' }),
+          essayService.getAll(queryPayload),
           essayService.getAll({ category: slug, sort: 'views', limit: 4, status: 'published' })
         ]);
 
@@ -57,9 +69,9 @@ export default function Category() {
     }
 
     loadCategoryData();
-  }, [slug, page]);
+  }, [slug, page, typeFilter]);
 
-  if (loading) {
+  if (loading && !category) {
     return (
       <div className="container" style={{ padding: '3rem 1.5rem' }}>
         <LoadingSkeleton type="grid" count={6} />
@@ -125,25 +137,78 @@ export default function Category() {
           </div>
 
           <div style={{
-            backgroundColor: 'var(--bg-tertiary)',
-            padding: '1rem 1.75rem',
-            borderRadius: 'var(--radius-md)',
-            border: '1px solid var(--border-color)',
-            textAlign: 'center',
+            display: 'flex',
+            gap: '0.75rem',
+            flexWrap: 'wrap',
             alignSelf: 'flex-start'
           }}>
-            <span style={{ fontSize: '2.2rem', fontWeight: '700', fontFamily: 'var(--font-serif)', color: category.accent_color || 'var(--text-primary)', display: 'block', lineHeight: '1.1' }}>
-              {category.essay_count || essays.length}
-            </span>
-            <span style={{ fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.1em', fontWeight: '600', color: 'var(--text-muted)' }}>
-              Published Essays
-            </span>
+            <div style={{
+              backgroundColor: 'var(--bg-tertiary)',
+              padding: '0.85rem 1.25rem',
+              borderRadius: 'var(--radius-md)',
+              border: '1px solid var(--border-color)',
+              textAlign: 'center'
+            }}>
+              <span style={{ fontSize: '1.8rem', fontWeight: '700', fontFamily: 'var(--font-serif)', color: '#8B263E', display: 'block', lineHeight: '1.1' }}>
+                {category.essay_count || 0}
+              </span>
+              <span style={{ fontSize: '0.7rem', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: '700', color: 'var(--text-muted)' }}>
+                Essays
+              </span>
+            </div>
+
+            <div style={{
+              backgroundColor: 'var(--bg-tertiary)',
+              padding: '0.85rem 1.25rem',
+              borderRadius: 'var(--radius-md)',
+              border: '1px solid var(--border-color)',
+              textAlign: 'center'
+            }}>
+              <span style={{ fontSize: '1.8rem', fontWeight: '700', fontFamily: 'var(--font-serif)', color: '#2B59C3', display: 'block', lineHeight: '1.1' }}>
+                {category.blog_count || 0}
+              </span>
+              <span style={{ fontSize: '0.7rem', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: '700', color: 'var(--text-muted)' }}>
+                Blogs
+              </span>
+            </div>
           </div>
         </div>
       </div>
 
+      {/* Type Filter Buttons */}
+      <div style={{
+        display: 'flex',
+        gap: '0.6rem',
+        marginBottom: '2rem',
+        borderBottom: '1px solid var(--border-color)',
+        paddingBottom: '0.75rem',
+        flexWrap: 'wrap'
+      }}>
+        <button
+          onClick={() => { setTypeFilter('all'); setPage(1); }}
+          className={`btn ${typeFilter === 'all' ? 'btn-primary' : 'btn-outline'}`}
+          style={{ padding: '0.4rem 1rem', fontSize: '0.85rem', borderRadius: 'var(--radius-full)' }}
+        >
+          All Publications ({(Number(category.essay_count) || 0) + (Number(category.blog_count) || 0)})
+        </button>
+        <button
+          onClick={() => { setTypeFilter('essay'); setPage(1); }}
+          className={`btn ${typeFilter === 'essay' ? 'btn-primary' : 'btn-outline'}`}
+          style={{ padding: '0.4rem 1rem', fontSize: '0.85rem', borderRadius: 'var(--radius-full)' }}
+        >
+          📜 Academic Essays ({category.essay_count || 0})
+        </button>
+        <button
+          onClick={() => { setTypeFilter('blog'); setPage(1); }}
+          className={`btn ${typeFilter === 'blog' ? 'btn-primary' : 'btn-outline'}`}
+          style={{ padding: '0.4rem 1rem', fontSize: '0.85rem', borderRadius: 'var(--radius-full)' }}
+        >
+          ✍️ Reflective Blogs ({category.blog_count || 0})
+        </button>
+      </div>
+
       {/* Featured Essay in Category */}
-      {featured && (
+      {featured && typeFilter === 'all' && (
         <section style={{ marginBottom: 'clamp(3rem, 5vw, 5rem)' }}>
           <h2 style={{ fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.15em', color: 'var(--text-muted)', fontWeight: '700', marginBottom: '1.25rem' }}>
             Featured in {category.name}
@@ -152,19 +217,29 @@ export default function Category() {
         </section>
       )}
 
-      {/* Main Essays Stream */}
+      {/* Main Stream */}
       <div>
         <h2 className="serif-heading" style={{ fontSize: 'clamp(1.5rem, 3.5vw, 1.8rem)', marginBottom: '1.75rem' }}>
-          All Essays in {category.name}
+          {typeFilter === 'essay' ? `Academic Essays in ${category.name}` : typeFilter === 'blog' ? `Reflective Blogs in ${category.name}` : `All Content in ${category.name}`}
         </h2>
 
-        <div className="grid-3">
-          {remainingEssays.map(essay => (
-            <EssayCard key={essay.id} essay={essay} />
-          ))}
-        </div>
+        {loading ? (
+          <LoadingSkeleton type="grid" count={6} />
+        ) : essays.length === 0 ? (
+          <div style={{ textAlign: 'center', padding: '3rem 1rem', backgroundColor: 'var(--bg-secondary)', borderRadius: 'var(--radius-md)' }}>
+            <p style={{ color: 'var(--text-secondary)' }}>No articles found for the selected filter.</p>
+          </div>
+        ) : (
+          <>
+            <div className="grid-3">
+              {(typeFilter === 'all' ? remainingEssays : essays).map(essay => (
+                <EssayCard key={essay.id} essay={essay} />
+              ))}
+            </div>
 
-        <Pagination page={page} totalPages={totalPages} onPageChange={(p) => setPage(p)} />
+            <Pagination page={page} totalPages={totalPages} onPageChange={(p) => setPage(p)} />
+          </>
+        )}
       </div>
     </div>
   );

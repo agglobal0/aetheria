@@ -66,9 +66,14 @@ export default function CategoryCard({ category }) {
         <span className={getCategoryClass(category.slug)} style={{ padding: '0.6rem', borderRadius: '50%', display: 'inline-flex' }}>
           {getCategoryIcon(category.slug)}
         </span>
-        <span style={{ fontSize: '0.8rem', fontWeight: '600', color: 'var(--text-muted)' }}>
-          {category.essay_count || 5} Essays
-        </span>
+        <div style={{ display: 'flex', gap: '0.4rem', alignItems: 'center' }}>
+          <span style={{ fontSize: '0.75rem', fontWeight: '600', padding: '0.15rem 0.45rem', borderRadius: 'var(--radius-sm)', backgroundColor: 'var(--bg-tertiary)', color: 'var(--text-secondary)' }}>
+            {category.essay_count || 0} Essays
+          </span>
+          <span style={{ fontSize: '0.75rem', fontWeight: '600', padding: '0.15rem 0.45rem', borderRadius: 'var(--radius-sm)', backgroundColor: 'var(--bg-tertiary)', color: 'var(--text-secondary)' }}>
+            {category.blog_count || 0} Blogs
+          </span>
+        </div>
       </div>
 
       <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.5rem', fontWeight: '700', marginBottom: '0.75rem', color: 'var(--text-primary)' }}>

@@ -435,21 +435,86 @@ export default function AdminDashboard() {
       {/* Tab 3: Categories */}
       {activeTab === 'categories' && (
         <div>
+          {/* Editorial Distinction Guide Card */}
+          <div style={{
+            backgroundColor: 'var(--bg-secondary)',
+            borderRadius: 'var(--radius-md)',
+            border: '1px solid var(--border-color)',
+            padding: '1.25rem 1.5rem',
+            marginBottom: '1.75rem',
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))',
+            gap: '1.25rem',
+            position: 'relative',
+            overflow: 'hidden'
+          }}>
+            <div style={{
+              padding: '1rem',
+              backgroundColor: 'var(--bg-tertiary)',
+              borderRadius: 'var(--radius-sm)',
+              borderLeft: '4px solid #8B263E'
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.4rem' }}>
+                <FileText size={18} style={{ color: '#8B263E' }} />
+                <h3 style={{ fontSize: '1rem', fontWeight: '700', margin: 0 }}>
+                  Academic & Philosophical Essays
+                </h3>
+              </div>
+              <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', margin: 0, lineHeight: '1.5' }}>
+                <strong>Format & Purpose:</strong> Long-form, rigorous, structured scholarly discourses exploring moral philosophy, human nature, ethical frameworks, and societal impacts. Detailed and contemplative (typically 5–15+ min reads).
+              </p>
+            </div>
+
+            <div style={{
+              padding: '1rem',
+              backgroundColor: 'var(--bg-tertiary)',
+              borderRadius: 'var(--radius-sm)',
+              borderLeft: '4px solid #2B59C3'
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.4rem' }}>
+                <BookOpen size={18} style={{ color: '#2B59C3' }} />
+                <h3 style={{ fontSize: '1rem', fontWeight: '700', margin: 0 }}>
+                  Reflective Blogs & Life Lessons
+                </h3>
+              </div>
+              <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', margin: 0, lineHeight: '1.5' }}>
+                <strong>Format & Purpose:</strong> Conversational, digestible, episodic musings and practical reflections on everyday life, workplace challenges, empathy, habits, and relatable moral lessons (typically 2–5 min reads).
+              </p>
+            </div>
+          </div>
+
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem', flexWrap: 'wrap', gap: '0.75rem' }}>
-            <h2 className="serif-heading" style={{ fontSize: 'clamp(1.3rem, 3vw, 1.6rem)' }}>Editorial Categories</h2>
+            <div>
+              <h2 className="serif-heading" style={{ fontSize: 'clamp(1.3rem, 3vw, 1.6rem)', margin: 0 }}>
+                Editorial Categories
+              </h2>
+              <span style={{ fontSize: '0.825rem', color: 'var(--text-muted)' }}>
+                Each category houses both comprehensive Academic Essays and accessible Reflective Blogs.
+              </span>
+            </div>
             <button onClick={() => { setEditingCat(null); setCatFormData({ name: '', slug: '', description: '', accent_color: '#8B263E' }); setCatModalOpen(true); }} className="btn btn-primary" style={{ padding: '0.5rem 1rem', fontSize: '0.85rem' }}>
               <Plus size={16} /> Add Category
             </button>
           </div>
 
           <div className="table-responsive" style={{ backgroundColor: 'var(--bg-secondary)', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)' }}>
-            <table style={{ width: '100%', minWidth: '560px', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.9rem' }}>
+            <table style={{ width: '100%', minWidth: '650px', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.9rem' }}>
               <thead>
                 <tr style={{ borderBottom: '1px solid var(--border-color)', backgroundColor: 'var(--bg-tertiary)' }}>
                   <th style={{ padding: '0.9rem 1rem' }}>Category</th>
                   <th style={{ padding: '0.9rem 1rem' }}>Slug</th>
                   <th style={{ padding: '0.9rem 1rem' }}>Description</th>
-                  <th style={{ padding: '0.9rem 1rem' }}>Essays</th>
+                  <th style={{ padding: '0.9rem 0.75rem', textAlign: 'center' }}>
+                    <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.3rem' }}>
+                      <FileText size={14} style={{ color: '#8B263E' }} /> Essays
+                    </span>
+                  </th>
+                  <th style={{ padding: '0.9rem 0.75rem', textAlign: 'center' }}>
+                    <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.3rem' }}>
+                      <BookOpen size={14} style={{ color: '#2B59C3' }} /> Blogs
+                    </span>
+                  </th>
+                  <th style={{ padding: '0.9rem 0.75rem', textAlign: 'center' }}>Total</th>
                   <th style={{ padding: '0.9rem 1rem', textAlign: 'right' }}>Actions</th>
                 </tr>
               </thead>
@@ -458,14 +523,42 @@ export default function AdminDashboard() {
                   <tr key={cat.id} style={{ borderBottom: '1px solid var(--border-color)' }}>
                     <td style={{ padding: '0.9rem 1rem', fontWeight: '600', color: cat.accent_color }}>{cat.name}</td>
                     <td style={{ padding: '0.9rem 1rem' }}><code>{cat.slug}</code></td>
-                    <td style={{ padding: '0.9rem 1rem', color: 'var(--text-secondary)' }}>{cat.description}</td>
-                    <td style={{ padding: '0.9rem 1rem' }}>{cat.essay_count || 0}</td>
+                    <td style={{ padding: '0.9rem 1rem', color: 'var(--text-secondary)', maxWidth: '320px', lineHeight: '1.45' }}>{cat.description}</td>
+                    <td style={{ padding: '0.9rem 0.75rem', textAlign: 'center' }}>
+                      <span style={{
+                        display: 'inline-block',
+                        padding: '0.2rem 0.6rem',
+                        borderRadius: 'var(--radius-full)',
+                        fontSize: '0.8rem',
+                        fontWeight: '700',
+                        backgroundColor: 'rgba(139, 38, 62, 0.12)',
+                        color: '#8B263E'
+                      }}>
+                        {cat.essay_count || 0}
+                      </span>
+                    </td>
+                    <td style={{ padding: '0.9rem 0.75rem', textAlign: 'center' }}>
+                      <span style={{
+                        display: 'inline-block',
+                        padding: '0.2rem 0.6rem',
+                        borderRadius: 'var(--radius-full)',
+                        fontSize: '0.8rem',
+                        fontWeight: '700',
+                        backgroundColor: 'rgba(43, 89, 195, 0.12)',
+                        color: '#2B59C3'
+                      }}>
+                        {cat.blog_count || 0}
+                      </span>
+                    </td>
+                    <td style={{ padding: '0.9rem 0.75rem', textAlign: 'center', fontWeight: '600', color: 'var(--text-primary)' }}>
+                      {(Number(cat.essay_count) || 0) + (Number(cat.blog_count) || 0)}
+                    </td>
                     <td style={{ padding: '0.9rem 1rem', textAlign: 'right' }}>
                       <div style={{ display: 'flex', gap: '0.4rem', justifyContent: 'flex-end' }}>
-                        <button onClick={() => { setEditingCat(cat); setCatFormData(cat); setCatModalOpen(true); }} className="btn btn-outline" style={{ padding: '0.35rem 0.6rem' }}>
+                        <button onClick={() => { setEditingCat(cat); setCatFormData(cat); setCatModalOpen(true); }} className="btn btn-outline" style={{ padding: '0.35rem 0.6rem' }} title="Edit Category">
                           <Edit size={14} />
                         </button>
-                        <button onClick={() => handleDeleteCategory(cat.id)} className="btn btn-outline" style={{ padding: '0.35rem 0.6rem', color: 'var(--accent-ethics)' }}>
+                        <button onClick={() => handleDeleteCategory(cat.id)} className="btn btn-outline" style={{ padding: '0.35rem 0.6rem', color: 'var(--accent-ethics)' }} title="Delete Category">
                           <Trash2 size={14} />
                         </button>
                       </div>

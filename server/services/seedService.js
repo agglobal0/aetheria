@@ -12,6 +12,23 @@ async function seedDatabase(pool) {
     }
     try {
       await pool.query("UPDATE essays SET type = 'essay' WHERE type IS NULL");
+      
+      const [blogCheck] = await pool.query("SELECT COUNT(*) as count FROM essays WHERE type = 'blog'");
+      if (blogCheck[0].count === 0) {
+        await pool.query(`
+          UPDATE essays 
+          SET type = 'blog' 
+          WHERE slug IN (
+            'the-subtle-art-of-quiet-confidence',
+            'why-we-struggle-to-say-no',
+            'the-courage-to-change-your-mind',
+            'what-happens-when-technology-becomes-invisible',
+            'can-technology-make-us-more-human',
+            'the-cost-of-being-good',
+            'knowing-your-worth-without-needing-approval'
+          ) OR id % 3 = 0
+        `);
+      }
     } catch (e) {}
 
     // 1. Seed Categories

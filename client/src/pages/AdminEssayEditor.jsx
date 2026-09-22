@@ -177,10 +177,12 @@ export default function AdminEssayEditor() {
         }}>
           <div>
             <h1 className="serif-heading" style={{ fontSize: 'clamp(1.3rem, 3vw, 1.8rem)' }}>
-              {isEditing ? 'Edit Essay' : 'Compose New Essay'}
+              {isEditing
+                ? `Edit ${formData.type === 'blog' ? 'Reflective Blog' : 'Academic Essay'}`
+                : `Compose ${formData.type === 'blog' ? 'Reflective Blog Post' : 'Academic Essay'}`}
             </h1>
             <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
-              Estimated Reading Time: <strong>{formData.reading_time} min</strong>
+              Estimated Reading Time: <strong>{formData.reading_time} min</strong> • Format: <strong>{formData.type === 'blog' ? 'Reflective Blog' : 'Academic Essay'}</strong>
             </span>
           </div>
 
@@ -374,17 +376,68 @@ export default function AdminEssayEditor() {
               </div>
 
               <div>
-                <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: '600', marginBottom: '0.4rem', color: 'var(--text-muted)' }}>
-                  Content Type *
+                <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: '600', marginBottom: '0.5rem', color: 'var(--text-muted)' }}>
+                  Content Format & Genre *
                 </label>
-                <select
-                  value={formData.type}
-                  onChange={e => setFormData({ ...formData, type: e.target.value })}
-                  style={{ width: '100%', padding: '0.65rem', fontSize: '0.9rem', borderRadius: 'var(--radius-sm)', border: '1px solid var(--border-color)', backgroundColor: 'var(--bg-input)', color: 'var(--text-primary)' }}
-                >
-                  <option value="essay">Academic Essay</option>
-                  <option value="blog">Blog Post</option>
-                </select>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
+                  <label style={{
+                    display: 'flex',
+                    alignItems: 'flex-start',
+                    gap: '0.75rem',
+                    padding: '0.75rem 0.85rem',
+                    borderRadius: 'var(--radius-sm)',
+                    border: `1.5px solid ${formData.type === 'essay' ? '#8B263E' : 'var(--border-color)'}`,
+                    backgroundColor: formData.type === 'essay' ? 'rgba(139, 38, 62, 0.08)' : 'var(--bg-input)',
+                    cursor: 'pointer',
+                    transition: 'all 0.2s ease'
+                  }}>
+                    <input
+                      type="radio"
+                      name="contentType"
+                      value="essay"
+                      checked={formData.type === 'essay'}
+                      onChange={() => setFormData({ ...formData, type: 'essay' })}
+                      style={{ marginTop: '0.2rem' }}
+                    />
+                    <div>
+                      <strong style={{ display: 'block', fontSize: '0.875rem', color: formData.type === 'essay' ? '#8B263E' : 'var(--text-primary)' }}>
+                        Academic Essay
+                      </strong>
+                      <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', lineHeight: '1.35', display: 'block', marginTop: '0.15rem' }}>
+                        Long-form, formal, scholarly discourse exploring ethics, philosophy & human nature.
+                      </span>
+                    </div>
+                  </label>
+
+                  <label style={{
+                    display: 'flex',
+                    alignItems: 'flex-start',
+                    gap: '0.75rem',
+                    padding: '0.75rem 0.85rem',
+                    borderRadius: 'var(--radius-sm)',
+                    border: `1.5px solid ${formData.type === 'blog' ? '#2B59C3' : 'var(--border-color)'}`,
+                    backgroundColor: formData.type === 'blog' ? 'rgba(43, 89, 195, 0.08)' : 'var(--bg-input)',
+                    cursor: 'pointer',
+                    transition: 'all 0.2s ease'
+                  }}>
+                    <input
+                      type="radio"
+                      name="contentType"
+                      value="blog"
+                      checked={formData.type === 'blog'}
+                      onChange={() => setFormData({ ...formData, type: 'blog' })}
+                      style={{ marginTop: '0.2rem' }}
+                    />
+                    <div>
+                      <strong style={{ display: 'block', fontSize: '0.875rem', color: formData.type === 'blog' ? '#2B59C3' : 'var(--text-primary)' }}>
+                        Reflective Blog Post
+                      </strong>
+                      <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', lineHeight: '1.35', display: 'block', marginTop: '0.15rem' }}>
+                        Conversational, relatable life lessons, personal reflections & practical wisdom.
+                      </span>
+                    </div>
+                  </label>
+                </div>
               </div>
 
               <div>

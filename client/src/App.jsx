@@ -12,6 +12,7 @@ import Footer from './components/Footer';
 // Pages
 import Home from './pages/Home';
 import Essays from './pages/Essays';
+import Blogs from './pages/Blogs';
 import Category from './pages/Category';
 import SingleEssay from './pages/SingleEssay';
 import Search from './pages/Search';
@@ -32,6 +33,7 @@ export default function App() {
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/essays" element={<Essays />} />
+                <Route path="/blogs" element={<Blogs />} />
                 <Route path="/category/:slug" element={<Category />} />
                 <Route path="/essay/:slug" element={<SingleEssay />} />
                 <Route path="/search" element={<Search />} />

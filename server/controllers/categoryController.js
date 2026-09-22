@@ -4,7 +4,10 @@ async function getAllCategories(req, res, next) {
   try {
     const pool = getPool();
     const [rows] = await pool.query(`
-      SELECT c.id, c.name, c.slug, c.description, c.accent_color, c.created_at, COUNT(e.id) as essay_count 
+      SELECT c.id, c.name, c.slug, c.description, c.accent_color, c.created_at, 
+             COUNT(CASE WHEN e.type = 'essay' OR e.type IS NULL THEN e.id END) as essay_count,
+             COUNT(CASE WHEN e.type = 'blog' THEN e.id END) as blog_count,
+             COUNT(e.id) as total_count
       FROM categories c 
       LEFT JOIN essays e ON e.category_id = c.id AND e.status = 'published'
       GROUP BY c.id, c.name, c.slug, c.description, c.accent_color, c.created_at
@@ -21,7 +24,10 @@ async function getCategoryBySlug(req, res, next) {
     const { slug } = req.params;
     const pool = getPool();
     const [rows] = await pool.query(`
-      SELECT c.id, c.name, c.slug, c.description, c.accent_color, c.created_at, COUNT(e.id) as essay_count 
+      SELECT c.id, c.name, c.slug, c.description, c.accent_color, c.created_at, 
+             COUNT(CASE WHEN e.type = 'essay' OR e.type IS NULL THEN e.id END) as essay_count,
+             COUNT(CASE WHEN e.type = 'blog' THEN e.id END) as blog_count,
+             COUNT(e.id) as total_count
       FROM categories c 
       LEFT JOIN essays e ON e.category_id = c.id AND e.status = 'published'
       WHERE c.slug = ?
