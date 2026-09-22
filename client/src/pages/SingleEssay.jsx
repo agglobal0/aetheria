@@ -146,6 +146,23 @@ export default function SingleEssay() {
             <SocialShare title={essay.title} />
           </div>
 
+          {/* Featured Hero Cover Image */}
+          {essay.featured_image && (
+            <div style={{
+              marginBottom: '2.5rem',
+              borderRadius: 'var(--radius-md)',
+              overflow: 'hidden',
+              border: '1px solid var(--border-color)',
+              boxShadow: '0 4px 20px rgba(0, 0, 0, 0.06)'
+            }}>
+              <img
+                src={essay.featured_image}
+                alt={essay.title}
+                style={{ width: '100%', maxHeight: '520px', objectFit: 'cover', display: 'block' }}
+              />
+            </div>
+          )}
+
           {/* Formatted Longform Article Body */}
           <div
             className="editorial-body"

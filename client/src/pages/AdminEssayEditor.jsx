@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, useLocation, Link } from 'react-router-dom';
-import { Save, ArrowLeft, Eye, Sparkles, Image, HelpCircle } from 'lucide-react';
+import {
+  Save, ArrowLeft, Eye, Sparkles, Image, HelpCircle,
+  Upload, Link2, Trash2, CheckCircle, RefreshCw, X, Plus
+} from 'lucide-react';
 import { essayService, categoryService } from '../services/api';
 import { slugify, calculateReadingTime } from '../utils/helpers';
 import Breadcrumbs from '../components/Breadcrumbs';
@@ -13,6 +16,10 @@ export default function AdminEssayEditor() {
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
+  const [imageMode, setImageMode] = useState('upload'); // 'upload' | 'url'
+  const [bodyImageModalOpen, setBodyImageModalOpen] = useState(false);
+  const [bodyImageData, setBodyImageData] = useState({ url: '', caption: '', alt: '' });
+  const [isProcessingImage, setIsProcessingImage] = useState(false);
 
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
@@ -76,6 +83,9 @@ export default function AdminEssayEditor() {
                   seo_title: ed.seo_title || '',
                   seo_description: ed.seo_description || ''
                 });
+                if (ed.featured_image && ed.featured_image.startsWith('http')) {
+                  setImageMode('url');
+                }
               }
             }
           }
@@ -89,6 +99,87 @@ export default function AdminEssayEditor() {
 
     loadEditorData();
   }, [id, location.search]);
+
+  // Utility to compress and optimize uploaded images
+  const processImageFile = (file, callback) => {
+    if (!file || !file.type.startsWith('image/')) {
+      alert('Please select a valid image file (JPG, PNG, WebP).');
+      return;
+    }
+
+    setIsProcessingImage(true);
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const img = new window.Image();
+      img.onload = () => {
+        const maxWidth = 1400;
+        const maxHeight = 900;
+        let width = img.width;
+        let height = img.height;
+
+        if (width > maxWidth || height > maxHeight) {
+          if (width / height > maxWidth / maxHeight) {
+            height = Math.round((height * maxWidth) / width);
+            width = maxWidth;
+          } else {
+            width = Math.round((width * maxHeight) / height);
+            height = maxHeight;
+          }
+        }
+
+        const canvas = document.createElement('canvas');
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, width, height);
+
+        const dataUrl = canvas.toDataURL('image/jpeg', 0.85);
+        setIsProcessingImage(false);
+        callback(dataUrl);
+      };
+      img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const handleFeaturedImageUpload = (e) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      processImageFile(file, (dataUrl) => {
+        setFormData(prev => ({ ...prev, featured_image: dataUrl }));
+      });
+    }
+  };
+
+  const handleFeaturedImageDrop = (e) => {
+    e.preventDefault();
+    const file = e.dataTransfer.files?.[0];
+    if (file) {
+      processImageFile(file, (dataUrl) => {
+        setFormData(prev => ({ ...prev, featured_image: dataUrl }));
+      });
+    }
+  };
+
+  const handleInsertBodyImage = () => {
+    if (!bodyImageData.url) {
+      alert('Please provide an image first.');
+      return;
+    }
+
+    const snippet = `
+<figure style="margin: 2rem 0; text-align: center;">
+  <img src="${bodyImageData.url}" alt="${bodyImageData.alt || formData.title}" style="width: 100%; max-height: 480px; object-fit: cover; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.08);" />
+  ${bodyImageData.caption ? `<figcaption style="font-size: 0.85rem; color: #777; margin-top: 0.5rem; font-style: italic;">${bodyImageData.caption}</figcaption>` : ''}
+</figure>
+`;
+    setFormData(prev => ({
+      ...prev,
+      content: prev.content + '\n' + snippet
+    }));
+    setBodyImageModalOpen(false);
+    setBodyImageData({ url: '', caption: '', alt: '' });
+  };
 
   const handleTitleChange = (e) => {
     const titleVal = e.target.value;
@@ -268,13 +359,16 @@ export default function AdminEssayEditor() {
               <button type="button" onClick={() => handleInsertHtml('h2')} className="btn btn-outline" style={{ padding: '0.25rem 0.6rem', fontSize: '0.75rem' }}>+ H2 Section</button>
               <button type="button" onClick={() => handleInsertHtml('quote')} className="btn btn-outline" style={{ padding: '0.25rem 0.6rem', fontSize: '0.75rem' }}>+ Pull Quote</button>
               <button type="button" onClick={() => handleInsertHtml('list')} className="btn btn-outline" style={{ padding: '0.25rem 0.6rem', fontSize: '0.75rem' }}>+ Bullet List</button>
+              <button type="button" onClick={() => setBodyImageModalOpen(true)} className="btn btn-outline" style={{ padding: '0.25rem 0.6rem', fontSize: '0.75rem', display: 'inline-flex', alignItems: 'center', gap: '0.3rem' }}>
+                <Image size={13} /> + Insert Image in Body
+              </button>
             </div>
 
             <div style={{ marginBottom: '2rem' }}>
               <textarea
                 required
                 rows={16}
-                placeholder="Write full long-form essay body in HTML/paragraphs..."
+                placeholder="Write full long-form article body in HTML/paragraphs..."
                 value={formData.content}
                 onChange={handleContentChange}
                 style={{
@@ -358,6 +452,163 @@ export default function AdminEssayEditor() {
                   <option value="published">Published</option>
                   <option value="draft">Draft</option>
                 </select>
+              </div>
+
+              {/* Featured Image Upload & Edit Section */}
+              <div style={{
+                padding: '1rem',
+                backgroundColor: 'var(--bg-tertiary)',
+                borderRadius: 'var(--radius-sm)',
+                border: '1px solid var(--border-color)'
+              }}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.6rem' }}>
+                  <label style={{ fontSize: '0.825rem', fontWeight: '700', color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                    <Image size={16} /> Featured Cover Image
+                  </label>
+                  {formData.featured_image && (
+                    <button
+                      type="button"
+                      onClick={() => setFormData(prev => ({ ...prev, featured_image: '' }))}
+                      className="btn btn-outline"
+                      style={{ padding: '0.2rem 0.5rem', fontSize: '0.725rem', color: 'var(--accent-ethics)' }}
+                      title="Remove Image"
+                    >
+                      <Trash2 size={12} /> Clear
+                    </button>
+                  )}
+                </div>
+
+                {/* Live Preview if image exists */}
+                {formData.featured_image ? (
+                  <div style={{ position: 'relative', marginBottom: '0.75rem', borderRadius: 'var(--radius-sm)', overflow: 'hidden', border: '1px solid var(--border-color)' }}>
+                    <img
+                      src={formData.featured_image}
+                      alt="Featured Preview"
+                      style={{ width: '100%', height: '160px', objectFit: 'cover', display: 'block' }}
+                    />
+                    <div style={{
+                      position: 'absolute',
+                      bottom: 0,
+                      left: 0,
+                      right: 0,
+                      backgroundColor: 'rgba(0,0,0,0.65)',
+                      backdropFilter: 'blur(4px)',
+                      padding: '0.35rem 0.6rem',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between'
+                    }}>
+                      <span style={{ fontSize: '0.75rem', color: '#fff', fontWeight: '500' }}>Image Ready</span>
+                      <label style={{ fontSize: '0.75rem', color: '#fff', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.3rem', textDecoration: 'underline' }}>
+                        <RefreshCw size={12} /> Replace
+                        <input
+                          type="file"
+                          accept="image/*"
+                          onChange={handleFeaturedImageUpload}
+                          style={{ display: 'none' }}
+                        />
+                      </label>
+                    </div>
+                  </div>
+                ) : null}
+
+                {/* Upload or URL Mode Switcher */}
+                <div style={{ display: 'flex', gap: '0.3rem', marginBottom: '0.6rem', backgroundColor: 'var(--bg-secondary)', padding: '0.2rem', borderRadius: 'var(--radius-sm)' }}>
+                  <button
+                    type="button"
+                    onClick={() => setImageMode('upload')}
+                    style={{
+                      flex: 1,
+                      padding: '0.35rem',
+                      fontSize: '0.75rem',
+                      fontWeight: '600',
+                      borderRadius: 'var(--radius-sm)',
+                      border: 'none',
+                      backgroundColor: imageMode === 'upload' ? 'var(--bg-tertiary)' : 'transparent',
+                      color: imageMode === 'upload' ? 'var(--text-primary)' : 'var(--text-muted)',
+                      cursor: 'pointer',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      gap: '0.3rem'
+                    }}
+                  >
+                    <Upload size={13} /> Upload File
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setImageMode('url')}
+                    style={{
+                      flex: 1,
+                      padding: '0.35rem',
+                      fontSize: '0.75rem',
+                      fontWeight: '600',
+                      borderRadius: 'var(--radius-sm)',
+                      border: 'none',
+                      backgroundColor: imageMode === 'url' ? 'var(--bg-tertiary)' : 'transparent',
+                      color: imageMode === 'url' ? 'var(--text-primary)' : 'var(--text-muted)',
+                      cursor: 'pointer',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      gap: '0.3rem'
+                    }}
+                  >
+                    <Link2 size={13} /> Image URL
+                  </button>
+                </div>
+
+                {imageMode === 'upload' ? (
+                  <div
+                    onDragOver={(e) => e.preventDefault()}
+                    onDrop={handleFeaturedImageDrop}
+                    style={{
+                      border: '2px dashed var(--border-color)',
+                      borderRadius: 'var(--radius-sm)',
+                      padding: '1.25rem 0.75rem',
+                      textAlign: 'center',
+                      backgroundColor: 'var(--bg-secondary)',
+                      cursor: 'pointer',
+                      transition: 'border-color 0.2s'
+                    }}
+                  >
+                    <Upload size={24} style={{ color: 'var(--text-muted)', margin: '0 auto 0.4rem auto' }} />
+                    <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: '600', color: 'var(--text-primary)', cursor: 'pointer' }}>
+                      {isProcessingImage ? 'Optimizing Image...' : 'Click to Upload or Drag & Drop'}
+                      <input
+                        type="file"
+                        accept="image/*"
+                        onChange={handleFeaturedImageUpload}
+                        disabled={isProcessingImage}
+                        style={{ display: 'none' }}
+                      />
+                    </label>
+                    <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)', display: 'block', marginTop: '0.2rem' }}>
+                      PNG, JPG, WebP (Auto-optimized)
+                    </span>
+                  </div>
+                ) : (
+                  <div>
+                    <input
+                      type="url"
+                      placeholder="https://images.unsplash.com/..."
+                      value={formData.featured_image}
+                      onChange={e => setFormData({ ...formData, featured_image: e.target.value })}
+                      style={{
+                        width: '100%',
+                        padding: '0.6rem',
+                        fontSize: '0.825rem',
+                        borderRadius: 'var(--radius-sm)',
+                        border: '1px solid var(--border-color)',
+                        backgroundColor: 'var(--bg-input)',
+                        color: 'var(--text-primary)'
+                      }}
+                    />
+                    <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)', display: 'block', marginTop: '0.25rem' }}>
+                      Paste direct link to image.
+                    </span>
+                  </div>
+                )}
               </div>
 
               <div>
@@ -461,7 +712,7 @@ export default function AdminEssayEditor() {
                   onChange={e => setFormData({ ...formData, featured: e.target.checked })}
                 />
                 <label htmlFor="featuredCheck" style={{ fontSize: '0.9rem', fontWeight: '600', color: 'var(--text-primary)', cursor: 'pointer' }}>
-                  Mark as Homepage Featured Essay
+                  Mark as Homepage Featured
                 </label>
               </div>
 
@@ -471,6 +722,124 @@ export default function AdminEssayEditor() {
         </div>
 
       </form>
+
+      {/* Insert Body Image Modal */}
+      {bodyImageModalOpen && (
+        <div style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundColor: 'rgba(0,0,0,0.6)',
+          backdropFilter: 'blur(4px)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          zIndex: 1100,
+          padding: '1rem'
+        }}>
+          <div style={{
+            backgroundColor: 'var(--bg-secondary)',
+            borderRadius: 'var(--radius-md)',
+            border: '1px solid var(--border-color)',
+            padding: '1.5rem',
+            width: '100%',
+            maxWidth: '480px',
+            boxShadow: 'var(--shadow-lg)'
+          }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.25rem' }}>
+              <h3 style={{ fontSize: '1.1rem', fontWeight: '700', margin: 0, display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                <Image size={18} /> Insert Image into Body
+              </h3>
+              <button
+                type="button"
+                onClick={() => setBodyImageModalOpen(false)}
+                style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-muted)' }}
+              >
+                <X size={20} />
+              </button>
+            </div>
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              <div>
+                <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: '600', marginBottom: '0.3rem', color: 'var(--text-muted)' }}>
+                  Upload Image File
+                </label>
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => {
+                    const file = e.target.files?.[0];
+                    if (file) {
+                      processImageFile(file, (dataUrl) => {
+                        setBodyImageData(prev => ({ ...prev, url: dataUrl }));
+                      });
+                    }
+                  }}
+                  style={{ width: '100%', fontSize: '0.85rem' }}
+                />
+              </div>
+
+              <div style={{ textAlign: 'center', fontSize: '0.75rem', color: 'var(--text-muted)' }}>
+                — OR ENTER DIRECT URL —
+              </div>
+
+              <div>
+                <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: '600', marginBottom: '0.3rem', color: 'var(--text-muted)' }}>
+                  Image URL
+                </label>
+                <input
+                  type="url"
+                  placeholder="https://images.unsplash.com/..."
+                  value={bodyImageData.url}
+                  onChange={(e) => setBodyImageData({ ...bodyImageData, url: e.target.value })}
+                  style={{ width: '100%', padding: '0.65rem', fontSize: '0.85rem', borderRadius: 'var(--radius-sm)', border: '1px solid var(--border-color)', backgroundColor: 'var(--bg-input)', color: 'var(--text-primary)' }}
+                />
+              </div>
+
+              <div>
+                <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: '600', marginBottom: '0.3rem', color: 'var(--text-muted)' }}>
+                  Image Caption (Optional)
+                </label>
+                <input
+                  type="text"
+                  placeholder="e.g. Photograph taken during ethics seminar..."
+                  value={bodyImageData.caption}
+                  onChange={(e) => setBodyImageData({ ...bodyImageData, caption: e.target.value })}
+                  style={{ width: '100%', padding: '0.65rem', fontSize: '0.85rem', borderRadius: 'var(--radius-sm)', border: '1px solid var(--border-color)', backgroundColor: 'var(--bg-input)', color: 'var(--text-primary)' }}
+                />
+              </div>
+
+              {bodyImageData.url && (
+                <div style={{ borderRadius: 'var(--radius-sm)', overflow: 'hidden', maxHeight: '140px' }}>
+                  <img src={bodyImageData.url} alt="Preview" style={{ width: '100%', height: '140px', objectFit: 'cover' }} />
+                </div>
+              )}
+
+              <div style={{ display: 'flex', gap: '0.5rem', justifyContent: 'flex-end', marginTop: '0.5rem' }}>
+                <button
+                  type="button"
+                  onClick={() => setBodyImageModalOpen(false)}
+                  className="btn btn-outline"
+                  style={{ padding: '0.5rem 0.9rem', fontSize: '0.85rem' }}
+                >
+                  Cancel
+                </button>
+                <button
+                  type="button"
+                  onClick={handleInsertBodyImage}
+                  disabled={!bodyImageData.url}
+                  className="btn btn-primary"
+                  style={{ padding: '0.5rem 1rem', fontSize: '0.85rem' }}
+                >
+                  Insert Image
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       <style>{`
         @media (max-width: 900px) {

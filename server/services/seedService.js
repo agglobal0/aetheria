@@ -11,6 +11,9 @@ async function seedDatabase(pool) {
       // Ignore if column already exists
     }
     try {
+      await pool.query("ALTER TABLE essays MODIFY COLUMN featured_image LONGTEXT");
+    } catch (e) {}
+    try {
       await pool.query("UPDATE essays SET type = 'essay' WHERE type IS NULL");
       
       const [blogCheck] = await pool.query("SELECT COUNT(*) as count FROM essays WHERE type = 'blog'");

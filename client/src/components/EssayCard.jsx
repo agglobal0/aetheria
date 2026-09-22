@@ -82,6 +82,22 @@ export default function EssayCard({ essay, layout = 'grid' }) {
     onMouseOut={e => e.currentTarget.style.borderColor = 'var(--border-color)'}
     className="animate-fade-in"
     >
+      {essay.featured_image && (
+        <Link to={`/essay/${essay.slug}`} style={{ display: 'block', overflow: 'hidden', height: '190px', backgroundColor: 'var(--bg-tertiary)' }}>
+          <img
+            src={essay.featured_image}
+            alt={essay.title}
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              transition: 'transform 0.4s ease'
+            }}
+            onMouseOver={e => e.currentTarget.style.transform = 'scale(1.04)'}
+            onMouseOut={e => e.currentTarget.style.transform = 'scale(1.0)'}
+          />
+        </Link>
+      )}
       <div style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', flex: 1 }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.75rem', flexWrap: 'wrap', gap: '0.4rem' }}>
           <Link to={`/category/${essay.category_slug}`} className={`category-badge ${getCategoryClass(essay.category_slug)}`}>
