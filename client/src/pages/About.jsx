@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Sparkles, HelpCircle, Compass, HeartHandshake, Eye, ArrowRight, Feather } from 'lucide-react';
 import Breadcrumbs from '../components/Breadcrumbs';
+import { profPortraitImg } from '../assets/images';
 
 export default function About() {
   const reflectiveQuestions = [
@@ -331,11 +332,28 @@ export default function About() {
           </div>
 
           <div style={{
-            display: 'inline-block',
+            display: 'inline-flex',
+            flexDirection: 'column',
+            alignItems: 'center',
             paddingTop: '1.25rem',
             borderTop: '1px solid var(--border-color)',
-            minWidth: '200px'
+            minWidth: '220px'
           }}>
+            <div style={{
+              width: '100px',
+              height: '100px',
+              borderRadius: '50%',
+              overflow: 'hidden',
+              marginBottom: '1rem',
+              border: '3px solid var(--accent-primary)',
+              boxShadow: 'var(--shadow-md)'
+            }}>
+              <img 
+                src={profPortraitImg} 
+                alt="Prof. Monika Chopra" 
+                style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top' }}
+              />
+            </div>
             <p style={{ fontFamily: 'var(--font-serif)', fontSize: '1.35rem', fontWeight: '600', color: 'var(--text-primary)', margin: 0 }}>
               Monika Chopra
             </p>
