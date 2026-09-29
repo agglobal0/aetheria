@@ -15,11 +15,11 @@ const SEEK_GOALS = [
   },
   {
     id: 'integrity',
-    title: 'Ethical Friction & Moral Choices',
+    title: 'Spiritual Alignment & Consciousness',
     icon: ShieldCheck,
-    color: 'var(--accent-ethics)',
-    summary: 'Resisting convenience culture, making brave decisions in corporate or social settings.',
-    actionStep: 'Pause 10 seconds before agreeing or reacting to controversial news or social pressure.',
+    color: 'var(--accent-spirituality)',
+    summary: 'Resisting convenience culture, making conscious decisions, and living with inner truth.',
+    actionStep: 'Pause 10 seconds before agreeing or reacting to external pressure or noise.',
     essaySlug: 'when-convenience-becomes-a-moral-choice',
     essayTitle: 'When Convenience Becomes a Moral Choice'
   },

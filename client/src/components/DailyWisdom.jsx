@@ -4,9 +4,9 @@ import { Sparkles, RefreshCw, Copy, Check, Heart, BookOpen } from 'lucide-react'
 const WISDOM_LESSONS = [
   {
     quote: "Character is not built in the amphitheater of applause, but in the quiet solitude of unobserved choices.",
-    lesson: "Ethical integrity is what you choose when no one is holding a camera or writing a review.",
+    lesson: "Inner integrity is what you choose when no one is holding a camera or writing a review.",
     reflection: "What choice can you make today purely out of personal integrity, regardless of who sees it?",
-    category: "Ethics & Virtue"
+    category: "Spirituality & Purpose"
   },
   {
     quote: "The tragedy of life is not that it ends so soon, but that we wait so long to begin noticing it.",

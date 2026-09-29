@@ -5,7 +5,7 @@ const MOTIVATIONAL_QUOTES = [
   {
     quote: "True education is not merely the transmission of data, but the cultivation of clarity, empathy, and moral discernment.",
     context: "On Moral Education & Mentoring",
-    pillar: "Ethics & Virtue"
+    pillar: "Spirituality"
   },
   {
     quote: "Indifference protects us from temporary pain, but it starves us of lifelong joy. Sincerity remains our only true bridge.",

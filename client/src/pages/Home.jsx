@@ -9,6 +9,7 @@ import {
   BookOpen,
   Compass,
   Lightbulb,
+  Flower2,
   Sprout,
   Library,
   Mail,
@@ -240,10 +241,10 @@ export default function Home() {
                 gap: '1rem'
               }} className="ref-themes-grid">
 
-                {/* Card 1: Ethics & Dilemmas */}
+                {/* Card 1: Spirituality */}
                 <div className="theme-card theme-card-ethics">
                   <div style={{ opacity: 0.85, marginBottom: '0.75rem' }}>
-                    <Scale size={28} strokeWidth={1.5} color="#8A4A28" />
+                    <Flower2 size={28} strokeWidth={1.5} color="#0284C7" />
                   </div>
                   <div>
                     <h4 style={{
@@ -253,14 +254,14 @@ export default function Home() {
                       lineHeight: '1.2',
                       marginBottom: '0.5rem'
                     }}>
-                      Ethics &<br />Dilemmas
+                      Spirituality &<br />Consciousness
                     </h4>
                     <p style={{ fontSize: '0.78rem', lineHeight: '1.45', opacity: 0.85, marginBottom: '1rem' }}>
-                      When life isn't simply right or wrong.
+                      Purpose, transcendence, and quiet depth.
                     </p>
                   </div>
                   <Link
-                    to="/category/ethics"
+                    to="/category/spirituality"
                     style={{
                       fontSize: '0.78rem',
                       fontWeight: '600',

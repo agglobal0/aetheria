@@ -9,8 +9,9 @@ export default function CategoryCard({ category }) {
       case 'life-reflection': return <Feather size={28} />;
       case 'emotional-intelligence':
       case 'human-behaviour': return <Users size={28} />;
-      case 'ethics':
       case 'wisdom': return <Compass size={28} />;
+      case 'spirituality':
+      case 'ethics': return <Compass size={28} />;
       case 'technology': return <Cpu size={28} />;
       default: return <Compass size={28} />;
     }
@@ -21,11 +22,11 @@ export default function CategoryCard({ category }) {
       case 'reflections':
       case 'life-reflection': return 'category-reflections';
       case 'emotional-intelligence':
-      case 'human-behaviour': return 'category-human-behaviour';
+      case 'human-behaviour': return 'category-emotional-intelligence';
       case 'healing': return 'category-healing';
-      case 'wisdom':
-      case 'ethics': return 'category-ethics';
-      case 'spirituality': return 'category-spirituality';
+      case 'wisdom': return 'category-wisdom';
+      case 'spirituality':
+      case 'ethics': return 'category-spirituality';
       case 'technology': return 'category-technology';
       default: return 'category-reflections';
     }

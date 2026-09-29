@@ -373,13 +373,10 @@ img {
   color: var(--accent-wisdom);
   background-color: var(--accent-wisdom-bg);
 }
-.category-spirituality {
+.category-spirituality,
+.category-ethics {
   color: var(--accent-spirituality);
   background-color: var(--accent-spirituality-bg);
-}
-.category-ethics {
-  color: var(--accent-ethics);
-  background-color: var(--accent-ethics-bg);
 }
 .category-technology {
   color: var(--accent-technology);

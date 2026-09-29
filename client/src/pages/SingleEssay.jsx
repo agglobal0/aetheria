@@ -57,12 +57,12 @@ export default function SingleEssay() {
     switch (catSlug) {
       case 'reflections':
       case 'life-reflection': return 'category-reflections';
-      case 'emotional-intelligence':
-      case 'human-behaviour': return 'category-human-behaviour';
+      case 'emotional-intelligence': return 'category-emotional-intelligence';
       case 'healing': return 'category-healing';
       case 'wisdom':
-      case 'ethics': return 'category-ethics';
-      case 'spirituality': return 'category-spirituality';
+      case 'human-behaviour': return 'category-wisdom';
+      case 'spirituality':
+      case 'ethics': return 'category-spirituality';
       case 'technology': return 'category-technology';
       default: return 'category-reflections';
     }

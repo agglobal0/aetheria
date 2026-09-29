@@ -70,6 +70,14 @@ async function seedDatabase(pool) {
         await pool.query("UPDATE essays SET category_id = ? WHERE category_id = ?", [wisCat[0].id, oldHbCat[0].id]);
         await pool.query("DELETE FROM categories WHERE id = ?", [oldHbCat[0].id]);
       }
+
+      const [spirCat] = await pool.query("SELECT id FROM categories WHERE slug = 'spirituality' LIMIT 1");
+      const [oldEthCat] = await pool.query("SELECT id FROM categories WHERE slug = 'ethics' LIMIT 1");
+      if (spirCat.length > 0 && oldEthCat.length > 0) {
+        console.log('[Seed Migration] Moving all essays from ethics to spirituality...');
+        await pool.query("UPDATE essays SET category_id = ? WHERE category_id = ?", [spirCat[0].id, oldEthCat[0].id]);
+        await pool.query("DELETE FROM categories WHERE id = ?", [oldEthCat[0].id]);
+      }
     } catch (migErr) {
       console.warn('[Seed Migration Error]:', migErr.message);
     }
@@ -147,7 +155,7 @@ async function seedDatabase(pool) {
       auths.forEach(a => { authMap[a.slug] = a.id; });
 
       const sampleEssays = [
-        // --- ETHICS ---
+        // --- SPIRITUALITY & CONSCIOUSNESS ---
         {
           title: 'When Convenience Becomes a Moral Choice',
           slug: 'when-convenience-becomes-a-moral-choice',
@@ -178,12 +186,12 @@ async function seedDatabase(pool) {
           `,
           featured_image: 'https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=1200&q=80',
           author_id: authMap['eleanor-vance'],
-          category_id: catMap['ethics'],
+          category_id: catMap['spirituality'],
           featured: 1,
           reading_time: 7,
           views: 1420,
-          seo_title: 'When Convenience Becomes a Moral Choice | Aetheria Ethics',
-          seo_description: 'An inquiry into how frictionless technology alters human morality and decision-making.'
+          seo_title: 'When Convenience Becomes a Moral Choice | Spirituality',
+          seo_description: 'An inquiry into how frictionless technology alters human morality, consciousness, and decision-making.'
         },
         {
           title: 'The Cost of Knowing Everything',
@@ -209,12 +217,12 @@ async function seedDatabase(pool) {
           `,
           featured_image: 'https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&w=1200&q=80',
           author_id: authMap['eleanor-vance'],
-          category_id: catMap['ethics'],
+          category_id: catMap['spirituality'],
           featured: 0,
           reading_time: 6,
           views: 980,
-          seo_title: 'The Cost of Knowing Everything | Aetheria',
-          seo_description: 'Exploring global awareness, emotional exhaustion, and the moral limits of attention.'
+          seo_title: 'The Cost of Knowing Everything | Spirituality',
+          seo_description: 'Exploring global awareness, emotional exhaustion, consciousness, and the limits of attention.'
         },
         {
           title: 'Who Is Responsible When Machines Decide?',
@@ -240,12 +248,12 @@ async function seedDatabase(pool) {
           `,
           featured_image: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1200&q=80',
           author_id: authMap['eleanor-vance'],
-          category_id: catMap['ethics'],
+          category_id: catMap['spirituality'],
           featured: 0,
           reading_time: 8,
           views: 1150,
-          seo_title: 'Who Is Responsible When Machines Decide? | Ethics',
-          seo_description: 'Analyzing the moral vacuums and accountability gaps created by automated decision systems.'
+          seo_title: 'Who Is Responsible When Machines Decide? | Spirituality',
+          seo_description: 'Analyzing the moral vacuums and spiritual accountability gaps created by automated decision systems.'
         },
         {
           title: 'The Mirage of Absolute Transparency',
@@ -262,12 +270,12 @@ async function seedDatabase(pool) {
           `,
           featured_image: 'https://images.unsplash.com/photo-1516962215378-7fa2e137ae93?auto=format&fit=crop&w=1200&q=80',
           author_id: authMap['eleanor-vance'],
-          category_id: catMap['ethics'],
+          category_id: catMap['spirituality'],
           featured: 0,
           reading_time: 5,
           views: 820,
-          seo_title: 'The Mirage of Absolute Transparency | Aetheria Ethics',
-          seo_description: 'Why privacy is crucial for human nuance, authentic selfhood, and moral freedom.'
+          seo_title: 'The Mirage of Absolute Transparency | Spirituality',
+          seo_description: 'Why privacy and quiet interiority are crucial for spiritual authentic selfhood.'
         },
         {
           title: 'The Ethos of Digital Minimalism',
@@ -282,12 +290,12 @@ async function seedDatabase(pool) {
           `,
           featured_image: 'https://images.unsplash.com/photo-1506784983877-45594efa4cbe?auto=format&fit=crop&w=1200&q=80',
           author_id: authMap['eleanor-vance'],
-          category_id: catMap['ethics'],
+          category_id: catMap['spirituality'],
           featured: 0,
           reading_time: 6,
           views: 940,
-          seo_title: 'The Ethos of Digital Minimalism | Aetheria',
-          seo_description: 'How reducing digital noise restores focus, moral agency, and deep intentionality.'
+          seo_title: 'The Ethos of Digital Minimalism | Spirituality',
+          seo_description: 'How reducing digital noise restores spiritual stillness, focus, and deep intentionality.'
         },
 
         // --- WISDOM & HUMAN NATURE ---

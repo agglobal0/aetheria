@@ -42,10 +42,10 @@ async function getAllEssays(req, res, next) {
         'life-reflection': ['reflections', 'life-reflection', 'life-reflections'],
         'emotional-intelligence': ['emotional-intelligence'],
         'human-behaviour': ['wisdom', 'human-behaviour', 'human-behavior'],
-        'wisdom': ['wisdom', 'ethics', 'human-behaviour', 'human-behavior'],
-        'ethics': ['wisdom', 'ethics'],
+        'wisdom': ['wisdom', 'human-behaviour', 'human-behavior'],
+        'ethics': ['spirituality', 'ethics'],
         'healing': ['healing', 'reflections'],
-        'spirituality': ['spirituality', 'reflections', 'ethics']
+        'spirituality': ['spirituality', 'ethics', 'reflections']
       };
 
       const matchedSlugs = catSynonyms[category] || [category];
