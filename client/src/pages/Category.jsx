@@ -23,10 +23,10 @@ export default function Category() {
     switch (catSlug) {
       case 'reflections':
       case 'life-reflection': return <BookOpen size={40} />;
-      case 'emotional-intelligence':
-      case 'human-behaviour': return <Brain size={40} />;
+      case 'emotional-intelligence': return <Brain size={40} />;
       case 'healing': return <HeartPulse size={40} />;
       case 'wisdom':
+      case 'human-behaviour':
       case 'ethics': return <Lightbulb size={40} />;
       case 'spirituality': return <Flower2 size={40} />;
       case 'technology': return <Cpu size={40} />;

@@ -30,7 +30,7 @@ const WISDOM_LESSONS = [
     quote: "True confidence demands neither loud declaration nor constant validation—only inner alignment.",
     lesson: "When you know your core values, external noise loses its ability to sway you.",
     reflection: "Which single core value will guide your decisions today?",
-    category: "Human Behaviour"
+    category: "Wisdom"
   }
 ];
 

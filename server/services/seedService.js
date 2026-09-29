@@ -53,14 +53,22 @@ async function seedDatabase(pool) {
       );
     }
 
-    // Auto-migrate: move all essays from 'life-reflection' to 'reflections' and delete 'life-reflection' category
+    // Auto-migrate: move all essays from 'life-reflection' to 'reflections' and 'human-behaviour' to 'wisdom'
     try {
       const [refCat] = await pool.query("SELECT id FROM categories WHERE slug = 'reflections' LIMIT 1");
-      const [oldCat] = await pool.query("SELECT id FROM categories WHERE slug = 'life-reflection' LIMIT 1");
-      if (refCat.length > 0 && oldCat.length > 0) {
+      const [oldRefCat] = await pool.query("SELECT id FROM categories WHERE slug = 'life-reflection' LIMIT 1");
+      if (refCat.length > 0 && oldRefCat.length > 0) {
         console.log('[Seed Migration] Moving all essays from life-reflection to reflections...');
-        await pool.query("UPDATE essays SET category_id = ? WHERE category_id = ?", [refCat[0].id, oldCat[0].id]);
-        await pool.query("DELETE FROM categories WHERE id = ?", [oldCat[0].id]);
+        await pool.query("UPDATE essays SET category_id = ? WHERE category_id = ?", [refCat[0].id, oldRefCat[0].id]);
+        await pool.query("DELETE FROM categories WHERE id = ?", [oldRefCat[0].id]);
+      }
+
+      const [wisCat] = await pool.query("SELECT id FROM categories WHERE slug = 'wisdom' LIMIT 1");
+      const [oldHbCat] = await pool.query("SELECT id FROM categories WHERE slug = 'human-behaviour' LIMIT 1");
+      if (wisCat.length > 0 && oldHbCat.length > 0) {
+        console.log('[Seed Migration] Moving all essays from human-behaviour to wisdom...');
+        await pool.query("UPDATE essays SET category_id = ? WHERE category_id = ?", [wisCat[0].id, oldHbCat[0].id]);
+        await pool.query("DELETE FROM categories WHERE id = ?", [oldHbCat[0].id]);
       }
     } catch (migErr) {
       console.warn('[Seed Migration Error]:', migErr.message);
@@ -282,7 +290,7 @@ async function seedDatabase(pool) {
           seo_description: 'How reducing digital noise restores focus, moral agency, and deep intentionality.'
         },
 
-        // --- HUMAN BEHAVIOUR ---
+        // --- WISDOM & HUMAN NATURE ---
         {
           title: 'Why We Pretend Not to Care',
           slug: 'why-we-pretend-not-to-care',
@@ -303,11 +311,11 @@ async function seedDatabase(pool) {
           `,
           featured_image: 'https://images.unsplash.com/photo-1499209974431-9dac3ada00d7?auto=format&fit=crop&w=1200&q=80',
           author_id: authMap['marcus-vance'],
-          category_id: catMap['human-behaviour'],
+          category_id: catMap['wisdom'],
           featured: 1,
           reading_time: 6,
           views: 1890,
-          seo_title: 'Why We Pretend Not to Care | Human Behaviour',
+          seo_title: 'Why We Pretend Not to Care | Wisdom',
           seo_description: 'An analysis of emotional detachment, irony, and the psychological courage of sincerity.'
         },
         {
@@ -323,11 +331,11 @@ async function seedDatabase(pool) {
           `,
           featured_image: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1200&q=80',
           author_id: authMap['marcus-vance'],
-          category_id: catMap['human-behaviour'],
+          category_id: catMap['wisdom'],
           featured: 0,
           reading_time: 5,
           views: 1320,
-          seo_title: 'The Strange Comfort of Being Understood | Human Behaviour',
+          seo_title: 'The Strange Comfort of Being Understood | Wisdom',
           seo_description: 'Exploring the psychology of psychological safety, attunement, and deep validation.'
         },
         {
@@ -343,11 +351,11 @@ async function seedDatabase(pool) {
           `,
           featured_image: 'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=1200&q=80',
           author_id: authMap['marcus-vance'],
-          category_id: catMap['human-behaviour'],
+          category_id: catMap['wisdom'],
           featured: 0,
           reading_time: 7,
           views: 1100,
-          seo_title: 'Why People Change When Nobody Is Watching | Aetheria',
+          seo_title: 'Why People Change When Nobody Is Watching | Wisdom',
           seo_description: 'A study on private habits, personal integrity, and subconscious identity formation.'
         },
         {
@@ -363,11 +371,11 @@ async function seedDatabase(pool) {
           `,
           featured_image: 'https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=1200&q=80',
           author_id: authMap['marcus-vance'],
-          category_id: catMap['human-behaviour'],
+          category_id: catMap['wisdom'],
           featured: 0,
           reading_time: 6,
           views: 890,
-          seo_title: 'The Psychology of Unspoken Expectations | Aetheria',
+          seo_title: 'The Psychology of Unspoken Expectations | Wisdom',
           seo_description: 'Understanding silent relationship contracts and how to communicate unexpressed needs.'
         },
         {
@@ -380,11 +388,11 @@ async function seedDatabase(pool) {
           `,
           featured_image: 'https://images.unsplash.com/photo-1517456793572-1d8efd6dc135?auto=format&fit=crop&w=1200&q=80',
           author_id: authMap['marcus-vance'],
-          category_id: catMap['human-behaviour'],
+          category_id: catMap['wisdom'],
           featured: 0,
           reading_time: 6,
           views: 1040,
-          seo_title: 'The Paradox of Choice in Belonging | Human Behaviour',
+          seo_title: 'The Paradox of Choice in Belonging | Wisdom',
           seo_description: 'How endless choices undermine community commitment and emotional stability.'
         },
 

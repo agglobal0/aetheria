@@ -40,12 +40,12 @@ async function getAllEssays(req, res, next) {
       const catSynonyms = {
         'reflections': ['reflections', 'life-reflection', 'life-reflections'],
         'life-reflection': ['reflections', 'life-reflection', 'life-reflections'],
-        'emotional-intelligence': ['emotional-intelligence', 'human-behaviour', 'human-behavior'],
-        'human-behaviour': ['emotional-intelligence', 'human-behaviour', 'human-behavior'],
-        'wisdom': ['wisdom', 'ethics', 'life-reflection'],
+        'emotional-intelligence': ['emotional-intelligence'],
+        'human-behaviour': ['wisdom', 'human-behaviour', 'human-behavior'],
+        'wisdom': ['wisdom', 'ethics', 'human-behaviour', 'human-behavior'],
         'ethics': ['wisdom', 'ethics'],
-        'healing': ['healing', 'reflections', 'life-reflection'],
-        'spirituality': ['spirituality', 'reflections', 'life-reflection', 'ethics']
+        'healing': ['healing', 'reflections'],
+        'spirituality': ['spirituality', 'reflections', 'ethics']
       };
 
       const matchedSlugs = catSynonyms[category] || [category];

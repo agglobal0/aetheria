@@ -8,6 +8,7 @@ import {
   Monitor,
   BookOpen,
   Compass,
+  Lightbulb,
   Sprout,
   Library,
   Mail,
@@ -272,10 +273,10 @@ export default function Home() {
                   </Link>
                 </div>
 
-                {/* Card 2: Human Behaviour */}
+                {/* Card 2: Wisdom */}
                 <div className="theme-card theme-card-human">
                   <div style={{ opacity: 0.85, marginBottom: '0.75rem' }}>
-                    <Users size={28} strokeWidth={1.5} color="#2D5A38" />
+                    <Lightbulb size={28} strokeWidth={1.5} color="#2D5A38" />
                   </div>
                   <div>
                     <h4 style={{
@@ -285,14 +286,14 @@ export default function Home() {
                       lineHeight: '1.2',
                       marginBottom: '0.5rem'
                     }}>
-                      Human<br />Behaviour
+                      Wisdom
                     </h4>
                     <p style={{ fontSize: '0.78rem', lineHeight: '1.45', opacity: 0.85, marginBottom: '1rem' }}>
-                      Understanding people beyond their actions.
+                      Timeless moral clarity and lessons for living well.
                     </p>
                   </div>
                   <Link
-                    to="/category/human-behaviour"
+                    to="/category/wisdom"
                     style={{
                       fontSize: '0.78rem',
                       fontWeight: '600',

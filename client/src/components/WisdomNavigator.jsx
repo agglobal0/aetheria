@@ -37,7 +37,7 @@ const SEEK_GOALS = [
     id: 'connection',
     title: 'Authentic Human Connection',
     icon: HeartHandshake,
-    color: 'var(--accent-human-behaviour)',
+    color: 'var(--accent-wisdom)',
     summary: 'Moving beyond ironical detachment, overcoming unspoken expectations, and building deep trust.',
     actionStep: 'Express genuine appreciation to someone today without expecting anything in return.',
     essaySlug: 'why-we-pretend-not-to-care',

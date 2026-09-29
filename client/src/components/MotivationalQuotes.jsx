@@ -10,7 +10,7 @@ const MOTIVATIONAL_QUOTES = [
   {
     quote: "Indifference protects us from temporary pain, but it starves us of lifelong joy. Sincerity remains our only true bridge.",
     context: "Why We Pretend Not to Care",
-    pillar: "Human Behaviour"
+    pillar: "Wisdom"
   },
   {
     quote: "When an algorithm chooses what you see before you think, choice ceases to be freedom and becomes execution of code.",

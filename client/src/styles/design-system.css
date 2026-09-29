@@ -368,7 +368,8 @@ img {
   color: var(--accent-healing);
   background-color: var(--accent-healing-bg);
 }
-.category-wisdom {
+.category-wisdom,
+.category-human-behaviour {
   color: var(--accent-wisdom);
   background-color: var(--accent-wisdom-bg);
 }
@@ -379,10 +380,6 @@ img {
 .category-ethics {
   color: var(--accent-ethics);
   background-color: var(--accent-ethics-bg);
-}
-.category-human-behaviour {
-  color: var(--accent-human-behaviour);
-  background-color: var(--accent-human-behaviour-bg);
 }
 .category-technology {
   color: var(--accent-technology);

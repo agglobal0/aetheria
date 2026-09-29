@@ -32,9 +32,9 @@ export default function About() {
   ];
 
   const topics = [
-    "Reflection",
+    "Reflections",
     "Emotional Intelligence",
-    "Human Behaviour",
+    "Healing",
     "Relationships",
     "Resilience",
     "Wisdom",
@@ -146,7 +146,7 @@ export default function About() {
           </div>
 
           <p style={{ color: 'var(--text-secondary)', fontSize: '1.05rem', lineHeight: '1.8' }}>
-            It is a space for reflection, emotional intelligence, human behaviour, relationships, resilience, wisdom, spirituality and the lessons that life quietly teaches us.
+            It is a space for reflection, emotional intelligence, healing, relationships, resilience, wisdom, spirituality and the lessons that life quietly teaches us.
           </p>
 
           {/* Topics Chips */}
