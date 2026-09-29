@@ -35,22 +35,23 @@ async function seedDatabase(pool) {
     } catch (e) {}
 
     // 1. Seed Categories
-    const [existingCategories] = await pool.query('SELECT COUNT(*) as count FROM categories');
-    if (existingCategories[0].count === 0) {
-      console.log('[Seed] Seeding categories...');
-      const categories = [
-        ['Ethics', 'ethics', 'Essays on morality, responsibility, digital ethics, truth, and the choices that shape human society.', '#8B263E'],
-        ['Human Behaviour', 'human-behaviour', 'Exploring psychology, human nature, habits, subtle social dynamics, and decision-making.', '#2B59C3'],
-        ['Life Reflection', 'life-reflection', 'Thoughtful examinations of time, personal growth, loneliness, purpose, failure, and quiet wisdom.', '#A67C46'],
-        ['Technology', 'technology', 'Critical perspectives on artificial intelligence, digital culture, cybersecurity, and human-machine coexistence.', '#2E8B80']
-      ];
+    const categories = [
+      ['Reflections', 'reflections', 'Thoughtful examinations of time, personal growth, quiet wisdom, and life reflections.', '#A67C46'],
+      ['Emotional Intelligence', 'emotional-intelligence', 'Exploring psychology, human nature, empathy, social dynamics, and self-awareness.', '#2B59C3'],
+      ['Healing', 'healing', 'Nurturing resilience, self-forgiveness, emotional recovery, and inner peace.', '#D97706'],
+      ['Wisdom', 'wisdom', 'Timeless insights, moral integrity, ethics, and enduring human life lessons.', '#8B263E'],
+      ['Spirituality', 'spirituality', 'Meditations on purpose, transcendence, quiet consciousness, and inner depth.', '#2E8B80'],
+      ['Ethics', 'ethics', 'Essays on morality, responsibility, truth, and the choices that shape human society.', '#8B263E'],
+      ['Human Behaviour', 'human-behaviour', 'Exploring psychology, human nature, habits, and subtle social dynamics.', '#2B59C3'],
+      ['Life Reflection', 'life-reflection', 'Thoughtful examinations of time, personal growth, and quiet wisdom.', '#A67C46'],
+      ['Technology', 'technology', 'Critical perspectives on artificial intelligence, digital culture, and human autonomy.', '#2E8B80']
+    ];
 
-      for (const cat of categories) {
-        await pool.query(
-          'INSERT IGNORE INTO categories (name, slug, description, accent_color) VALUES (?, ?, ?, ?)',
-          cat
-        );
-      }
+    for (const cat of categories) {
+      await pool.query(
+        'INSERT IGNORE INTO categories (name, slug, description, accent_color) VALUES (?, ?, ?, ?)',
+        cat
+      );
     }
 
     // 2. Seed Default Admin User (Ensure admin@aetheria.com exists)

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { Compass, Users, Feather, Cpu, ArrowRight } from 'lucide-react';
+import { Compass, Users, Feather, Cpu, ArrowRight, BookOpen, Brain, HeartPulse, Lightbulb, Flower2 } from 'lucide-react';
 import { categoryService, essayService } from '../services/api';
 import EssayCard from '../components/EssayCard';
 import FeaturedEssay from '../components/FeaturedEssay';
@@ -21,9 +21,14 @@ export default function Category() {
 
   const getCategoryIcon = (catSlug) => {
     switch (catSlug) {
-      case 'ethics': return <Compass size={40} />;
-      case 'human-behaviour': return <Users size={40} />;
-      case 'life-reflection': return <Feather size={40} />;
+      case 'reflections':
+      case 'life-reflection': return <BookOpen size={40} />;
+      case 'emotional-intelligence':
+      case 'human-behaviour': return <Brain size={40} />;
+      case 'healing': return <HeartPulse size={40} />;
+      case 'wisdom':
+      case 'ethics': return <Lightbulb size={40} />;
+      case 'spirituality': return <Flower2 size={40} />;
       case 'technology': return <Cpu size={40} />;
       default: return <Compass size={40} />;
     }
@@ -49,8 +54,18 @@ export default function Category() {
           essayService.getAll({ category: slug, sort: 'views', limit: 4, status: 'published' })
         ]);
 
-        if (catRes.data.success) {
+        const fallbackMeta = {
+          'reflections': { name: 'Reflections', description: 'Thoughtful examinations of time, personal growth, quiet wisdom, and life reflections.', accent_color: '#A67C46' },
+          'emotional-intelligence': { name: 'Emotional Intelligence', description: 'Exploring psychology, human nature, empathy, social dynamics, and self-awareness.', accent_color: '#2B59C3' },
+          'healing': { name: 'Healing', description: 'Nurturing resilience, emotional recovery, self-forgiveness, and inner peace.', accent_color: '#D97706' },
+          'wisdom': { name: 'Wisdom', description: 'Timeless insights, moral integrity, ethics, and enduring human life lessons.', accent_color: '#8B263E' },
+          'spirituality': { name: 'Spirituality', description: 'Meditations on purpose, transcendence, quiet consciousness, and inner depth.', accent_color: '#0284C7' }
+        };
+
+        if (catRes.data && catRes.data.success) {
           setCategory(catRes.data.data);
+        } else if (fallbackMeta[slug]) {
+          setCategory(fallbackMeta[slug]);
         }
 
         if (essaysRes.data.success) {

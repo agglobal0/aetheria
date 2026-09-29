@@ -1,10 +1,22 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { Sparkles, HelpCircle, Compass, HeartHandshake, Eye, ArrowRight, Feather } from 'lucide-react';
 import Breadcrumbs from '../components/Breadcrumbs';
 import { profPortraitImg } from '../assets/images';
 
 export default function About() {
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.hash) {
+      const elem = document.querySelector(location.hash);
+      if (elem) {
+        elem.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }, [location]);
   const reflectiveQuestions = [
     "Why do some people stay when they should leave?",
     "Why do some endings hurt before they heal?",
@@ -306,14 +318,15 @@ export default function About() {
           </p>
         </div>
 
-        {/* Signature & Three Mantras */}
-        <div style={{
+        {/* Signature & Three Mantras (The Person Behind This) */}
+        <div id="author" style={{
           textAlign: 'center',
           padding: 'clamp(2.5rem, 5vw, 3.5rem) 1.5rem',
           backgroundColor: 'var(--bg-secondary)',
           borderRadius: 'var(--radius-lg)',
           border: '1px solid var(--border-color)',
-          boxShadow: 'var(--shadow-sm)'
+          boxShadow: 'var(--shadow-sm)',
+          scrollMarginTop: '6rem'
         }}>
           <h3 className="serif-heading" style={{ fontSize: 'clamp(1.8rem, 4vw, 2.4rem)', marginBottom: '1.25rem', letterSpacing: '0.04em' }}>
             Aetheria

@@ -1,15 +1,37 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { Search, Menu, X } from 'lucide-react';
-import { LotusLogo } from './BrandIcons';
+import { 
+  Search, 
+  Menu, 
+  X, 
+  ChevronDown, 
+  BookOpen, 
+  Brain, 
+  HeartPulse, 
+  Lightbulb, 
+  Flower2 
+} from 'lucide-react';
 import ThemeToggle from './ThemeToggle';
-import { useAuth } from '../context/AuthContext';
+
+// Custom Botanical Leaf Branch Separator matching the user reference
+const LeafSeparator = () => (
+  <span className="navbar-leaf-sep" aria-hidden="true" style={{ display: 'inline-flex', alignItems: 'center', margin: '0 0.35rem', opacity: 0.85, flexShrink: 0 }}>
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 22C12 22 12.5 15 16 11C18.5 8 21.5 6.5 21.5 6.5C21.5 6.5 19.5 10 16.5 12.5C14 14.5 12 22 12 22Z" fill="#7FA98E" fillOpacity="0.45" stroke="#5E8B6F" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round"/>
+      <path d="M12 22C12 22 11.5 16 8 13.5C5.5 11.5 2.5 11 2.5 11C2.5 11 5.5 9 9.5 11.5C11 12.5 12 22 12 22Z" fill="#7FA98E" fillOpacity="0.45" stroke="#5E8B6F" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round"/>
+      <path d="M12 22V11" stroke="#5E8B6F" strokeWidth="1.3" strokeLinecap="round"/>
+    </svg>
+  </span>
+);
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
-  const { user, isAdmin } = useAuth();
+  const [exploreOpen, setExploreOpen] = useState(false);
+  const [mobileExploreOpen, setMobileExploreOpen] = useState(false);
+  
+  const exploreRef = useRef(null);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -17,7 +39,20 @@ export default function Navbar() {
   useEffect(() => {
     setMobileMenuOpen(false);
     setSearchOpen(false);
+    setExploreOpen(false);
+    setMobileExploreOpen(false);
   }, [location.pathname]);
+
+  // Click outside to close explore dropdown
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (exploreRef.current && !exploreRef.current.contains(event.target)) {
+        setExploreOpen(false);
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   // Lock body scroll on mobile drawer
   useEffect(() => {
@@ -44,16 +79,37 @@ export default function Navbar() {
     }
   };
 
-  const navLinks = [
-    { name: 'Home', path: '/', isHome: true },
-    { name: 'Essays', path: '/essays' },
-    { name: 'Blogs', path: '/blogs' },
-    { name: 'Reflections', path: '/category/life-reflection' },
-    { name: 'Human Behaviour', path: '/category/human-behaviour' },
-    { name: 'Ethics', path: '/category/ethics' },
-    { name: 'Technology & Humanity', path: '/category/technology' },
-    { name: 'About', path: '/about' },
-    { name: 'Contact', path: '/contact' }
+  const categories = [
+    {
+      name: 'Reflections',
+      path: '/category/reflections',
+      icon: <BookOpen size={16} color="#0D9488" />,
+      bg: '#E6F4F1'
+    },
+    {
+      name: 'Emotional Intelligence',
+      path: '/category/emotional-intelligence',
+      icon: <Brain size={16} color="#16A34A" />,
+      bg: '#EAF7EE'
+    },
+    {
+      name: 'Healing',
+      path: '/category/healing',
+      icon: <HeartPulse size={16} color="#D97706" />,
+      bg: '#FDF2E9'
+    },
+    {
+      name: 'Wisdom',
+      path: '/category/wisdom',
+      icon: <Lightbulb size={16} color="#CA8A04" />,
+      bg: '#FEF9C3'
+    },
+    {
+      name: 'Spirituality',
+      path: '/category/spirituality',
+      icon: <Flower2 size={16} color="#0284C7" />,
+      bg: '#E0F2FE'
+    }
   ];
 
   return (
@@ -65,95 +121,264 @@ export default function Navbar() {
       backdropFilter: 'blur(16px)',
       WebkitBackdropFilter: 'blur(16px)',
       borderBottom: '1px solid var(--border-color)',
+      boxShadow: '0 2px 12px rgba(44, 38, 33, 0.03)',
       transition: 'all 0.3s ease'
     }}>
       <div className="container" style={{
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
-        height: '4.85rem',
-        gap: '0.5rem'
+        height: '4.75rem',
+        padding: '0 clamp(1rem, 3vw, 2rem)',
+        position: 'relative'
       }}>
 
-        {/* Brand Logo */}
+        {/* Left Side: Brand Identity (Mobile & Compact Desktop) */}
         <Link to="/" style={{
+          textDecoration: 'none',
           display: 'flex',
           alignItems: 'center',
-          gap: '0.65rem',
-          textDecoration: 'none',
-          minWidth: 0,
-          flexShrink: 1
+          gap: '0.4rem',
+          flexShrink: 0
         }}>
-          <LotusLogo size={34} color="var(--accent-gold)" />
-          <div style={{ display: 'flex', flexDirection: 'column', minWidth: 0 }}>
-            <span style={{
-              fontFamily: 'var(--font-cormorant)',
-              fontSize: 'clamp(1.05rem, 3.8vw, 1.45rem)',
-              fontWeight: '700',
-              color: 'var(--text-primary)',
-              lineHeight: '1.1',
-              letterSpacing: '-0.01em',
-              whiteSpace: 'nowrap',
-              overflow: 'hidden',
-              textOverflow: 'ellipsis'
-            }}>
-              Prof. Monika Chopra
-            </span>
-            <span className="navbar-brand-subtitle" style={{
-              fontSize: '0.65rem',
-              letterSpacing: '0.06em',
-              color: 'var(--text-secondary)',
-              fontWeight: '500',
-              marginTop: '0.1rem',
-              lineHeight: '1',
-              whiteSpace: 'nowrap',
-              overflow: 'hidden',
-              textOverflow: 'ellipsis'
-            }}>
-              Life Lessons <span style={{ opacity: 0.5, margin: '0 0.15rem' }}>|</span> Moral Wisdom
-            </span>
-          </div>
+          <span className="navbar-brand-text" style={{
+            fontFamily: "'Great Vibes', 'Dancing Script', 'Alex Brush', cursive",
+            fontSize: 'clamp(1.75rem, 3.5vw, 2.25rem)',
+            color: 'var(--accent-primary)',
+            fontWeight: '600',
+            letterSpacing: '0.02em',
+            lineHeight: 1
+          }}>
+            Aetheria
+          </span>
         </Link>
 
-        {/* Desktop Navigation Links */}
-        <nav className="desktop-nav-ref" style={{
+        {/* Center: Botanical Script Navigation Links */}
+        <nav className="botanical-navbar-links" style={{
           display: 'none',
           alignItems: 'center',
-          gap: '1.25rem'
+          justifyContent: 'center',
+          gap: '0.2rem',
+          flex: 1,
+          margin: '0 1rem'
         }}>
-          {navLinks.map((item, idx) => {
-            const isActive = location.pathname === item.path || (item.isHome && location.pathname === '/');
-            return (
-              <Link
-                key={idx}
-                to={item.path}
+          {/* 1. Home */}
+          <Link
+            to="/"
+            className="botanical-nav-item"
+            style={{
+              fontFamily: "'Great Vibes', 'Dancing Script', 'Alex Brush', cursive",
+              fontSize: 'clamp(1.35rem, 1.8vw, 1.65rem)',
+              color: location.pathname === '/' ? 'var(--accent-primary)' : 'var(--text-primary)',
+              textDecoration: 'none',
+              padding: '0.25rem 0.5rem',
+              transition: 'color 0.2s ease, transform 0.2s ease',
+              whiteSpace: 'nowrap'
+            }}
+          >
+            Home
+          </Link>
+
+          <LeafSeparator />
+
+          {/* 2. About Aetheria */}
+          <Link
+            to="/about"
+            className="botanical-nav-item"
+            style={{
+              fontFamily: "'Great Vibes', 'Dancing Script', 'Alex Brush', cursive",
+              fontSize: 'clamp(1.35rem, 1.8vw, 1.65rem)',
+              color: location.pathname === '/about' ? 'var(--accent-primary)' : 'var(--text-primary)',
+              textDecoration: 'none',
+              padding: '0.25rem 0.5rem',
+              transition: 'color 0.2s ease, transform 0.2s ease',
+              whiteSpace: 'nowrap'
+            }}
+          >
+            About Aetheria
+          </Link>
+
+          <LeafSeparator />
+
+          {/* 3. The Person Behind This */}
+          <Link
+            to="/about#author"
+            className="botanical-nav-item"
+            style={{
+              fontFamily: "'Great Vibes', 'Dancing Script', 'Alex Brush', cursive",
+              fontSize: 'clamp(1.35rem, 1.8vw, 1.65rem)',
+              color: location.hash === '#author' ? 'var(--accent-primary)' : 'var(--text-primary)',
+              textDecoration: 'none',
+              padding: '0.25rem 0.5rem',
+              transition: 'color 0.2s ease, transform 0.2s ease',
+              whiteSpace: 'nowrap'
+            }}
+          >
+            The Person Behind This
+          </Link>
+
+          <LeafSeparator />
+
+          {/* 4. Explore (Dropdown) */}
+          <div 
+            ref={exploreRef}
+            style={{ position: 'relative' }}
+            onMouseEnter={() => setExploreOpen(true)}
+            onMouseLeave={() => setExploreOpen(false)}
+          >
+            <button
+              onClick={() => setExploreOpen(!exploreOpen)}
+              className="botanical-nav-item"
+              style={{
+                background: 'none',
+                border: 'none',
+                cursor: 'pointer',
+                fontFamily: "'Great Vibes', 'Dancing Script', 'Alex Brush', cursive",
+                fontSize: 'clamp(1.35rem, 1.8vw, 1.65rem)',
+                color: (exploreOpen || location.pathname.startsWith('/category')) ? 'var(--accent-primary)' : 'var(--text-primary)',
+                padding: '0.25rem 0.5rem',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '0.2rem',
+                transition: 'color 0.2s ease',
+                whiteSpace: 'nowrap'
+              }}
+            >
+              <span>Explore</span>
+              <ChevronDown 
+                size={14} 
+                style={{ 
+                  transition: 'transform 0.2s ease',
+                  transform: exploreOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+                  opacity: 0.7
+                }} 
+              />
+            </button>
+
+            {/* Explore Dropdown Card matching the user's screenshot */}
+            {exploreOpen && (
+              <div 
+                className="explore-dropdown-card"
                 style={{
-                  fontSize: '0.86rem',
-                  fontWeight: isActive ? '600' : '450',
-                  color: isActive ? 'var(--text-primary)' : 'var(--text-secondary)',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  padding: '0.4rem 0.1rem',
-                  borderBottom: isActive ? '2px solid var(--text-primary)' : '2px solid transparent',
-                  transition: 'all 0.2s ease',
-                  whiteSpace: 'nowrap',
-                  textDecoration: 'none'
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.color = 'var(--text-primary)';
-                }}
-                onMouseLeave={(e) => {
-                  if (!isActive) e.currentTarget.style.color = 'var(--text-secondary)';
+                  position: 'absolute',
+                  top: 'calc(100% + 8px)',
+                  left: '50%',
+                  transform: 'translateX(-50%)',
+                  backgroundColor: 'var(--bg-secondary)',
+                  border: '1px solid var(--border-color)',
+                  borderRadius: '16px',
+                  padding: '0.65rem',
+                  boxShadow: '0 12px 36px rgba(44, 38, 33, 0.12)',
+                  minWidth: '230px',
+                  zIndex: 1100,
+                  animation: 'dropdownFadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1)'
                 }}
               >
-                <span>{item.name}</span>
-              </Link>
-            );
-          })}
+                {/* Speech Bubble Arrow Tip */}
+                <div style={{
+                  position: 'absolute',
+                  top: '-7px',
+                  left: '50%',
+                  transform: 'translateX(-50%) rotate(45deg)',
+                  width: '12px',
+                  height: '12px',
+                  backgroundColor: 'var(--bg-secondary)',
+                  borderTop: '1px solid var(--border-color)',
+                  borderLeft: '1px solid var(--border-color)',
+                  zIndex: 1101
+                }} />
+
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem', position: 'relative', zIndex: 1102 }}>
+                  {categories.map((cat, idx) => {
+                    const isCatActive = location.pathname === cat.path;
+                    return (
+                      <Link
+                        key={idx}
+                        to={cat.path}
+                        onClick={() => setExploreOpen(false)}
+                        className="explore-dropdown-item"
+                        style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '0.75rem',
+                          padding: '0.55rem 0.75rem',
+                          borderRadius: '10px',
+                          textDecoration: 'none',
+                          color: isCatActive ? 'var(--accent-primary)' : 'var(--text-primary)',
+                          backgroundColor: isCatActive ? 'var(--accent-light)' : 'transparent',
+                          transition: 'all 0.15s ease'
+                        }}
+                      >
+                        <div style={{
+                          width: '32px',
+                          height: '32px',
+                          borderRadius: '50%',
+                          backgroundColor: cat.bg,
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          flexShrink: 0,
+                          boxShadow: '0 2px 6px rgba(0,0,0,0.04)'
+                        }}>
+                          {cat.icon}
+                        </div>
+                        <span style={{
+                          fontFamily: 'var(--font-sans)',
+                          fontSize: '0.92rem',
+                          fontWeight: '500',
+                          whiteSpace: 'nowrap'
+                        }}>
+                          {cat.name}
+                        </span>
+                      </Link>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+          </div>
+
+          <LeafSeparator />
+
+          {/* 5. Share */}
+          <Link
+            to="/confessions"
+            className="botanical-nav-item"
+            style={{
+              fontFamily: "'Great Vibes', 'Dancing Script', 'Alex Brush', cursive",
+              fontSize: 'clamp(1.35rem, 1.8vw, 1.65rem)',
+              color: location.pathname === '/confessions' ? 'var(--accent-primary)' : 'var(--text-primary)',
+              textDecoration: 'none',
+              padding: '0.25rem 0.5rem',
+              transition: 'color 0.2s ease, transform 0.2s ease',
+              whiteSpace: 'nowrap'
+            }}
+          >
+            Share
+          </Link>
+
+          <LeafSeparator />
+
+          {/* 6. Connect */}
+          <Link
+            to="/contact"
+            className="botanical-nav-item"
+            style={{
+              fontFamily: "'Great Vibes', 'Dancing Script', 'Alex Brush', cursive",
+              fontSize: 'clamp(1.35rem, 1.8vw, 1.65rem)',
+              color: location.pathname === '/contact' ? 'var(--accent-primary)' : 'var(--text-primary)',
+              textDecoration: 'none',
+              padding: '0.25rem 0.5rem',
+              transition: 'color 0.2s ease, transform 0.2s ease',
+              whiteSpace: 'nowrap'
+            }}
+          >
+            Connect
+          </Link>
         </nav>
 
-        {/* Right Action Icons: Search, Theme Toggle, and Menu Drawer */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', flexShrink: 0 }}>
+        {/* Right Side Controls: Search, Theme Toggle, and Mobile Hamburger */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', flexShrink: 0 }}>
           {/* Search Trigger */}
           <button
             onClick={() => setSearchOpen(!searchOpen)}
@@ -221,7 +446,7 @@ export default function Navbar() {
               <Search size={18} style={{ color: 'var(--text-muted)', flexShrink: 0 }} />
               <input
                 type="text"
-                placeholder="Search reflections, essays, and wisdom topics..."
+                placeholder="Search reflections, wisdom, healing, and life lessons..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 autoFocus
@@ -245,14 +470,14 @@ export default function Navbar() {
 
       {/* Mobile Drawer Navigation */}
       {mobileMenuOpen && (
-        <div className="mobile-nav-overlay animate-fade-in">
+        <div className="mobile-nav-overlay animate-fade-in" style={{ padding: '1.25rem' }}>
           {/* Quick Search */}
-          <form onSubmit={handleSearchSubmit} style={{ display: 'flex', gap: '0.5rem', width: '100%' }}>
+          <form onSubmit={handleSearchSubmit} style={{ display: 'flex', gap: '0.5rem', width: '100%', marginBottom: '1.25rem' }}>
             <div style={{ position: 'relative', width: '100%' }}>
               <Search size={18} style={{ position: 'absolute', left: '0.85rem', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }} />
               <input
                 type="text"
-                placeholder="Search reflections..."
+                placeholder="Search..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 style={{
@@ -273,45 +498,171 @@ export default function Navbar() {
           </form>
 
           {/* Navigation Items */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-            {navLinks.map((item, idx) => {
-              const isActive = location.pathname === item.path || (item.isHome && location.pathname === '/');
-              return (
-                <Link
-                  key={idx}
-                  to={item.path}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="mobile-nav-link"
-                  style={{
-                    backgroundColor: isActive ? 'var(--accent-light)' : 'var(--bg-secondary)',
-                    borderColor: isActive ? 'var(--accent-primary)' : 'var(--border-color)',
-                    color: isActive ? 'var(--accent-primary)' : 'var(--text-primary)'
-                  }}
-                >
-                  <span>{item.name}</span>
-                  <span style={{ fontSize: '1rem', opacity: 0.5 }}>›</span>
-                </Link>
-              );
-            })}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
+            <Link
+              to="/"
+              onClick={() => setMobileMenuOpen(false)}
+              className="mobile-nav-link"
+              style={{
+                fontFamily: "'Great Vibes', 'Dancing Script', 'Alex Brush', cursive",
+                fontSize: '1.6rem',
+                padding: '0.6rem 1rem'
+              }}
+            >
+              <span>Home</span>
+              <span style={{ fontSize: '1rem', opacity: 0.5 }}>›</span>
+            </Link>
+
+            <Link
+              to="/about"
+              onClick={() => setMobileMenuOpen(false)}
+              className="mobile-nav-link"
+              style={{
+                fontFamily: "'Great Vibes', 'Dancing Script', 'Alex Brush', cursive",
+                fontSize: '1.6rem',
+                padding: '0.6rem 1rem'
+              }}
+            >
+              <span>About Aetheria</span>
+              <span style={{ fontSize: '1rem', opacity: 0.5 }}>›</span>
+            </Link>
+
+            <Link
+              to="/about#author"
+              onClick={() => setMobileMenuOpen(false)}
+              className="mobile-nav-link"
+              style={{
+                fontFamily: "'Great Vibes', 'Dancing Script', 'Alex Brush', cursive",
+                fontSize: '1.6rem',
+                padding: '0.6rem 1rem'
+              }}
+            >
+              <span>The Person Behind This</span>
+              <span style={{ fontSize: '1rem', opacity: 0.5 }}>›</span>
+            </Link>
+
+            {/* Mobile Explore Accordion */}
+            <div style={{
+              backgroundColor: 'var(--bg-secondary)',
+              borderRadius: 'var(--radius-sm)',
+              border: '1px solid var(--border-color)',
+              overflow: 'hidden'
+            }}>
+              <button
+                onClick={() => setMobileExploreOpen(!mobileExploreOpen)}
+                style={{
+                  width: '100%',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  padding: '0.6rem 1rem',
+                  background: 'none',
+                  border: 'none',
+                  cursor: 'pointer',
+                  fontFamily: "'Great Vibes', 'Dancing Script', 'Alex Brush', cursive",
+                  fontSize: '1.6rem',
+                  color: 'var(--text-primary)'
+                }}
+              >
+                <span>Explore</span>
+                <ChevronDown size={18} style={{ transform: mobileExploreOpen ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.2s ease' }} />
+              </button>
+
+              {mobileExploreOpen && (
+                <div style={{ padding: '0.5rem 0.75rem 0.75rem', display: 'flex', flexDirection: 'column', gap: '0.4rem', borderTop: '1px solid var(--border-color)' }}>
+                  {categories.map((cat, idx) => (
+                    <Link
+                      key={idx}
+                      to={cat.path}
+                      onClick={() => setMobileMenuOpen(false)}
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '0.65rem',
+                        padding: '0.5rem',
+                        borderRadius: '8px',
+                        textDecoration: 'none',
+                        color: 'var(--text-primary)'
+                      }}
+                    >
+                      <div style={{
+                        width: '28px',
+                        height: '28px',
+                        borderRadius: '50%',
+                        backgroundColor: cat.bg,
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center'
+                      }}>
+                        {cat.icon}
+                      </div>
+                      <span style={{ fontSize: '0.9rem', fontWeight: '500' }}>{cat.name}</span>
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            <Link
+              to="/confessions"
+              onClick={() => setMobileMenuOpen(false)}
+              className="mobile-nav-link"
+              style={{
+                fontFamily: "'Great Vibes', 'Dancing Script', 'Alex Brush', cursive",
+                fontSize: '1.6rem',
+                padding: '0.6rem 1rem'
+              }}
+            >
+              <span>Share</span>
+              <span style={{ fontSize: '1rem', opacity: 0.5 }}>›</span>
+            </Link>
+
+            <Link
+              to="/contact"
+              onClick={() => setMobileMenuOpen(false)}
+              className="mobile-nav-link"
+              style={{
+                fontFamily: "'Great Vibes', 'Dancing Script', 'Alex Brush', cursive",
+                fontSize: '1.6rem',
+                padding: '0.6rem 1rem'
+              }}
+            >
+              <span>Connect</span>
+              <span style={{ fontSize: '1rem', opacity: 0.5 }}>›</span>
+            </Link>
           </div>
         </div>
       )}
 
       <style>{`
-        @media (min-width: 1040px) {
-          .desktop-nav-ref { display: flex !important; }
+        @keyframes dropdownFadeIn {
+          from {
+            opacity: 0;
+            transform: translate(-50%, -6px);
+          }
+          to {
+            opacity: 1;
+            transform: translate(-50%, 0);
+          }
+        }
+        .botanical-nav-item:hover {
+          color: var(--accent-primary) !important;
+          transform: translateY(-1px);
+        }
+        .explore-dropdown-item:hover {
+          background-color: var(--accent-light) !important;
+          transform: translateX(2px);
+        }
+        @media (min-width: 900px) {
+          .botanical-navbar-links { display: flex !important; }
           .mobile-menu-trigger { display: none !important; }
         }
-        @media (max-width: 1039px) {
-          .desktop-nav-ref { display: none !important; }
+        @media (max-width: 899px) {
+          .botanical-navbar-links { display: none !important; }
           .mobile-menu-trigger { display: inline-flex !important; }
-        }
-        @media (max-width: 360px) {
-          .navbar-brand-subtitle {
-            display: none !important;
-          }
         }
       `}</style>
     </header>
   );
 }
+
