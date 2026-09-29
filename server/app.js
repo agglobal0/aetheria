@@ -49,31 +49,35 @@ app.use('/api/admin', adminRoutes);
 app.use(errorHandler);
 
 // Start Server with Graceful Port Handling
-async function startServer(portToUse = DEFAULT_PORT) {
+async function startServer() {
   try {
     const pool = await initDB();
     await seedDatabase(pool);
 
-    const server = app.listen(portToUse, () => {
-      console.log(`====================================================`);
-      console.log(`  Aetheria Editorial API Server running on port ${portToUse}`);
-      console.log(`  Health Check: http://localhost:${portToUse}/api/health`);
-      console.log(`====================================================`);
-    });
+    const tryListen = (portToUse) => {
+      const server = app.listen(portToUse, () => {
+        console.log(`====================================================`);
+        console.log(`  Aetheria Editorial API Server running on port ${portToUse}`);
+        console.log(`  Health Check: http://localhost:${portToUse}/api/health`);
+        console.log(`====================================================`);
+      });
 
-    server.on('error', (err) => {
-      if (err.code === 'EADDRINUSE') {
-        console.warn(`[Port Conflict] Port ${portToUse} is already in use.`);
-        if (portToUse === DEFAULT_PORT) {
-          console.log(`[Auto-Fallback] Retrying server on fallback port ${DEFAULT_PORT + 1}...`);
-          startServer(DEFAULT_PORT + 1);
+      server.on('error', (err) => {
+        if (err.code === 'EADDRINUSE') {
+          console.warn(`[Port Conflict] Port ${portToUse} is already in use.`);
+          if (portToUse < DEFAULT_PORT + 5) {
+            console.log(`[Auto-Fallback] Retrying server on fallback port ${portToUse + 1}...`);
+            tryListen(portToUse + 1);
+          } else {
+            console.error(`Error: Unable to bind to ports ${DEFAULT_PORT} through ${portToUse}.`);
+          }
         } else {
-          console.error(`Error: Unable to bind to port ${portToUse}. Please stop the process using port 5000.`);
+          console.error('Server error:', err);
         }
-      } else {
-        console.error('Server error:', err);
-      }
-    });
+      });
+    };
+
+    tryListen(DEFAULT_PORT);
 
   } catch (error) {
     console.error('Failed to start server:', error);

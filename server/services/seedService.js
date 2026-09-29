@@ -80,9 +80,13 @@ async function seedDatabase(pool) {
     }
 
     // 3. Seed & Update Editorial Author (Prof. Monika Chopra)
-    await pool.query(
-      `UPDATE authors SET name = 'Prof. Monika Chopra', slug = 'prof-monika-chopra', bio = 'Professor, Scholar, and Writer specializing in ethics, human behavior, technology, and reflective thought.' WHERE id = 1 OR slug = 'prof-monika-chopra' OR slug = 'marcus-vance'`
-    );
+    try {
+      await pool.query(
+        `UPDATE authors SET name = 'Prof. Monika Chopra', slug = 'prof-monika-chopra', bio = 'Professor, Scholar, and Writer specializing in ethics, human behavior, technology, and reflective thought.' WHERE id = 1 OR slug = 'prof-monika-chopra' OR slug = 'marcus-vance'`
+      );
+    } catch (e) {
+      // Ignore if slug conflict
+    }
 
     const [existingAuthors] = await pool.query('SELECT COUNT(*) as count FROM authors');
     if (existingAuthors[0].count === 0) {
