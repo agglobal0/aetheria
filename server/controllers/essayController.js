@@ -25,14 +25,33 @@ async function getAllEssays(req, res, next) {
       whereClauses.push("e.status = 'published'");
     }
 
-    if (type) {
-      whereClauses.push('e.type = ?');
-      params.push(type);
+    if (type && type !== 'all') {
+      if (type === 'essay') {
+        whereClauses.push("(e.type = 'essay' OR e.type IS NULL OR e.type = '')");
+      } else if (type === 'blog') {
+        whereClauses.push("e.type = 'blog'");
+      } else {
+        whereClauses.push("e.type = ?");
+        params.push(type);
+      }
     }
 
-    if (category) {
-      whereClauses.push('(c.slug = ? OR c.id = ?)');
-      params.push(category, category);
+    if (category && category !== 'all') {
+      const catSynonyms = {
+        'reflections': ['reflections', 'life-reflection', 'life-reflections'],
+        'life-reflection': ['reflections', 'life-reflection', 'life-reflections'],
+        'emotional-intelligence': ['emotional-intelligence', 'human-behaviour', 'human-behavior'],
+        'human-behaviour': ['emotional-intelligence', 'human-behaviour', 'human-behavior'],
+        'wisdom': ['wisdom', 'ethics', 'life-reflection'],
+        'ethics': ['wisdom', 'ethics'],
+        'healing': ['healing', 'reflections', 'life-reflection'],
+        'spirituality': ['spirituality', 'reflections', 'life-reflection', 'ethics']
+      };
+
+      const matchedSlugs = catSynonyms[category] || [category];
+      const placeholders = matchedSlugs.map(() => '?').join(', ');
+      whereClauses.push(`(c.slug IN (${placeholders}) OR c.id = ? OR e.category_id = ?)`);
+      params.push(...matchedSlugs, category, category);
     }
 
     if (author) {
@@ -57,20 +76,20 @@ async function getAllEssays(req, res, next) {
     const [countResult] = await pool.query(
       `SELECT COUNT(*) as total 
        FROM essays e 
-       JOIN categories c ON e.category_id = c.id 
+       LEFT JOIN categories c ON e.category_id = c.id 
        LEFT JOIN authors a ON e.author_id = a.id 
        ${whereSQL}`,
       params
     );
 
-    const total = countResult[0].total;
+    const total = countResult[0]?.total || 0;
     const pageNum = parseInt(page, 10) || 1;
     const limitNum = parseInt(limit, 10) || 12;
     const offset = (pageNum - 1) * limitNum;
 
     // Sorting
-    let orderSQL = 'ORDER BY e.published_at DESC';
-    if (sort === 'oldest') orderSQL = 'ORDER BY e.published_at ASC';
+    let orderSQL = 'ORDER BY e.published_at DESC, e.id DESC';
+    if (sort === 'oldest') orderSQL = 'ORDER BY e.published_at ASC, e.id ASC';
     if (sort === 'views') orderSQL = 'ORDER BY e.views DESC';
     if (sort === 'title') orderSQL = 'ORDER BY e.title ASC';
 
@@ -81,7 +100,7 @@ async function getAllEssays(req, res, next) {
               c.id as category_id, c.name as category_name, c.slug as category_slug, c.accent_color,
               a.id as author_id, a.name as author_name, a.slug as author_slug, a.avatar as author_avatar, a.bio as author_bio
        FROM essays e
-       JOIN categories c ON e.category_id = c.id
+       LEFT JOIN categories c ON e.category_id = c.id
        LEFT JOIN authors a ON e.author_id = a.id
        ${whereSQL}
        ${orderSQL}
@@ -96,7 +115,7 @@ async function getAllEssays(req, res, next) {
         total,
         page: pageNum,
         limit: limitNum,
-        totalPages: Math.ceil(total / limitNum)
+        totalPages: Math.ceil(total / limitNum) || 1
       }
     });
   } catch (error) {
@@ -114,7 +133,7 @@ async function getEssayBySlug(req, res, next) {
               c.id as category_id, c.name as category_name, c.slug as category_slug, c.accent_color,
               a.id as author_id, a.name as author_name, a.slug as author_slug, a.avatar as author_avatar, a.bio as author_bio, a.social_links as author_social
        FROM essays e
-       JOIN categories c ON e.category_id = c.id
+       LEFT JOIN categories c ON e.category_id = c.id
        LEFT JOIN authors a ON e.author_id = a.id
        WHERE e.slug = ?`,
       [slug]
@@ -135,11 +154,11 @@ async function getEssayBySlug(req, res, next) {
               c.name as category_name, c.slug as category_slug, c.accent_color,
               a.name as author_name
        FROM essays e
-       JOIN categories c ON e.category_id = c.id
-       JOIN authors a ON e.author_id = a.id
-       WHERE e.category_id = ? AND e.id != ? AND e.status = 'published'
+       LEFT JOIN categories c ON e.category_id = c.id
+       LEFT JOIN authors a ON e.author_id = a.id
+       WHERE (e.category_id = ? OR ? IS NULL) AND e.id != ? AND e.status = 'published'
        ORDER BY e.published_at DESC LIMIT 3`,
-      [essay.category_id, essay.id]
+      [essay.category_id, essay.category_id, essay.id]
     );
 
     // Fetch prev/next essays

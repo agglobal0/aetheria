@@ -68,13 +68,25 @@ export default function Category() {
           setCategory(fallbackMeta[slug]);
         }
 
-        if (essaysRes.data.success) {
+        if (essaysRes.data && essaysRes.data.success && essaysRes.data.data.length > 0) {
           setEssays(essaysRes.data.data);
-          setTotalPages(essaysRes.data.pagination.totalPages);
+          setTotalPages(essaysRes.data.pagination.totalPages || 1);
+        } else {
+          // Fallback to recent published essays so page never shows 0 items
+          const fallbackEssaysRes = await essayService.getAll({ page: 1, limit: 9, status: 'published' });
+          if (fallbackEssaysRes.data && fallbackEssaysRes.data.success) {
+            setEssays(fallbackEssaysRes.data.data);
+            setTotalPages(fallbackEssaysRes.data.pagination.totalPages || 1);
+          }
         }
 
-        if (popRes.data.success) {
+        if (popRes.data && popRes.data.success && popRes.data.data.length > 0) {
           setPopular(popRes.data.data);
+        } else {
+          const fallbackPop = await essayService.getAll({ sort: 'views', limit: 4, status: 'published' });
+          if (fallbackPop.data && fallbackPop.data.success) {
+            setPopular(fallbackPop.data.data);
+          }
         }
       } catch (err) {
         console.error('Failed to load category data:', err);
