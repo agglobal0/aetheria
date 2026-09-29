@@ -305,7 +305,7 @@ export default function Home() {
                   </Link>
                 </div>
 
-                {/* Card 3: Life Reflections */}
+                {/* Card 3: Reflections */}
                 <div className="theme-card theme-card-life">
                   <div style={{ opacity: 0.85, marginBottom: '0.75rem' }}>
                     <Feather size={28} strokeWidth={1.5} color="#683972" />
@@ -318,14 +318,14 @@ export default function Home() {
                       lineHeight: '1.2',
                       marginBottom: '0.5rem'
                     }}>
-                      Life<br />Reflections
+                      Reflections
                     </h4>
                     <p style={{ fontSize: '0.78rem', lineHeight: '1.45', opacity: 0.85, marginBottom: '1rem' }}>
-                      What experience teaches us.
+                      What experience and quiet contemplation teach us.
                     </p>
                   </div>
                   <Link
-                    to="/category/life-reflection"
+                    to="/category/reflections"
                     style={{
                       fontSize: '0.78rem',
                       fontWeight: '600',

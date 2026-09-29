@@ -25,7 +25,7 @@ const MOTIVATIONAL_QUOTES = [
   {
     quote: "We spend our youth rushing to arrive, only to realize in quiet hindsight that the mundane afternoons were the real life.",
     context: "Things We Understand Too Late",
-    pillar: "Life Reflection"
+    pillar: "Reflections"
   }
 ];
 
@@ -67,7 +67,7 @@ export default function MotivationalQuotes() {
         <Quote size={38} style={{ color: 'var(--accent-primary)', marginBottom: '0.75rem', opacity: 0.8 }} />
 
         <div style={{ marginBottom: '1.25rem' }}>
-          <span className="category-badge category-life-reflection">
+          <span className="category-badge category-reflections">
             {current.pillar}
           </span>
         </div>

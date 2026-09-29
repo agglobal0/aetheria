@@ -12,7 +12,7 @@ const WISDOM_LESSONS = [
     quote: "The tragedy of life is not that it ends so soon, but that we wait so long to begin noticing it.",
     lesson: "Presence is the highest form of self-respect and gratitude.",
     reflection: "Take 3 minutes to notice three things around you right now that you usually take for granted.",
-    category: "Life Reflection"
+    category: "Reflections"
   },
   {
     quote: "In a world designed for instant gratification, intentional friction is an act of spiritual freedom.",
@@ -89,7 +89,7 @@ export default function DailyWisdom() {
         gap: '0.6rem'
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
-          <span className="category-badge category-life-reflection">
+          <span className="category-badge category-reflections">
             <Sparkles size={13} /> Daily Life Lesson
           </span>
           <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)', fontWeight: '600' }}>

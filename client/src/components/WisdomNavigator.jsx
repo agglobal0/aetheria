@@ -7,7 +7,7 @@ const SEEK_GOALS = [
     id: 'purpose',
     title: 'Finding Purpose & Direction',
     icon: Compass,
-    color: 'var(--accent-life-reflection)',
+    color: 'var(--accent-reflections)',
     summary: 'Navigating life crossroads, understanding quiet ambitions, and setting meaningful long-term values.',
     actionStep: 'Identify one project or habit that feeds your soul regardless of external financial gain.',
     essaySlug: 'things-we-understand-too-late',

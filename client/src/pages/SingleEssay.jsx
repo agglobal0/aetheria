@@ -55,11 +55,16 @@ export default function SingleEssay() {
   }
   const getCategoryClass = (catSlug) => {
     switch (catSlug) {
-      case 'ethics': return 'category-ethics';
+      case 'reflections':
+      case 'life-reflection': return 'category-reflections';
+      case 'emotional-intelligence':
       case 'human-behaviour': return 'category-human-behaviour';
-      case 'life-reflection': return 'category-life-reflection';
+      case 'healing': return 'category-healing';
+      case 'wisdom':
+      case 'ethics': return 'category-ethics';
+      case 'spirituality': return 'category-spirituality';
       case 'technology': return 'category-technology';
-      default: return 'category-ethics';
+      default: return 'category-reflections';
     }
   };
 

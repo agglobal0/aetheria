@@ -50,7 +50,7 @@ export default function About() {
         
         {/* Header Hero Section */}
         <div style={{ textAlign: 'center', marginBottom: 'clamp(2.5rem, 5vw, 4rem)' }}>
-          <span className="category-badge category-life-reflection" style={{ marginBottom: '1.25rem', display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}>
+          <span className="category-badge category-reflections" style={{ marginBottom: '1.25rem', display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}>
             <Sparkles size={14} /> Sanctuary of Thought & Reflection
           </span>
           <h1 className="serif-heading" style={{ fontSize: 'clamp(2.2rem, 5.5vw, 3.8rem)', marginTop: '0.4rem', marginBottom: '1.5rem', letterSpacing: '-0.02em', lineHeight: '1.15' }}>

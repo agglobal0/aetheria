@@ -37,12 +37,22 @@
   --hero-glow: radial-gradient(circle at 50% 30%, rgba(212, 160, 89, 0.15), transparent 70%);
 
   /* Category Accents */
+  --accent-reflections: #A67C46;
+  --accent-reflections-bg: rgba(166, 124, 70, 0.12);
+  --accent-emotional-intelligence: #2B59C3;
+  --accent-emotional-intelligence-bg: rgba(43, 89, 195, 0.12);
+  --accent-healing: #D97706;
+  --accent-healing-bg: rgba(217, 119, 6, 0.12);
+  --accent-wisdom: #8B263E;
+  --accent-wisdom-bg: rgba(139, 38, 62, 0.12);
+  --accent-spirituality: #0284C7;
+  --accent-spirituality-bg: rgba(2, 132, 199, 0.12);
   --accent-ethics: #9B2C3B;
   --accent-ethics-bg: rgba(155, 44, 59, 0.09);
   --accent-human-behaviour: #2563EB;
   --accent-human-behaviour-bg: rgba(37, 99, 235, 0.09);
-  --accent-life-reflection: #B86B27;
-  --accent-life-reflection-bg: rgba(184, 107, 39, 0.09);
+  --accent-life-reflection: #A67C46;
+  --accent-life-reflection-bg: rgba(166, 124, 70, 0.12);
   --accent-technology: #0D9488;
   --accent-technology-bg: rgba(13, 148, 136, 0.09);
 
@@ -345,6 +355,27 @@ img {
   white-space: nowrap;
 }
 
+.category-reflections,
+.category-life-reflection {
+  color: var(--accent-reflections);
+  background-color: var(--accent-reflections-bg);
+}
+.category-emotional-intelligence {
+  color: var(--accent-emotional-intelligence);
+  background-color: var(--accent-emotional-intelligence-bg);
+}
+.category-healing {
+  color: var(--accent-healing);
+  background-color: var(--accent-healing-bg);
+}
+.category-wisdom {
+  color: var(--accent-wisdom);
+  background-color: var(--accent-wisdom-bg);
+}
+.category-spirituality {
+  color: var(--accent-spirituality);
+  background-color: var(--accent-spirituality-bg);
+}
 .category-ethics {
   color: var(--accent-ethics);
   background-color: var(--accent-ethics-bg);
@@ -352,10 +383,6 @@ img {
 .category-human-behaviour {
   color: var(--accent-human-behaviour);
   background-color: var(--accent-human-behaviour-bg);
-}
-.category-life-reflection {
-  color: var(--accent-life-reflection);
-  background-color: var(--accent-life-reflection-bg);
 }
 .category-technology {
   color: var(--accent-technology);

@@ -98,7 +98,7 @@ CREATE TABLE IF NOT EXISTS `categories` (
 INSERT INTO `categories` (`id`, `name`, `slug`, `description`, `accent_color`, `created_at`, `updated_at`) VALUES
 (1, 'Ethics', 'ethics', 'Essays on morality, responsibility, digital ethics, truth, and the choices that shape human society.', '#8B263E', '2026-08-18 13:33:51', '2026-08-18 13:33:51'),
 (3, 'Human Behaviour', 'human-behaviour', 'Exploring psychology, human nature, habits, subtle social dynamics, and decision-making.', '#2B59C3', '2026-08-18 13:33:51', '2026-08-18 13:33:51'),
-(4, 'Life Reflection', 'life-reflection', 'Thoughtful examinations of time, personal growth, loneliness, purpose, failure, and quiet wisdom.', '#A67C46', '2026-08-18 13:33:51', '2026-08-18 13:33:51'),
+(4, 'Reflections', 'reflections', 'Thoughtful examinations of time, personal growth, quiet wisdom, and life reflections.', '#A67C46', '2026-08-18 13:33:51', '2026-08-18 13:33:51'),
 (5, 'Technology', 'technology', 'Critical perspectives on artificial intelligence, digital culture, cybersecurity, and human-machine coexistence.', '#2E8B80', '2026-08-18 13:33:51', '2026-08-18 13:33:51');
 
 -- --------------------------------------------------------

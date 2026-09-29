@@ -8,7 +8,7 @@ export default function Footer() {
   const footerLinks = [
     { name: 'Home', path: '/' },
     { name: 'About', path: '/about' },
-    { name: 'Reflections', path: '/category/life-reflection' },
+    { name: 'Reflections', path: '/category/reflections' },
     { name: 'Human Behaviour', path: '/category/human-behaviour' },
     { name: 'Ethics', path: '/category/ethics' },
     { name: 'Technology & Humanity', path: '/category/technology' },

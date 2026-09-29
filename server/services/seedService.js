@@ -34,7 +34,7 @@ async function seedDatabase(pool) {
       }
     } catch (e) {}
 
-    // 1. Seed Categories
+    // 1. Seed Categories & Auto-Migrate 'life-reflection' -> 'reflections'
     const categories = [
       ['Reflections', 'reflections', 'Thoughtful examinations of time, personal growth, quiet wisdom, and life reflections.', '#A67C46'],
       ['Emotional Intelligence', 'emotional-intelligence', 'Exploring psychology, human nature, empathy, social dynamics, and self-awareness.', '#2B59C3'],
@@ -43,7 +43,6 @@ async function seedDatabase(pool) {
       ['Spirituality', 'spirituality', 'Meditations on purpose, transcendence, quiet consciousness, and inner depth.', '#2E8B80'],
       ['Ethics', 'ethics', 'Essays on morality, responsibility, truth, and the choices that shape human society.', '#8B263E'],
       ['Human Behaviour', 'human-behaviour', 'Exploring psychology, human nature, habits, and subtle social dynamics.', '#2B59C3'],
-      ['Life Reflection', 'life-reflection', 'Thoughtful examinations of time, personal growth, and quiet wisdom.', '#A67C46'],
       ['Technology', 'technology', 'Critical perspectives on artificial intelligence, digital culture, and human autonomy.', '#2E8B80']
     ];
 
@@ -52,6 +51,19 @@ async function seedDatabase(pool) {
         'INSERT IGNORE INTO categories (name, slug, description, accent_color) VALUES (?, ?, ?, ?)',
         cat
       );
+    }
+
+    // Auto-migrate: move all essays from 'life-reflection' to 'reflections' and delete 'life-reflection' category
+    try {
+      const [refCat] = await pool.query("SELECT id FROM categories WHERE slug = 'reflections' LIMIT 1");
+      const [oldCat] = await pool.query("SELECT id FROM categories WHERE slug = 'life-reflection' LIMIT 1");
+      if (refCat.length > 0 && oldCat.length > 0) {
+        console.log('[Seed Migration] Moving all essays from life-reflection to reflections...');
+        await pool.query("UPDATE essays SET category_id = ? WHERE category_id = ?", [refCat[0].id, oldCat[0].id]);
+        await pool.query("DELETE FROM categories WHERE id = ?", [oldCat[0].id]);
+      }
+    } catch (migErr) {
+      console.warn('[Seed Migration Error]:', migErr.message);
     }
 
     // 2. Seed Default Admin User (Ensure admin@aetheria.com exists)
@@ -376,7 +388,7 @@ async function seedDatabase(pool) {
           seo_description: 'How endless choices undermine community commitment and emotional stability.'
         },
 
-        // --- LIFE REFLECTION ---
+        // --- REFLECTIONS ---
         {
           title: 'Things We Understand Too Late',
           slug: 'things-we-understand-too-late',
@@ -401,11 +413,11 @@ async function seedDatabase(pool) {
           `,
           featured_image: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80',
           author_id: authMap['sophia-lin'],
-          category_id: catMap['life-reflection'],
+          category_id: catMap['reflections'],
           featured: 1,
           reading_time: 8,
           views: 2310,
-          seo_title: 'Things We Understand Too Late | Life Reflection',
+          seo_title: 'Things We Understand Too Late | Reflections',
           seo_description: 'Meditation on presence, time, peace, and the timeless truths revealed through quiet observation.'
         },
         {
@@ -418,11 +430,11 @@ async function seedDatabase(pool) {
           `,
           featured_image: 'https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?auto=format&fit=crop&w=1200&q=80',
           author_id: authMap['sophia-lin'],
-          category_id: catMap['life-reflection'],
+          category_id: catMap['reflections'],
           featured: 0,
           reading_time: 5,
           views: 1250,
-          seo_title: 'The Life We Keep Postponing | Life Reflection',
+          seo_title: 'The Life We Keep Postponing | Reflections',
           seo_description: 'Breaking free from conditional living and embracing present creative action.'
         },
         {
@@ -435,11 +447,11 @@ async function seedDatabase(pool) {
           `,
           featured_image: 'https://images.unsplash.com/photo-1518495973542-4542c06a5843?auto=format&fit=crop&w=1200&q=80',
           author_id: authMap['sophia-lin'],
-          category_id: catMap['life-reflection'],
+          category_id: catMap['reflections'],
           featured: 0,
           reading_time: 6,
           views: 1480,
-          seo_title: 'What Quiet Seasons Teach Us | Life Reflection',
+          seo_title: 'What Quiet Seasons Teach Us | Reflections',
           seo_description: 'Embracing slow periods of life for underground personal growth and renewal.'
         },
         {
@@ -452,11 +464,11 @@ async function seedDatabase(pool) {
           `,
           featured_image: 'https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=1200&q=80',
           author_id: authMap['sophia-lin'],
-          category_id: catMap['life-reflection'],
+          category_id: catMap['reflections'],
           featured: 0,
           reading_time: 7,
           views: 970,
-          seo_title: 'The Art of Unlearning | Aetheria Life Reflection',
+          seo_title: 'The Art of Unlearning | Reflections',
           seo_description: 'How dismantling inherited cultural beliefs unlocks personal clarity and truth.'
         },
         {
@@ -469,11 +481,11 @@ async function seedDatabase(pool) {
           `,
           featured_image: 'https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=1200&q=80',
           author_id: authMap['sophia-lin'],
-          category_id: catMap['life-reflection'],
+          category_id: catMap['reflections'],
           featured: 0,
           reading_time: 6,
           views: 1120,
-          seo_title: 'On Friendship in the Second Half of Life | Life Reflection',
+          seo_title: 'On Friendship in the Second Half of Life | Reflections',
           seo_description: 'Cultivating enduring personal friendships past youth and easy proximity.'
         },
 
