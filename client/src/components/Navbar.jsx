@@ -11,12 +11,13 @@ import {
   Lightbulb, 
   Flower2 
 } from 'lucide-react';
+import { LotusLogo } from './BrandIcons';
 import ThemeToggle from './ThemeToggle';
 
-// Custom Botanical Leaf Branch Separator matching the user reference
+// Custom Botanical Leaf Branch Separator matching the reference
 const LeafSeparator = () => (
-  <span className="navbar-leaf-sep" aria-hidden="true" style={{ display: 'inline-flex', alignItems: 'center', margin: '0 0.35rem', opacity: 0.85, flexShrink: 0 }}>
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <span className="navbar-leaf-sep" aria-hidden="true" style={{ display: 'inline-flex', alignItems: 'center', margin: '0 0.4rem', opacity: 0.75, flexShrink: 0 }}>
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M12 22C12 22 12.5 15 16 11C18.5 8 21.5 6.5 21.5 6.5C21.5 6.5 19.5 10 16.5 12.5C14 14.5 12 22 12 22Z" fill="#7FA98E" fillOpacity="0.45" stroke="#5E8B6F" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round"/>
       <path d="M12 22C12 22 11.5 16 8 13.5C5.5 11.5 2.5 11 2.5 11C2.5 11 5.5 9 9.5 11.5C11 12.5 12 22 12 22Z" fill="#7FA98E" fillOpacity="0.45" stroke="#5E8B6F" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round"/>
       <path d="M12 22V11" stroke="#5E8B6F" strokeWidth="1.3" strokeLinecap="round"/>
@@ -83,31 +84,31 @@ export default function Navbar() {
     {
       name: 'Reflections',
       path: '/category/reflections',
-      icon: <BookOpen size={16} color="#0D9488" />,
+      icon: <BookOpen size={15} color="#0D9488" />,
       bg: '#E6F4F1'
     },
     {
       name: 'Emotional Intelligence',
       path: '/category/emotional-intelligence',
-      icon: <Brain size={16} color="#16A34A" />,
+      icon: <Brain size={15} color="#16A34A" />,
       bg: '#EAF7EE'
     },
     {
       name: 'Healing',
       path: '/category/healing',
-      icon: <HeartPulse size={16} color="#D97706" />,
+      icon: <HeartPulse size={15} color="#D97706" />,
       bg: '#FDF2E9'
     },
     {
       name: 'Wisdom',
       path: '/category/wisdom',
-      icon: <Lightbulb size={16} color="#CA8A04" />,
+      icon: <Lightbulb size={15} color="#CA8A04" />,
       bg: '#FEF9C3'
     },
     {
       name: 'Spirituality',
       path: '/category/spirituality',
-      icon: <Flower2 size={16} color="#0284C7" />,
+      icon: <Flower2 size={15} color="#0284C7" />,
       bg: '#E0F2FE'
     }
   ];
@@ -121,7 +122,7 @@ export default function Navbar() {
       backdropFilter: 'blur(16px)',
       WebkitBackdropFilter: 'blur(16px)',
       borderBottom: '1px solid var(--border-color)',
-      boxShadow: '0 2px 12px rgba(44, 38, 33, 0.03)',
+      boxShadow: '0 2px 10px rgba(44, 38, 33, 0.03)',
       transition: 'all 0.3s ease'
     }}>
       <div className="container" style={{
@@ -130,50 +131,70 @@ export default function Navbar() {
         justifyContent: 'space-between',
         height: '4.75rem',
         padding: '0 clamp(1rem, 3vw, 2rem)',
-        position: 'relative'
+        gap: '0.5rem'
       }}>
 
-        {/* Left Side: Brand Identity (Mobile & Compact Desktop) */}
+        {/* Brand Logo (Original Logo & Typography) */}
         <Link to="/" style={{
-          textDecoration: 'none',
           display: 'flex',
           alignItems: 'center',
-          gap: '0.4rem',
+          gap: '0.65rem',
+          textDecoration: 'none',
+          minWidth: 0,
           flexShrink: 0
         }}>
-          <span className="navbar-brand-text" style={{
-            fontFamily: "'Great Vibes', 'Dancing Script', 'Alex Brush', cursive",
-            fontSize: 'clamp(1.75rem, 3.5vw, 2.25rem)',
-            color: 'var(--accent-primary)',
-            fontWeight: '600',
-            letterSpacing: '0.02em',
-            lineHeight: 1
-          }}>
-            Aetheria
-          </span>
+          <LotusLogo size={32} color="var(--accent-gold)" />
+          <div style={{ display: 'flex', flexDirection: 'column', minWidth: 0 }}>
+            <span style={{
+              fontFamily: 'var(--font-cormorant)',
+              fontSize: 'clamp(1.05rem, 3.8vw, 1.4rem)',
+              fontWeight: '700',
+              color: 'var(--text-primary)',
+              lineHeight: '1.1',
+              letterSpacing: '-0.01em',
+              whiteSpace: 'nowrap'
+            }}>
+              Prof. Monika Chopra
+            </span>
+            <span className="navbar-brand-subtitle" style={{
+              fontSize: '0.65rem',
+              letterSpacing: '0.06em',
+              color: 'var(--text-secondary)',
+              fontWeight: '500',
+              marginTop: '0.1rem',
+              lineHeight: '1',
+              whiteSpace: 'nowrap'
+            }}>
+              Aetheria <span style={{ opacity: 0.5, margin: '0 0.15rem' }}>|</span> Life Lessons & Wisdom
+            </span>
+          </div>
         </Link>
 
-        {/* Center: Botanical Script Navigation Links */}
-        <nav className="botanical-navbar-links" style={{
+        {/* Desktop Navigation Links (Original Clean Typography) */}
+        <nav className="desktop-nav-ref" style={{
           display: 'none',
           alignItems: 'center',
           justifyContent: 'center',
           gap: '0.2rem',
           flex: 1,
-          margin: '0 1rem'
+          margin: '0 0.5rem'
         }}>
           {/* 1. Home */}
           <Link
             to="/"
-            className="botanical-nav-item"
             style={{
-              fontFamily: "'Great Vibes', 'Dancing Script', 'Alex Brush', cursive",
-              fontSize: 'clamp(1.35rem, 1.8vw, 1.65rem)',
-              color: location.pathname === '/' ? 'var(--accent-primary)' : 'var(--text-primary)',
+              fontSize: '0.88rem',
+              fontWeight: location.pathname === '/' ? '600' : '500',
+              color: location.pathname === '/' ? 'var(--accent-primary)' : 'var(--text-secondary)',
               textDecoration: 'none',
-              padding: '0.25rem 0.5rem',
-              transition: 'color 0.2s ease, transform 0.2s ease',
-              whiteSpace: 'nowrap'
+              padding: '0.4rem 0.5rem',
+              transition: 'all 0.2s ease',
+              whiteSpace: 'nowrap',
+              borderBottom: location.pathname === '/' ? '2px solid var(--accent-primary)' : '2px solid transparent'
+            }}
+            onMouseEnter={(e) => e.currentTarget.style.color = 'var(--text-primary)'}
+            onMouseLeave={(e) => {
+              if (location.pathname !== '/') e.currentTarget.style.color = 'var(--text-secondary)';
             }}
           >
             Home
@@ -184,15 +205,19 @@ export default function Navbar() {
           {/* 2. About Aetheria */}
           <Link
             to="/about"
-            className="botanical-nav-item"
             style={{
-              fontFamily: "'Great Vibes', 'Dancing Script', 'Alex Brush', cursive",
-              fontSize: 'clamp(1.35rem, 1.8vw, 1.65rem)',
-              color: location.pathname === '/about' ? 'var(--accent-primary)' : 'var(--text-primary)',
+              fontSize: '0.88rem',
+              fontWeight: location.pathname === '/about' ? '600' : '500',
+              color: location.pathname === '/about' ? 'var(--accent-primary)' : 'var(--text-secondary)',
               textDecoration: 'none',
-              padding: '0.25rem 0.5rem',
-              transition: 'color 0.2s ease, transform 0.2s ease',
-              whiteSpace: 'nowrap'
+              padding: '0.4rem 0.5rem',
+              transition: 'all 0.2s ease',
+              whiteSpace: 'nowrap',
+              borderBottom: location.pathname === '/about' ? '2px solid var(--accent-primary)' : '2px solid transparent'
+            }}
+            onMouseEnter={(e) => e.currentTarget.style.color = 'var(--text-primary)'}
+            onMouseLeave={(e) => {
+              if (location.pathname !== '/about') e.currentTarget.style.color = 'var(--text-secondary)';
             }}
           >
             About Aetheria
@@ -203,15 +228,19 @@ export default function Navbar() {
           {/* 3. The Person Behind This */}
           <Link
             to="/about#author"
-            className="botanical-nav-item"
             style={{
-              fontFamily: "'Great Vibes', 'Dancing Script', 'Alex Brush', cursive",
-              fontSize: 'clamp(1.35rem, 1.8vw, 1.65rem)',
-              color: location.hash === '#author' ? 'var(--accent-primary)' : 'var(--text-primary)',
+              fontSize: '0.88rem',
+              fontWeight: location.hash === '#author' ? '600' : '500',
+              color: location.hash === '#author' ? 'var(--accent-primary)' : 'var(--text-secondary)',
               textDecoration: 'none',
-              padding: '0.25rem 0.5rem',
-              transition: 'color 0.2s ease, transform 0.2s ease',
-              whiteSpace: 'nowrap'
+              padding: '0.4rem 0.5rem',
+              transition: 'all 0.2s ease',
+              whiteSpace: 'nowrap',
+              borderBottom: location.hash === '#author' ? '2px solid var(--accent-primary)' : '2px solid transparent'
+            }}
+            onMouseEnter={(e) => e.currentTarget.style.color = 'var(--text-primary)'}
+            onMouseLeave={(e) => {
+              if (location.hash !== '#author') e.currentTarget.style.color = 'var(--text-secondary)';
             }}
           >
             The Person Behind This
@@ -219,7 +248,7 @@ export default function Navbar() {
 
           <LeafSeparator />
 
-          {/* 4. Explore (Dropdown) */}
+          {/* 4. Explore (Dropdown with Categories) */}
           <div 
             ref={exploreRef}
             style={{ position: 'relative' }}
@@ -228,25 +257,32 @@ export default function Navbar() {
           >
             <button
               onClick={() => setExploreOpen(!exploreOpen)}
-              className="botanical-nav-item"
               style={{
                 background: 'none',
                 border: 'none',
                 cursor: 'pointer',
-                fontFamily: "'Great Vibes', 'Dancing Script', 'Alex Brush', cursive",
-                fontSize: 'clamp(1.35rem, 1.8vw, 1.65rem)',
-                color: (exploreOpen || location.pathname.startsWith('/category')) ? 'var(--accent-primary)' : 'var(--text-primary)',
-                padding: '0.25rem 0.5rem',
+                fontFamily: 'inherit',
+                fontSize: '0.88rem',
+                fontWeight: (exploreOpen || location.pathname.startsWith('/category')) ? '600' : '500',
+                color: (exploreOpen || location.pathname.startsWith('/category')) ? 'var(--accent-primary)' : 'var(--text-secondary)',
+                padding: '0.4rem 0.5rem',
                 display: 'inline-flex',
                 alignItems: 'center',
-                gap: '0.2rem',
-                transition: 'color 0.2s ease',
-                whiteSpace: 'nowrap'
+                gap: '0.25rem',
+                transition: 'all 0.2s ease',
+                whiteSpace: 'nowrap',
+                borderBottom: (exploreOpen || location.pathname.startsWith('/category')) ? '2px solid var(--accent-primary)' : '2px solid transparent'
+              }}
+              onMouseEnter={(e) => e.currentTarget.style.color = 'var(--text-primary)'}
+              onMouseLeave={(e) => {
+                if (!exploreOpen && !location.pathname.startsWith('/category')) {
+                  e.currentTarget.style.color = 'var(--text-secondary)';
+                }
               }}
             >
               <span>Explore</span>
               <ChevronDown 
-                size={14} 
+                size={13} 
                 style={{ 
                   transition: 'transform 0.2s ease',
                   transform: exploreOpen ? 'rotate(180deg)' : 'rotate(0deg)',
@@ -255,7 +291,7 @@ export default function Navbar() {
               />
             </button>
 
-            {/* Explore Dropdown Card matching the user's screenshot */}
+            {/* Explore Dropdown Card */}
             {exploreOpen && (
               <div 
                 className="explore-dropdown-card"
@@ -266,10 +302,10 @@ export default function Navbar() {
                   transform: 'translateX(-50%)',
                   backgroundColor: 'var(--bg-secondary)',
                   border: '1px solid var(--border-color)',
-                  borderRadius: '16px',
-                  padding: '0.65rem',
-                  boxShadow: '0 12px 36px rgba(44, 38, 33, 0.12)',
-                  minWidth: '230px',
+                  borderRadius: '14px',
+                  padding: '0.55rem',
+                  boxShadow: '0 12px 30px rgba(44, 38, 33, 0.10)',
+                  minWidth: '220px',
                   zIndex: 1100,
                   animation: 'dropdownFadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1)'
                 }}
@@ -277,18 +313,18 @@ export default function Navbar() {
                 {/* Speech Bubble Arrow Tip */}
                 <div style={{
                   position: 'absolute',
-                  top: '-7px',
+                  top: '-6px',
                   left: '50%',
                   transform: 'translateX(-50%) rotate(45deg)',
-                  width: '12px',
-                  height: '12px',
+                  width: '10px',
+                  height: '10px',
                   backgroundColor: 'var(--bg-secondary)',
                   borderTop: '1px solid var(--border-color)',
                   borderLeft: '1px solid var(--border-color)',
                   zIndex: 1101
                 }} />
 
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem', position: 'relative', zIndex: 1102 }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.2rem', position: 'relative', zIndex: 1102 }}>
                   {categories.map((cat, idx) => {
                     const isCatActive = location.pathname === cat.path;
                     return (
@@ -296,36 +332,39 @@ export default function Navbar() {
                         key={idx}
                         to={cat.path}
                         onClick={() => setExploreOpen(false)}
-                        className="explore-dropdown-item"
                         style={{
                           display: 'flex',
                           alignItems: 'center',
-                          gap: '0.75rem',
-                          padding: '0.55rem 0.75rem',
-                          borderRadius: '10px',
+                          gap: '0.65rem',
+                          padding: '0.5rem 0.65rem',
+                          borderRadius: '8px',
                           textDecoration: 'none',
                           color: isCatActive ? 'var(--accent-primary)' : 'var(--text-primary)',
                           backgroundColor: isCatActive ? 'var(--accent-light)' : 'transparent',
                           transition: 'all 0.15s ease'
                         }}
+                        onMouseEnter={(e) => {
+                          if (!isCatActive) e.currentTarget.style.backgroundColor = 'var(--bg-tertiary)';
+                        }}
+                        onMouseLeave={(e) => {
+                          if (!isCatActive) e.currentTarget.style.backgroundColor = 'transparent';
+                        }}
                       >
                         <div style={{
-                          width: '32px',
-                          height: '32px',
+                          width: '28px',
+                          height: '28px',
                           borderRadius: '50%',
                           backgroundColor: cat.bg,
                           display: 'flex',
                           alignItems: 'center',
                           justifyContent: 'center',
-                          flexShrink: 0,
-                          boxShadow: '0 2px 6px rgba(0,0,0,0.04)'
+                          flexShrink: 0
                         }}>
                           {cat.icon}
                         </div>
                         <span style={{
-                          fontFamily: 'var(--font-sans)',
-                          fontSize: '0.92rem',
-                          fontWeight: '500',
+                          fontSize: '0.86rem',
+                          fontWeight: isCatActive ? '600' : '500',
                           whiteSpace: 'nowrap'
                         }}>
                           {cat.name}
@@ -343,15 +382,19 @@ export default function Navbar() {
           {/* 5. Share */}
           <Link
             to="/confessions"
-            className="botanical-nav-item"
             style={{
-              fontFamily: "'Great Vibes', 'Dancing Script', 'Alex Brush', cursive",
-              fontSize: 'clamp(1.35rem, 1.8vw, 1.65rem)',
-              color: location.pathname === '/confessions' ? 'var(--accent-primary)' : 'var(--text-primary)',
+              fontSize: '0.88rem',
+              fontWeight: location.pathname === '/confessions' ? '600' : '500',
+              color: location.pathname === '/confessions' ? 'var(--accent-primary)' : 'var(--text-secondary)',
               textDecoration: 'none',
-              padding: '0.25rem 0.5rem',
-              transition: 'color 0.2s ease, transform 0.2s ease',
-              whiteSpace: 'nowrap'
+              padding: '0.4rem 0.5rem',
+              transition: 'all 0.2s ease',
+              whiteSpace: 'nowrap',
+              borderBottom: location.pathname === '/confessions' ? '2px solid var(--accent-primary)' : '2px solid transparent'
+            }}
+            onMouseEnter={(e) => e.currentTarget.style.color = 'var(--text-primary)'}
+            onMouseLeave={(e) => {
+              if (location.pathname !== '/confessions') e.currentTarget.style.color = 'var(--text-secondary)';
             }}
           >
             Share
@@ -362,23 +405,27 @@ export default function Navbar() {
           {/* 6. Connect */}
           <Link
             to="/contact"
-            className="botanical-nav-item"
             style={{
-              fontFamily: "'Great Vibes', 'Dancing Script', 'Alex Brush', cursive",
-              fontSize: 'clamp(1.35rem, 1.8vw, 1.65rem)',
-              color: location.pathname === '/contact' ? 'var(--accent-primary)' : 'var(--text-primary)',
+              fontSize: '0.88rem',
+              fontWeight: location.pathname === '/contact' ? '600' : '500',
+              color: location.pathname === '/contact' ? 'var(--accent-primary)' : 'var(--text-secondary)',
               textDecoration: 'none',
-              padding: '0.25rem 0.5rem',
-              transition: 'color 0.2s ease, transform 0.2s ease',
-              whiteSpace: 'nowrap'
+              padding: '0.4rem 0.5rem',
+              transition: 'all 0.2s ease',
+              whiteSpace: 'nowrap',
+              borderBottom: location.pathname === '/contact' ? '2px solid var(--accent-primary)' : '2px solid transparent'
+            }}
+            onMouseEnter={(e) => e.currentTarget.style.color = 'var(--text-primary)'}
+            onMouseLeave={(e) => {
+              if (location.pathname !== '/contact') e.currentTarget.style.color = 'var(--text-secondary)';
             }}
           >
             Connect
           </Link>
         </nav>
 
-        {/* Right Side Controls: Search, Theme Toggle, and Mobile Hamburger */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', flexShrink: 0 }}>
+        {/* Right Action Icons: Search, Theme Toggle, and Menu Drawer */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', flexShrink: 0 }}>
           {/* Search Trigger */}
           <button
             onClick={() => setSearchOpen(!searchOpen)}
@@ -498,15 +545,15 @@ export default function Navbar() {
           </form>
 
           {/* Navigation Items */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
             <Link
               to="/"
               onClick={() => setMobileMenuOpen(false)}
               className="mobile-nav-link"
               style={{
-                fontFamily: "'Great Vibes', 'Dancing Script', 'Alex Brush', cursive",
-                fontSize: '1.6rem',
-                padding: '0.6rem 1rem'
+                fontSize: '0.95rem',
+                fontWeight: location.pathname === '/' ? '600' : '500',
+                padding: '0.75rem 1rem'
               }}
             >
               <span>Home</span>
@@ -518,9 +565,9 @@ export default function Navbar() {
               onClick={() => setMobileMenuOpen(false)}
               className="mobile-nav-link"
               style={{
-                fontFamily: "'Great Vibes', 'Dancing Script', 'Alex Brush', cursive",
-                fontSize: '1.6rem',
-                padding: '0.6rem 1rem'
+                fontSize: '0.95rem',
+                fontWeight: location.pathname === '/about' ? '600' : '500',
+                padding: '0.75rem 1rem'
               }}
             >
               <span>About Aetheria</span>
@@ -532,9 +579,9 @@ export default function Navbar() {
               onClick={() => setMobileMenuOpen(false)}
               className="mobile-nav-link"
               style={{
-                fontFamily: "'Great Vibes', 'Dancing Script', 'Alex Brush', cursive",
-                fontSize: '1.6rem',
-                padding: '0.6rem 1rem'
+                fontSize: '0.95rem',
+                fontWeight: location.hash === '#author' ? '600' : '500',
+                padding: '0.75rem 1rem'
               }}
             >
               <span>The Person Behind This</span>
@@ -555,17 +602,18 @@ export default function Navbar() {
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'space-between',
-                  padding: '0.6rem 1rem',
+                  padding: '0.75rem 1rem',
                   background: 'none',
                   border: 'none',
                   cursor: 'pointer',
-                  fontFamily: "'Great Vibes', 'Dancing Script', 'Alex Brush', cursive",
-                  fontSize: '1.6rem',
+                  fontFamily: 'inherit',
+                  fontSize: '0.95rem',
+                  fontWeight: '500',
                   color: 'var(--text-primary)'
                 }}
               >
                 <span>Explore</span>
-                <ChevronDown size={18} style={{ transform: mobileExploreOpen ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.2s ease' }} />
+                <ChevronDown size={16} style={{ transform: mobileExploreOpen ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.2s ease' }} />
               </button>
 
               {mobileExploreOpen && (
@@ -586,8 +634,8 @@ export default function Navbar() {
                       }}
                     >
                       <div style={{
-                        width: '28px',
-                        height: '28px',
+                        width: '26px',
+                        height: '26px',
                         borderRadius: '50%',
                         backgroundColor: cat.bg,
                         display: 'flex',
@@ -596,7 +644,7 @@ export default function Navbar() {
                       }}>
                         {cat.icon}
                       </div>
-                      <span style={{ fontSize: '0.9rem', fontWeight: '500' }}>{cat.name}</span>
+                      <span style={{ fontSize: '0.88rem', fontWeight: '500' }}>{cat.name}</span>
                     </Link>
                   ))}
                 </div>
@@ -608,9 +656,9 @@ export default function Navbar() {
               onClick={() => setMobileMenuOpen(false)}
               className="mobile-nav-link"
               style={{
-                fontFamily: "'Great Vibes', 'Dancing Script', 'Alex Brush', cursive",
-                fontSize: '1.6rem',
-                padding: '0.6rem 1rem'
+                fontSize: '0.95rem',
+                fontWeight: location.pathname === '/confessions' ? '600' : '500',
+                padding: '0.75rem 1rem'
               }}
             >
               <span>Share</span>
@@ -622,9 +670,9 @@ export default function Navbar() {
               onClick={() => setMobileMenuOpen(false)}
               className="mobile-nav-link"
               style={{
-                fontFamily: "'Great Vibes', 'Dancing Script', 'Alex Brush', cursive",
-                fontSize: '1.6rem',
-                padding: '0.6rem 1rem'
+                fontSize: '0.95rem',
+                fontWeight: location.pathname === '/contact' ? '600' : '500',
+                padding: '0.75rem 1rem'
               }}
             >
               <span>Connect</span>
@@ -645,24 +693,22 @@ export default function Navbar() {
             transform: translate(-50%, 0);
           }
         }
-        .botanical-nav-item:hover {
-          color: var(--accent-primary) !important;
-          transform: translateY(-1px);
-        }
-        .explore-dropdown-item:hover {
-          background-color: var(--accent-light) !important;
-          transform: translateX(2px);
-        }
-        @media (min-width: 900px) {
-          .botanical-navbar-links { display: flex !important; }
+        @media (min-width: 1040px) {
+          .desktop-nav-ref { display: flex !important; }
           .mobile-menu-trigger { display: none !important; }
         }
-        @media (max-width: 899px) {
-          .botanical-navbar-links { display: none !important; }
+        @media (max-width: 1039px) {
+          .desktop-nav-ref { display: none !important; }
           .mobile-menu-trigger { display: inline-flex !important; }
+        }
+        @media (max-width: 480px) {
+          .navbar-brand-subtitle {
+            display: none !important;
+          }
         }
       `}</style>
     </header>
   );
 }
+
 
