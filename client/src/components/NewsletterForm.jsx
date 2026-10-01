@@ -88,7 +88,7 @@ export default function NewsletterForm() {
             fontSize: '0.925rem',
             fontWeight: '600'
           }}>
-            <CheckCircle size={18} /> Thank you for subscribing to Prof. Monika Chopra's journal.
+            <CheckCircle size={18} /> Thank you for subscribing to Monika Chopra's journal.
           </div>
         ) : (
           <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', alignItems: 'center' }}>

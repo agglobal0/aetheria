@@ -136,7 +136,7 @@ export default function SingleEssay() {
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
                 <div>
                   <span style={{ fontWeight: '600', color: 'var(--text-primary)', fontSize: '0.925rem', display: 'block' }}>
-                    Prof. Monika Chopra
+                    Monika Chopra
                   </span>
                   <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
                     Published {formatDate(essay.published_at)}

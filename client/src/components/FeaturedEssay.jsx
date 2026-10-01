@@ -72,7 +72,7 @@ export default function FeaturedEssay({ essay }) {
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', fontSize: '0.85rem', color: 'var(--text-muted)' }}>
             <span style={{ color: 'var(--text-primary)', fontWeight: '600' }}>
-              Prof. Monika Chopra
+              Monika Chopra
             </span>
             <span>•</span>
             <span>{formatDate(essay.published_at)}</span>

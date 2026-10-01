@@ -90,7 +90,7 @@ export default function Essays() {
           Academic Essays
         </h1>
         <p style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(1rem, 2vw, 1.2rem)', color: 'var(--text-secondary)', maxWidth: '580px', margin: '0 auto' }}>
-          Long-form academic and editorial essays by Professor Monika Chopra exploring ethics, human behaviour, technology, and life reflections.
+          Long-form editorial essays by Monika Chopra exploring wisdom, emotional intelligence, spirituality, and life reflections.
         </p>
       </div>
 

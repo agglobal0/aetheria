@@ -68,7 +68,7 @@ export default function WisdomNavigator() {
           What Guidance Do You Seek Today?
         </h2>
         <p style={{ color: 'var(--text-secondary)', maxWidth: '560px', margin: '0.5rem auto 0 auto', fontSize: '0.925rem' }}>
-          Select your focus to discover actionable life lessons and curated reflections by Prof. Monika Chopra.
+          Select your focus to discover actionable life lessons and curated reflections by Monika Chopra.
         </p>
       </div>
 

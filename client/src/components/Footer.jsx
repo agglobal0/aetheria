@@ -52,7 +52,7 @@ export default function Footer() {
                 color: '#FFFFFF',
                 lineHeight: '1.1'
               }}>
-                Prof. Monika Chopra
+                Monika Chopra
               </span>
               <span style={{
                 fontSize: '0.65rem',
@@ -166,7 +166,7 @@ export default function Footer() {
           color: '#7F9685'
         }}>
           <div>
-            © {currentYear} Prof. Monika Chopra. All rights reserved.
+            © {currentYear} Monika Chopra. All rights reserved.
           </div>
           <div style={{ display: 'flex', gap: '1.25rem', flexWrap: 'wrap' }}>
             <Link to="/about" style={{ color: '#7F9685' }}>Privacy</Link>

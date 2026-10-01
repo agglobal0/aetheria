@@ -107,7 +107,7 @@ export default function Blogs() {
           Reflective Blog Posts
         </h1>
         <p style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(1rem, 2vw, 1.2rem)', color: 'var(--text-secondary)', maxWidth: '620px', margin: '0 auto', lineHeight: '1.6' }}>
-          Conversational reflections, daily observations, and practical wisdom by Professor Monika Chopra on human relationships, empathy, and navigating life’s subtle moments.
+          Conversational reflections, daily observations, and practical wisdom by Monika Chopra on human relationships, empathy, and navigating life’s subtle moments.
         </p>
       </div>
 

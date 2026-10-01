@@ -154,7 +154,7 @@ export default function Navbar() {
               letterSpacing: '-0.01em',
               whiteSpace: 'nowrap'
             }}>
-              Prof. Monika Chopra
+              Monika Chopra
             </span>
             <span className="navbar-brand-subtitle" style={{
               fontSize: '0.65rem',

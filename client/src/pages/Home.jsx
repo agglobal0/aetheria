@@ -477,7 +477,7 @@ export default function Home() {
             <div className="bio-box">
               <img
                 src={profPortraitImg}
-                alt="Prof. Monika Chopra"
+                alt="Monika Chopra"
                 style={{
                   width: '100%',
                   height: '270px',
@@ -505,7 +505,7 @@ export default function Home() {
                   color: 'var(--text-secondary)',
                   marginBottom: '0.8rem'
                 }}>
-                  I am Prof. Monika Chopra, an educator in Information Technology with nearly three decades of teaching, reading, observing and learning from people and life.
+                  I am Monika Chopra, an educator in Information Technology with nearly three decades of teaching, reading, observing and learning from people and life.
                 </p>
 
                 <p style={{

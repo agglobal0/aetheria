@@ -50,7 +50,7 @@ export default function DailyWisdom() {
   };
 
   const handleCopy = () => {
-    const text = `"${current.quote}" — Prof. Monika Chopra (Life Lessons & Ethics)`;
+    const text = `"${current.quote}" — Monika Chopra (Life Lessons & Wisdom)`;
     navigator.clipboard.writeText(text);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);

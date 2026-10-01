@@ -46,7 +46,7 @@ export default function MotivationalQuotes() {
   const current = MOTIVATIONAL_QUOTES[activeIdx];
 
   const handleShare = () => {
-    const text = `"${current.quote}" — Prof. Monika Chopra (${current.context})`;
+    const text = `"${current.quote}" — Monika Chopra (${current.context})`;
     navigator.clipboard.writeText(text);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
@@ -90,7 +90,7 @@ export default function MotivationalQuotes() {
         </blockquote>
 
         <cite style={{ fontSize: '0.85rem', fontStyle: 'normal', letterSpacing: '0.08em', textTransform: 'uppercase', fontWeight: '600', color: 'var(--text-muted)', display: 'block', marginBottom: '1.75rem' }}>
-          — Prof. Monika Chopra, <em>{current.context}</em>
+          — Monika Chopra, <em>{current.context}</em>
         </cite>
 
         {/* Carousel & Action Buttons */}

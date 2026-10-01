@@ -58,7 +58,7 @@ export default function EssayCard({ essay, layout = 'grid' }) {
             {essay.excerpt}
           </p>
           <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', fontSize: '0.8rem', color: 'var(--text-muted)' }}>
-            <span>By Prof. Monika Chopra</span>
+            <span>By Monika Chopra</span>
             <span>•</span>
             <span>{formatDate(essay.published_at)}</span>
             {essay.reading_time && (
@@ -153,7 +153,7 @@ export default function EssayCard({ essay, layout = 'grid' }) {
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
             <span style={{ color: 'var(--text-secondary)', fontWeight: '500' }}>
-              Prof. Monika Chopra
+              Monika Chopra
             </span>
           </div>
           <div>

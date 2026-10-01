@@ -108,10 +108,10 @@ async function seedDatabase(pool) {
       }
     }
 
-    // 3. Seed & Update Editorial Author (Prof. Monika Chopra)
+    // 3. Seed & Update Editorial Author (Monika Chopra)
     try {
       await pool.query(
-        `UPDATE authors SET name = 'Prof. Monika Chopra', slug = 'prof-monika-chopra', bio = 'Professor, Scholar, and Writer specializing in ethics, human behavior, technology, and reflective thought.' WHERE id = 1 OR slug = 'prof-monika-chopra' OR slug = 'marcus-vance'`
+        `UPDATE authors SET name = 'Monika Chopra', slug = 'monika-chopra', bio = 'Writer and Educator exploring human behaviour, emotional intelligence, wisdom, and life reflections.' WHERE id = 1 OR slug = 'prof-monika-chopra' OR slug = 'monika-chopra' OR slug = 'marcus-vance'`
       );
     } catch (e) {
       // Ignore if slug conflict
@@ -119,16 +119,16 @@ async function seedDatabase(pool) {
 
     const [existingAuthors] = await pool.query('SELECT COUNT(*) as count FROM authors');
     if (existingAuthors[0].count === 0) {
-      console.log('[Seed] Seeding Prof. Monika Chopra as primary author...');
+      console.log('[Seed] Seeding Monika Chopra as primary author...');
       await pool.query(
         'INSERT IGNORE INTO authors (name, slug, bio, avatar, website, social_links) VALUES (?, ?, ?, ?, ?, ?)',
         [
-          'Prof. Monika Chopra',
-          'prof-monika-chopra',
-          'Professor, Scholar, and Writer specializing in ethics, human behavior, technology, and reflective thought.',
+          'Monika Chopra',
+          'monika-chopra',
+          'Writer and Educator exploring human behaviour, emotional intelligence, wisdom, and life reflections.',
           '',
-          'https://profmonikachopra.org',
-          JSON.stringify({ twitter: 'https://x.com/profmonikachopra', linkedin: 'https://linkedin.com/in/profmonikachopra' })
+          'https://monikachopra.org',
+          JSON.stringify({ twitter: 'https://x.com/monikachopra', linkedin: 'https://linkedin.com/in/monikachopra' })
         ]
       );
     }

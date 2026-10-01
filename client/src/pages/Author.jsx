@@ -89,7 +89,7 @@ export default function Author() {
               }}>
                 <img
                   src={profPortraitImg}
-                  alt="Prof. Monika Chopra"
+                  alt="Monika Chopra"
                   style={{
                     width: '100%',
                     height: 'auto',
@@ -107,7 +107,7 @@ export default function Author() {
                   color: 'var(--text-primary)',
                   marginBottom: '0.2rem'
                 }}>
-                  Prof. Monika Chopra
+                  Monika Chopra
                 </h2>
                 <p style={{
                   fontSize: '0.88rem',
@@ -127,7 +127,7 @@ export default function Author() {
               color: 'var(--text-primary)'
             }}>
               <p style={{ marginBottom: '1.25rem' }}>
-                I am <strong style={{ color: 'var(--accent-primary)' }}>Prof. Monika Chopra</strong>, an educator in Information Technology with nearly three decades of teaching, reading, observing, and learning from people and life.
+                I am <strong style={{ color: 'var(--accent-primary)' }}>Monika Chopra</strong>, an educator in Information Technology with nearly three decades of teaching, reading, observing, and learning from people and life.
               </p>
 
               <p style={{ marginBottom: '1.25rem' }}>
@@ -196,7 +196,7 @@ export default function Author() {
                 color: 'var(--text-primary)',
                 margin: '0 0 0.35rem 0'
               }}>
-                Prof. Monika Chopra
+                Monika Chopra
               </p>
               <p style={{
                 fontSize: '0.85rem',
