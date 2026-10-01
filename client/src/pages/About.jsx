@@ -1,241 +1,206 @@
 import React, { useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { 
-  Sparkles, 
-  ArrowRight, 
-  BookOpen, 
-  Brain, 
-  HeartPulse, 
-  Lightbulb, 
-  Flower2, 
-  Mail 
-} from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { ArrowRight } from 'lucide-react';
 import Breadcrumbs from '../components/Breadcrumbs';
-import { profPortraitImg } from '../assets/images';
 
 export default function About() {
-  const location = useLocation();
-
   useEffect(() => {
-    if (location.hash) {
-      const elem = document.querySelector(location.hash);
-      if (elem) {
-        elem.scrollIntoView({ behavior: 'smooth' });
-      }
-    } else {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-  }, [location]);
-
-  const pillars = [
-    {
-      title: 'Reflections',
-      slug: 'reflections',
-      icon: <BookOpen size={24} color="#0D9488" />,
-      desc: 'Thoughtful examinations of time, personal growth, quiet stillness, and life observations.'
-    },
-    {
-      title: 'Emotional Intelligence',
-      slug: 'emotional-intelligence',
-      icon: <Brain size={24} color="#16A34A" />,
-      desc: 'Exploring empathy, sincere vulnerability, relational maturity, and self-awareness.'
-    },
-    {
-      title: 'Healing',
-      slug: 'healing',
-      icon: <HeartPulse size={24} color="#D97706" />,
-      desc: 'Nurturing resilience, emotional recovery, self-forgiveness, and inner peace.'
-    },
-    {
-      title: 'Wisdom',
-      slug: 'wisdom',
-      icon: <Lightbulb size={24} color="#CA8A04" />,
-      desc: 'Timeless insights, moral integrity, ethics, and enduring human life lessons.'
-    },
-    {
-      title: 'Spirituality',
-      slug: 'spirituality',
-      icon: <Flower2 size={24} color="#0284C7" />,
-      desc: 'Meditations on purpose, transcendence, quiet consciousness, and inner depth.'
-    }
-  ];
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, []);
 
   return (
     <div className="container" style={{ padding: 'clamp(2rem, 4vw, 3.5rem) clamp(1rem, 3vw, 1.5rem) clamp(3rem, 6vw, 6rem) clamp(1rem, 3vw, 1.5rem)' }}>
-      <Breadcrumbs items={[{ label: 'About Prof. Monika Chopra & Aetheria' }]} />
+      <Breadcrumbs items={[{ label: 'About Aetheria' }]} />
 
-      <div className="reading-container" style={{ maxWidth: '820px', margin: '0 auto' }}>
+      <article className="reading-container" style={{
+        maxWidth: '720px',
+        margin: '0 auto',
+        backgroundColor: 'var(--bg-secondary)',
+        padding: 'clamp(2rem, 5vw, 4rem) clamp(1.5rem, 4vw, 3.5rem)',
+        borderRadius: 'var(--radius-lg)',
+        border: '1px solid var(--border-color)',
+        boxShadow: 'var(--shadow-sm)'
+      }}>
         
-        {/* Header Section */}
-        <div style={{ textAlign: 'center', marginBottom: 'clamp(2.5rem, 5vw, 3.5rem)' }}>
-          <span className="category-badge category-reflections" style={{ marginBottom: '1rem', display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}>
-            <Sparkles size={13} /> Scholar, Mentor & Essayist
-          </span>
-          <h1 className="serif-heading" style={{ fontSize: 'clamp(2rem, 5vw, 3.2rem)', marginTop: '0.4rem', marginBottom: '1rem', letterSpacing: '-0.01em' }}>
-            Professor Monika Chopra
+        {/* Title */}
+        <header style={{ textAlign: 'center', marginBottom: 'clamp(2rem, 4vw, 3rem)' }}>
+          <h1 className="serif-heading" style={{
+            fontSize: 'clamp(2.2rem, 5vw, 3.4rem)',
+            letterSpacing: '-0.01em',
+            marginBottom: '0.5rem',
+            color: 'var(--text-primary)'
+          }}>
+            About Aetheria
           </h1>
-          <p style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.1rem, 2.5vw, 1.3rem)', color: 'var(--text-secondary)', lineHeight: '1.7', maxWidth: '640px', margin: '0 auto' }}>
-            Dedicated to inspiring lives through reflective wisdom, ethical clarity, emotional resilience, and enduring life lessons.
-          </p>
-        </div>
+          <div style={{
+            width: '40px',
+            height: '2px',
+            backgroundColor: 'var(--accent-primary)',
+            margin: '1.25rem auto 0 auto',
+            opacity: 0.6
+          }} />
+        </header>
 
-        {/* Profile Card & Introduction */}
+        {/* Continuous Editorial Essay Prose */}
         <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))',
-          gap: 'clamp(1.5rem, 4vw, 2.5rem)',
-          alignItems: 'center',
-          backgroundColor: 'var(--bg-secondary)',
-          padding: 'clamp(1.5rem, 3.5vw, 2.5rem)',
-          borderRadius: 'var(--radius-lg)',
-          border: '1px solid var(--border-color)',
-          boxShadow: 'var(--shadow-sm)',
-          marginBottom: 'clamp(2.5rem, 5vw, 3.5rem)'
+          fontFamily: 'var(--font-serif)',
+          fontSize: 'clamp(1.1rem, 2.4vw, 1.25rem)',
+          lineHeight: '1.85',
+          color: 'var(--text-primary)'
         }}>
-          <div style={{ textAlign: 'center' }}>
-            <div style={{
-              width: 'clamp(180px, 30vw, 220px)',
-              height: 'clamp(180px, 30vw, 220px)',
-              borderRadius: '50%',
-              margin: '0 auto',
-              overflow: 'hidden',
-              border: '4px solid var(--bg-tertiary)',
-              boxShadow: '0 8px 24px rgba(0,0,0,0.08)'
-            }}>
-              <img
-                src={profPortraitImg}
-                alt="Prof. Monika Chopra"
-                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-              />
-            </div>
-            <h3 style={{ fontFamily: 'var(--font-cormorant)', fontSize: '1.35rem', fontWeight: '700', marginTop: '1rem', color: 'var(--text-primary)', marginBottom: '0.2rem' }}>
-              Prof. Monika Chopra
-            </h3>
-            <p style={{ fontSize: '0.825rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.08em', margin: 0 }}>
-              Founder & Editorial Director
-            </p>
-          </div>
 
-          <div>
-            <h2 className="serif-heading" style={{ fontSize: '1.5rem', marginBottom: '0.85rem' }}>
-              A Sanctuary of Thought
-            </h2>
-            <p style={{ fontSize: '1rem', color: 'var(--text-secondary)', lineHeight: '1.8', marginBottom: '1rem' }}>
-              In a world dominated by noise and haste, Aetheria was created as a peaceful intellectual and spiritual haven—a space dedicated to deep reflection, emotional maturity, and the quiet lessons life teaches us.
-            </p>
-            <p style={{ fontSize: '1rem', color: 'var(--text-secondary)', lineHeight: '1.8', margin: 0 }}>
-              Through decades of academic leadership, mentoring, and research, Professor Chopra explores the delicate crossroads of psychology, human behavior, and moral character.
-            </p>
-          </div>
-        </div>
+          <p style={{ marginBottom: '1.25rem' }}>Some spaces are built with walls.</p>
+          <p style={{ marginBottom: '1.25rem' }}>Some are built with words.</p>
+          <p style={{ marginBottom: '2rem', fontWeight: '600' }}>Aetheria is one of the latter.</p>
 
-        {/* Editorial Body / Purpose & Vision */}
-        <div className="editorial-body" style={{ marginBottom: 'clamp(2.5rem, 5vw, 3.5rem)' }}>
-          <h2>Purpose & Philosophy</h2>
-          <p>
-            People do not always need straightforward advice; often, they need a clear thought that helps them understand their own reality. Life gives us experiences continuously, but rarely gives us their explanations immediately.
-          </p>
+          <p style={{ marginBottom: '1.25rem' }}>It was born from a simple realisation:</p>
 
-          <p>
-            Aetheria exists to slow down the rush of everyday living and provide a lens through which we can observe our habits, relationships, and aspirations with gentle honesty.
-          </p>
-
-          <blockquote className="editorial-quote">
-            "True education is not merely the transmission of data, but the cultivation of clarity, empathy, and moral discernment that inspires lives."
+          <blockquote style={{
+            fontStyle: 'italic',
+            fontSize: 'clamp(1.15rem, 2.5vw, 1.35rem)',
+            lineHeight: '1.7',
+            color: 'var(--accent-primary)',
+            borderLeft: '3px solid var(--accent-primary)',
+            paddingLeft: '1.25rem',
+            margin: '1.75rem 0'
+          }}>
+            <p style={{ margin: '0 0 0.5rem 0' }}>People do not always need advice.</p>
+            <p style={{ margin: 0 }}>Sometimes, they need a thought that helps them understand their own.</p>
           </blockquote>
 
-          <h2 style={{ marginTop: '2.5rem' }}>Core Pillars of Life & Reflection</h2>
-          <p>
-            The essays and publications across this platform are organized around five timeless dimensions of human growth:
-          </p>
-        </div>
-
-        {/* Pillars Cards Grid */}
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 240px), 1fr))',
-          gap: '1.25rem',
-          marginBottom: 'clamp(2.5rem, 5vw, 4rem)'
-        }}>
-          {pillars.map((item, idx) => (
-            <Link
-              key={idx}
-              to={`/category/${item.slug}`}
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                padding: '1.5rem',
-                backgroundColor: 'var(--bg-secondary)',
-                borderRadius: 'var(--radius-md)',
-                border: '1px solid var(--border-color)',
-                textDecoration: 'none',
-                color: 'inherit',
-                transition: 'all var(--transition-fast)'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = 'translateY(-2px)';
-                e.currentTarget.style.borderColor = 'var(--accent-primary)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = 'translateY(0)';
-                e.currentTarget.style.borderColor = 'var(--border-color)';
-              }}
-            >
-              <div style={{ marginBottom: '0.85rem' }}>
-                {item.icon}
-              </div>
-              <h3 style={{ fontFamily: 'var(--font-cormorant)', fontSize: '1.3rem', fontWeight: '700', marginBottom: '0.45rem', color: 'var(--text-primary)' }}>
-                {item.title}
-              </h3>
-              <p style={{ fontSize: '0.875rem', color: 'var(--text-secondary)', lineHeight: '1.6', flex: 1, margin: 0 }}>
-                {item.desc}
-              </p>
-              <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.35rem', fontSize: '0.8rem', fontWeight: '600', color: 'var(--accent-primary)', marginTop: '1rem' }}>
-                Explore <ArrowRight size={13} />
-              </div>
-            </Link>
-          ))}
-        </div>
-
-        {/* Closing & Signature */}
-        <div style={{
-          textAlign: 'center',
-          padding: 'clamp(2rem, 5vw, 3.5rem) 1.5rem',
-          backgroundColor: 'var(--bg-secondary)',
-          borderRadius: 'var(--radius-lg)',
-          border: '1px solid var(--border-color)',
-          boxShadow: 'var(--shadow-sm)'
-        }}>
-          <h3 className="serif-heading" style={{ fontSize: 'clamp(1.4rem, 3.5vw, 1.85rem)', marginBottom: '0.75rem' }}>
-            Begin Your Journey of Reflection
-          </h3>
-          <p style={{ color: 'var(--text-secondary)', marginBottom: '1.75rem', maxWidth: '520px', margin: '0 auto 1.75rem auto', fontSize: '0.95rem', lineHeight: '1.7' }}>
-            Discover thoughtful life lessons, explore published essays, or reach out to engage in academic and inspirational dialogue.
+          <p style={{ margin: '2rem 0 1.25rem 0', color: 'var(--text-secondary)' }}>
+            Life gives us experiences, but rarely gives us their explanations.
           </p>
 
           <div style={{
-            display: 'inline-block',
-            paddingTop: '1rem',
-            borderTop: '1px solid var(--border-color)',
-            marginBottom: '2rem',
-            minWidth: '180px'
+            padding: '1.25rem 0',
+            fontStyle: 'italic',
+            color: 'var(--text-primary)',
+            lineHeight: '2',
+            marginBottom: '1.5rem'
           }}>
-            <p style={{ fontFamily: 'var(--font-serif)', fontSize: '1.25rem', fontWeight: '600', color: 'var(--text-primary)', margin: 0 }}>
-              Monika Chopra
-            </p>
+            <div>Why do some people stay when they should leave?</div>
+            <div>Why do some endings hurt before they heal?</div>
+            <div>Why do we seek approval from people who cannot see our worth?</div>
+            <div>Why do we lose ourselves trying to hold on to what was never meant to stay?</div>
           </div>
 
-          <div style={{ display: 'flex', gap: '0.85rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <Link to="/essays" className="btn btn-primary" style={{ padding: '0.75rem 1.4rem' }}>
-              Explore Essays <ArrowRight size={16} />
-            </Link>
-            <Link to="/contact" className="btn btn-outline" style={{ padding: '0.75rem 1.4rem' }}>
-              <Mail size={16} /> Contact Prof. Chopra
-            </Link>
+          <p style={{ marginBottom: '1.5rem', fontWeight: '600' }}>
+            Aetheria lives in these questions.
+          </p>
+
+          <p style={{ marginBottom: '2rem', lineHeight: '1.8' }}>
+            It is a space for reflection, emotional intelligence, human behaviour, relationships, resilience, wisdom, spirituality and the lessons that life quietly teaches us.
+          </p>
+
+          <p style={{ marginBottom: '1rem' }}>Some words here may comfort you.</p>
+          <p style={{ marginBottom: '1rem' }}>Some may challenge you.</p>
+          <p style={{ marginBottom: '1.25rem' }}>Some may make you question something you have believed for years.</p>
+          <p style={{ marginBottom: '2rem', fontStyle: 'italic', color: 'var(--text-secondary)' }}>
+            And perhaps that is exactly how it should be.
+          </p>
+
+          <div style={{
+            padding: '1.25rem 1.5rem',
+            backgroundColor: 'var(--bg-tertiary)',
+            borderRadius: 'var(--radius-md)',
+            margin: '2rem 0',
+            lineHeight: '1.75'
+          }}>
+            <p style={{ margin: '0 0 0.4rem 0' }}>Aetheria does not promise answers to every question.</p>
+            <p style={{ margin: 0, fontWeight: '600' }}>It simply creates room for better questions.</p>
           </div>
+
+          <p style={{ marginBottom: '1rem' }}>Here, a difficult experience is not merely a wound.</p>
+          <p style={{ marginBottom: '1rem', fontStyle: 'italic' }}>It can become wisdom.</p>
+          <p style={{ marginBottom: '1rem' }}>A rejection can become redirection.</p>
+          <p style={{ marginBottom: '1rem' }}>A closed door can become clarity.</p>
+          <p style={{ marginBottom: '1.25rem' }}>Silence can become understanding.</p>
+          <p style={{ marginBottom: '2rem', fontWeight: '600', color: 'var(--accent-primary)' }}>
+            And sometimes, losing your way can be the beginning of finding yourself.
+          </p>
+
+          <p style={{ marginBottom: '1.5rem', lineHeight: '1.8' }}>
+            There is also a quieter side to Aetheria, a space where you can share what you cannot easily say elsewhere. Without labels. Without judgement. Without the pressure to reveal who you are.
+          </p>
+
+          <p style={{ marginBottom: '2rem', fontStyle: 'italic' }}>
+            Because sometimes, anonymity gives honesty a voice.
+          </p>
+
+          <p style={{ marginBottom: '0.75rem' }}>This is not a place for perfect lives or perfect people.</p>
+          <p style={{ marginBottom: '2rem', fontWeight: '600' }}>It is for real people navigating imperfect lives.</p>
+
+          <div style={{ margin: '2rem 0', lineHeight: '1.9' }}>
+            <div>Read something that speaks to you.</div>
+            <div>Question something that doesn’t.</div>
+            <div>Leave with a thought you did not arrive with.</div>
+          </div>
+
+          <p style={{ margin: '2rem 0 1rem 0', fontStyle: 'italic', color: 'var(--text-secondary)' }}>
+            And if, somewhere between these words, you recognise a part of yourself,
+          </p>
+
+          <p style={{ marginBottom: '2.5rem', fontWeight: '600' }}>
+            then Aetheria has already done what it was created to do.
+          </p>
+
+          {/* Mantras & Signature */}
+          <div style={{
+            marginTop: '3rem',
+            paddingTop: '2.5rem',
+            borderTop: '1px solid var(--border-color)',
+            textAlign: 'center'
+          }}>
+            <h3 style={{
+              fontFamily: 'var(--font-cormorant)',
+              fontSize: '2rem',
+              fontWeight: '700',
+              marginBottom: '1rem',
+              color: 'var(--text-primary)'
+            }}>
+              Aetheria
+            </h3>
+
+            <div style={{
+              fontStyle: 'italic',
+              color: 'var(--text-secondary)',
+              lineHeight: '2',
+              marginBottom: '2rem'
+            }}>
+              <div>A space to pause.</div>
+              <div>A thought to carry.</div>
+              <div>A perspective to discover.</div>
+            </div>
+
+            <div style={{
+              display: 'inline-block',
+              paddingTop: '1rem',
+              borderTop: '1px solid var(--border-color)',
+              minWidth: '160px',
+              marginBottom: '2.5rem'
+            }}>
+              <p style={{
+                fontFamily: 'var(--font-serif)',
+                fontSize: '1.4rem',
+                fontWeight: '600',
+                color: 'var(--text-primary)',
+                margin: 0
+              }}>
+                Monika Chopra
+              </p>
+            </div>
+
+            <div>
+              <Link to="/essays" className="btn btn-primary" style={{ padding: '0.75rem 1.6rem' }}>
+                Explore Essays <ArrowRight size={16} />
+              </Link>
+            </div>
+          </div>
+
         </div>
 
-      </div>
+      </article>
     </div>
   );
 }
