@@ -18,6 +18,7 @@ import SingleEssay from './pages/SingleEssay';
 import Search from './pages/Search';
 import About from './pages/About';
 import Author from './pages/Author';
+import Rajsaar from './pages/Rajsaar';
 import Contact from './pages/Contact';
 import Login from './pages/Login';
 import AdminDashboard from './pages/AdminDashboard';
@@ -41,6 +42,7 @@ export default function App() {
                 <Route path="/about" element={<About />} />
                 <Route path="/person-behind-this" element={<Author />} />
                 <Route path="/author" element={<Author />} />
+                <Route path="/rajsaar" element={<Rajsaar />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/login" element={<Login />} />
                 

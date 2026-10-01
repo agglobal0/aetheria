@@ -8,6 +8,8 @@ export default function Footer() {
   const footerLinks = [
     { name: 'Home', path: '/' },
     { name: 'About', path: '/about' },
+    { name: 'The Person Behind This', path: '/person-behind-this' },
+    { name: 'RAJSAAR', path: '/rajsaar' },
     { name: 'Reflections', path: '/category/reflections' },
     { name: 'Wisdom', path: '/category/wisdom' },
     { name: 'Emotional Intelligence', path: '/category/emotional-intelligence' },
