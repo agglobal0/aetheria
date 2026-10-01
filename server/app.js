@@ -31,7 +31,7 @@ app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 app.get('/api/health', (req, res) => {
   res.json({
     status: 'online',
-    service: 'Aetheria Editorial API',
+    service: 'ORAANIS Editorial API',
     timestamp: new Date()
   });
 });
@@ -57,7 +57,7 @@ async function startServer() {
     const tryListen = (portToUse) => {
       const server = app.listen(portToUse, () => {
         console.log(`====================================================`);
-        console.log(`  Aetheria Editorial API Server running on port ${portToUse}`);
+        console.log(`  ORAANIS Editorial API Server running on port ${portToUse}`);
         console.log(`  Health Check: http://localhost:${portToUse}/api/health`);
         console.log(`====================================================`);
       });

@@ -213,7 +213,7 @@ export default function Rajsaar() {
                   <Compass size={16} /> The Person Behind This
                 </Link>
                 <Link to="/about" className="btn btn-secondary" style={{ padding: '0.75rem 1.6rem', fontSize: '0.92rem' }}>
-                  <BookOpen size={16} /> About Aetheria
+                  <BookOpen size={16} /> About ORAANIS
                 </Link>
               </div>
             </div>

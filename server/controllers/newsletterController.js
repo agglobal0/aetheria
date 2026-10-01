@@ -15,11 +15,11 @@ async function subscribe(req, res, next) {
         await pool.query("UPDATE newsletter_subscribers SET status = 'active' WHERE email = ?", [email]);
         return res.json({ success: true, message: 'Welcome back! Your subscription has been reactivated.' });
       }
-      return res.status(400).json({ success: false, message: 'You are already subscribed to the Aetheria Newsletter.' });
+      return res.status(400).json({ success: false, message: 'You are already subscribed to the ORAANIS Newsletter.' });
     }
 
     await pool.query('INSERT INTO newsletter_subscribers (email) VALUES (?)', [email]);
-    res.status(201).json({ success: true, message: 'Thank you for subscribing to Aetheria Essays.' });
+    res.status(201).json({ success: true, message: 'Thank you for subscribing to ORAANIS Essays.' });
   } catch (error) {
     next(error);
   }

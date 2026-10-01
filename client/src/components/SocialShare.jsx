@@ -5,7 +5,7 @@ import { TwitterIcon, LinkedinIcon, FacebookIcon } from './SocialIcons';
 export default function SocialShare({ title, url }) {
   const [copied, setCopied] = useState(false);
   const shareUrl = url || window.location.href;
-  const shareTitle = title || 'Check out this essay on Aetheria';
+  const shareTitle = title || 'Check out this essay on ORAANIS';
 
   const handleCopy = () => {
     navigator.clipboard.writeText(shareUrl);

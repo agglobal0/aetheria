@@ -60,7 +60,7 @@ export default function Login() {
             Editorial Portal
           </h1>
           <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', marginBottom: '1.75rem' }}>
-            Sign in to access the Aetheria Admin Dashboard.
+            Sign in to access the ORAANIS Admin Dashboard.
           </p>
 
           {error && (

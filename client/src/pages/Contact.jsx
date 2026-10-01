@@ -80,7 +80,7 @@ export default function Contact() {
                 </h3>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', color: 'var(--text-primary)', fontSize: '0.925rem' }}>
                   <Mail size={18} style={{ flexShrink: 0 }} />
-                  <span style={{ wordBreak: 'break-all' }}>editor@aetheria.org</span>
+                  <span style={{ wordBreak: 'break-all' }}>editor@oraanis.org</span>
                 </div>
               </div>
 
@@ -90,7 +90,7 @@ export default function Contact() {
                 </h3>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', color: 'var(--text-primary)', fontSize: '0.925rem' }}>
                   <MessageSquare size={18} style={{ flexShrink: 0 }} />
-                  <span style={{ wordBreak: 'break-all' }}>essays@aetheria.org</span>
+                  <span style={{ wordBreak: 'break-all' }}>essays@oraanis.org</span>
                 </div>
               </div>
 
@@ -100,7 +100,7 @@ export default function Contact() {
                 </h3>
                 <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.65rem', color: 'var(--text-primary)', fontSize: '0.925rem' }}>
                   <MapPin size={18} style={{ flexShrink: 0, marginTop: '0.2rem' }} />
-                  <span>Aetheria Review, 148 Humanities Plaza, Cambridge, MA</span>
+                  <span>ORAANIS Editorial, 148 Humanities Plaza, Cambridge, MA</span>
                 </div>
               </div>
             </div>

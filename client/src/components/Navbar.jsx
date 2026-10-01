@@ -165,7 +165,7 @@ export default function Navbar() {
               lineHeight: '1',
               whiteSpace: 'nowrap'
             }}>
-              Aetheria <span style={{ opacity: 0.5, margin: '0 0.15rem' }}>|</span> Life Lessons & Wisdom
+              ORAANIS <span style={{ opacity: 0.5, margin: '0 0.15rem' }}>|</span> Life Lessons & Wisdom
             </span>
           </div>
         </Link>
@@ -202,7 +202,7 @@ export default function Navbar() {
 
           <LeafSeparator />
 
-          {/* 2. About Aetheria */}
+          {/* 2. About ORAANIS */}
           <Link
             to="/about"
             style={{
@@ -220,7 +220,7 @@ export default function Navbar() {
               if (location.pathname !== '/about') e.currentTarget.style.color = 'var(--text-secondary)';
             }}
           >
-            About Aetheria
+            About ORAANIS
           </Link>
 
           <LeafSeparator />
@@ -594,7 +594,7 @@ export default function Navbar() {
                 padding: '0.75rem 1rem'
               }}
             >
-              <span>About Aetheria</span>
+              <span>About ORAANIS</span>
               <span style={{ fontSize: '1rem', opacity: 0.5 }}>›</span>
             </Link>
 

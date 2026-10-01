@@ -1,7 +1,7 @@
 {
-  "name": "aetheria-backend",
+  "name": "oraanis-backend",
   "version": "1.0.0",
-  "description": "Backend API for Aetheria Editorial Blogging Platform",
+  "description": "Backend API for ORAANIS Editorial Blogging Platform",
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
@@ -14,7 +14,7 @@
     "mysql",
     "jwt"
   ],
-  "author": "Aetheria Team",
+  "author": "ORAANIS",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",

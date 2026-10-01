@@ -1,4 +1,4 @@
-# AETHERIA — Modern Editorial Blogging Platform
+# ORAANIS — Modern Editorial Blogging Platform
 
 > **Ideas worth sitting with.**  
 > An independent digital publication featuring long-form essays, quiet reflection, ethics, human behaviour, technology, and life observations.
@@ -7,7 +7,7 @@
 
 ## 🌟 Editorial Philosophy & Aesthetics
 
-Aetheria is designed like a high-end digital magazine and personal essay journal. It prioritizes **content and typography over decoration**, encouraging readers to slow down, read, and return.
+ORAANIS is designed like a high-end digital magazine and personal essay journal. It prioritizes **content and typography over decoration**, encouraging readers to slow down, read, and return.
 
 ### Core Spheres (Categories)
 1. **Ethics** (Accent: Muted Burgundy `#8B263E`) — Morality, digital privacy, responsibility, and human choice.
@@ -37,7 +37,7 @@ cd server
 npm install
 npm run start
 ```
-*Note: The backend automatically connects to local MySQL (`root` with empty password by default), creates `aetheria_db` if missing, initializes all tables, and seeds 20 high-quality essays across all categories along with editorial authors and an admin user.*
+*Note: The backend automatically connects to local MySQL (`root` with empty password by default), creates `oraanis_db` if missing, initializes all tables, and seeds 20 high-quality essays across all categories along with editorial authors and an admin user.*
 
 ### 3. Frontend Setup
 ```bash
@@ -52,7 +52,7 @@ Access the application at `http://localhost:5173`.
 ## 🔑 Admin Credentials
 
 - **URL**: `http://localhost:5173/login`
-- **Email**: `admin@aetheria.com`
+- **Email**: `admin@oraanis.com`
 - **Password**: `adminpassword123`
 
 ### Admin Features

@@ -319,7 +319,7 @@ export default function Author() {
                   Explore Essays <ArrowRight size={16} />
                 </Link>
                 <Link to="/about" className="btn btn-secondary" style={{ padding: '0.75rem 1.6rem', fontSize: '0.92rem' }}>
-                  <BookOpen size={16} /> About Aetheria
+                  <BookOpen size={16} /> About ORAANIS
                 </Link>
                 <Link to="/share" className="btn btn-secondary" style={{ padding: '0.75rem 1.6rem', fontSize: '0.92rem' }}>
                   <Feather size={16} /> Share Anonymously

@@ -52,7 +52,7 @@ export default function Search() {
 
       <div style={{ maxWidth: '680px', margin: '0 auto clamp(2rem, 4vw, 3.5rem) auto', textAlign: 'center' }}>
         <h1 className="serif-heading" style={{ fontSize: 'clamp(1.85rem, 4.5vw, 2.5rem)', marginBottom: '1rem' }}>
-          Search Aetheria
+          Search ORAANIS
         </h1>
 
         <form onSubmit={handleSearchSubmit} className="search-page-form" style={{ display: 'flex', gap: '0.6rem' }}>

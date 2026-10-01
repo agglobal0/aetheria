@@ -14,11 +14,11 @@ export default function About() {
         
         {/* Breadcrumb Navigation */}
         <div style={{ marginBottom: '1.5rem' }}>
-          <Breadcrumbs items={[{ label: 'About Aetheria' }]} />
+          <Breadcrumbs items={[{ label: 'About ORAANIS' }]} />
         </div>
 
         {/* =========================================================================
-            ABOUT AETHERIA MANIFESTO
+            ABOUT ORAANIS MANIFESTO
             ========================================================================= */}
         <article style={{
           backgroundColor: 'var(--bg-secondary)',
@@ -40,7 +40,7 @@ export default function About() {
               color: 'var(--text-primary)',
               textTransform: 'none'
             }}>
-              About Aetheria
+              About ORAANIS
             </h1>
             <div style={{
               width: '45px',
@@ -61,7 +61,7 @@ export default function About() {
 
             <p style={{ marginBottom: '1.25rem' }}>Some spaces are built with walls.</p>
             <p style={{ marginBottom: '1.25rem' }}>Some are built with words.</p>
-            <p style={{ marginBottom: '2.25rem', fontWeight: '600' }}>Aetheria is one of the latter.</p>
+            <p style={{ marginBottom: '2.25rem', fontWeight: '600' }}>ORAANIS is one of the latter.</p>
 
             <p style={{ marginBottom: '1.25rem' }}>It was born from a simple realisation:</p>
 
@@ -99,7 +99,7 @@ export default function About() {
             </div>
 
             <p style={{ marginBottom: '1.5rem', fontWeight: '600' }}>
-              Aetheria lives in these questions.
+              ORAANIS lives in these questions.
             </p>
 
             <p style={{ marginBottom: '2.25rem', lineHeight: '1.85' }}>
@@ -121,7 +121,7 @@ export default function About() {
               lineHeight: '1.75',
               borderLeft: '3px solid var(--accent-primary)'
             }}>
-              <p style={{ margin: '0 0 0.4rem 0' }}>Aetheria does not promise answers to every question.</p>
+              <p style={{ margin: '0 0 0.4rem 0' }}>ORAANIS does not promise answers to every question.</p>
               <p style={{ margin: 0, fontWeight: '600' }}>It simply creates room for better questions.</p>
             </div>
 
@@ -135,7 +135,7 @@ export default function About() {
             </p>
 
             <p style={{ marginBottom: '1.5rem', lineHeight: '1.85' }}>
-              There is also a quieter side to Aetheria, a space where you can share what you cannot easily say elsewhere. Without labels. Without judgement. Without the pressure to reveal who you are.
+              There is also a quieter side to ORAANIS, a space where you can share what you cannot easily say elsewhere. Without labels. Without judgement. Without the pressure to reveal who you are.
             </p>
 
             <p style={{ marginBottom: '2.25rem', fontStyle: 'italic' }}>
@@ -156,10 +156,10 @@ export default function About() {
             </p>
 
             <p style={{ marginBottom: '2.5rem', fontWeight: '600' }}>
-              then Aetheria has already done what it was created to do.
+              then ORAANIS has already done what it was created to do.
             </p>
 
-            {/* Aetheria Closing Mantra */}
+            {/* ORAANIS Closing Mantra */}
             <div style={{
               marginTop: '3rem',
               paddingTop: '2.5rem',
@@ -173,7 +173,7 @@ export default function About() {
                 marginBottom: '0.85rem',
                 color: 'var(--text-primary)'
               }}>
-                Aetheria
+                ORAANIS
               </h3>
 
               <div style={{
