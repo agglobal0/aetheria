@@ -65,21 +65,8 @@ export default function About() {
 
             <p style={{ marginBottom: '1.25rem' }}>It was born from a simple realisation:</p>
 
-            <blockquote style={{
-              fontStyle: 'italic',
-              fontSize: 'clamp(1.15rem, 2.4vw, 1.3rem)',
-              lineHeight: '1.75',
-              color: 'var(--accent-primary)',
-              borderLeft: '3px solid var(--accent-primary)',
-              paddingLeft: '1.25rem',
-              margin: '2rem 0',
-              backgroundColor: 'var(--bg-tertiary)',
-              padding: '1.25rem 1.5rem',
-              borderRadius: '0 8px 8px 0'
-            }}>
-              <p style={{ margin: '0 0 0.5rem 0' }}>People do not always need advice.</p>
-              <p style={{ margin: 0 }}>Sometimes, they need a thought that helps them understand their own.</p>
-            </blockquote>
+            <p style={{ marginBottom: '1.25rem' }}>People do not always need advice.</p>
+            <p style={{ marginBottom: '2.25rem' }}>Sometimes, they need a thought that helps them understand their own.</p>
 
             <p style={{ margin: '2.25rem 0 1.25rem 0', color: 'var(--text-secondary)' }}>
               Life gives us experiences, but rarely gives us their explanations.
@@ -113,17 +100,8 @@ export default function About() {
               And perhaps that is exactly how it should be.
             </p>
 
-            <div style={{
-              padding: '1.25rem 1.5rem',
-              backgroundColor: 'var(--bg-tertiary)',
-              borderRadius: '8px',
-              margin: '2.25rem 0',
-              lineHeight: '1.75',
-              borderLeft: '3px solid var(--accent-primary)'
-            }}>
-              <p style={{ margin: '0 0 0.4rem 0' }}>ORAANIS does not promise answers to every question.</p>
-              <p style={{ margin: 0, fontWeight: '600' }}>It simply creates room for better questions.</p>
-            </div>
+            <p style={{ marginBottom: '0.85rem' }}>ORAANIS does not promise answers to every question.</p>
+            <p style={{ marginBottom: '2.25rem', fontWeight: '600' }}>It simply creates room for better questions.</p>
 
             <p style={{ marginBottom: '0.85rem' }}>Here, a difficult experience is not merely a wound.</p>
             <p style={{ marginBottom: '0.85rem', fontStyle: 'italic' }}>It can become wisdom.</p>

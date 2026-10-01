@@ -156,25 +156,12 @@ export default function Author() {
               <div>And experience taught me that sometimes, a single thought at the right moment can change the way we look at everything.</div>
             </div>
 
-            <blockquote style={{
-              fontStyle: 'italic',
-              fontSize: 'clamp(1.12rem, 2.3vw, 1.28rem)',
-              lineHeight: '1.75',
-              color: 'var(--accent-primary)',
-              borderLeft: '3px solid var(--accent-primary)',
-              paddingLeft: '1.25rem',
-              margin: '2rem 0',
-              backgroundColor: 'var(--bg-tertiary)',
-              padding: '1.25rem 1.5rem',
-              borderRadius: '0 8px 8px 0'
-            }}>
-              <p style={{ margin: '0 0 0.5rem 0' }}>
+            <p style={{ marginBottom: '1.25rem' }}>
                 I am Monika Chopra — an educator, an avid reader, a writer, and, above all, someone who continues to learn from life.
               </p>
-              <p style={{ margin: 0 }}>
+              <p style={{ marginBottom: '2rem' }}>
                 Writing has always been my way of making sense of what I read, experience and feel.
               </p>
-            </blockquote>
 
             <p style={{ marginBottom: '1.5rem' }}>
               This platform grew from that habit.
@@ -184,14 +171,7 @@ export default function Author() {
               It is not meant to be another place telling people what they should believe, how they should live, or what they should do.
             </p>
 
-            <div style={{
-              padding: '1.25rem 1.5rem',
-              backgroundColor: 'var(--bg-tertiary)',
-              borderRadius: '8px',
-              margin: '2rem 0',
-              lineHeight: '2',
-              borderLeft: '3px solid var(--accent-primary)'
-            }}>
+            <div style={{ margin: '1.5rem 0', lineHeight: '2' }}>
               <div>It is a space where thoughts can breathe.</div>
               <div>Where experiences can be shared.</div>
               <div>Where difficult questions do not need immediate answers.</div>
