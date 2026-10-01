@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Compass, Feather, BookOpen, Heart, Sparkles } from 'lucide-react';
+import { ArrowRight, Compass, Feather, BookOpen } from 'lucide-react';
 import Breadcrumbs from '../components/Breadcrumbs';
 import { profPortraitImg } from '../assets/images';
 
@@ -11,14 +11,14 @@ export default function Author() {
 
   return (
     <div style={{ backgroundColor: 'var(--bg-primary)', minHeight: '100vh', padding: 'clamp(1.5rem, 3vw, 2.5rem) 0 clamp(4rem, 8vw, 7rem) 0' }}>
-      <div className="container" style={{ maxWidth: '880px', margin: '0 auto', padding: '0 clamp(1.25rem, 4vw, 2rem)' }}>
+      <div className="container" style={{ maxWidth: '820px', margin: '0 auto', padding: '0 clamp(1.25rem, 4vw, 2rem)' }}>
         
         {/* Breadcrumb Navigation */}
         <div style={{ marginBottom: '1.5rem' }}>
           <Breadcrumbs items={[{ label: 'The Person Behind This' }]} />
         </div>
 
-        {/* Main Content Card */}
+        {/* Main Content Article */}
         <article style={{
           backgroundColor: 'var(--bg-secondary)',
           border: '1px solid var(--border-color)',
@@ -41,12 +41,12 @@ export default function Author() {
               color: 'var(--accent-primary)',
               marginBottom: '0.6rem'
             }}>
-              <Compass size={14} /> Founder & Author
+              <Compass size={14} /> Founder & Writer
             </span>
 
             <h1 style={{
               fontFamily: 'var(--font-cormorant)',
-              fontSize: 'clamp(2.4rem, 5.5vw, 3.5rem)',
+              fontSize: 'clamp(2.3rem, 5.5vw, 3.4rem)',
               fontWeight: '700',
               letterSpacing: '-0.01em',
               lineHeight: '1.15',
@@ -66,145 +66,245 @@ export default function Author() {
             }} />
           </header>
 
-          {/* Author Grid: Portrait & Intro Bio */}
+          {/* Portrait Banner / Card */}
           <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-            gap: 'clamp(2rem, 4vw, 3rem)',
-            alignItems: 'center',
-            marginBottom: '3rem'
+            textAlign: 'center',
+            marginBottom: 'clamp(2rem, 4vw, 3rem)'
           }}>
-            
-            {/* Portrait Column */}
-            <div style={{ textAlign: 'center' }}>
-              <div style={{
-                position: 'relative',
-                display: 'inline-block',
-                maxWidth: '320px',
-                width: '100%',
-                borderRadius: '14px',
-                overflow: 'hidden',
-                boxShadow: '0 10px 30px rgba(44, 38, 33, 0.12)',
-                border: '4px solid var(--bg-tertiary)'
-              }}>
-                <img
-                  src={profPortraitImg}
-                  alt="Monika Chopra"
-                  style={{
-                    width: '100%',
-                    height: 'auto',
-                    aspectRatio: '4 / 5',
-                    objectFit: 'cover',
-                    display: 'block'
-                  }}
-                />
-              </div>
-              <div style={{ marginTop: '1.1rem' }}>
-                <h2 style={{
-                  fontFamily: 'var(--font-cormorant)',
-                  fontSize: '1.65rem',
-                  fontWeight: '700',
-                  color: 'var(--text-primary)',
-                  marginBottom: '0.2rem'
-                }}>
-                  Monika Chopra
-                </h2>
-                <p style={{
-                  fontSize: '0.88rem',
-                  color: 'var(--text-secondary)',
-                  letterSpacing: '0.04em'
-                }}>
-                  Educator • Observer • Writer
-                </p>
-              </div>
-            </div>
-
-            {/* Introductory Narrative */}
             <div style={{
-              fontFamily: 'var(--font-serif)',
-              fontSize: 'clamp(1.08rem, 2.2vw, 1.2rem)',
-              lineHeight: '1.9',
-              color: 'var(--text-primary)'
+              position: 'relative',
+              display: 'inline-block',
+              maxWidth: '300px',
+              width: '100%',
+              borderRadius: '14px',
+              overflow: 'hidden',
+              boxShadow: '0 10px 30px rgba(44, 38, 33, 0.12)',
+              border: '4px solid var(--bg-tertiary)'
             }}>
-              <p style={{ marginBottom: '1.25rem' }}>
-                I am <strong style={{ color: 'var(--accent-primary)' }}>Monika Chopra</strong>, an educator in Information Technology with nearly three decades of teaching, reading, observing, and learning from people and life.
-              </p>
-
-              <p style={{ marginBottom: '1.25rem' }}>
-                Technology has been my profession. Human beings have been my deeper subject of study.
-              </p>
-
-              <blockquote style={{
-                fontStyle: 'italic',
-                fontSize: '1.15rem',
-                lineHeight: '1.75',
-                color: 'var(--accent-primary)',
-                borderLeft: '3px solid var(--accent-primary)',
-                paddingLeft: '1.25rem',
-                margin: '1.5rem 0',
-                backgroundColor: 'var(--bg-tertiary)',
-                padding: '1rem 1.25rem',
-                borderRadius: '0 8px 8px 0'
-              }}>
-                "I write to explore those lessons — not because I have figured life out, but because I continue to learn from it."
-              </blockquote>
+              <img
+                src={profPortraitImg}
+                alt="Monika Chopra"
+                style={{
+                  width: '100%',
+                  height: 'auto',
+                  aspectRatio: '4 / 5',
+                  objectFit: 'cover',
+                  display: 'block'
+                }}
+              />
             </div>
-
+            <div style={{ marginTop: '1rem' }}>
+              <h2 style={{
+                fontFamily: 'var(--font-cormorant)',
+                fontSize: '1.65rem',
+                fontWeight: '700',
+                color: 'var(--text-primary)',
+                marginBottom: '0.15rem'
+              }}>
+                Monika Chopra
+              </h2>
+              <p style={{
+                fontSize: '0.88rem',
+                color: 'var(--text-secondary)',
+                letterSpacing: '0.04em'
+              }}>
+                Educator • Observer • Writer
+              </p>
+            </div>
           </div>
 
-          {/* Full Narrative Essay */}
+          {/* Continuous Editorial Essay Prose */}
           <div style={{
             fontFamily: 'var(--font-serif)',
-            fontSize: 'clamp(1.08rem, 2.2vw, 1.2rem)',
+            fontSize: 'clamp(1.08rem, 2.2vw, 1.22rem)',
             lineHeight: '1.9',
             color: 'var(--text-primary)',
             borderTop: '1px solid var(--border-color)',
             paddingTop: '2.5rem'
           }}>
 
+            <p style={{ marginBottom: '1.25rem' }}>
+              I did not create this space because I had something extraordinary to say.
+            </p>
+
+            <p style={{ marginBottom: '2rem', fontWeight: '600' }}>
+              I created it because, over the years, I realised how many ordinary thoughts remain unspoken.
+            </p>
+
+            <div style={{
+              padding: '0.75rem 0 1.25rem 0',
+              fontStyle: 'italic',
+              color: 'var(--text-primary)',
+              lineHeight: '2.1',
+              marginBottom: '1rem'
+            }}>
+              <div>A question we carry for years.</div>
+              <div>A lesson we understand too late.</div>
+              <div>A relationship we struggle to understand.</div>
+              <div>A phase of life we survive quietly.</div>
+              <div>Or simply a thought that keeps returning to us, asking to be understood.</div>
+            </div>
+
+            <p style={{ margin: '2rem 0 1.25rem 0' }}>
+              I have spent almost three decades in education. Teaching has been my profession, but learning has never been limited to a classroom.
+            </p>
+
+            <div style={{ margin: '1.5rem 0', lineHeight: '2' }}>
+              <div>Books taught me to look beyond what is obvious.</div>
+              <div>People taught me that everyone carries a world that may not be visible.</div>
+              <div>Life taught me that some of the deepest lessons arrive without announcements.</div>
+              <div>And experience taught me that sometimes, a single thought at the right moment can change the way we look at everything.</div>
+            </div>
+
+            <blockquote style={{
+              fontStyle: 'italic',
+              fontSize: 'clamp(1.12rem, 2.3vw, 1.28rem)',
+              lineHeight: '1.75',
+              color: 'var(--accent-primary)',
+              borderLeft: '3px solid var(--accent-primary)',
+              paddingLeft: '1.25rem',
+              margin: '2rem 0',
+              backgroundColor: 'var(--bg-tertiary)',
+              padding: '1.25rem 1.5rem',
+              borderRadius: '0 8px 8px 0'
+            }}>
+              <p style={{ margin: '0 0 0.5rem 0' }}>
+                I am Monika Chopra — an educator, an avid reader, a writer, and, above all, someone who continues to learn from life.
+              </p>
+              <p style={{ margin: 0 }}>
+                Writing has always been my way of making sense of what I read, experience and feel.
+              </p>
+            </blockquote>
+
             <p style={{ marginBottom: '1.5rem' }}>
-              Over the decades spent in academic halls, mentoring sessions, and quiet everyday conversations, I came to realise a fundamental truth:
-            </p>
-
-            <p style={{ marginBottom: '1.5rem', fontWeight: '600', color: 'var(--accent-primary)' }}>
-              Regardless of who we are, where we come from, or what title we hold, we all navigate the same unspoken vulnerabilities.
+              This platform grew from that habit.
             </p>
 
             <p style={{ marginBottom: '1.5rem' }}>
-              We all wonder why certain relationships fall apart, how to recover our sense of self-worth after a quiet betrayal, why some goodbyes sting before they heal, and how to find courage when our plans do not turn out as intended.
+              It is not meant to be another place telling people what they should believe, how they should live, or what they should do.
+            </p>
+
+            <div style={{
+              padding: '1.25rem 1.5rem',
+              backgroundColor: 'var(--bg-tertiary)',
+              borderRadius: '8px',
+              margin: '2rem 0',
+              lineHeight: '2',
+              borderLeft: '3px solid var(--accent-primary)'
+            }}>
+              <div>It is a space where thoughts can breathe.</div>
+              <div>Where experiences can be shared.</div>
+              <div>Where difficult questions do not need immediate answers.</div>
+              <div>Where words can sometimes say what we have struggled to say ourselves.</div>
+            </div>
+
+            <div style={{ margin: '1.5rem 0', lineHeight: '2' }}>
+              <div>Some writings here may make you think.</div>
+              <div>Some may challenge you.</div>
+              <div>Some may comfort you.</div>
+              <div>Some may simply stay with you for a while.</div>
+            </div>
+
+            <p style={{ margin: '2rem 0 1.25rem 0', fontWeight: '600' }}>
+              And that is enough.
             </p>
 
             <p style={{ marginBottom: '1.5rem' }}>
-              Aetheria was born from this space of listening. It is not an advice column, nor a rulebook for how one ought to live. It is a quiet place of companionship for the mind — a mirror where experiences are transformed into perspective, and pain is given room to turn into wisdom.
+              Because I believe words do not always have to solve something.
             </p>
 
-            <p style={{ marginBottom: '2.5rem', fontStyle: 'italic', color: 'var(--text-secondary)' }}>
-              If a single line here helps you feel understood, makes you pause to breathe, or brings you clarity on a path you are walking, then this journey has achieved its purpose.
+            <p style={{ marginBottom: '2rem', fontStyle: 'italic', color: 'var(--accent-primary)' }}>
+              Sometimes, they only need to reach the right person at the right time.
             </p>
 
-            {/* Signature & Closing */}
+            <p style={{ marginBottom: '1.5rem' }}>
+              This is also my invitation to look at life beyond its obvious definitions — beyond success and failure, right and wrong, gain and loss.
+            </p>
+
+            <div style={{ margin: '1.5rem 0', lineHeight: '2' }}>
+              <div>To read not just for information, but for meaning.</div>
+              <div>To reflect without judging ourselves too quickly.</div>
+              <div>To question without being afraid of the answers.</div>
+              <div>And to keep becoming, because none of us is ever a finished story.</div>
+            </div>
+
+            <p style={{ margin: '2rem 0 1rem 0' }}>
+              There will be my writings here.
+            </p>
+
+            <p style={{ marginBottom: '1.5rem' }}>
+              There will be other voices too.
+            </p>
+
+            <p style={{ marginBottom: '1.5rem' }}>
+              Because this space is not meant to be only about me.
+            </p>
+
+            <p style={{ marginBottom: '2rem', fontWeight: '600' }}>
+              It is about the conversations that begin when one person’s thought meets another person’s experience.
+            </p>
+
+            <div style={{ margin: '1.5rem 0', lineHeight: '2', fontStyle: 'italic' }}>
+              <div>Perhaps you will find something here that puts words to a feeling you could not explain.</div>
+              <div>Perhaps you will discover a perspective you had never considered.</div>
+              <div>Or perhaps you will simply pause for a moment in the middle of a busy life.</div>
+            </div>
+
+            <p style={{ margin: '2rem 0 1.5rem 0', fontWeight: '600', color: 'var(--accent-primary)' }}>
+              If that happens, this journey has already found its purpose.
+            </p>
+
+            <p style={{ marginBottom: '1rem' }}>
+              I am not here to give you a formula for life.
+            </p>
+
+            <p style={{ marginBottom: '2rem' }}>
+              I am here to share what I have read, lived, questioned and understood along the way.
+            </p>
+
+            <div style={{ margin: '1.5rem 0', lineHeight: '2' }}>
+              <div>Take what speaks to you.</div>
+              <div>Question what does not.</div>
+              <div>And keep discovering your own way.</div>
+            </div>
+
+            {/* Closing Signature & Tagline */}
             <div style={{
               textAlign: 'center',
-              paddingTop: '2rem',
+              paddingTop: '2.5rem',
               borderTop: '1px solid var(--border-color)',
-              marginTop: '2.5rem'
+              marginTop: '3rem'
             }}>
               <p style={{
                 fontFamily: 'var(--font-cormorant)',
-                fontSize: '1.75rem',
+                fontSize: '1.65rem',
                 fontWeight: '700',
-                color: 'var(--text-primary)',
-                margin: '0 0 0.35rem 0'
+                color: 'var(--accent-primary)',
+                marginBottom: '0.5rem',
+                letterSpacing: '0.02em'
               }}>
-                Monika Chopra
+                Welcome
               </p>
-              <p style={{
-                fontSize: '0.85rem',
+
+              <div style={{
+                fontFamily: 'var(--font-cormorant)',
+                fontSize: '1.35rem',
                 fontStyle: 'italic',
                 color: 'var(--text-secondary)',
-                marginBottom: '2rem'
+                letterSpacing: '0.08em',
+                marginBottom: '1.5rem'
               }}>
-                Aetheria — Life Lessons & Wisdom
+                Read. Reflect. Become.
+              </div>
+
+              <p style={{
+                fontFamily: 'var(--font-cormorant)',
+                fontSize: '1.85rem',
+                fontWeight: '700',
+                color: 'var(--text-primary)',
+                margin: '0 0 2rem 0'
+              }}>
+                Monika Chopra
               </p>
 
               {/* Action Buttons */}
