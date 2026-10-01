@@ -207,17 +207,17 @@ export default function Navbar() {
             to="/about"
             style={{
               fontSize: '0.88rem',
-              fontWeight: (location.pathname === '/about' && location.hash !== '#author') ? '600' : '500',
-              color: (location.pathname === '/about' && location.hash !== '#author') ? 'var(--accent-primary)' : 'var(--text-secondary)',
+              fontWeight: location.pathname === '/about' ? '600' : '500',
+              color: location.pathname === '/about' ? 'var(--accent-primary)' : 'var(--text-secondary)',
               textDecoration: 'none',
               padding: '0.4rem 0.5rem',
               transition: 'all 0.2s ease',
               whiteSpace: 'nowrap',
-              borderBottom: (location.pathname === '/about' && location.hash !== '#author') ? '2px solid var(--accent-primary)' : '2px solid transparent'
+              borderBottom: location.pathname === '/about' ? '2px solid var(--accent-primary)' : '2px solid transparent'
             }}
             onMouseEnter={(e) => e.currentTarget.style.color = 'var(--text-primary)'}
             onMouseLeave={(e) => {
-              if (location.pathname !== '/about' || location.hash === '#author') e.currentTarget.style.color = 'var(--text-secondary)';
+              if (location.pathname !== '/about') e.currentTarget.style.color = 'var(--text-secondary)';
             }}
           >
             About Aetheria
@@ -227,20 +227,20 @@ export default function Navbar() {
 
           {/* 3. The Person Behind This */}
           <Link
-            to="/about#author"
+            to="/person-behind-this"
             style={{
               fontSize: '0.88rem',
-              fontWeight: (location.pathname === '/about' && location.hash === '#author') ? '600' : '500',
-              color: (location.pathname === '/about' && location.hash === '#author') ? 'var(--accent-primary)' : 'var(--text-secondary)',
+              fontWeight: (location.pathname === '/person-behind-this' || location.pathname === '/author') ? '600' : '500',
+              color: (location.pathname === '/person-behind-this' || location.pathname === '/author') ? 'var(--accent-primary)' : 'var(--text-secondary)',
               textDecoration: 'none',
               padding: '0.4rem 0.5rem',
               transition: 'all 0.2s ease',
               whiteSpace: 'nowrap',
-              borderBottom: (location.pathname === '/about' && location.hash === '#author') ? '2px solid var(--accent-primary)' : '2px solid transparent'
+              borderBottom: (location.pathname === '/person-behind-this' || location.pathname === '/author') ? '2px solid var(--accent-primary)' : '2px solid transparent'
             }}
             onMouseEnter={(e) => e.currentTarget.style.color = 'var(--text-primary)'}
             onMouseLeave={(e) => {
-              if (location.pathname !== '/about' || location.hash !== '#author') e.currentTarget.style.color = 'var(--text-secondary)';
+              if (location.pathname !== '/person-behind-this' && location.pathname !== '/author') e.currentTarget.style.color = 'var(--text-secondary)';
             }}
           >
             The Person Behind This
@@ -566,8 +566,8 @@ export default function Navbar() {
               className="mobile-nav-link"
               style={{
                 fontSize: '0.95rem',
-                fontWeight: (location.pathname === '/about' && location.hash !== '#author') ? '600' : '500',
-                color: (location.pathname === '/about' && location.hash !== '#author') ? 'var(--accent-primary)' : 'inherit',
+                fontWeight: location.pathname === '/about' ? '600' : '500',
+                color: location.pathname === '/about' ? 'var(--accent-primary)' : 'inherit',
                 padding: '0.75rem 1rem'
               }}
             >
@@ -576,13 +576,13 @@ export default function Navbar() {
             </Link>
 
             <Link
-              to="/about#author"
+              to="/person-behind-this"
               onClick={() => setMobileMenuOpen(false)}
               className="mobile-nav-link"
               style={{
                 fontSize: '0.95rem',
-                fontWeight: (location.pathname === '/about' && location.hash === '#author') ? '600' : '500',
-                color: (location.pathname === '/about' && location.hash === '#author') ? 'var(--accent-primary)' : 'inherit',
+                fontWeight: (location.pathname === '/person-behind-this' || location.pathname === '/author') ? '600' : '500',
+                color: (location.pathname === '/person-behind-this' || location.pathname === '/author') ? 'var(--accent-primary)' : 'inherit',
                 padding: '0.75rem 1rem'
               }}
             >

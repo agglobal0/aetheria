@@ -203,7 +203,7 @@ export default function Home() {
               </p>
 
               <Link
-                to="/about"
+                to="/person-behind-this"
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',
@@ -527,7 +527,7 @@ export default function Home() {
                 </p>
 
                 <Link
-                  to="/about"
+                  to="/person-behind-this"
                   style={{
                     fontSize: '0.84rem',
                     fontWeight: '600',
