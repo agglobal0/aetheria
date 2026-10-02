@@ -135,7 +135,7 @@ export default function Home() {
             <div className="why-space-left">
               <div>
                 <div className="why-space-pill-badge">
-                  <LeafIcon size={14} color="var(--accent-primary)" />
+                  <LeafIcon size={13} color="var(--accent-primary)" />
                   <span>An Invitation to Pause</span>
                 </div>
 
@@ -143,63 +143,63 @@ export default function Home() {
                   Why This Space?
                 </h2>
 
-                <p style={{ fontSize: '0.975rem', lineHeight: '1.75', color: 'var(--text-primary)', marginBottom: '1rem', fontWeight: '500' }}>
+                <p style={{ fontSize: '0.92rem', lineHeight: '1.65', color: 'var(--text-primary)', marginBottom: '0.75rem', fontWeight: '500' }}>
                   We have never had more access to information, yet understanding ourselves and the people around us has not necessarily become easier.
                 </p>
 
-                <p style={{ fontSize: '0.925rem', lineHeight: '1.7', color: 'var(--text-secondary)', marginBottom: '1rem' }}>
+                <p style={{ fontSize: '0.865rem', lineHeight: '1.6', color: 'var(--text-secondary)', marginBottom: '0.75rem' }}>
                   A search can give us an answer in seconds. A social media post can tell us what a situation means. A short video can offer a solution to a problem that may have taken us years to understand. But human experiences rarely fit into a few lines.
                 </p>
 
-                <p style={{ fontSize: '0.925rem', lineHeight: '1.7', color: 'var(--text-secondary)', marginBottom: '1.25rem' }}>
+                <p style={{ fontSize: '0.865rem', lineHeight: '1.6', color: 'var(--text-secondary)', marginBottom: '0.85rem' }}>
                   A disagreement can have many layers. A relationship can hold affection and disappointment at the same time. A decision can be right for one phase of life and wrong for another. Even our own behaviour can surprise us.
                 </p>
 
                 {/* Focus Explore Block */}
                 <div style={{
-                  padding: '1rem 1.15rem',
+                  padding: '0.75rem 0.95rem',
                   backgroundColor: 'var(--bg-tertiary)',
                   borderRadius: 'var(--radius-sm)',
                   borderLeft: '3px solid var(--accent-primary)',
-                  marginBottom: '1.25rem'
+                  marginBottom: '0.85rem'
                 }}>
-                  <p style={{ fontSize: '0.95rem', fontWeight: '600', color: 'var(--text-primary)', marginBottom: '0.5rem' }}>
+                  <p style={{ fontSize: '0.88rem', fontWeight: '600', color: 'var(--text-primary)', marginBottom: '0.35rem' }}>
                     This is the space ORAANIS wants to explore.
                   </p>
-                  <p style={{ fontSize: '0.875rem', lineHeight: '1.65', color: 'var(--text-secondary)', margin: 0 }}>
+                  <p style={{ fontSize: '0.825rem', lineHeight: '1.55', color: 'var(--text-secondary)', margin: 0 }}>
                     Not the obvious explanation, but what lies underneath it. Not simply what happened, but the different ways it can be understood. Not just the emotion we felt in a moment, but what that emotion may reveal about our expectations, choices, relationships and patterns.
                   </p>
                 </div>
 
-                <p style={{ fontSize: '0.925rem', lineHeight: '1.7', color: 'var(--text-secondary)', marginBottom: '1rem' }}>
+                <p style={{ fontSize: '0.865rem', lineHeight: '1.6', color: 'var(--text-secondary)', marginBottom: '0.75rem' }}>
                   There is also value in encountering a perspective that is different from our own. We do not always have to agree with an idea for it to make us think. Sometimes the most useful thought is the one that makes us pause and reconsider something we had already decided.
                 </p>
 
-                <p style={{ fontSize: '0.925rem', lineHeight: '1.7', color: 'var(--text-secondary)', marginBottom: '1.25rem' }}>
+                <p style={{ fontSize: '0.865rem', lineHeight: '1.6', color: 'var(--text-secondary)', marginBottom: '0.85rem' }}>
                   ORAANIS brings together such thoughts and perspectives through stories, essays and conversations around the experiences that shape everyday life.
                 </p>
 
                 {/* Philosophical Quote Card */}
-                <div className="why-space-quote-card" style={{ marginBottom: '1.25rem' }}>
-                  <p className="why-space-quote-lead" style={{ fontSize: '0.925rem', marginBottom: '0.5rem' }}>
+                <div className="why-space-quote-card" style={{ marginBottom: '0.85rem', padding: '0.75rem 0.95rem' }}>
+                  <p className="why-space-quote-lead" style={{ fontSize: '0.84rem', marginBottom: '0.35rem' }}>
                     The intention is simple: to create something worth spending a few quiet minutes with.
                   </p>
-                  <div style={{ fontSize: '0.85rem', lineHeight: '1.6', color: 'var(--text-secondary)', fontStyle: 'italic', marginBottom: '0.5rem' }}>
+                  <div style={{ fontSize: '0.8rem', lineHeight: '1.5', color: 'var(--text-secondary)', fontStyle: 'italic', marginBottom: '0.35rem' }}>
                     <div>Something that does not demand an immediate reaction.</div>
                     <div>Something that leaves room for your own interpretation.</div>
                   </div>
-                  <p className="why-space-quote-core" style={{ fontSize: '0.875rem', marginTop: '0.5rem' }}>
+                  <p className="why-space-quote-core" style={{ fontSize: '0.84rem', marginTop: '0.35rem' }}>
                     Because the most meaningful insights are not always the ones that tell us something new. Sometimes they are the ones that make us look at something familiar in a way we had never considered before.
                   </p>
                 </div>
 
                 <p style={{
-                  fontSize: '0.95rem',
+                  fontSize: '0.88rem',
                   fontFamily: 'var(--font-serif)',
                   fontWeight: '600',
                   color: 'var(--accent-burgundy, #8B263E)',
                   fontStyle: 'italic',
-                  marginBottom: '1.5rem'
+                  marginBottom: '1.15rem'
                 }}>
                   ORAANIS is that space between reading something and truly thinking about it.
                 </p>
@@ -211,7 +211,7 @@ export default function Home() {
                   className="why-space-story-btn"
                 >
                   <span>Read My Story</span>
-                  <ArrowRight size={15} className="story-btn-arrow" />
+                  <ArrowRight size={14} className="story-btn-arrow" />
                 </Link>
               </div>
             </div>
@@ -225,7 +225,7 @@ export default function Home() {
                   </h3>
                   <span className="explore-theme-subtitle">5 Pillars of Reflection</span>
                 </div>
-                <div style={{ flex: 1, height: '1px', backgroundColor: 'var(--border-color)', maxWidth: '120px', marginLeft: '1.25rem' }} />
+                <div style={{ flex: 1, height: '1px', backgroundColor: 'var(--border-color)', maxWidth: '100px', marginLeft: '1rem' }} />
               </div>
 
               {/* 5 Theme Cards Grid */}
@@ -235,7 +235,7 @@ export default function Home() {
                 <Link to="/category/reflections" className="theme-pillar-card pillar-reflections">
                   <div>
                     <div className="theme-pillar-icon-box">
-                      <BookOpen size={22} strokeWidth={1.75} />
+                      <BookOpen size={18} strokeWidth={1.75} />
                     </div>
                     <h4 className="theme-pillar-title">
                       Reflections
@@ -246,7 +246,7 @@ export default function Home() {
                   </div>
                   <div className="theme-pillar-action">
                     <span>Explore</span>
-                    <ArrowRight size={14} className="theme-pillar-action-arrow" />
+                    <ArrowRight size={13} className="theme-pillar-action-arrow" />
                   </div>
                 </Link>
 
@@ -254,7 +254,7 @@ export default function Home() {
                 <Link to="/category/emotional-intelligence" className="theme-pillar-card pillar-emotional-intelligence">
                   <div>
                     <div className="theme-pillar-icon-box">
-                      <Brain size={22} strokeWidth={1.75} />
+                      <Brain size={18} strokeWidth={1.75} />
                     </div>
                     <h4 className="theme-pillar-title">
                       Emotional Intelligence
@@ -265,7 +265,7 @@ export default function Home() {
                   </div>
                   <div className="theme-pillar-action">
                     <span>Explore</span>
-                    <ArrowRight size={14} className="theme-pillar-action-arrow" />
+                    <ArrowRight size={13} className="theme-pillar-action-arrow" />
                   </div>
                 </Link>
 
@@ -273,7 +273,7 @@ export default function Home() {
                 <Link to="/category/healing" className="theme-pillar-card pillar-healing">
                   <div>
                     <div className="theme-pillar-icon-box">
-                      <HeartPulse size={22} strokeWidth={1.75} />
+                      <HeartPulse size={18} strokeWidth={1.75} />
                     </div>
                     <h4 className="theme-pillar-title">
                       Healing
@@ -284,7 +284,7 @@ export default function Home() {
                   </div>
                   <div className="theme-pillar-action">
                     <span>Explore</span>
-                    <ArrowRight size={14} className="theme-pillar-action-arrow" />
+                    <ArrowRight size={13} className="theme-pillar-action-arrow" />
                   </div>
                 </Link>
 
@@ -292,7 +292,7 @@ export default function Home() {
                 <Link to="/category/wisdom" className="theme-pillar-card pillar-wisdom">
                   <div>
                     <div className="theme-pillar-icon-box">
-                      <Lightbulb size={22} strokeWidth={1.75} />
+                      <Lightbulb size={18} strokeWidth={1.75} />
                     </div>
                     <h4 className="theme-pillar-title">
                       Wisdom
@@ -303,7 +303,7 @@ export default function Home() {
                   </div>
                   <div className="theme-pillar-action">
                     <span>Explore</span>
-                    <ArrowRight size={14} className="theme-pillar-action-arrow" />
+                    <ArrowRight size={13} className="theme-pillar-action-arrow" />
                   </div>
                 </Link>
 
@@ -311,7 +311,7 @@ export default function Home() {
                 <Link to="/category/spirituality" className="theme-pillar-card theme-pillar-card-wide pillar-spirituality">
                   <div className="theme-pillar-wide-left">
                     <div className="theme-pillar-icon-box">
-                      <Flower2 size={24} strokeWidth={1.75} />
+                      <Flower2 size={18} strokeWidth={1.75} />
                     </div>
                     <div>
                       <h4 className="theme-pillar-title">
@@ -324,7 +324,7 @@ export default function Home() {
                   </div>
                   <div className="theme-pillar-action">
                     <span>Explore</span>
-                    <ArrowRight size={14} className="theme-pillar-action-arrow" />
+                    <ArrowRight size={13} className="theme-pillar-action-arrow" />
                   </div>
                 </Link>
 
