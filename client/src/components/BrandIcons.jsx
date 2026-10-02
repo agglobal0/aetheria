@@ -1,62 +1,41 @@
-export function OraanisEmblem({ size = 38, color = "#B38245" }) {
+export function OraanisEmblem({ size = 38, color = "#C2A366", style = {} }) {
   return (
-    <svg width={size} height={size} viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ flexShrink: 0 }}>
-      {/* 8-pointed geometric flower / starburst */}
-      <g stroke={color} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-        {/* Vertical petal pair */}
-        <path d="M50 6 C43 25 43 75 50 94 C57 75 57 25 50 6 Z" fill={color} fillOpacity="0.06" />
-        {/* Horizontal petal pair */}
-        <path d="M6 50 C25 43 75 43 94 50 C75 57 25 57 6 50 Z" fill={color} fillOpacity="0.06" />
-        {/* Diagonal 45-deg petal pair */}
-        <path d="M18.9 18.9 C34.5 23.5 69.5 58.5 81.1 81.1 C65.5 76.5 30.5 41.5 18.9 18.9 Z" fill={color} fillOpacity="0.06" />
-        {/* Diagonal 135-deg petal pair */}
-        <path d="M81.1 18.9 C76.5 34.5 41.5 69.5 18.9 81.1 C23.5 65.5 58.5 30.5 81.1 18.9 Z" fill={color} fillOpacity="0.06" />
-        {/* Central rings */}
-        <circle cx="50" cy="50" r="11" stroke={color} strokeWidth="1.8" fill="none" opacity="0.65" />
-        <circle cx="50" cy="50" r="3.5" fill={color} stroke="none" />
+    <svg 
+      width={size} 
+      height={size} 
+      viewBox="0 0 100 100" 
+      fill="none" 
+      xmlns="http://www.w3.org/2000/svg" 
+      style={{ flexShrink: 0, ...style }}
+    >
+      <g stroke={color} strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+        {/* Top Dot */}
+        <circle cx="50" cy="11.5" r="2.2" fill={color} stroke="none" />
+        
+        {/* Center Petal */}
+        <path d="M50 16.5 C41.5 29 40 48 50 76 C60 48 58.5 29 50 16.5 Z" />
+        
+        {/* Inner Left Petal */}
+        <path d="M43.5 39 C34 31 23.5 34 25.5 53 C27.5 65 37 74.5 50 80.5" />
+        
+        {/* Inner Right Petal */}
+        <path d="M56.5 39 C66 31 76.5 34 74.5 53 C72.5 65 63 74.5 50 80.5" />
+        
+        {/* Outer Left Petal */}
+        <path d="M30 58 C18 53 7 57 9 66 C11.5 75 28 80.5 47 82" />
+        
+        {/* Outer Right Petal */}
+        <path d="M70 58 C82 53 93 57 91 66 C88.5 75 72 80.5 53 82" />
+        
+        {/* Bottom Lotus Base Anchor */}
+        <path d="M46 81.5 L50 86 L54 81.5" />
       </g>
     </svg>
   );
 }
 
-export function LotusLogo({ size = 34, color = "#B38245" }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ flexShrink: 0 }}>
-      {/* Central petal */}
-      <path
-        d="M24 6C24 6 18.5 17 18.5 27C18.5 33 21 37.5 24 39.5C27 37.5 29.5 33 29.5 27C29.5 17 24 6 24 6Z"
-        fill={color}
-        fillOpacity="0.18"
-        stroke={color}
-        strokeWidth="1.8"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      {/* Left major petal */}
-      <path
-        d="M17.5 19C12 21 6 26.5 7.5 34C9 38 15 39 20 39"
-        stroke={color}
-        strokeWidth="1.8"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      {/* Right major petal */}
-      <path
-        d="M30.5 19C36 21 42 26.5 40.5 34C39 38 33 39 28 39"
-        stroke={color}
-        strokeWidth="1.8"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      {/* Lower base curve */}
-      <path
-        d="M14 41.5C19 43 29 43 34 41.5"
-        stroke={color}
-        strokeWidth="1.8"
-        strokeLinecap="round"
-      />
-    </svg>
-  );
+export function LotusLogo({ size = 38, color = "#C2A366", style = {} }) {
+  return <OraanisEmblem size={size} color={color} style={style} />;
 }
 
 export function LeafIcon({ size = 18, color = "#5A7A5E", style = {} }) {

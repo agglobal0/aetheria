@@ -134,39 +134,38 @@ export default function Navbar() {
         gap: '0.5rem'
       }}>
 
-        {/* Brand Logo (ORAANIS - LIFE LESSONS & WISDOM) */}
+        {/* Brand Logo (ORAANIS - Where Experience Becomes Wisdom) */}
         <Link to="/" style={{
           display: 'flex',
           alignItems: 'center',
-          gap: '0.65rem',
+          gap: '0.75rem',
           textDecoration: 'none',
           minWidth: 0,
           flexShrink: 0
         }}>
-          <OraanisEmblem size={38} color="#B38245" />
+          <OraanisEmblem size={40} color="#C2A366" />
           <div style={{ display: 'flex', flexDirection: 'column', minWidth: 0 }}>
             <span style={{
               fontFamily: 'var(--font-cormorant)',
-              fontSize: 'clamp(1.25rem, 3.8vw, 1.6rem)',
+              fontSize: 'clamp(1.35rem, 4vw, 1.65rem)',
               fontWeight: '700',
-              color: 'var(--accent-gold, #A67C46)',
+              color: 'var(--accent-gold, #C2A366)',
               lineHeight: '1',
-              letterSpacing: '0.04em',
+              letterSpacing: '0.06em',
               whiteSpace: 'nowrap'
             }}>
               ORAANIS
             </span>
             <span className="navbar-brand-subtitle" style={{
-              fontSize: '0.58rem',
-              letterSpacing: '0.16em',
+              fontSize: '0.62rem',
+              letterSpacing: '0.03em',
               color: 'var(--text-secondary)',
-              fontWeight: '700',
-              marginTop: '0.2rem',
+              fontWeight: '500',
+              marginTop: '0.25rem',
               lineHeight: '1',
-              textTransform: 'uppercase',
               whiteSpace: 'nowrap'
             }}>
-              Life Lessons &amp; Wisdom
+              Where Experience Becomes Wisdom
             </span>
           </div>
         </Link>
