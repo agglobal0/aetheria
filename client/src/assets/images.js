@@ -1,4 +1,4 @@
-import heroDeskImg from './monika_chopra_portrait.png';
+import heroDeskImg from './hero_perspective_bg.png';
 import profPortraitImg from './monika_chopra_portrait.png';
 import stonePathImg from './stone_path_ridge_1789047427970.jpg';
 import mistyMountainsImg from './misty_mountains_banner_1789047448187.jpg';
