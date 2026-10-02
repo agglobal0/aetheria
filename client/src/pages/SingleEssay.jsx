@@ -139,7 +139,7 @@ export default function SingleEssay() {
                   essay.author_id === 2;
                 const authorName = isRajsaar ? 'RAJSAAR' : (essay.author_name || 'Monika Chopra');
                 const authorLink = isRajsaar ? '/rajsaar' : '/person-behind-this';
-                const authorRole = isRajsaar ? "Through the Mentor's Lens" : 'Writer & Educator';
+                const authorRole = isRajsaar ? 'Mentor & Contributor' : 'Writer & Educator';
 
                 return (
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
@@ -223,7 +223,7 @@ export default function SingleEssay() {
             const authorName = isRajsaar ? 'RAJSAAR' : (essay.author_name || 'Monika Chopra');
             const authorLink = isRajsaar ? '/rajsaar' : '/person-behind-this';
             const authorBio = isRajsaar 
-              ? "Through the Mentor's Lens — quiet reflections, critical thinking, life principles, and perspectives shaped by experience."
+              ? "Observer • Thinker • Educator • Voice of Experience — reflections born from quiet observation, character, mentorship, and life lessons."
               : (essay.author_bio || 'Writer and Educator exploring human behaviour, emotional intelligence, wisdom, and life reflections.');
 
             return (

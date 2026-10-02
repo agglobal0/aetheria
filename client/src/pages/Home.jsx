@@ -586,17 +586,26 @@ export default function Home() {
                     borderRadius: '4px',
                     marginBottom: '0.5rem'
                   }}>
-                    Through the Mentor's Lens
+                    Mentor & Contributor
                   </div>
                   <h3 style={{
                     fontFamily: 'var(--font-cormorant)',
                     fontSize: '1.5rem',
                     fontWeight: '700',
                     color: 'var(--text-primary)',
-                    marginBottom: '0.35rem'
+                    marginBottom: '0.2rem'
                   }}>
                     RAJSAAR
                   </h3>
+                  <div style={{
+                    fontSize: '0.76rem',
+                    fontWeight: '600',
+                    color: 'var(--text-muted)',
+                    marginBottom: '0.5rem',
+                    letterSpacing: '0.02em'
+                  }}>
+                    Observer • Thinker • Educator • Voice of Experience
+                  </div>
                   <p style={{
                     fontSize: '0.83rem',
                     lineHeight: '1.6',

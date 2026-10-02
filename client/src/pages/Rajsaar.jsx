@@ -46,7 +46,7 @@ export default function Rajsaar() {
               color: 'var(--accent-primary)',
               marginBottom: '0.6rem'
             }}>
-              <Eye size={14} /> Through the Mentor’s Lens
+              <Eye size={14} /> Mentor & Contributor
             </span>
 
             <h1 style={{
@@ -61,11 +61,13 @@ export default function Rajsaar() {
             </h1>
 
             <p style={{
-              fontSize: 'clamp(1rem, 2vw, 1.15rem)',
+              fontSize: 'clamp(0.95rem, 2vw, 1.05rem)',
               color: 'var(--text-secondary)',
-              margin: '0'
+              margin: '0',
+              fontWeight: '500',
+              letterSpacing: '0.02em'
             }}>
-              Through the Mentor’s Lens
+              Observer • Thinker • Educator • Voice of Experience
             </p>
 
             <div style={{
@@ -87,7 +89,7 @@ export default function Rajsaar() {
           }}>
             <img
               src={rajsaarWritingImg}
-              alt="RAJSAAR - Through the Mentor's Lens"
+              alt="RAJSAAR - Mentor & Contributor"
               style={{
                 width: '100%',
                 height: 'auto',
@@ -202,12 +204,11 @@ export default function Rajsaar() {
               </div>
 
               <p style={{
-                fontSize: '0.95rem',
-                fontStyle: 'italic',
+                fontSize: '0.9rem',
                 color: 'var(--text-secondary)',
                 marginBottom: '2rem'
               }}>
-                Through the Mentor’s Lens
+                Mentor & Contributor • Observer • Thinker • Educator • Voice of Experience
               </p>
 
               {/* Action Buttons */}
@@ -224,7 +225,7 @@ export default function Rajsaar() {
                   <Compass size={16} /> The Person Behind This
                 </Link>
                 <Link to="/about" className="btn-warm-pill">
-                  <BookOpen size={16} /> About Aetheria
+                  <BookOpen size={16} /> About ORAANIS
                 </Link>
               </div>
             </div>
