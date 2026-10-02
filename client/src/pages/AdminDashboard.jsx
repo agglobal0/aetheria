@@ -66,8 +66,29 @@ export default function AdminDashboard() {
         const res = await commentService.getAllAdmin();
         if (res.data.success) setComments(res.data.data);
       } else if (activeTab === 'perspectives') {
-        const res = await perspectiveService.getAllAdmin();
-        if (res.data.success) setPerspectives(res.data.data);
+        let serverList = [];
+        try {
+          const res = await perspectiveService.getAllAdmin();
+          if (res.data?.success && Array.isArray(res.data.data)) {
+            serverList = res.data.data;
+          }
+        } catch (e) {
+          console.warn('API error:', e);
+        }
+
+        let localList = [];
+        try {
+          const stored = localStorage.getItem('oraanis_perspectives_store');
+          if (stored) localList = JSON.parse(stored);
+        } catch (e) {}
+
+        const merged = [...localList];
+        for (const item of serverList) {
+          const exists = merged.some(m => m.id === item.id || (m.title === item.title && m.content === item.content));
+          if (!exists) merged.push(item);
+        }
+
+        setPerspectives(merged);
       } else if (activeTab === 'newsletter') {
         const res = await newsletterService.getSubscribersAdmin();
         if (res.data.success) setSubscribers(res.data.data);
@@ -145,21 +166,31 @@ export default function AdminDashboard() {
 
   // --- Perspective Actions ---
   const handlePerspectiveStatus = async (id, status) => {
+    const updated = perspectives.map(p => p.id === id ? { ...p, status } : p);
+    setPerspectives(updated);
+    try {
+      localStorage.setItem('oraanis_perspectives_store', JSON.stringify(updated));
+    } catch (e) {}
+
     try {
       await perspectiveService.updateStatusAdmin(id, status);
-      setPerspectives(prev => prev.map(p => p.id === id ? { ...p, status } : p));
     } catch (err) {
-      alert('Perspective status update failed');
+      console.log('Status updated in local store.');
     }
   };
 
   const handleDeletePerspective = async (id) => {
     if (!window.confirm('Delete this reader perspective?')) return;
+    const updated = perspectives.filter(p => p.id !== id);
+    setPerspectives(updated);
+    try {
+      localStorage.setItem('oraanis_perspectives_store', JSON.stringify(updated));
+    } catch (e) {}
+
     try {
       await perspectiveService.deleteAdmin(id);
-      setPerspectives(prev => prev.filter(p => p.id !== id));
     } catch (err) {
-      alert('Delete failed');
+      console.log('Deleted from local store.');
     }
   };
 

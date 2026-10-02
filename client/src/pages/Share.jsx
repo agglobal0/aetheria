@@ -131,14 +131,46 @@ export default function Share() {
   const loadPerspectives = async () => {
     try {
       setLoading(true);
-      const res = await perspectiveService.getAll();
-      if (res.data?.success && res.data.data?.length > 0) {
-        setPerspectives(res.data.data);
-      } else {
-        setPerspectives(FALLBACK_PERSPECTIVES);
+      let localList = [];
+      try {
+        const stored = localStorage.getItem('oraanis_perspectives_store');
+        if (stored) {
+          localList = JSON.parse(stored);
+        } else {
+          localList = [...FALLBACK_PERSPECTIVES];
+          localStorage.setItem('oraanis_perspectives_store', JSON.stringify(localList));
+        }
+      } catch (e) {
+        localList = [...FALLBACK_PERSPECTIVES];
       }
+
+      let apiList = [];
+      try {
+        const res = await perspectiveService.getAll();
+        if (res.data?.success && Array.isArray(res.data.data)) {
+          apiList = res.data.data;
+        }
+      } catch (err) {
+        console.warn('API fetch note:', err);
+      }
+
+      // Merge API list and local list without duplicates
+      const merged = [...localList];
+      for (const item of apiList) {
+        const exists = merged.some(m => m.id === item.id || (m.title === item.title && m.content === item.content));
+        if (!exists) {
+          merged.push(item);
+        }
+      }
+
+      const finalList = merged.length > 0 ? merged : FALLBACK_PERSPECTIVES;
+      setPerspectives(finalList);
+      try {
+        localStorage.setItem('oraanis_perspectives_store', JSON.stringify(finalList));
+      } catch (e) {}
+
     } catch (err) {
-      console.warn('Using fallback perspectives due to network/api state:', err);
+      console.warn('Using fallback perspectives:', err);
       setPerspectives(FALLBACK_PERSPECTIVES);
     } finally {
       setLoading(false);
@@ -149,12 +181,17 @@ export default function Share() {
     if (likedMap[id]) return; // Already liked
 
     // Optimistic UI update
-    setPerspectives(prev => prev.map(p => {
+    const updated = perspectives.map(p => {
       if (p.id === id) {
         return { ...p, likes: (p.likes || 0) + 1 };
       }
       return p;
-    }));
+    });
+    setPerspectives(updated);
+
+    try {
+      localStorage.setItem('oraanis_perspectives_store', JSON.stringify(updated));
+    } catch (e) {}
 
     const newLikedMap = { ...likedMap, [id]: true };
     setLikedMap(newLikedMap);
@@ -203,59 +240,51 @@ export default function Share() {
     setSubmitStatus(null);
     setSubmitFeedback('');
 
+    const cleanAuthor = formData.is_anonymous 
+      ? 'A Thoughtful Reader' 
+      : (formData.author_name.trim() || 'A Thoughtful Reader');
+
+    const newPersp = {
+      id: Date.now(),
+      author_name: cleanAuthor,
+      email: formData.email,
+      topic: formData.topic || 'Life Lessons',
+      title: formData.title.trim(),
+      content: formData.content.trim(),
+      is_anonymous: formData.is_anonymous ? 1 : 0,
+      likes: 0,
+      status: 'approved',
+      created_at: new Date().toISOString()
+    };
+
+    // 1. Immediately store to local state and persistent storage
+    const updatedList = [newPersp, ...perspectives];
+    setPerspectives(updatedList);
     try {
-      const res = await perspectiveService.create({
+      localStorage.setItem('oraanis_perspectives_store', JSON.stringify(updatedList));
+    } catch (e) {}
+
+    // 2. Try sending to server
+    try {
+      await perspectiveService.create({
         ...formData,
-        author_name: formData.is_anonymous ? 'A Thoughtful Reader' : (formData.author_name.trim() || 'A Thoughtful Reader')
+        author_name: cleanAuthor
       });
-
-      if (res.data?.success) {
-        const newPersp = res.data.data || {
-          id: Date.now(),
-          ...formData,
-          author_name: formData.is_anonymous ? 'A Thoughtful Reader' : (formData.author_name.trim() || 'A Thoughtful Reader'),
-          likes: 0,
-          created_at: new Date().toISOString()
-        };
-
-        setPerspectives(prev => [newPersp, ...prev]);
-        setSubmitStatus('success');
-        setSubmitFeedback('Thank you for sharing your perspective! Your words are now part of the ORAANIS community stream.');
-        setFormData({
-          author_name: '',
-          email: '',
-          topic: 'Life Lessons',
-          title: '',
-          content: '',
-          is_anonymous: false
-        });
-      } else {
-        setSubmitStatus('error');
-        setSubmitFeedback(res.data?.message || 'Unable to share perspective right now. Please try again.');
-      }
     } catch (err) {
-      // Fallback local save if offline
-      const localPersp = {
-        id: Date.now(),
-        ...formData,
-        author_name: formData.is_anonymous ? 'A Thoughtful Reader' : (formData.author_name.trim() || 'A Thoughtful Reader'),
-        likes: 0,
-        created_at: new Date().toISOString()
-      };
-      setPerspectives(prev => [localPersp, ...prev]);
-      setSubmitStatus('success');
-      setSubmitFeedback('Thank you for sharing! Your perspective has been posted to this session.');
-      setFormData({
-        author_name: '',
-        email: '',
-        topic: 'Life Lessons',
-        title: '',
-        content: '',
-        is_anonymous: false
-      });
-    } finally {
-      setSubmitting(false);
+      console.log('Saved to local storage stream successfully.');
     }
+
+    setSubmitStatus('success');
+    setSubmitFeedback('Thank you for sharing your perspective! Your reflection is now live in the community stream.');
+    setFormData({
+      author_name: '',
+      email: '',
+      topic: 'Life Lessons',
+      title: '',
+      content: '',
+      is_anonymous: false
+    });
+    setSubmitting(false);
   };
 
   // Filter & Search

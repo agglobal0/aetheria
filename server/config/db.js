@@ -33,7 +33,45 @@ let pool = null;
 const fallbackStore = {
   contact_messages: [],
   newsletter_subscribers: [],
-  comments: []
+  comments: [],
+  perspectives: [
+    {
+      id: 1,
+      author_name: 'Aarav M.',
+      email: 'aarav@example.com',
+      topic: 'Life Lessons',
+      title: 'Learning to distinguish between silence and absence',
+      content: 'For years, I thought silence in a relationship meant distance or withdrawal. But with age, I began to realize that some people carry their love quietly without performance. Silence isn\'t always empty; sometimes it is the only space large enough for genuine understanding to rest.',
+      is_anonymous: 0,
+      likes: 28,
+      status: 'approved',
+      created_at: new Date('2026-09-28T10:30:00Z')
+    },
+    {
+      id: 2,
+      author_name: 'A Fellow Educator',
+      email: 'educator@example.com',
+      topic: 'Mentorship & Growth',
+      title: 'What students teach us when we stop giving answers',
+      content: 'Thirty years in the classroom taught me that the moment you stop trying to convince someone of a truth, their mind actually opens to discover it. Mentorship is not carving a statue; it is clearing the stone so the person underneath can emerge.',
+      is_anonymous: 1,
+      likes: 42,
+      status: 'approved',
+      created_at: new Date('2026-09-29T14:15:00Z')
+    },
+    {
+      id: 3,
+      author_name: 'Meera Sen',
+      email: 'meera.sen@example.com',
+      topic: 'Inner Peace',
+      title: 'The courage to be ordinary without feeling small',
+      content: 'We live in a culture that constantly urges us to be extraordinary, exceptional, and visible. It took a period of burnout for me to realize that an ordinary life lived with deep kindness, presence, and honesty is the rarest accomplishment of all.',
+      is_anonymous: 0,
+      likes: 51,
+      status: 'approved',
+      created_at: new Date('2026-09-30T09:45:00Z')
+    }
+  ]
 };
 
 const mockPool = {
@@ -48,6 +86,52 @@ const mockPool = {
     if (lowerSql.includes('insert into newsletter_subscribers')) {
       fallbackStore.newsletter_subscribers.push({ id: Date.now(), email: params[0] });
       return [{ insertId: Date.now(), affectedRows: 1 }];
+    }
+
+    if (lowerSql.includes('insert into perspectives')) {
+      const newId = Date.now();
+      const newP = {
+        id: newId,
+        author_name: params[0],
+        email: params[1],
+        topic: params[2],
+        title: params[3],
+        content: params[4],
+        is_anonymous: params[5],
+        likes: 0,
+        status: params[7] || 'approved',
+        created_at: new Date()
+      };
+      fallbackStore.perspectives.unshift(newP);
+      return [{ insertId: newId, affectedRows: 1 }];
+    }
+
+    if (lowerSql.includes('from perspectives')) {
+      if (lowerSql.includes('count(*)')) {
+        return [[{ count: fallbackStore.perspectives.length }]];
+      }
+      return [fallbackStore.perspectives];
+    }
+
+    if (lowerSql.includes('update perspectives') && lowerSql.includes('likes = likes + 1')) {
+      const pId = Number(params[0]);
+      const p = fallbackStore.perspectives.find(x => x.id === pId);
+      if (p) p.likes = (p.likes || 0) + 1;
+      return [{ affectedRows: 1 }];
+    }
+
+    if (lowerSql.includes('update perspectives') && lowerSql.includes('status = ?')) {
+      const status = params[0];
+      const pId = Number(params[1]);
+      const p = fallbackStore.perspectives.find(x => x.id === pId);
+      if (p) p.status = status;
+      return [{ affectedRows: 1 }];
+    }
+
+    if (lowerSql.includes('delete from perspectives')) {
+      const pId = Number(params[0]);
+      fallbackStore.perspectives = fallbackStore.perspectives.filter(x => x.id !== pId);
+      return [{ affectedRows: 1 }];
     }
     
     if (lowerSql.includes('select count(*)')) {
