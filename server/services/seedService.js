@@ -82,29 +82,32 @@ async function seedDatabase(pool) {
       console.warn('[Seed Migration Error]:', migErr.message);
     }
 
-    // 2. Seed Default Admin User (Ensure admin@aetheria.com exists)
-    const [existingAdmin] = await pool.query('SELECT id FROM users WHERE email = ?', ['admin@aetheria.com']);
+    // 2. Seed Default Admin Users (Ensure admin@aetheria.com and admin@aetheria.org exist)
+    const adminEmails = ['admin@aetheria.com', 'admin@aetheria.org'];
     const hashedPassword = await bcrypt.hash('adminpassword123', 10);
 
-    if (existingAdmin.length === 0) {
-      console.log('[Seed] Creating default admin user (admin@aetheria.com)...');
-      try {
-        await pool.query(
-          'INSERT INTO users (name, email, password, password_hash, first_name, last_name, role_id, role) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
-          ['Editor in Chief', 'admin@aetheria.com', hashedPassword, hashedPassword, 'Editor', 'in Chief', 1, 'admin']
-        );
-      } catch (err) {
-        await pool.query(
-          'INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, ?)',
-          ['Editor in Chief', 'admin@aetheria.com', hashedPassword, 'admin']
-        );
-      }
-    } else {
-      console.log('[Seed] Resetting admin user password for admin@aetheria.com...');
-      try {
-        await pool.query('UPDATE users SET password = ?, password_hash = ?, role = ? WHERE email = ?', [hashedPassword, hashedPassword, 'admin', 'admin@aetheria.com']);
-      } catch (err) {
-        await pool.query('UPDATE users SET password = ?, role = ? WHERE email = ?', [hashedPassword, 'admin', 'admin@aetheria.com']);
+    for (const admEmail of adminEmails) {
+      const [existingAdmin] = await pool.query('SELECT id FROM users WHERE email = ?', [admEmail]);
+      if (existingAdmin.length === 0) {
+        console.log(`[Seed] Creating default admin user (${admEmail})...`);
+        try {
+          await pool.query(
+            'INSERT INTO users (name, email, password, password_hash, first_name, last_name, role_id, role) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
+            ['Editor in Chief', admEmail, hashedPassword, hashedPassword, 'Editor', 'in Chief', 1, 'admin']
+          );
+        } catch (err) {
+          await pool.query(
+            'INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, ?)',
+            ['Editor in Chief', admEmail, hashedPassword, 'admin']
+          );
+        }
+      } else {
+        console.log(`[Seed] Resetting admin password for ${admEmail}...`);
+        try {
+          await pool.query('UPDATE users SET password = ?, password_hash = ?, role = ? WHERE email = ?', [hashedPassword, hashedPassword, 'admin', admEmail]);
+        } catch (err) {
+          await pool.query('UPDATE users SET password = ?, role = ? WHERE email = ?', [hashedPassword, 'admin', admEmail]);
+        }
       }
     }
 

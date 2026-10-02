@@ -26,7 +26,8 @@ export default function Login() {
       await login(email.trim(), password);
       navigate('/admin');
     } catch (err) {
-      setError(err.message || 'Invalid credentials');
+      const errMsg = err.response?.data?.message || err.message || 'Invalid email or password';
+      setError(errMsg);
     } finally {
       setLoading(false);
     }
@@ -60,7 +61,7 @@ export default function Login() {
             Editorial Portal
           </h1>
           <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', marginBottom: '1.75rem' }}>
-            Sign in to access the ORAANIS Admin Dashboard.
+            Sign in to access the Aetheria Admin Dashboard.
           </p>
 
           {error && (
