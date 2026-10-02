@@ -1,50 +1,20 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-export function BrandLogo({ height = 44, className = "" }) {
-  const [imgError, setImgError] = useState(false);
-
-  if (!imgError) {
-    return (
-      <img
-        src="/logo.png"
-        alt="ORAANIS — Where Experience Becomes Wisdom"
-        className={className}
-        style={{
-          height: `${height}px`,
-          width: 'auto',
-          objectFit: 'contain',
-          display: 'block'
-        }}
-        onError={() => setImgError(true)}
-      />
-    );
-  }
-
+export function BrandLogo({ height = 40, variant = "auto", className = "" }) {
   return (
-    <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-      <OraanisEmblem size={height} color="#C2A366" />
-      <div style={{ display: 'flex', flexDirection: 'column' }}>
-        <span style={{
-          fontFamily: 'var(--font-cormorant)',
-          fontSize: '1.45rem',
-          fontWeight: '700',
-          color: 'var(--accent-gold, #C2A366)',
-          lineHeight: '1',
-          letterSpacing: '0.06em'
-        }}>
-          ORAANIS
-        </span>
-        <span style={{
-          fontSize: '0.62rem',
-          letterSpacing: '0.03em',
-          color: 'var(--text-secondary)',
-          fontWeight: '500',
-          marginTop: '0.25rem'
-        }}>
-          Where Experience Becomes Wisdom
-        </span>
-      </div>
-    </div>
+    <img
+      src="/logo.png"
+      alt="ORAANIS — Where Experience Becomes Wisdom"
+      className={`brand-logo-img ${variant === 'light' ? 'brand-logo-light' : ''} ${className}`.trim()}
+      style={{
+        height: `${height}px`,
+        width: 'auto',
+        maxHeight: `${height}px`,
+        maxWidth: '240px',
+        objectFit: 'contain',
+        display: 'block'
+      }}
+    />
   );
 }
 

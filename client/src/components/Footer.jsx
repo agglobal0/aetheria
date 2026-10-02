@@ -44,7 +44,7 @@ export default function Footer() {
             textDecoration: 'none',
             color: '#FFFFFF'
           }}>
-            <BrandLogo height={42} />
+            <BrandLogo height={42} variant="light" />
           </Link>
 
           {/* Center Nav Links */}
