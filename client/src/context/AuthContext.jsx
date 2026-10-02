@@ -4,28 +4,41 @@ import { authService } from '../services/api';
 const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(() => {
+    try {
+      const saved = localStorage.getItem('aetheria_user');
+      return saved ? JSON.parse(saved) : null;
+    } catch {
+      return null;
+    }
+  });
   const [token, setToken] = useState(() => localStorage.getItem('aetheria_token'));
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(Boolean(token && !user));
 
   useEffect(() => {
+    let isMounted = true;
     async function loadUser() {
       if (token) {
         try {
           const res = await authService.getMe();
-          if (res.data.success) {
+          if (res.data.success && isMounted) {
             setUser(res.data.user);
-          } else {
+            localStorage.setItem('aetheria_user', JSON.stringify(res.data.user));
+          } else if (isMounted) {
             logout();
           }
         } catch (err) {
-          console.error('Auth verify failed:', err);
-          logout();
+          console.error('Auth verify error:', err);
+          // Only logout if 401 Unauthorized (token invalid/expired), not on temporary network glitch
+          if (err.response?.status === 401 && isMounted) {
+            logout();
+          }
         }
       }
-      setLoading(false);
+      if (isMounted) setLoading(false);
     }
     loadUser();
+    return () => { isMounted = false; };
   }, [token]);
 
   const login = async (email, password) => {
@@ -35,6 +48,7 @@ export function AuthProvider({ children }) {
       setUser(userData);
       setToken(userToken);
       localStorage.setItem('aetheria_token', userToken);
+      localStorage.setItem('aetheria_user', JSON.stringify(userData));
       return userData;
     } else {
       throw new Error(res.data.message || 'Login failed');
@@ -45,6 +59,7 @@ export function AuthProvider({ children }) {
     setUser(null);
     setToken(null);
     localStorage.removeItem('aetheria_token');
+    localStorage.removeItem('aetheria_user');
   };
 
   return (

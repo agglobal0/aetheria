@@ -9,8 +9,15 @@ export default function Login() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const { login } = useAuth();
+  const { login, isAdmin, loading: authLoading } = useAuth();
   const navigate = useNavigate();
+
+  // If already authenticated as admin, automatically redirect to dashboard
+  useEffect(() => {
+    if (!authLoading && isAdmin) {
+      navigate('/admin', { replace: true });
+    }
+  }, [isAdmin, authLoading, navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

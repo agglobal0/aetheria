@@ -13,7 +13,7 @@ import { formatDate } from '../utils/helpers';
 import Breadcrumbs from '../components/Breadcrumbs';
 
 export default function AdminDashboard() {
-  const { user, isAdmin, logout } = useAuth();
+  const { user, isAdmin, loading: authLoading, logout } = useAuth();
   const navigate = useNavigate();
 
   const [activeTab, setActiveTab] = useState('essays'); // essays, categories, authors, comments, newsletter, contact
@@ -33,16 +33,16 @@ export default function AdminDashboard() {
   const [editingCat, setEditingCat] = useState(null);
   const [catFormData, setCatFormData] = useState({ name: '', slug: '', description: '', accent_color: '#8B263E' });
 
-
-
   useEffect(() => {
+    if (authLoading) return;
+
     if (!isAdmin) {
       navigate('/login');
       return;
     }
 
     loadDashboardData();
-  }, [isAdmin, activeTab]);
+  }, [isAdmin, authLoading, activeTab]);
 
   async function loadDashboardData() {
     setLoading(true);
