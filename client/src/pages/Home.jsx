@@ -141,63 +141,65 @@ export default function Home() {
               Why This Space?
             </h2>
 
-            <p style={{ fontSize: '0.975rem', lineHeight: '1.75', color: 'var(--text-primary)', marginBottom: '1rem', fontWeight: '500' }}>
+            <p style={{ fontSize: '1.05rem', lineHeight: '1.8', color: 'var(--text-primary)', marginBottom: '1.25rem', fontWeight: '500' }}>
               We have never had more access to information, yet understanding ourselves and the people around us has not necessarily become easier.
             </p>
 
-            <p style={{ fontSize: '0.92rem', lineHeight: '1.7', color: 'var(--text-secondary)', marginBottom: '1rem' }}>
+            <p style={{ fontSize: '0.98rem', lineHeight: '1.8', color: 'var(--text-secondary)', marginBottom: '1.25rem' }}>
               A search can give us an answer in seconds. A social media post can tell us what a situation means. A short video can offer a solution to a problem that may have taken us years to understand. But human experiences rarely fit into a few lines.
             </p>
 
-            <p style={{ fontSize: '0.92rem', lineHeight: '1.7', color: 'var(--text-secondary)', marginBottom: '1.25rem' }}>
+            <p style={{ fontSize: '0.98rem', lineHeight: '1.8', color: 'var(--text-secondary)', marginBottom: '1.5rem' }}>
               A disagreement can have many layers. A relationship can hold affection and disappointment at the same time. A decision can be right for one phase of life and wrong for another. Even our own behaviour can surprise us.
             </p>
 
-            {/* Focus Explore Block */}
+            {/* Focus Explore Block - Clean Left Border Accent */}
             <div style={{
-              padding: '1rem 1.25rem',
-              backgroundColor: 'var(--bg-tertiary)',
-              borderRadius: 'var(--radius-sm)',
-              borderLeft: '3px solid var(--accent-primary)',
-              marginBottom: '1.25rem'
+              padding: '0.35rem 0 0.35rem 1.35rem',
+              borderLeft: '2.5px solid var(--accent-primary)',
+              margin: '1.75rem 0'
             }}>
-              <p style={{ fontSize: '0.95rem', fontWeight: '600', color: 'var(--text-primary)', marginBottom: '0.4rem' }}>
+              <p style={{ fontSize: '1.05rem', fontWeight: '600', color: 'var(--text-primary)', marginBottom: '0.5rem' }}>
                 This is the space ORAANIS wants to explore.
               </p>
-              <p style={{ fontSize: '0.88rem', lineHeight: '1.65', color: 'var(--text-secondary)', margin: 0 }}>
+              <p style={{ fontSize: '0.95rem', lineHeight: '1.75', color: 'var(--text-secondary)', margin: 0 }}>
                 Not the obvious explanation, but what lies underneath it. Not simply what happened, but the different ways it can be understood. Not just the emotion we felt in a moment, but what that emotion may reveal about our expectations, choices, relationships and patterns.
               </p>
             </div>
 
-            <p style={{ fontSize: '0.92rem', lineHeight: '1.7', color: 'var(--text-secondary)', marginBottom: '1rem' }}>
+            <p style={{ fontSize: '0.98rem', lineHeight: '1.8', color: 'var(--text-secondary)', marginBottom: '1.25rem' }}>
               There is also value in encountering a perspective that is different from our own. We do not always have to agree with an idea for it to make us think. Sometimes the most useful thought is the one that makes us pause and reconsider something we had already decided.
             </p>
 
-            <p style={{ fontSize: '0.92rem', lineHeight: '1.7', color: 'var(--text-secondary)', marginBottom: '1.25rem' }}>
+            <p style={{ fontSize: '0.98rem', lineHeight: '1.8', color: 'var(--text-secondary)', marginBottom: '1.75rem' }}>
               ORAANIS brings together such thoughts and perspectives through stories, essays and conversations around the experiences that shape everyday life.
             </p>
 
-            {/* Philosophical Quote Card */}
-            <div className="why-space-quote-card" style={{ marginBottom: '1.25rem' }}>
-              <p className="why-space-quote-lead" style={{ fontSize: '0.92rem', marginBottom: '0.4rem' }}>
+            {/* Philosophical Quote Block - Clean & Unboxed */}
+            <div style={{
+              margin: '1.75rem 0',
+              paddingLeft: '1.35rem',
+              borderLeft: '2px solid rgba(139, 38, 62, 0.4)'
+            }}>
+              <p style={{ fontSize: '0.98rem', color: 'var(--text-primary)', fontWeight: '600', marginBottom: '0.5rem' }}>
                 The intention is simple: to create something worth spending a few quiet minutes with.
               </p>
-              <div style={{ fontSize: '0.86rem', lineHeight: '1.6', color: 'var(--text-secondary)', fontStyle: 'italic', marginBottom: '0.5rem' }}>
+              <div style={{ fontSize: '0.92rem', lineHeight: '1.7', color: 'var(--text-secondary)', fontStyle: 'italic', marginBottom: '0.5rem' }}>
                 <div>Something that does not demand an immediate reaction.</div>
                 <div>Something that leaves room for your own interpretation.</div>
               </div>
-              <p className="why-space-quote-core" style={{ fontSize: '0.88rem', marginTop: '0.4rem' }}>
+              <p style={{ fontSize: '0.95rem', lineHeight: '1.7', color: 'var(--text-primary)', fontStyle: 'italic', margin: 0 }}>
                 Because the most meaningful insights are not always the ones that tell us something new. Sometimes they are the ones that make us look at something familiar in a way we had never considered before.
               </p>
             </div>
 
             <p style={{
-              fontSize: '0.95rem',
+              fontSize: '1.05rem',
               fontFamily: 'var(--font-serif)',
-              fontWeight: '600',
+              fontWeight: '700',
               color: 'var(--accent-burgundy, #8B263E)',
               fontStyle: 'italic',
-              marginBottom: '1.5rem'
+              margin: '1.75rem 0 1.5rem 0'
             }}>
               ORAANIS is that space between reading something and truly thinking about it.
             </p>
