@@ -19,6 +19,7 @@ import Search from './pages/Search';
 import About from './pages/About';
 import Author from './pages/Author';
 import Rajsaar from './pages/Rajsaar';
+import Share from './pages/Share';
 import Contact from './pages/Contact';
 import Login from './pages/Login';
 import AdminDashboard from './pages/AdminDashboard';
@@ -43,6 +44,9 @@ export default function App() {
                 <Route path="/person-behind-this" element={<Author />} />
                 <Route path="/author" element={<Author />} />
                 <Route path="/rajsaar" element={<Rajsaar />} />
+                <Route path="/share" element={<Share />} />
+                <Route path="/confessions" element={<Share />} />
+                <Route path="/perspectives" element={<Share />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/login" element={<Login />} />
                 

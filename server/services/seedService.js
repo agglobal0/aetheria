@@ -659,6 +659,66 @@ async function seedDatabase(pool) {
       console.log('[Seed] 20 sample essays successfully seeded!');
     }
 
+    // Seed Sample Community Reader Perspectives
+    try {
+      const [perspCount] = await pool.query("SELECT COUNT(*) as count FROM perspectives");
+      if (perspCount[0].count === 0) {
+        const samplePerspectives = [
+          [
+            'Aarav M.',
+            'aarav@example.com',
+            'Life Lessons',
+            'Learning to distinguish between silence and absence',
+            'For years, I thought silence in a relationship meant distance or withdrawal. But with age, I began to realize that some people carry their love quietly without performance. Silence isn\'t always empty; sometimes it is the only space large enough for genuine understanding to rest.',
+            0,
+            24,
+            'approved'
+          ],
+          [
+            'A Fellow Educator',
+            'educator@example.com',
+            'Mentorship & Growth',
+            'What students teach us when we stop giving answers',
+            'Thirty years in the classroom taught me that the moment you stop trying to convince someone of a truth, their mind actually opens to discover it. Mentorship is not carving a statue; it is clearing the stone so the person underneath can emerge.',
+            1,
+            38,
+            'approved'
+          ],
+          [
+            'Meera Sen',
+            'meera.sen@example.com',
+            'Inner Peace',
+            'The courage to be ordinary without feeling small',
+            'We live in a culture that constantly urges us to be extraordinary, exceptional, and visible. It took a severe period of burnout for me to realize that an ordinary life lived with deep kindness, presence, and honesty is the rarest accomplishment of all.',
+            0,
+            45,
+            'approved'
+          ],
+          [
+            'A Quiet Observer',
+            'observer@example.com',
+            'Relationships & Trust',
+            'The slow erosion of trust is never about one mistake',
+            'People often point to a single breaking point when trust falls apart. But in truth, trust rarely breaks in an instant; it erodes in small unkept promises, subtle dismissals, and moments where someone felt unseen and chose not to speak up anymore.',
+            1,
+            19,
+            'approved'
+          ]
+        ];
+
+        for (const p of samplePerspectives) {
+          await pool.query(
+            `INSERT INTO perspectives (author_name, email, topic, title, content, is_anonymous, likes, status) 
+             VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+            p
+          );
+        }
+        console.log('[Seed] Sample community perspectives seeded successfully.');
+      }
+    } catch (e) {
+      console.log('[Seed Note] Perspectives seeding skipped:', e.message);
+    }
+
     console.log('[Seed] Database initialization complete.');
   } catch (error) {
     console.error('[Seed Error]:', error.message);

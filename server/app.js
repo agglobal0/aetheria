@@ -10,6 +10,7 @@ const categoryRoutes = require('./routes/categoryRoutes');
 const essayRoutes = require('./routes/essayRoutes');
 
 const commentRoutes = require('./routes/commentRoutes');
+const perspectiveRoutes = require('./routes/perspectiveRoutes');
 const newsletterRoutes = require('./routes/newsletterRoutes');
 const contactRoutes = require('./routes/contactRoutes');
 const adminRoutes = require('./routes/adminRoutes');
@@ -41,6 +42,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/categories', categoryRoutes);
 app.use('/api/essays', essayRoutes);
 app.use('/api/comments', commentRoutes);
+app.use('/api/perspectives', perspectiveRoutes);
 app.use('/api/newsletter', newsletterRoutes);
 app.use('/api/contact', contactRoutes);
 app.use('/api/admin', adminRoutes);

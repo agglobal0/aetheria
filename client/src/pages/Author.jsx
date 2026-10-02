@@ -302,7 +302,7 @@ export default function Author() {
                   <BookOpen size={16} /> About ORAANIS
                 </Link>
                 <Link to="/share" className="btn btn-secondary" style={{ padding: '0.75rem 1.6rem', fontSize: '0.92rem' }}>
-                  <Feather size={16} /> Share Anonymously
+                  <Feather size={16} /> Share Perspective
                 </Link>
               </div>
             </div>

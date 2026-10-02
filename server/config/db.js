@@ -226,6 +226,21 @@ async function createTablesIfNotExist() {
       message TEXT NOT NULL,
       status ENUM('unread', 'read', 'archived') DEFAULT 'unread',
       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;`,
+
+    `CREATE TABLE IF NOT EXISTS perspectives (
+      id INT AUTO_INCREMENT PRIMARY KEY,
+      author_name VARCHAR(100) NOT NULL DEFAULT 'Anonymous',
+      email VARCHAR(150),
+      topic VARCHAR(100) NOT NULL DEFAULT 'Life Lessons',
+      title VARCHAR(255) NOT NULL,
+      content TEXT NOT NULL,
+      is_anonymous TINYINT(1) DEFAULT 0,
+      likes INT DEFAULT 0,
+      status ENUM('pending', 'approved', 'rejected') DEFAULT 'approved',
+      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+      INDEX idx_perspectives_status (status),
+      INDEX idx_perspectives_topic (topic)
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;`
   ];
 

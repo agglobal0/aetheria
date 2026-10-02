@@ -67,6 +67,16 @@ export const commentService = {
   deleteAdmin: (id) => api.delete(`/comments/admin/${id}`)
 };
 
+// Community Perspectives Services (Reader Voices & Sharing)
+export const perspectiveService = {
+  getAll: (params) => api.get('/perspectives', { params }),
+  create: (data) => api.post('/perspectives', data),
+  like: (id) => api.post(`/perspectives/${id}/like`),
+  getAllAdmin: () => api.get('/perspectives/admin/all'),
+  updateStatusAdmin: (id, status) => api.put(`/perspectives/admin/${id}`, { status }),
+  deleteAdmin: (id) => api.delete(`/perspectives/admin/${id}`)
+};
+
 // Newsletter Service
 export const newsletterService = {
   subscribe: (email) => api.post('/newsletter/subscribe', { email }),

@@ -10,11 +10,11 @@ export default function Footer() {
     { name: 'About', path: '/about' },
     { name: 'The Person Behind This', path: '/person-behind-this' },
     { name: 'RAJSAAR', path: '/rajsaar' },
+    { name: 'Share Perspective', path: '/share' },
     { name: 'Reflections', path: '/category/reflections' },
     { name: 'Wisdom', path: '/category/wisdom' },
     { name: 'Emotional Intelligence', path: '/category/emotional-intelligence' },
     { name: 'Healing', path: '/category/healing' },
-    { name: 'Spirituality', path: '/category/spirituality' },
     { name: 'Stories', path: '/essays' }
   ];
 

@@ -405,20 +405,22 @@ export default function Navbar() {
 
           {/* 5. Share */}
           <Link
-            to="/confessions"
+            to="/share"
             style={{
               fontSize: '0.88rem',
-              fontWeight: location.pathname === '/confessions' ? '600' : '500',
-              color: location.pathname === '/confessions' ? 'var(--accent-primary)' : 'var(--text-secondary)',
+              fontWeight: (location.pathname === '/share' || location.pathname === '/confessions' || location.pathname === '/perspectives') ? '600' : '500',
+              color: (location.pathname === '/share' || location.pathname === '/confessions' || location.pathname === '/perspectives') ? 'var(--accent-primary)' : 'var(--text-secondary)',
               textDecoration: 'none',
               padding: '0.4rem 0.5rem',
               transition: 'all 0.2s ease',
               whiteSpace: 'nowrap',
-              borderBottom: location.pathname === '/confessions' ? '2px solid var(--accent-primary)' : '2px solid transparent'
+              borderBottom: (location.pathname === '/share' || location.pathname === '/confessions' || location.pathname === '/perspectives') ? '2px solid var(--accent-primary)' : '2px solid transparent'
             }}
             onMouseEnter={(e) => e.currentTarget.style.color = 'var(--text-primary)'}
             onMouseLeave={(e) => {
-              if (location.pathname !== '/confessions') e.currentTarget.style.color = 'var(--text-secondary)';
+              if (location.pathname !== '/share' && location.pathname !== '/confessions' && location.pathname !== '/perspectives') {
+                e.currentTarget.style.color = 'var(--text-secondary)';
+              }
             }}
           >
             Share
@@ -693,16 +695,16 @@ export default function Navbar() {
             </div>
 
             <Link
-              to="/confessions"
+              to="/share"
               onClick={() => setMobileMenuOpen(false)}
               className="mobile-nav-link"
               style={{
                 fontSize: '0.95rem',
-                fontWeight: location.pathname === '/confessions' ? '600' : '500',
+                fontWeight: (location.pathname === '/share' || location.pathname === '/confessions' || location.pathname === '/perspectives') ? '600' : '500',
                 padding: '0.75rem 1rem'
               }}
             >
-              <span>Share</span>
+              <span>Share Perspective</span>
               <span style={{ fontSize: '1rem', opacity: 0.5 }}>›</span>
             </Link>
 

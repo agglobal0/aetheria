@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import {
   FileText, FolderKanban, Users, MessageSquare, Mail, Inbox, Plus, BookOpen,
-  Edit, Trash2, CheckCircle, XCircle, Eye, LogOut, Download, ShieldCheck
+  Edit, Trash2, CheckCircle, XCircle, Eye, LogOut, Download, ShieldCheck, Feather
 } from 'lucide-react';
 import {
   adminService, essayService, categoryService,
-  commentService, newsletterService, contactService
+  commentService, newsletterService, contactService, perspectiveService
 } from '../services/api';
 import { useAuth } from '../context/AuthContext';
 import { formatDate } from '../utils/helpers';
@@ -16,7 +16,7 @@ export default function AdminDashboard() {
   const { user, isAdmin, loading: authLoading, logout } = useAuth();
   const navigate = useNavigate();
 
-  const [activeTab, setActiveTab] = useState('essays'); // essays, categories, authors, comments, newsletter, contact
+  const [activeTab, setActiveTab] = useState('essays'); // essays, categories, authors, comments, newsletter, contact, perspectives
   const [stats, setStats] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -25,6 +25,7 @@ export default function AdminDashboard() {
   const [blogs, setBlogs] = useState([]);
   const [categories, setCategories] = useState([]);
   const [comments, setComments] = useState([]);
+  const [perspectives, setPerspectives] = useState([]);
   const [subscribers, setSubscribers] = useState([]);
   const [messages, setMessages] = useState([]);
 
@@ -64,6 +65,9 @@ export default function AdminDashboard() {
       } else if (activeTab === 'comments') {
         const res = await commentService.getAllAdmin();
         if (res.data.success) setComments(res.data.data);
+      } else if (activeTab === 'perspectives') {
+        const res = await perspectiveService.getAllAdmin();
+        if (res.data.success) setPerspectives(res.data.data);
       } else if (activeTab === 'newsletter') {
         const res = await newsletterService.getSubscribersAdmin();
         if (res.data.success) setSubscribers(res.data.data);
@@ -134,6 +138,26 @@ export default function AdminDashboard() {
     try {
       await commentService.deleteAdmin(id);
       setComments(prev => prev.filter(c => c.id !== id));
+    } catch (err) {
+      alert('Delete failed');
+    }
+  };
+
+  // --- Perspective Actions ---
+  const handlePerspectiveStatus = async (id, status) => {
+    try {
+      await perspectiveService.updateStatusAdmin(id, status);
+      setPerspectives(prev => prev.map(p => p.id === id ? { ...p, status } : p));
+    } catch (err) {
+      alert('Perspective status update failed');
+    }
+  };
+
+  const handleDeletePerspective = async (id) => {
+    if (!window.confirm('Delete this reader perspective?')) return;
+    try {
+      await perspectiveService.deleteAdmin(id);
+      setPerspectives(prev => prev.filter(p => p.id !== id));
     } catch (err) {
       alert('Delete failed');
     }
@@ -278,6 +302,7 @@ export default function AdminDashboard() {
           { id: 'blogs', label: 'Blogs', icon: BookOpen },
           { id: 'categories', label: 'Categories', icon: FolderKanban },
           { id: 'comments', label: 'Comments', icon: MessageSquare },
+          { id: 'perspectives', label: 'Perspectives (Share)', icon: Feather },
           { id: 'newsletter', label: 'Subscribers', icon: Mail },
           { id: 'contact', label: 'Contact Messages', icon: Inbox }
         ].map(tab => {
@@ -645,6 +670,86 @@ export default function AdminDashboard() {
               </div>
             ))}
           </div>
+        </div>
+      )}
+
+      {/* Tab: Reader Perspectives (Share Page) */}
+      {activeTab === 'perspectives' && (
+        <div>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem', flexWrap: 'wrap', gap: '0.75rem' }}>
+            <h2 className="serif-heading" style={{ fontSize: 'clamp(1.3rem, 3vw, 1.6rem)' }}>Community Reader Perspectives</h2>
+            <Link to="/share" target="_blank" className="btn btn-outline" style={{ fontSize: '0.82rem', gap: '0.35rem' }}>
+              <Eye size={14} /> View Live Share Stream
+            </Link>
+          </div>
+
+          {perspectives.length === 0 ? (
+            <div style={{ padding: '3.5rem 1.5rem', textAlign: 'center', backgroundColor: 'var(--bg-secondary)', borderRadius: 'var(--radius-md)', border: '1px dashed var(--border-color)', color: 'var(--text-muted)' }}>
+              <Feather size={44} style={{ marginBottom: '0.75rem', opacity: 0.5 }} />
+              <p style={{ fontSize: '1.05rem', fontWeight: '600', color: 'var(--text-primary)', marginBottom: '0.25rem' }}>No community perspectives yet</p>
+              <p style={{ fontSize: '0.875rem' }}>Perspectives submitted by viewers through the Share page will appear here for review and management.</p>
+            </div>
+          ) : (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              {perspectives.map(p => (
+                <div key={p.id} style={{
+                  padding: 'clamp(1rem, 2.5vw, 1.35rem)',
+                  backgroundColor: 'var(--bg-secondary)',
+                  borderRadius: 'var(--radius-md)',
+                  border: '1px solid var(--border-color)',
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  gap: '1rem',
+                  alignItems: 'flex-start',
+                  flexWrap: 'wrap'
+                }}>
+                  <div style={{ flex: 1, minWidth: '240px' }}>
+                    <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center', marginBottom: '0.35rem', flexWrap: 'wrap' }}>
+                      <strong style={{ fontSize: '0.98rem' }}>{p.is_anonymous ? 'Anonymous Reader' : p.author_name}</strong>
+                      {p.email && <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>({p.email})</span>}
+                      <span style={{
+                        fontSize: '0.72rem',
+                        padding: '0.15rem 0.5rem',
+                        borderRadius: 'var(--radius-full)',
+                        backgroundColor: 'rgba(166, 124, 70, 0.15)',
+                        color: 'var(--accent-life-reflection, #A67C46)',
+                        fontWeight: '600'
+                      }}>
+                        {p.topic}
+                      </span>
+                      <span style={{
+                        fontSize: '0.72rem',
+                        padding: '0.15rem 0.5rem',
+                        borderRadius: 'var(--radius-full)',
+                        backgroundColor: p.status === 'approved' ? 'rgba(46,139,128,0.15)' : 'rgba(139,38,62,0.15)',
+                        color: p.status === 'approved' ? 'var(--accent-technology)' : 'var(--accent-ethics)'
+                      }}>
+                        {p.status}
+                      </span>
+                    </div>
+                    <h4 style={{ fontSize: '0.95rem', fontWeight: '700', color: 'var(--text-primary)', marginBottom: '0.35rem' }}>
+                      {p.title}
+                    </h4>
+                    <p style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', lineHeight: '1.6', marginBottom: '0.5rem', whiteSpace: 'pre-line', wordBreak: 'break-word' }}>
+                      {p.content}
+                    </p>
+                    <span style={{ fontSize: '0.775rem', color: 'var(--text-muted)' }}>
+                      Likes: {p.likes || 0} • Submitted: {formatDate(p.created_at)}
+                    </span>
+                  </div>
+                  <div style={{ display: 'flex', gap: '0.4rem', flexShrink: 0 }}>
+                    {p.status !== 'approved' && (
+                      <button onClick={() => handlePerspectiveStatus(p.id, 'approved')} className="btn btn-outline" style={{ padding: '0.35rem 0.6rem', color: 'var(--accent-technology)' }} title="Approve"><CheckCircle size={14} /></button>
+                    )}
+                    {p.status !== 'rejected' && (
+                      <button onClick={() => handlePerspectiveStatus(p.id, 'rejected')} className="btn btn-outline" style={{ padding: '0.35rem 0.6rem', color: 'var(--accent-ethics)' }} title="Reject"><XCircle size={14} /></button>
+                    )}
+                    <button onClick={() => handleDeletePerspective(p.id)} className="btn btn-outline" style={{ padding: '0.35rem 0.6rem' }} title="Delete"><Trash2 size={14} /></button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       )}
 
