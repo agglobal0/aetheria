@@ -1268,6 +1268,26 @@ select {
   }
 }
 
+.author-showcase-card {
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease;
+}
+
+.author-showcase-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+  border-color: var(--accent-primary) !important;
+}
+
+@media (max-width: 540px) {
+  .author-card-inner {
+    grid-template-columns: 1fr !important;
+    gap: 1.25rem !important;
+  }
+  .author-card-inner img {
+    height: 220px !important;
+  }
+}
+
 /* Bottom Misty Mountain Banner */
 .misty-mountains-section {
   position: relative;

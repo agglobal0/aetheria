@@ -29,7 +29,8 @@ import {
   thumbKnowingWorth,
   thumbTrustLost,
   thumbCostGood,
-  thumbTechHuman
+  thumbTechHuman,
+  rajsaarWritingImg
 } from '../assets/images';
 
 export default function Home() {
@@ -412,89 +413,245 @@ export default function Home() {
       </section>
 
       {/* =========================================================================
-          5. SECTION: "The Person Behind the Words" & "Read • Reflect • Rethink"
+          5. SECTION: "The People Behind the Words" (Monika Chopra & RAJSAAR) & "Read • Reflect • Rethink"
           ========================================================================= */}
-      <section style={{ padding: '0 0 clamp(3rem, 6vw, 5rem) 0' }}>
+      <section style={{ padding: '0 0 clamp(3.5rem, 6vw, 5.5rem) 0' }}>
         <div className="container">
+
+          {/* Section Header */}
+          <div style={{ textAlign: 'center', maxWidth: '720px', margin: '0 auto 2.75rem auto' }}>
+            <div style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '0.45rem',
+              color: 'var(--accent-primary)',
+              fontSize: '0.82rem',
+              fontWeight: '600',
+              letterSpacing: '0.12em',
+              textTransform: 'uppercase',
+              marginBottom: '0.5rem'
+            }}>
+              <Compass size={15} />
+              <span>The Voices of ORAANIS</span>
+            </div>
+            <h2 style={{
+              fontFamily: 'var(--font-cormorant)',
+              fontSize: 'clamp(2rem, 4vw, 2.5rem)',
+              fontWeight: '700',
+              color: 'var(--text-primary)',
+              lineHeight: '1.2',
+              marginBottom: '0.6rem'
+            }}>
+              The People Behind the Words
+            </h2>
+            <p style={{
+              fontSize: '0.92rem',
+              color: 'var(--text-secondary)',
+              lineHeight: '1.65'
+            }}>
+              Two distinct perspectives rooted in teaching, mentorship, and decades of observing the human experience.
+            </p>
+          </div>
+
+          {/* 2-Author Showcase Grid */}
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'minmax(300px, 56%) 1fr',
-            gap: 'clamp(2rem, 4vw, 3.5rem)',
-            alignItems: 'start'
-          }} className="ref-bio-feature-grid">
+            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+            gap: '2rem',
+            marginBottom: '3rem'
+          }}>
 
-            {/* Left: Portrait & Bio */}
-            <div className="bio-box">
-              <img
-                src={profPortraitImg}
-                alt="Monika Chopra"
-                style={{
-                  width: '100%',
-                  height: '270px',
-                  objectFit: 'cover',
-                  borderRadius: '10px'
-                }}
-              />
-
-              <div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.85rem' }}>
-                  <Compass size={18} color="var(--accent-primary)" />
+            {/* Author 1: Monika Chopra */}
+            <div className="author-showcase-card" style={{
+              backgroundColor: 'var(--surface-color)',
+              border: '1px solid var(--border-color)',
+              borderRadius: '16px',
+              padding: 'clamp(1.4rem, 2.5vw, 1.85rem)',
+              display: 'flex',
+              flexDirection: 'column',
+              boxShadow: '0 4px 20px rgba(0,0,0,0.03)'
+            }}>
+              <div style={{
+                display: 'grid',
+                gridTemplateColumns: '170px 1fr',
+                gap: '1.4rem',
+                alignItems: 'start'
+              }} className="author-card-inner">
+                <img
+                  src={profPortraitImg}
+                  alt="Monika Chopra"
+                  style={{
+                    width: '100%',
+                    height: '210px',
+                    objectFit: 'cover',
+                    borderRadius: '12px',
+                    boxShadow: '0 4px 12px rgba(0,0,0,0.08)'
+                  }}
+                />
+                <div>
+                  <div style={{
+                    display: 'inline-block',
+                    fontSize: '0.72rem',
+                    fontWeight: '700',
+                    letterSpacing: '0.08em',
+                    textTransform: 'uppercase',
+                    color: 'var(--accent-burgundy, #8B263E)',
+                    backgroundColor: 'rgba(139, 38, 62, 0.08)',
+                    padding: '0.2rem 0.6rem',
+                    borderRadius: '4px',
+                    marginBottom: '0.5rem'
+                  }}>
+                    Author & Educator
+                  </div>
                   <h3 style={{
                     fontFamily: 'var(--font-cormorant)',
-                    fontSize: '1.45rem',
+                    fontSize: '1.5rem',
                     fontWeight: '700',
-                    color: 'var(--text-primary)'
-                  }}>
-                    The Person Behind the Words
-                  </h3>
-                </div>
-
-                <p style={{
-                  fontSize: '0.84rem',
-                  lineHeight: '1.65',
-                  color: 'var(--text-secondary)',
-                  marginBottom: '0.8rem'
-                }}>
-                  I am Monika Chopra, an educator in Information Technology with nearly three decades of teaching, reading, observing and learning from people and life.
-                </p>
-
-                <p style={{
-                  fontSize: '0.84rem',
-                  lineHeight: '1.65',
-                  color: 'var(--text-secondary)',
-                  marginBottom: '0.8rem'
-                }}>
-                  Technology has been my profession. Human beings have been my deeper subject of study.
-                </p>
-
-                <p style={{
-                  fontSize: '0.84rem',
-                  lineHeight: '1.65',
-                  color: 'var(--text-secondary)',
-                  marginBottom: '1.25rem'
-                }}>
-                  I write to explore those lessons — not because I have figured life out, but because I continue to learn from it.
-                </p>
-
-                <Link
-                  to="/person-behind-this"
-                  style={{
-                    fontSize: '0.84rem',
-                    fontWeight: '600',
                     color: 'var(--text-primary)',
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: '0.3rem'
-                  }}
-                >
-                  More About Me <ArrowRight size={13} />
-                </Link>
+                    marginBottom: '0.35rem'
+                  }}>
+                    Monika Chopra
+                  </h3>
+                  <p style={{
+                    fontSize: '0.83rem',
+                    lineHeight: '1.6',
+                    color: 'var(--text-secondary)',
+                    marginBottom: '0.5rem'
+                  }}>
+                    Educator in Information Technology with nearly three decades of teaching, observing, and learning from life.
+                  </p>
+                  <p style={{
+                    fontSize: '0.82rem',
+                    lineHeight: '1.55',
+                    color: 'var(--text-secondary)',
+                    marginBottom: '1rem',
+                    fontStyle: 'italic'
+                  }}>
+                    "Technology has been my profession. Human beings have been my deeper subject of study."
+                  </p>
+                  <Link
+                    to="/person-behind-this"
+                    style={{
+                      fontSize: '0.84rem',
+                      fontWeight: '600',
+                      color: 'var(--accent-primary)',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '0.35rem'
+                    }}
+                  >
+                    More About Monika <ArrowRight size={13} />
+                  </Link>
+                </div>
               </div>
             </div>
 
-            {/* Right: Read • Reflect • Rethink Features List */}
-            <div className="ref-feature-col">
-              <div style={{ marginBottom: '1.5rem' }}>
+            {/* Author 2: RAJSAAR */}
+            <div className="author-showcase-card" style={{
+              backgroundColor: 'var(--surface-color)',
+              border: '1px solid var(--border-color)',
+              borderRadius: '16px',
+              padding: 'clamp(1.4rem, 2.5vw, 1.85rem)',
+              display: 'flex',
+              flexDirection: 'column',
+              boxShadow: '0 4px 20px rgba(0,0,0,0.03)'
+            }}>
+              <div style={{
+                display: 'grid',
+                gridTemplateColumns: '170px 1fr',
+                gap: '1.4rem',
+                alignItems: 'start'
+              }} className="author-card-inner">
+                <img
+                  src={rajsaarWritingImg}
+                  alt="RAJSAAR"
+                  style={{
+                    width: '100%',
+                    height: '210px',
+                    objectFit: 'cover',
+                    borderRadius: '12px',
+                    boxShadow: '0 4px 12px rgba(0,0,0,0.08)'
+                  }}
+                />
+                <div>
+                  <div style={{
+                    display: 'inline-block',
+                    fontSize: '0.72rem',
+                    fontWeight: '700',
+                    letterSpacing: '0.08em',
+                    textTransform: 'uppercase',
+                    color: 'var(--accent-life-reflection, #A67C46)',
+                    backgroundColor: 'rgba(166, 124, 70, 0.12)',
+                    padding: '0.2rem 0.6rem',
+                    borderRadius: '4px',
+                    marginBottom: '0.5rem'
+                  }}>
+                    Through the Mentor's Lens
+                  </div>
+                  <h3 style={{
+                    fontFamily: 'var(--font-cormorant)',
+                    fontSize: '1.5rem',
+                    fontWeight: '700',
+                    color: 'var(--text-primary)',
+                    marginBottom: '0.35rem'
+                  }}>
+                    RAJSAAR
+                  </h3>
+                  <p style={{
+                    fontSize: '0.83rem',
+                    lineHeight: '1.6',
+                    color: 'var(--text-secondary)',
+                    marginBottom: '0.5rem'
+                  }}>
+                    An educator and mentor who writes from the vantage point of quiet observation, character, and life discipline.
+                  </p>
+                  <p style={{
+                    fontSize: '0.82rem',
+                    lineHeight: '1.55',
+                    color: 'var(--text-secondary)',
+                    marginBottom: '1rem',
+                    fontStyle: 'italic'
+                  }}>
+                    "A chosen writing identity distanced from titles, giving thought its own space to breathe."
+                  </p>
+                  <Link
+                    to="/rajsaar"
+                    style={{
+                      fontSize: '0.84rem',
+                      fontWeight: '600',
+                      color: 'var(--accent-primary)',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '0.35rem'
+                    }}
+                  >
+                    Discover RAJSAAR <ArrowRight size={13} />
+                  </Link>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          {/* Read • Reflect • Rethink Features Block */}
+          <div style={{
+            backgroundColor: 'var(--surface-color)',
+            border: '1px solid var(--border-color)',
+            borderRadius: '16px',
+            padding: 'clamp(1.5rem, 3vw, 2.25rem)',
+            boxShadow: '0 4px 20px rgba(0,0,0,0.02)'
+          }}>
+            <div style={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              gap: '1rem',
+              marginBottom: '1.75rem',
+              borderBottom: '1px solid var(--border-color)',
+              paddingBottom: '1.2rem'
+            }}>
+              <div>
                 <h3 style={{
                   fontFamily: 'var(--font-cormorant)',
                   fontSize: 'clamp(1.35rem, 3vw, 1.6rem)',
@@ -505,122 +662,16 @@ export default function Home() {
                 }}>
                   Read • Reflect • Rethink
                 </h3>
-                <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
-                  What You Will Find Here
+                <span style={{ fontSize: '0.82rem', color: 'var(--text-muted)' }}>
+                  What You Will Find in the ORAANIS Library
                 </span>
               </div>
-
-              {/* 4 Feature Items */}
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.1rem', marginBottom: '1.75rem' }}>
-
-                {/* Item 1 */}
-                <div style={{ display: 'flex', gap: '0.9rem', alignItems: 'flex-start' }}>
-                  <div style={{
-                    width: '36px',
-                    height: '36px',
-                    borderRadius: '50%',
-                    backgroundColor: '#F3EAE0',
-                    color: '#8A5E35',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    flexShrink: 0
-                  }}>
-                    <BookOpen size={16} />
-                  </div>
-                  <div>
-                    <h4 style={{ fontSize: '0.9rem', fontWeight: '700', color: 'var(--text-primary)', marginBottom: '0.15rem' }}>
-                      Thoughtful Essays
-                    </h4>
-                    <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', lineHeight: '1.45' }}>
-                      Longer reflections on life, ethics and human behaviour.
-                    </p>
-                  </div>
-                </div>
-
-                {/* Item 2 */}
-                <div style={{ display: 'flex', gap: '0.9rem', alignItems: 'flex-start' }}>
-                  <div style={{
-                    width: '36px',
-                    height: '36px',
-                    borderRadius: '50%',
-                    backgroundColor: '#FCEFE6',
-                    color: '#B0653B',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    flexShrink: 0
-                  }}>
-                    <Compass size={16} />
-                  </div>
-                  <div>
-                    <h4 style={{ fontSize: '0.9rem', fontWeight: '700', color: 'var(--text-primary)', marginBottom: '0.15rem' }}>
-                      Life Perspectives
-                    </h4>
-                    <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', lineHeight: '1.45' }}>
-                      Different ways of looking at difficult situations and choices.
-                    </p>
-                  </div>
-                </div>
-
-                {/* Item 3 */}
-                <div style={{ display: 'flex', gap: '0.9rem', alignItems: 'flex-start' }}>
-                  <div style={{
-                    width: '36px',
-                    height: '36px',
-                    borderRadius: '50%',
-                    backgroundColor: '#E7F2E8',
-                    color: '#387346',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    flexShrink: 0
-                  }}>
-                    <Sprout size={16} />
-                  </div>
-                  <div>
-                    <h4 style={{ fontSize: '0.9rem', fontWeight: '700', color: 'var(--text-primary)', marginBottom: '0.15rem' }}>
-                      Wisdom in Few Words
-                    </h4>
-                    <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', lineHeight: '1.45' }}>
-                      Short thoughts and observations worth carrying with you.
-                    </p>
-                  </div>
-                </div>
-
-                {/* Item 4 */}
-                <div style={{ display: 'flex', gap: '0.9rem', alignItems: 'flex-start' }}>
-                  <div style={{
-                    width: '36px',
-                    height: '36px',
-                    borderRadius: '50%',
-                    backgroundColor: '#EFE7F2',
-                    color: '#7B4285',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    flexShrink: 0
-                  }}>
-                    <Library size={16} />
-                  </div>
-                  <div>
-                    <h4 style={{ fontSize: '0.9rem', fontWeight: '700', color: 'var(--text-primary)', marginBottom: '0.15rem' }}>
-                      Stories & Experiences
-                    </h4>
-                    <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', lineHeight: '1.45' }}>
-                      Lessons from teaching, observing and living.
-                    </p>
-                  </div>
-                </div>
-
-              </div>
-
               <Link
                 to="/essays"
                 style={{
                   fontSize: '0.85rem',
                   fontWeight: '600',
-                  color: 'var(--text-primary)',
+                  color: 'var(--accent-primary)',
                   display: 'inline-flex',
                   alignItems: 'center',
                   gap: '0.3rem'
@@ -630,7 +681,116 @@ export default function Home() {
               </Link>
             </div>
 
+            {/* 4 Feature Items Grid */}
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
+              gap: '1.5rem'
+            }}>
+
+              {/* Item 1 */}
+              <div style={{ display: 'flex', gap: '0.9rem', alignItems: 'flex-start' }}>
+                <div style={{
+                  width: '38px',
+                  height: '38px',
+                  borderRadius: '50%',
+                  backgroundColor: '#F3EAE0',
+                  color: '#8A5E35',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  flexShrink: 0
+                }}>
+                  <BookOpen size={17} />
+                </div>
+                <div>
+                  <h4 style={{ fontSize: '0.92rem', fontWeight: '700', color: 'var(--text-primary)', marginBottom: '0.2rem' }}>
+                    Thoughtful Essays
+                  </h4>
+                  <p style={{ fontSize: '0.81rem', color: 'var(--text-secondary)', lineHeight: '1.45' }}>
+                    Longer reflections on life, ethics and human behaviour.
+                  </p>
+                </div>
+              </div>
+
+              {/* Item 2 */}
+              <div style={{ display: 'flex', gap: '0.9rem', alignItems: 'flex-start' }}>
+                <div style={{
+                  width: '38px',
+                  height: '38px',
+                  borderRadius: '50%',
+                  backgroundColor: '#FCEFE6',
+                  color: '#B0653B',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  flexShrink: 0
+                }}>
+                  <Compass size={17} />
+                </div>
+                <div>
+                  <h4 style={{ fontSize: '0.92rem', fontWeight: '700', color: 'var(--text-primary)', marginBottom: '0.2rem' }}>
+                    Life Perspectives
+                  </h4>
+                  <p style={{ fontSize: '0.81rem', color: 'var(--text-secondary)', lineHeight: '1.45' }}>
+                    Different ways of looking at difficult situations and choices.
+                  </p>
+                </div>
+              </div>
+
+              {/* Item 3 */}
+              <div style={{ display: 'flex', gap: '0.9rem', alignItems: 'flex-start' }}>
+                <div style={{
+                  width: '38px',
+                  height: '38px',
+                  borderRadius: '50%',
+                  backgroundColor: '#E7F2E8',
+                  color: '#387346',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  flexShrink: 0
+                }}>
+                  <Sprout size={17} />
+                </div>
+                <div>
+                  <h4 style={{ fontSize: '0.92rem', fontWeight: '700', color: 'var(--text-primary)', marginBottom: '0.2rem' }}>
+                    Wisdom in Few Words
+                  </h4>
+                  <p style={{ fontSize: '0.81rem', color: 'var(--text-secondary)', lineHeight: '1.45' }}>
+                    Short thoughts and observations worth carrying with you.
+                  </p>
+                </div>
+              </div>
+
+              {/* Item 4 */}
+              <div style={{ display: 'flex', gap: '0.9rem', alignItems: 'flex-start' }}>
+                <div style={{
+                  width: '38px',
+                  height: '38px',
+                  borderRadius: '50%',
+                  backgroundColor: '#EFE7F2',
+                  color: '#7B4285',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  flexShrink: 0
+                }}>
+                  <Library size={17} />
+                </div>
+                <div>
+                  <h4 style={{ fontSize: '0.92rem', fontWeight: '700', color: 'var(--text-primary)', marginBottom: '0.2rem' }}>
+                    Stories & Experiences
+                  </h4>
+                  <p style={{ fontSize: '0.81rem', color: 'var(--text-secondary)', lineHeight: '1.45' }}>
+                    Lessons from teaching, observing and living.
+                  </p>
+                </div>
+              </div>
+
+            </div>
           </div>
+
         </div>
       </section>
 
