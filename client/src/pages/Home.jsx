@@ -125,253 +125,155 @@ export default function Home() {
       {/* =========================================================================
           2. SECTION: "Why This Space?" & "Explore by Theme"
           ========================================================================= */}
-      <section style={{ padding: 'clamp(2.5rem, 5vw, 4.5rem) 0 clamp(2rem, 4vw, 3.5rem) 0' }}>
+      <section className="why-space-section">
         <div className="container">
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'minmax(280px, 38%) 1fr',
-            gap: 'clamp(2rem, 4vw, 3.5rem)',
-            alignItems: 'start'
-          }} className="ref-two-col-grid">
+          <div className="why-space-grid">
 
             {/* Left Column: Why This Space? */}
-            <div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '1rem' }}>
-                <LeafIcon size={22} color="#5C7A60" />
-                <h2 style={{
-                  fontFamily: 'var(--font-cormorant)',
-                  fontSize: 'clamp(1.6rem, 3.5vw, 2rem)',
-                  fontWeight: '700',
-                  color: 'var(--text-primary)',
-                  letterSpacing: '-0.01em'
-                }}>
+            <div className="why-space-left">
+              <div>
+                <div className="why-space-pill-badge">
+                  <LeafIcon size={14} color="var(--accent-primary)" />
+                  <span>An Invitation to Pause</span>
+                </div>
+
+                <h2 className="why-space-title">
                   Why This Space?
                 </h2>
+
+                <p className="why-space-intro">
+                  We live in a world that has never been more connected, yet many of us carry thoughts we rarely speak about.
+                </p>
+
+                {/* Topics Grid */}
+                <div className="why-space-topics-grid">
+                  {[
+                    'Difficult choices',
+                    'Unspoken emotions',
+                    'Workplace struggles',
+                    'Changing relationships',
+                    'Questions of right and wrong',
+                    'The pressure to keep going'
+                  ].map((item, idx) => (
+                    <div key={idx} className="why-space-topic-item">
+                      <LeafBullet size={13} color="#6C8A6F" />
+                      <span>{item}</span>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Philosophical Quote Card */}
+                <div className="why-space-quote-card">
+                  <p className="why-space-quote-lead">
+                    Sometimes we don't need someone to tell us what to do.
+                  </p>
+                  <p className="why-space-quote-core">
+                    We simply need another way of looking at what we are going through.
+                  </p>
+                </div>
               </div>
 
-              <p style={{
-                fontSize: '0.92rem',
-                lineHeight: '1.65',
-                color: 'var(--text-secondary)',
-                marginBottom: '1.5rem'
-              }}>
-                We live in a world that has never been more connected, yet many of us carry thoughts we rarely speak about.
-              </p>
-
-              {/* Bulleted Points with Leaves */}
-              <ul style={{
-                listStyle: 'none',
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '0.6rem',
-                marginBottom: '1.75rem',
-                fontSize: '0.88rem',
-                color: 'var(--text-secondary)'
-              }}>
-                {[
-                  'Difficult choices',
-                  'Unspoken emotions',
-                  'Workplace struggles',
-                  'Changing relationships',
-                  'Questions of right and wrong',
-                  'The pressure to keep going when life feels complicated'
-                ].map((item, idx) => (
-                  <li key={idx} style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
-                    <LeafBullet size={14} color="#7A937D" />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-
-              <p style={{
-                fontSize: '0.92rem',
-                lineHeight: '1.6',
-                color: 'var(--text-secondary)',
-                marginBottom: '0.35rem'
-              }}>
-                Sometimes we don't need someone to tell us what to do.
-              </p>
-              <p style={{
-                fontSize: '0.92rem',
-                lineHeight: '1.6',
-                color: 'var(--text-primary)',
-                fontWeight: '600',
-                fontStyle: 'italic',
-                marginBottom: '1.5rem'
-              }}>
-                We simply need another way of looking at what we are going through.
-              </p>
-
-              <Link
-                to="/person-behind-this"
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '0.4rem',
-                  fontSize: '0.88rem',
-                  fontWeight: '600',
-                  color: 'var(--text-primary)',
-                  borderBottom: '1px solid var(--text-primary)',
-                  paddingBottom: '2px'
-                }}
-              >
-                Read My Story <ArrowRight size={14} />
-              </Link>
+              <div>
+                <Link
+                  to="/person-behind-this"
+                  className="why-space-story-btn"
+                >
+                  <span>Read My Story</span>
+                  <ArrowRight size={15} className="story-btn-arrow" />
+                </Link>
+              </div>
             </div>
 
             {/* Right Column: Explore by Theme */}
-            <div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.5rem' }}>
-                <h3 style={{
-                  fontFamily: 'var(--font-cormorant)',
-                  fontSize: 'clamp(1.35rem, 3vw, 1.6rem)',
-                  fontWeight: '600',
-                  color: 'var(--text-primary)',
-                  letterSpacing: '-0.01em'
-                }}>
-                  Explore by Theme
-                </h3>
-                <div style={{ flex: 1, height: '1px', backgroundColor: 'var(--border-color)', maxWidth: '80px' }} />
+            <div className="why-space-right">
+              <div className="explore-theme-header">
+                <div>
+                  <h3 className="explore-theme-title">
+                    Explore by Theme
+                  </h3>
+                  <span className="explore-theme-subtitle">Core Pillars of Reflection</span>
+                </div>
+                <div style={{ flex: 1, height: '1px', backgroundColor: 'var(--border-color)', maxWidth: '120px', marginLeft: '1.25rem' }} />
               </div>
 
-              {/* 4 Theme Cards */}
-              <div style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(4, 1fr)',
-                gap: '1rem'
-              }} className="ref-themes-grid">
+              {/* 4 Theme Cards Grid */}
+              <div className="explore-theme-grid">
 
-                {/* Card 1: Spirituality */}
-                <div className="theme-card theme-card-ethics">
-                  <div style={{ opacity: 0.85, marginBottom: '0.75rem' }}>
-                    <Flower2 size={28} strokeWidth={1.5} color="#0284C7" />
-                  </div>
+                {/* Card 1: Spirituality & Consciousness */}
+                <Link to="/category/spirituality" className="theme-pillar-card pillar-spirituality">
                   <div>
-                    <h4 style={{
-                      fontFamily: 'var(--font-cormorant)',
-                      fontSize: '1.15rem',
-                      fontWeight: '700',
-                      lineHeight: '1.2',
-                      marginBottom: '0.5rem'
-                    }}>
+                    <div className="theme-pillar-icon-box">
+                      <Flower2 size={24} strokeWidth={1.75} />
+                    </div>
+                    <h4 className="theme-pillar-title">
                       Spirituality &<br />Consciousness
                     </h4>
-                    <p style={{ fontSize: '0.78rem', lineHeight: '1.45', opacity: 0.85, marginBottom: '1rem' }}>
-                      Purpose, transcendence, and quiet depth.
+                    <p className="theme-pillar-desc">
+                      Purpose, transcendence, and quiet depth for the inner seeker.
                     </p>
                   </div>
-                  <Link
-                    to="/category/spirituality"
-                    style={{
-                      fontSize: '0.78rem',
-                      fontWeight: '600',
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: '0.25rem'
-                    }}
-                  >
-                    Explore <ArrowRight size={12} />
-                  </Link>
-                </div>
+                  <div className="theme-pillar-action">
+                    <span>Explore Theme</span>
+                    <ArrowRight size={14} className="theme-pillar-action-arrow" />
+                  </div>
+                </Link>
 
                 {/* Card 2: Wisdom */}
-                <div className="theme-card theme-card-human">
-                  <div style={{ opacity: 0.85, marginBottom: '0.75rem' }}>
-                    <Lightbulb size={28} strokeWidth={1.5} color="#2D5A38" />
-                  </div>
+                <Link to="/category/wisdom" className="theme-pillar-card pillar-wisdom">
                   <div>
-                    <h4 style={{
-                      fontFamily: 'var(--font-cormorant)',
-                      fontSize: '1.15rem',
-                      fontWeight: '700',
-                      lineHeight: '1.2',
-                      marginBottom: '0.5rem'
-                    }}>
-                      Wisdom
+                    <div className="theme-pillar-icon-box">
+                      <Lightbulb size={24} strokeWidth={1.75} />
+                    </div>
+                    <h4 className="theme-pillar-title">
+                      Wisdom &<br />Clarity
                     </h4>
-                    <p style={{ fontSize: '0.78rem', lineHeight: '1.45', opacity: 0.85, marginBottom: '1rem' }}>
-                      Timeless moral clarity and lessons for living well.
+                    <p className="theme-pillar-desc">
+                      Timeless moral clarity and lessons for living with deeper intent.
                     </p>
                   </div>
-                  <Link
-                    to="/category/wisdom"
-                    style={{
-                      fontSize: '0.78rem',
-                      fontWeight: '600',
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: '0.25rem'
-                    }}
-                  >
-                    Explore <ArrowRight size={12} />
-                  </Link>
-                </div>
+                  <div className="theme-pillar-action">
+                    <span>Explore Theme</span>
+                    <ArrowRight size={14} className="theme-pillar-action-arrow" />
+                  </div>
+                </Link>
 
                 {/* Card 3: Reflections */}
-                <div className="theme-card theme-card-life">
-                  <div style={{ opacity: 0.85, marginBottom: '0.75rem' }}>
-                    <Feather size={28} strokeWidth={1.5} color="#683972" />
-                  </div>
+                <Link to="/category/reflections" className="theme-pillar-card pillar-reflections">
                   <div>
-                    <h4 style={{
-                      fontFamily: 'var(--font-cormorant)',
-                      fontSize: '1.15rem',
-                      fontWeight: '700',
-                      lineHeight: '1.2',
-                      marginBottom: '0.5rem'
-                    }}>
-                      Reflections
+                    <div className="theme-pillar-icon-box">
+                      <Feather size={24} strokeWidth={1.75} />
+                    </div>
+                    <h4 className="theme-pillar-title">
+                      Reflections &<br />Life Insights
                     </h4>
-                    <p style={{ fontSize: '0.78rem', lineHeight: '1.45', opacity: 0.85, marginBottom: '1rem' }}>
-                      What experience and quiet contemplation teach us.
+                    <p className="theme-pillar-desc">
+                      What lived experience, empathy, and quiet contemplation teach us.
                     </p>
                   </div>
-                  <Link
-                    to="/category/reflections"
-                    style={{
-                      fontSize: '0.78rem',
-                      fontWeight: '600',
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: '0.25rem'
-                    }}
-                  >
-                    Explore <ArrowRight size={12} />
-                  </Link>
-                </div>
+                  <div className="theme-pillar-action">
+                    <span>Explore Theme</span>
+                    <ArrowRight size={14} className="theme-pillar-action-arrow" />
+                  </div>
+                </Link>
 
                 {/* Card 4: Technology & Humanity */}
-                <div className="theme-card theme-card-tech">
-                  <div style={{ opacity: 0.85, marginBottom: '0.75rem' }}>
-                    <Monitor size={28} strokeWidth={1.5} color="#26526B" />
-                  </div>
+                <Link to="/category/technology" className="theme-pillar-card pillar-technology">
                   <div>
-                    <h4 style={{
-                      fontFamily: 'var(--font-cormorant)',
-                      fontSize: '1.15rem',
-                      fontWeight: '700',
-                      lineHeight: '1.2',
-                      marginBottom: '0.5rem'
-                    }}>
+                    <div className="theme-pillar-icon-box">
+                      <Monitor size={24} strokeWidth={1.75} />
+                    </div>
+                    <h4 className="theme-pillar-title">
                       Technology &<br />Humanity
                     </h4>
-                    <p style={{ fontSize: '0.78rem', lineHeight: '1.45', opacity: 0.85, marginBottom: '1rem' }}>
-                      Where technology meets the human side of life.
+                    <p className="theme-pillar-desc">
+                      Where modern digital change meets the timeless human spirit.
                     </p>
                   </div>
-                  <Link
-                    to="/category/technology"
-                    style={{
-                      fontSize: '0.78rem',
-                      fontWeight: '600',
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: '0.25rem'
-                    }}
-                  >
-                    Explore <ArrowRight size={12} />
-                  </Link>
-                </div>
+                  <div className="theme-pillar-action">
+                    <span>Explore Theme</span>
+                    <ArrowRight size={14} className="theme-pillar-action-arrow" />
+                  </div>
+                </Link>
 
               </div>
             </div>
