@@ -111,35 +111,57 @@ async function seedDatabase(pool) {
       }
     }
 
-    // 3. Seed & Update Editorial Author (Monika Chopra)
+    // 3. Seed & Update Editorial Authors (Monika Chopra & RAJSAAR)
     try {
-      await pool.query(
-        `UPDATE authors SET name = 'Monika Chopra', slug = 'monika-chopra', bio = 'Writer and Educator exploring human behaviour, emotional intelligence, wisdom, and life reflections.' WHERE id = 1 OR slug = 'prof-monika-chopra' OR slug = 'monika-chopra' OR slug = 'marcus-vance'`
-      );
+      const [monikaRows] = await pool.query("SELECT id FROM authors WHERE slug = 'monika-chopra' OR id = 1 LIMIT 1");
+      if (monikaRows.length === 0) {
+        console.log('[Seed] Seeding Monika Chopra as primary author...');
+        await pool.query(
+          'INSERT INTO authors (name, slug, bio, avatar, website, social_links) VALUES (?, ?, ?, ?, ?, ?)',
+          [
+            'Monika Chopra',
+            'monika-chopra',
+            'Writer and Educator exploring human behaviour, emotional intelligence, wisdom, and life reflections.',
+            '',
+            'https://monikachopra.org',
+            JSON.stringify({ twitter: 'https://x.com/monikachopra', linkedin: 'https://linkedin.com/in/monikachopra' })
+          ]
+        );
+      } else {
+        await pool.query(
+          `UPDATE authors SET name = 'Monika Chopra', slug = 'monika-chopra', bio = 'Writer and Educator exploring human behaviour, emotional intelligence, wisdom, and life reflections.' WHERE id = ?`,
+          [monikaRows[0].id]
+        );
+      }
+
+      // Ensure RAJSAAR exists as co-author
+      const [rajsaarRows] = await pool.query("SELECT id FROM authors WHERE slug = 'rajsaar' OR name = 'RAJSAAR' LIMIT 1");
+      if (rajsaarRows.length === 0) {
+        console.log('[Seed] Seeding RAJSAAR as author...');
+        await pool.query(
+          'INSERT INTO authors (name, slug, bio, avatar, website, social_links) VALUES (?, ?, ?, ?, ?, ?)',
+          [
+            'RAJSAAR',
+            'rajsaar',
+            "Through the Mentor's Lens. Exploring life principles, discipline, purpose, and timeless perspectives.",
+            '/rajsaar_writing.png',
+            '',
+            JSON.stringify({})
+          ]
+        );
+      }
     } catch (e) {
-      // Ignore if slug conflict
+      console.warn('[Seed] Author setup warning:', e.message);
     }
 
-    const [existingAuthors] = await pool.query('SELECT COUNT(*) as count FROM authors');
-    if (existingAuthors[0].count === 0) {
-      console.log('[Seed] Seeding Monika Chopra as primary author...');
-      await pool.query(
-        'INSERT IGNORE INTO authors (name, slug, bio, avatar, website, social_links) VALUES (?, ?, ?, ?, ?, ?)',
-        [
-          'Monika Chopra',
-          'monika-chopra',
-          'Writer and Educator exploring human behaviour, emotional intelligence, wisdom, and life reflections.',
-          '',
-          'https://monikachopra.org',
-          JSON.stringify({ twitter: 'https://x.com/monikachopra', linkedin: 'https://linkedin.com/in/monikachopra' })
-        ]
-      );
-    }
-
-    // Re-assign all existing essays to Prof. Monika Chopra
-    const [monikaAuthor] = await pool.query("SELECT id FROM authors ORDER BY id ASC LIMIT 1");
-    if (monikaAuthor.length > 0) {
-      await pool.query("UPDATE essays SET author_id = ?", [monikaAuthor[0].id]);
+    // Set default author_id on any essays that have null or 0 author_id
+    try {
+      const [monikaAuthor] = await pool.query("SELECT id FROM authors WHERE slug = 'monika-chopra' OR id = 1 LIMIT 1");
+      if (monikaAuthor.length > 0) {
+        await pool.query("UPDATE essays SET author_id = ? WHERE author_id IS NULL OR author_id = 0", [monikaAuthor[0].id]);
+      }
+    } catch (e) {
+      // Ignore
     }
 
     // 4. Seed Essays (20 High-Quality Essays across 4 categories)

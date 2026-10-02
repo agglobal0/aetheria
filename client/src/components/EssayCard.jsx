@@ -21,6 +21,11 @@ export default function EssayCard({ essay, layout = 'grid' }) {
 
   const isBlog = essay.type === 'blog';
 
+  const isRajsaar = essay.author_slug === 'rajsaar' || 
+    (essay.author_name && essay.author_name.toLowerCase().includes('rajsaar')) || 
+    essay.author_id === 2;
+  const authorName = isRajsaar ? 'RAJSAAR' : (essay.author_name || 'Monika Chopra');
+
   if (layout === 'list') {
     return (
       <article style={{
@@ -58,7 +63,7 @@ export default function EssayCard({ essay, layout = 'grid' }) {
             {essay.excerpt}
           </p>
           <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', fontSize: '0.8rem', color: 'var(--text-muted)' }}>
-            <span>By Monika Chopra</span>
+            <span>By {authorName}</span>
             <span>•</span>
             <span>{formatDate(essay.published_at)}</span>
             {essay.reading_time && (
@@ -153,7 +158,7 @@ export default function EssayCard({ essay, layout = 'grid' }) {
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
             <span style={{ color: 'var(--text-secondary)', fontWeight: '500' }}>
-              Monika Chopra
+              {authorName}
             </span>
           </div>
           <div>

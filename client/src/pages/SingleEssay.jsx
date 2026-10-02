@@ -133,16 +133,39 @@ export default function SingleEssay() {
               flexWrap: 'wrap',
               gap: '0.75rem'
             }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
-                <div>
-                  <span style={{ fontWeight: '600', color: 'var(--text-primary)', fontSize: '0.925rem', display: 'block' }}>
-                    Monika Chopra
-                  </span>
-                  <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
-                    Published {formatDate(essay.published_at)}
-                  </span>
-                </div>
-              </div>
+              {(() => {
+                const isRajsaar = essay.author_slug === 'rajsaar' || 
+                  (essay.author_name && essay.author_name.toLowerCase().includes('rajsaar')) || 
+                  essay.author_id === 2;
+                const authorName = isRajsaar ? 'RAJSAAR' : (essay.author_name || 'Monika Chopra');
+                const authorLink = isRajsaar ? '/rajsaar' : '/person-behind-this';
+                const authorRole = isRajsaar ? "Through the Mentor's Lens" : 'Writer & Educator';
+
+                return (
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
+                    <div>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                        <span style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>Written by</span>
+                        <Link 
+                          to={authorLink}
+                          style={{ 
+                            fontWeight: '600', 
+                            color: 'var(--text-primary)', 
+                            fontSize: '0.95rem',
+                            textDecoration: 'none',
+                            borderBottom: '1px dotted var(--text-muted)'
+                          }}
+                        >
+                          {authorName}
+                        </Link>
+                      </div>
+                      <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
+                        {authorRole} • Published {formatDate(essay.published_at)}
+                      </span>
+                    </div>
+                  </div>
+                );
+              })()}
             </div>
           </header>
 
@@ -187,10 +210,52 @@ export default function SingleEssay() {
             gap: '0.75rem'
           }}>
             <span style={{ fontSize: '0.9rem', fontWeight: '600', color: 'var(--text-primary)' }}>
-              Enjoyed this essay? Share it:
+              Enjoyed this piece? Share it:
             </span>
             <SocialShare title={essay.title} />
           </div>
+
+          {/* About The Author Section */}
+          {(() => {
+            const isRajsaar = essay.author_slug === 'rajsaar' || 
+              (essay.author_name && essay.author_name.toLowerCase().includes('rajsaar')) || 
+              essay.author_id === 2;
+            const authorName = isRajsaar ? 'RAJSAAR' : (essay.author_name || 'Monika Chopra');
+            const authorLink = isRajsaar ? '/rajsaar' : '/person-behind-this';
+            const authorBio = isRajsaar 
+              ? "Through the Mentor's Lens — quiet reflections, critical thinking, life principles, and perspectives shaped by experience."
+              : (essay.author_bio || 'Writer and Educator exploring human behaviour, emotional intelligence, wisdom, and life reflections.');
+
+            return (
+              <div style={{
+                marginTop: '2.5rem',
+                padding: '1.75rem',
+                backgroundColor: 'var(--bg-secondary)',
+                borderRadius: 'var(--radius-md)',
+                border: '1px solid var(--border-color)',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '0.75rem'
+              }}>
+                <div style={{ fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--text-muted)', fontWeight: '700' }}>
+                  About The Author
+                </div>
+                <h4 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.25rem', fontWeight: '700', margin: 0 }}>
+                  <Link to={authorLink} style={{ color: 'var(--text-primary)', textDecoration: 'none' }}>
+                    {authorName}
+                  </Link>
+                </h4>
+                <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', lineHeight: '1.6', margin: 0 }}>
+                  {authorBio}
+                </p>
+                <div style={{ marginTop: '0.5rem' }}>
+                  <Link to={authorLink} style={{ fontSize: '0.825rem', fontWeight: '600', color: 'var(--accent-burgundy, #8B263E)', textDecoration: 'none' }}>
+                    View Profile & All Essays by {authorName} →
+                  </Link>
+                </div>
+              </div>
+            );
+          })()}
 
           {/* Previous / Next Navigation */}
           <div style={{

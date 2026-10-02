@@ -4,7 +4,7 @@ import {
   Save, ArrowLeft, Eye, Sparkles, Image, HelpCircle,
   Upload, Link2, Trash2, CheckCircle, RefreshCw, X, Plus
 } from 'lucide-react';
-import { essayService, categoryService } from '../services/api';
+import { essayService, categoryService, authorService } from '../services/api';
 import { slugify, calculateReadingTime } from '../utils/helpers';
 import Breadcrumbs from '../components/Breadcrumbs';
 
@@ -14,6 +14,10 @@ export default function AdminEssayEditor() {
   const navigate = useNavigate();
 
   const [categories, setCategories] = useState([]);
+  const [authors, setAuthors] = useState([
+    { id: 1, name: 'Monika Chopra', slug: 'monika-chopra' },
+    { id: 2, name: 'RAJSAAR', slug: 'rajsaar' }
+  ]);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [imageMode, setImageMode] = useState('upload'); // 'upload' | 'url'
@@ -46,7 +50,10 @@ export default function AdminEssayEditor() {
     async function loadEditorData() {
       setLoading(true);
       try {
-        const catRes = await categoryService.getAll();
+        const [catRes, authRes] = await Promise.all([
+          categoryService.getAll(),
+          authorService.getAll().catch(() => ({ data: { success: false } }))
+        ]);
 
         if (catRes.data.success) {
           setCategories(catRes.data.data);
@@ -57,6 +64,10 @@ export default function AdminEssayEditor() {
               type: prev.type || defaultType
             }));
           }
+        }
+
+        if (authRes?.data?.success && authRes.data.data?.length > 0) {
+          setAuthors(authRes.data.data);
         }
 
         if (isEditing) {
@@ -609,6 +620,26 @@ export default function AdminEssayEditor() {
                     </span>
                   </div>
                 )}
+              </div>
+
+              <div>
+                <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: '600', marginBottom: '0.4rem', color: 'var(--text-muted)' }}>
+                  Author / Writer *
+                </label>
+                <select
+                  value={formData.author_id}
+                  onChange={e => setFormData({ ...formData, author_id: Number(e.target.value) })}
+                  style={{ width: '100%', padding: '0.65rem', fontSize: '0.9rem', borderRadius: 'var(--radius-sm)', border: '1px solid var(--border-color)', backgroundColor: 'var(--bg-input)', color: 'var(--text-primary)', fontWeight: '500' }}
+                >
+                  {authors.map(a => (
+                    <option key={a.id} value={a.id}>
+                      {a.name}
+                    </option>
+                  ))}
+                </select>
+                <span style={{ fontSize: '0.725rem', color: 'var(--text-muted)', display: 'block', marginTop: '0.25rem' }}>
+                  Select whether this piece is authored by Monika Chopra or RAJSAAR.
+                </span>
               </div>
 
               <div>

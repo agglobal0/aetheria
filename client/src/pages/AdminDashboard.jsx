@@ -323,47 +323,64 @@ export default function AdminDashboard() {
               <thead>
                 <tr style={{ borderBottom: '1px solid var(--border-color)', backgroundColor: 'var(--bg-tertiary)' }}>
                   <th style={{ padding: '0.9rem 1rem' }}>Article</th>
+                  <th style={{ padding: '0.9rem 1rem' }}>Author</th>
                   <th style={{ padding: '0.9rem 1rem' }}>Category</th>
                   <th style={{ padding: '0.9rem 1rem' }}>Status</th>
                   <th style={{ padding: '0.9rem 1rem', textAlign: 'right' }}>Actions</th>
                 </tr>
               </thead>
               <tbody>
-                {essays.map(essay => (
-                  <tr key={essay.id} style={{ borderBottom: '1px solid var(--border-color)' }}>
-                    <td style={{ padding: '0.9rem 1rem' }}>
-                      <strong style={{ display: 'block', color: 'var(--text-primary)', wordBreak: 'break-word' }}>{essay.title}</strong>
-                      <span style={{ fontSize: '0.775rem', color: 'var(--text-muted)' }}>{formatDate(essay.published_at)}</span>
-                    </td>
-                    <td style={{ padding: '0.9rem 1rem', whiteSpace: 'nowrap' }}>{essay.category_name}</td>
-                    <td style={{ padding: '0.9rem 1rem', whiteSpace: 'nowrap' }}>
-                      <span style={{
-                        padding: '0.2rem 0.6rem',
-                        borderRadius: 'var(--radius-full)',
-                        fontSize: '0.75rem',
-                        fontWeight: '700',
-                        textTransform: 'uppercase',
-                        backgroundColor: essay.status === 'published' ? 'rgba(46, 139, 128, 0.15)' : 'rgba(166, 124, 70, 0.15)',
-                        color: essay.status === 'published' ? 'var(--accent-technology)' : 'var(--accent-life-reflection)'
-                      }}>
-                        {essay.status}
-                      </span>
-                    </td>
-                    <td style={{ padding: '0.9rem 1rem', textAlign: 'right' }}>
-                      <div style={{ display: 'flex', gap: '0.4rem', justifyContent: 'flex-end' }}>
-                        <Link to={`/essay/${essay.slug}`} target="_blank" className="btn btn-outline" style={{ padding: '0.35rem 0.6rem' }} title="View">
-                          <Eye size={14} />
-                        </Link>
-                        <Link to={`/admin/essay/edit/${essay.id}`} className="btn btn-outline" style={{ padding: '0.35rem 0.6rem' }} title="Edit">
-                          <Edit size={14} />
-                        </Link>
-                        <button onClick={() => handleDeleteEssay(essay.id)} className="btn btn-outline" style={{ padding: '0.35rem 0.6rem', color: 'var(--accent-ethics)' }} title="Delete">
-                          <Trash2 size={14} />
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                ))}
+                {essays.map(essay => {
+                  const isRajsaar = essay.author_slug === 'rajsaar' || (essay.author_name && essay.author_name.toLowerCase().includes('rajsaar')) || essay.author_id === 2;
+                  const authorName = isRajsaar ? 'RAJSAAR' : (essay.author_name || 'Monika Chopra');
+                  return (
+                    <tr key={essay.id} style={{ borderBottom: '1px solid var(--border-color)' }}>
+                      <td style={{ padding: '0.9rem 1rem' }}>
+                        <strong style={{ display: 'block', color: 'var(--text-primary)', wordBreak: 'break-word' }}>{essay.title}</strong>
+                        <span style={{ fontSize: '0.775rem', color: 'var(--text-muted)' }}>{formatDate(essay.published_at)}</span>
+                      </td>
+                      <td style={{ padding: '0.9rem 1rem', whiteSpace: 'nowrap' }}>
+                        <span style={{
+                          padding: '0.2rem 0.55rem',
+                          borderRadius: 'var(--radius-sm)',
+                          fontSize: '0.75rem',
+                          fontWeight: '600',
+                          backgroundColor: isRajsaar ? 'rgba(166, 124, 70, 0.15)' : 'rgba(139, 38, 62, 0.12)',
+                          color: isRajsaar ? 'var(--accent-life-reflection)' : 'var(--accent-burgundy, #8B263E)'
+                        }}>
+                          {authorName}
+                        </span>
+                      </td>
+                      <td style={{ padding: '0.9rem 1rem', whiteSpace: 'nowrap' }}>{essay.category_name}</td>
+                      <td style={{ padding: '0.9rem 1rem', whiteSpace: 'nowrap' }}>
+                        <span style={{
+                          padding: '0.2rem 0.6rem',
+                          borderRadius: 'var(--radius-full)',
+                          fontSize: '0.75rem',
+                          fontWeight: '700',
+                          textTransform: 'uppercase',
+                          backgroundColor: essay.status === 'published' ? 'rgba(46, 139, 128, 0.15)' : 'rgba(166, 124, 70, 0.15)',
+                          color: essay.status === 'published' ? 'var(--accent-technology)' : 'var(--accent-life-reflection)'
+                        }}>
+                          {essay.status}
+                        </span>
+                      </td>
+                      <td style={{ padding: '0.9rem 1rem', textAlign: 'right' }}>
+                        <div style={{ display: 'flex', gap: '0.4rem', justifyContent: 'flex-end' }}>
+                          <Link to={`/essay/${essay.slug}`} target="_blank" className="btn btn-outline" style={{ padding: '0.35rem 0.6rem' }} title="View">
+                            <Eye size={14} />
+                          </Link>
+                          <Link to={`/admin/essay/edit/${essay.id}`} className="btn btn-outline" style={{ padding: '0.35rem 0.6rem' }} title="Edit">
+                            <Edit size={14} />
+                          </Link>
+                          <button onClick={() => handleDeleteEssay(essay.id)} className="btn btn-outline" style={{ padding: '0.35rem 0.6rem', color: 'var(--accent-ethics)' }} title="Delete">
+                            <Trash2 size={14} />
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           </div>
@@ -385,47 +402,64 @@ export default function AdminDashboard() {
               <thead>
                 <tr style={{ borderBottom: '1px solid var(--border-color)', backgroundColor: 'var(--bg-tertiary)' }}>
                   <th style={{ padding: '0.9rem 1rem' }}>Blog Post</th>
+                  <th style={{ padding: '0.9rem 1rem' }}>Author</th>
                   <th style={{ padding: '0.9rem 1rem' }}>Category</th>
                   <th style={{ padding: '0.9rem 1rem' }}>Status</th>
                   <th style={{ padding: '0.9rem 1rem', textAlign: 'right' }}>Actions</th>
                 </tr>
               </thead>
               <tbody>
-                {blogs.map(blog => (
-                  <tr key={blog.id} style={{ borderBottom: '1px solid var(--border-color)' }}>
-                    <td style={{ padding: '0.9rem 1rem' }}>
-                      <strong style={{ display: 'block', color: 'var(--text-primary)', wordBreak: 'break-word' }}>{blog.title}</strong>
-                      <span style={{ fontSize: '0.775rem', color: 'var(--text-muted)' }}>{formatDate(blog.published_at)}</span>
-                    </td>
-                    <td style={{ padding: '0.9rem 1rem', whiteSpace: 'nowrap' }}>{blog.category_name}</td>
-                    <td style={{ padding: '0.9rem 1rem', whiteSpace: 'nowrap' }}>
-                      <span style={{
-                        padding: '0.2rem 0.6rem',
-                        borderRadius: 'var(--radius-full)',
-                        fontSize: '0.75rem',
-                        fontWeight: '700',
-                        textTransform: 'uppercase',
-                        backgroundColor: blog.status === 'published' ? 'rgba(46, 139, 128, 0.15)' : 'rgba(166, 124, 70, 0.15)',
-                        color: blog.status === 'published' ? 'var(--accent-technology)' : 'var(--accent-life-reflection)'
-                      }}>
-                        {blog.status}
-                      </span>
-                    </td>
-                    <td style={{ padding: '0.9rem 1rem', textAlign: 'right' }}>
-                      <div style={{ display: 'flex', gap: '0.4rem', justifyContent: 'flex-end' }}>
-                        <Link to={`/essay/${blog.slug}`} target="_blank" className="btn btn-outline" style={{ padding: '0.35rem 0.6rem' }} title="View">
-                          <Eye size={14} />
-                        </Link>
-                        <Link to={`/admin/essay/edit/${blog.id}`} className="btn btn-outline" style={{ padding: '0.35rem 0.6rem' }} title="Edit">
-                          <Edit size={14} />
-                        </Link>
-                        <button onClick={() => handleDeleteEssay(blog.id)} className="btn btn-outline" style={{ padding: '0.35rem 0.6rem', color: 'var(--accent-ethics)' }} title="Delete">
-                          <Trash2 size={14} />
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                ))}
+                {blogs.map(blog => {
+                  const isRajsaar = blog.author_slug === 'rajsaar' || (blog.author_name && blog.author_name.toLowerCase().includes('rajsaar')) || blog.author_id === 2;
+                  const authorName = isRajsaar ? 'RAJSAAR' : (blog.author_name || 'Monika Chopra');
+                  return (
+                    <tr key={blog.id} style={{ borderBottom: '1px solid var(--border-color)' }}>
+                      <td style={{ padding: '0.9rem 1rem' }}>
+                        <strong style={{ display: 'block', color: 'var(--text-primary)', wordBreak: 'break-word' }}>{blog.title}</strong>
+                        <span style={{ fontSize: '0.775rem', color: 'var(--text-muted)' }}>{formatDate(blog.published_at)}</span>
+                      </td>
+                      <td style={{ padding: '0.9rem 1rem', whiteSpace: 'nowrap' }}>
+                        <span style={{
+                          padding: '0.2rem 0.55rem',
+                          borderRadius: 'var(--radius-sm)',
+                          fontSize: '0.75rem',
+                          fontWeight: '600',
+                          backgroundColor: isRajsaar ? 'rgba(166, 124, 70, 0.15)' : 'rgba(139, 38, 62, 0.12)',
+                          color: isRajsaar ? 'var(--accent-life-reflection)' : 'var(--accent-burgundy, #8B263E)'
+                        }}>
+                          {authorName}
+                        </span>
+                      </td>
+                      <td style={{ padding: '0.9rem 1rem', whiteSpace: 'nowrap' }}>{blog.category_name}</td>
+                      <td style={{ padding: '0.9rem 1rem', whiteSpace: 'nowrap' }}>
+                        <span style={{
+                          padding: '0.2rem 0.6rem',
+                          borderRadius: 'var(--radius-full)',
+                          fontSize: '0.75rem',
+                          fontWeight: '700',
+                          textTransform: 'uppercase',
+                          backgroundColor: blog.status === 'published' ? 'rgba(46, 139, 128, 0.15)' : 'rgba(166, 124, 70, 0.15)',
+                          color: blog.status === 'published' ? 'var(--accent-technology)' : 'var(--accent-life-reflection)'
+                        }}>
+                          {blog.status}
+                        </span>
+                      </td>
+                      <td style={{ padding: '0.9rem 1rem', textAlign: 'right' }}>
+                        <div style={{ display: 'flex', gap: '0.4rem', justifyContent: 'flex-end' }}>
+                          <Link to={`/essay/${blog.slug}`} target="_blank" className="btn btn-outline" style={{ padding: '0.35rem 0.6rem' }} title="View">
+                            <Eye size={14} />
+                          </Link>
+                          <Link to={`/admin/essay/edit/${blog.id}`} className="btn btn-outline" style={{ padding: '0.35rem 0.6rem' }} title="Edit">
+                            <Edit size={14} />
+                          </Link>
+                          <button onClick={() => handleDeleteEssay(blog.id)} className="btn btn-outline" style={{ padding: '0.35rem 0.6rem', color: 'var(--accent-ethics)' }} title="Delete">
+                            <Trash2 size={14} />
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           </div>

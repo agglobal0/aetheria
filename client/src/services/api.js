@@ -52,6 +52,12 @@ export const categoryService = {
 };
 
 
+// Author Services
+export const authorService = {
+  getAll: () => api.get('/authors'),
+  getBySlug: (slug) => api.get(`/authors/${slug}`)
+};
+
 // Comment Services
 export const commentService = {
   getByEssay: (essayId) => api.get(`/comments/essay/${essayId}`),

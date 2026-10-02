@@ -70,13 +70,22 @@ export default function FeaturedEssay({ essay }) {
           paddingTop: '1.25rem',
           borderTop: '1px solid var(--border-color)'
         }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', fontSize: '0.85rem', color: 'var(--text-muted)' }}>
-            <span style={{ color: 'var(--text-primary)', fontWeight: '600' }}>
-              Monika Chopra
-            </span>
-            <span>•</span>
-            <span>{formatDate(essay.published_at)}</span>
-          </div>
+          {(() => {
+            const isRajsaar = essay.author_slug === 'rajsaar' || 
+              (essay.author_name && essay.author_name.toLowerCase().includes('rajsaar')) || 
+              essay.author_id === 2;
+            const authorName = isRajsaar ? 'RAJSAAR' : (essay.author_name || 'Monika Chopra');
+
+            return (
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', fontSize: '0.85rem', color: 'var(--text-muted)' }}>
+                <span style={{ color: 'var(--text-primary)', fontWeight: '600' }}>
+                  {authorName}
+                </span>
+                <span>•</span>
+                <span>{formatDate(essay.published_at)}</span>
+              </div>
+            );
+          })()}
 
           <Link to={`/essay/${essay.slug}`} className="btn btn-primary" style={{ gap: '0.5rem', padding: '0.75rem 1.35rem' }}>
             Read Full Essay <ArrowRight size={16} />
