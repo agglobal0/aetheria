@@ -85,7 +85,7 @@ export default function Home() {
     <div style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)', overflowX: 'hidden' }}>
 
       {/* =========================================================================
-          1. HERO SECTION (Desk & Mountain Landscape with Contemplative Quote)
+          1. HERO SECTION (Background Video & Contemplative Quote)
           ========================================================================= */}
       <section
         className="ref-hero"
@@ -93,11 +93,22 @@ export default function Home() {
           backgroundImage: `url(${heroDeskImg})`
         }}
       >
+        <video
+          className="ref-hero-video"
+          autoPlay
+          loop
+          muted
+          playsInline
+          poster={heroDeskImg}
+        >
+          <source src="/hero-video.mp4" type="video/mp4" />
+          <source src="https://assets.mixkit.co/videos/preview/mixkit-set-of-plateaus-seen-from-the-sky-in-a-sunset-26070-large.mp4" type="video/mp4" />
+        </video>
         <div className="ref-hero-overlay" />
         <div className="container" style={{ position: 'relative', zIndex: 2 }}>
           <div className="ref-hero-content animate-fade-in">
             {/* Top Leaf Accent */}
-            <div style={{ marginBottom: '1.25rem' }}>
+            <div style={{ marginBottom: '1.25rem', display: 'flex', justifyContent: 'center' }}>
               <LeafIcon size={26} color="#7A937D" />
             </div>
 
@@ -113,7 +124,7 @@ export default function Home() {
             </p>
 
             {/* CTA Buttons */}
-            <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', alignItems: 'center' }}>
+            <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center' }}>
               <Link to="/essays" className="btn-dark-green">
                 Explore Reflections <ArrowRight size={16} />
               </Link>
