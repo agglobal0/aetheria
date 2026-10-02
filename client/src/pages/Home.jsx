@@ -143,36 +143,66 @@ export default function Home() {
                   Why This Space?
                 </h2>
 
-                <p className="why-space-intro">
-                  We live in a world that has never been more connected, yet many of us carry thoughts we rarely speak about.
+                <p style={{ fontSize: '0.975rem', lineHeight: '1.75', color: 'var(--text-primary)', marginBottom: '1rem', fontWeight: '500' }}>
+                  We have never had more access to information, yet understanding ourselves and the people around us has not necessarily become easier.
                 </p>
 
-                {/* Topics Grid */}
-                <div className="why-space-topics-grid">
-                  {[
-                    'Difficult choices',
-                    'Unspoken emotions',
-                    'Workplace struggles',
-                    'Changing relationships',
-                    'Questions of right and wrong',
-                    'The pressure to keep going'
-                  ].map((item, idx) => (
-                    <div key={idx} className="why-space-topic-item">
-                      <LeafBullet size={13} color="#6C8A6F" />
-                      <span>{item}</span>
-                    </div>
-                  ))}
+                <p style={{ fontSize: '0.925rem', lineHeight: '1.7', color: 'var(--text-secondary)', marginBottom: '1rem' }}>
+                  A search can give us an answer in seconds. A social media post can tell us what a situation means. A short video can offer a solution to a problem that may have taken us years to understand. But human experiences rarely fit into a few lines.
+                </p>
+
+                <p style={{ fontSize: '0.925rem', lineHeight: '1.7', color: 'var(--text-secondary)', marginBottom: '1.25rem' }}>
+                  A disagreement can have many layers. A relationship can hold affection and disappointment at the same time. A decision can be right for one phase of life and wrong for another. Even our own behaviour can surprise us.
+                </p>
+
+                {/* Focus Explore Block */}
+                <div style={{
+                  padding: '1rem 1.15rem',
+                  backgroundColor: 'var(--bg-tertiary)',
+                  borderRadius: 'var(--radius-sm)',
+                  borderLeft: '3px solid var(--accent-primary)',
+                  marginBottom: '1.25rem'
+                }}>
+                  <p style={{ fontSize: '0.95rem', fontWeight: '600', color: 'var(--text-primary)', marginBottom: '0.5rem' }}>
+                    This is the space ORAANIS wants to explore.
+                  </p>
+                  <p style={{ fontSize: '0.875rem', lineHeight: '1.65', color: 'var(--text-secondary)', margin: 0 }}>
+                    Not the obvious explanation, but what lies underneath it. Not simply what happened, but the different ways it can be understood. Not just the emotion we felt in a moment, but what that emotion may reveal about our expectations, choices, relationships and patterns.
+                  </p>
                 </div>
 
+                <p style={{ fontSize: '0.925rem', lineHeight: '1.7', color: 'var(--text-secondary)', marginBottom: '1rem' }}>
+                  There is also value in encountering a perspective that is different from our own. We do not always have to agree with an idea for it to make us think. Sometimes the most useful thought is the one that makes us pause and reconsider something we had already decided.
+                </p>
+
+                <p style={{ fontSize: '0.925rem', lineHeight: '1.7', color: 'var(--text-secondary)', marginBottom: '1.25rem' }}>
+                  ORAANIS brings together such thoughts and perspectives through stories, essays and conversations around the experiences that shape everyday life.
+                </p>
+
                 {/* Philosophical Quote Card */}
-                <div className="why-space-quote-card">
-                  <p className="why-space-quote-lead">
-                    Sometimes we don't need someone to tell us what to do.
+                <div className="why-space-quote-card" style={{ marginBottom: '1.25rem' }}>
+                  <p className="why-space-quote-lead" style={{ fontSize: '0.925rem', marginBottom: '0.5rem' }}>
+                    The intention is simple: to create something worth spending a few quiet minutes with.
                   </p>
-                  <p className="why-space-quote-core">
-                    We simply need another way of looking at what we are going through.
+                  <div style={{ fontSize: '0.85rem', lineHeight: '1.6', color: 'var(--text-secondary)', fontStyle: 'italic', marginBottom: '0.5rem' }}>
+                    <div>Something that does not demand an immediate reaction.</div>
+                    <div>Something that leaves room for your own interpretation.</div>
+                  </div>
+                  <p className="why-space-quote-core" style={{ fontSize: '0.875rem', marginTop: '0.5rem' }}>
+                    Because the most meaningful insights are not always the ones that tell us something new. Sometimes they are the ones that make us look at something familiar in a way we had never considered before.
                   </p>
                 </div>
+
+                <p style={{
+                  fontSize: '0.95rem',
+                  fontFamily: 'var(--font-serif)',
+                  fontWeight: '600',
+                  color: 'var(--accent-burgundy, #8B263E)',
+                  fontStyle: 'italic',
+                  marginBottom: '1.5rem'
+                }}>
+                  ORAANIS is that space between reading something and truly thinking about it.
+                </p>
               </div>
 
               <div>
