@@ -6,6 +6,7 @@ import thumbKnowingWorth from './thumb_knowing_worth_1789047473502.jpg';
 import thumbTrustLost from './thumb_trust_lost_1789047495524.jpg';
 import thumbCostGood from './thumb_cost_good_1789047513951.jpg';
 import thumbTechHuman from './thumb_tech_human_1789047534194.jpg';
+import rajsaarWritingImg from './rajsaar_writing.png';
 
 export {
   heroDeskImg,
@@ -15,5 +16,6 @@ export {
   thumbKnowingWorth,
   thumbTrustLost,
   thumbCostGood,
-  thumbTechHuman
+  thumbTechHuman,
+  rajsaarWritingImg
 };

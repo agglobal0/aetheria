@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Compass, Eye, Sparkles, BookOpen, Feather } from 'lucide-react';
+import { rajsaarWritingImg } from '../assets/images';
 import Breadcrumbs from '../components/Breadcrumbs';
 
 export default function Rajsaar() {
@@ -28,7 +29,7 @@ export default function Rajsaar() {
         }}>
           
           {/* Header */}
-          <header style={{ textAlign: 'center', marginBottom: 'clamp(2.5rem, 5vw, 3.5rem)' }}>
+          <header style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
             <span style={{
               display: 'inline-flex',
               alignItems: 'center',
@@ -73,6 +74,27 @@ export default function Rajsaar() {
               opacity: 0.7
             }} />
           </header>
+
+          {/* Featured RAJSAAR Image */}
+          <div style={{
+            marginBottom: '2.5rem',
+            borderRadius: '12px',
+            overflow: 'hidden',
+            boxShadow: '0 8px 24px rgba(0, 0, 0, 0.08)',
+            border: '1px solid var(--border-color)'
+          }}>
+            <img
+              src={rajsaarWritingImg}
+              alt="RAJSAAR - Through the Mentor's Lens"
+              style={{
+                width: '100%',
+                height: 'auto',
+                display: 'block',
+                maxHeight: '440px',
+                objectFit: 'cover'
+              }}
+            />
+          </div>
 
           {/* Continuous Editorial Essay Prose */}
           <div style={{
@@ -206,14 +228,14 @@ export default function Rajsaar() {
                 justifyContent: 'center',
                 alignItems: 'center'
               }}>
-                <Link to="/essays" className="btn btn-dark-green" style={{ padding: '0.75rem 1.6rem', fontSize: '0.92rem' }}>
+                <Link to="/essays" className="btn-dark-green">
                   Explore Essays <ArrowRight size={16} />
                 </Link>
-                <Link to="/person-behind-this" className="btn btn-secondary" style={{ padding: '0.75rem 1.6rem', fontSize: '0.92rem' }}>
+                <Link to="/person-behind-this" className="btn-warm-pill">
                   <Compass size={16} /> The Person Behind This
                 </Link>
-                <Link to="/about" className="btn btn-secondary" style={{ padding: '0.75rem 1.6rem', fontSize: '0.92rem' }}>
-                  <BookOpen size={16} /> About ORAANIS
+                <Link to="/about" className="btn-warm-pill">
+                  <BookOpen size={16} /> About Aetheria
                 </Link>
               </div>
             </div>
