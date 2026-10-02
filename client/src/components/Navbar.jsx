@@ -11,7 +11,7 @@ import {
   Lightbulb, 
   Flower2 
 } from 'lucide-react';
-import { OraanisEmblem } from './BrandIcons';
+import { OraanisEmblem, BrandLogo } from './BrandIcons';
 import ThemeToggle from './ThemeToggle';
 
 // Custom Botanical Leaf Branch Separator matching the reference
@@ -138,36 +138,11 @@ export default function Navbar() {
         <Link to="/" style={{
           display: 'flex',
           alignItems: 'center',
-          gap: '0.75rem',
           textDecoration: 'none',
           minWidth: 0,
           flexShrink: 0
         }}>
-          <OraanisEmblem size={40} color="#C2A366" />
-          <div style={{ display: 'flex', flexDirection: 'column', minWidth: 0 }}>
-            <span style={{
-              fontFamily: 'var(--font-cormorant)',
-              fontSize: 'clamp(1.35rem, 4vw, 1.65rem)',
-              fontWeight: '700',
-              color: 'var(--accent-gold, #C2A366)',
-              lineHeight: '1',
-              letterSpacing: '0.06em',
-              whiteSpace: 'nowrap'
-            }}>
-              ORAANIS
-            </span>
-            <span className="navbar-brand-subtitle" style={{
-              fontSize: '0.62rem',
-              letterSpacing: '0.03em',
-              color: 'var(--text-secondary)',
-              fontWeight: '500',
-              marginTop: '0.25rem',
-              lineHeight: '1',
-              whiteSpace: 'nowrap'
-            }}>
-              Where Experience Becomes Wisdom
-            </span>
-          </div>
+          <BrandLogo height={44} />
         </Link>
 
         {/* Desktop Navigation Links (Original Clean Typography) */}

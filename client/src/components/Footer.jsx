@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { OraanisEmblem } from './BrandIcons';
+import { BrandLogo } from './BrandIcons';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -41,32 +41,10 @@ export default function Footer() {
           <Link to="/" style={{
             display: 'flex',
             alignItems: 'center',
-            gap: '0.75rem',
             textDecoration: 'none',
             color: '#FFFFFF'
           }}>
-            <OraanisEmblem size={40} color="#C2A366" />
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
-              <span style={{
-                fontFamily: 'var(--font-cormorant)',
-                fontSize: '1.45rem',
-                fontWeight: '700',
-                color: '#E8CA9B',
-                lineHeight: '1',
-                letterSpacing: '0.06em'
-              }}>
-                ORAANIS
-              </span>
-              <span style={{
-                fontSize: '0.62rem',
-                letterSpacing: '0.03em',
-                color: '#A9BAAE',
-                fontWeight: '500',
-                marginTop: '0.25rem'
-              }}>
-                Where Experience Becomes Wisdom
-              </span>
-            </div>
+            <BrandLogo height={42} />
           </Link>
 
           {/* Center Nav Links */}
