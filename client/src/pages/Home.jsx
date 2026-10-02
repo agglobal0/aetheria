@@ -125,213 +125,206 @@ export default function Home() {
       </section>
 
       {/* =========================================================================
-          2. SECTION: "Why This Space?" & "Explore by Theme"
+          2. SECTION: "Why This Space?" (Top) & "Explore by Category" (Down)
           ========================================================================= */}
       <section className="why-space-section">
         <div className="container">
-          <div className="why-space-grid">
 
-            {/* Left Column: Why This Space? */}
-            <div className="why-space-left">
-              <div>
-                <div className="why-space-pill-badge">
-                  <LeafIcon size={13} color="var(--accent-primary)" />
-                  <span>An Invitation to Pause</span>
-                </div>
-
-                <h2 className="why-space-title">
-                  Why This Space?
-                </h2>
-
-                <p style={{ fontSize: '0.92rem', lineHeight: '1.65', color: 'var(--text-primary)', marginBottom: '0.75rem', fontWeight: '500' }}>
-                  We have never had more access to information, yet understanding ourselves and the people around us has not necessarily become easier.
-                </p>
-
-                <p style={{ fontSize: '0.865rem', lineHeight: '1.6', color: 'var(--text-secondary)', marginBottom: '0.75rem' }}>
-                  A search can give us an answer in seconds. A social media post can tell us what a situation means. A short video can offer a solution to a problem that may have taken us years to understand. But human experiences rarely fit into a few lines.
-                </p>
-
-                <p style={{ fontSize: '0.865rem', lineHeight: '1.6', color: 'var(--text-secondary)', marginBottom: '0.85rem' }}>
-                  A disagreement can have many layers. A relationship can hold affection and disappointment at the same time. A decision can be right for one phase of life and wrong for another. Even our own behaviour can surprise us.
-                </p>
-
-                {/* Focus Explore Block */}
-                <div style={{
-                  padding: '0.75rem 0.95rem',
-                  backgroundColor: 'var(--bg-tertiary)',
-                  borderRadius: 'var(--radius-sm)',
-                  borderLeft: '3px solid var(--accent-primary)',
-                  marginBottom: '0.85rem'
-                }}>
-                  <p style={{ fontSize: '0.88rem', fontWeight: '600', color: 'var(--text-primary)', marginBottom: '0.35rem' }}>
-                    This is the space ORAANIS wants to explore.
-                  </p>
-                  <p style={{ fontSize: '0.825rem', lineHeight: '1.55', color: 'var(--text-secondary)', margin: 0 }}>
-                    Not the obvious explanation, but what lies underneath it. Not simply what happened, but the different ways it can be understood. Not just the emotion we felt in a moment, but what that emotion may reveal about our expectations, choices, relationships and patterns.
-                  </p>
-                </div>
-
-                <p style={{ fontSize: '0.865rem', lineHeight: '1.6', color: 'var(--text-secondary)', marginBottom: '0.75rem' }}>
-                  There is also value in encountering a perspective that is different from our own. We do not always have to agree with an idea for it to make us think. Sometimes the most useful thought is the one that makes us pause and reconsider something we had already decided.
-                </p>
-
-                <p style={{ fontSize: '0.865rem', lineHeight: '1.6', color: 'var(--text-secondary)', marginBottom: '0.85rem' }}>
-                  ORAANIS brings together such thoughts and perspectives through stories, essays and conversations around the experiences that shape everyday life.
-                </p>
-
-                {/* Philosophical Quote Card */}
-                <div className="why-space-quote-card" style={{ marginBottom: '0.85rem', padding: '0.75rem 0.95rem' }}>
-                  <p className="why-space-quote-lead" style={{ fontSize: '0.84rem', marginBottom: '0.35rem' }}>
-                    The intention is simple: to create something worth spending a few quiet minutes with.
-                  </p>
-                  <div style={{ fontSize: '0.8rem', lineHeight: '1.5', color: 'var(--text-secondary)', fontStyle: 'italic', marginBottom: '0.35rem' }}>
-                    <div>Something that does not demand an immediate reaction.</div>
-                    <div>Something that leaves room for your own interpretation.</div>
-                  </div>
-                  <p className="why-space-quote-core" style={{ fontSize: '0.84rem', marginTop: '0.35rem' }}>
-                    Because the most meaningful insights are not always the ones that tell us something new. Sometimes they are the ones that make us look at something familiar in a way we had never considered before.
-                  </p>
-                </div>
-
-                <p style={{
-                  fontSize: '0.88rem',
-                  fontFamily: 'var(--font-serif)',
-                  fontWeight: '600',
-                  color: 'var(--accent-burgundy, #8B263E)',
-                  fontStyle: 'italic',
-                  marginBottom: '1.15rem'
-                }}>
-                  ORAANIS is that space between reading something and truly thinking about it.
-                </p>
-              </div>
-
-              <div>
-                <Link
-                  to="/person-behind-this"
-                  className="why-space-story-btn"
-                >
-                  <span>Read My Story</span>
-                  <ArrowRight size={14} className="story-btn-arrow" />
-                </Link>
-              </div>
+          {/* Top: Why This Space? Full Editorial Card */}
+          <div className="why-space-full-card">
+            <div className="why-space-pill-badge">
+              <LeafIcon size={13} color="var(--accent-primary)" />
+              <span>An Invitation to Pause</span>
             </div>
 
-            {/* Right Column: Explore by Category (5 Pillars) */}
-            <div className="why-space-right">
-              <div className="explore-theme-header">
-                <div>
-                  <h3 className="explore-theme-title">
-                    Explore by Category
-                  </h3>
-                  <span className="explore-theme-subtitle">5 Pillars of Reflection</span>
-                </div>
-                <div style={{ flex: 1, height: '1px', backgroundColor: 'var(--border-color)', maxWidth: '100px', marginLeft: '1rem' }} />
-              </div>
+            <h2 className="why-space-title">
+              Why This Space?
+            </h2>
 
-              {/* 5 Theme Cards Grid */}
-              <div className="explore-theme-grid">
+            <p style={{ fontSize: '0.975rem', lineHeight: '1.75', color: 'var(--text-primary)', marginBottom: '1rem', fontWeight: '500' }}>
+              We have never had more access to information, yet understanding ourselves and the people around us has not necessarily become easier.
+            </p>
 
-                {/* 1. Reflections */}
-                <Link to="/category/reflections" className="theme-pillar-card pillar-reflections">
-                  <div>
-                    <div className="theme-pillar-icon-box">
-                      <BookOpen size={18} strokeWidth={1.75} />
-                    </div>
-                    <h4 className="theme-pillar-title">
-                      Reflections
-                    </h4>
-                    <p className="theme-pillar-desc">
-                      Quiet contemplation, personal growth, and lessons learned through life.
-                    </p>
-                  </div>
-                  <div className="theme-pillar-action">
-                    <span>Explore</span>
-                    <ArrowRight size={13} className="theme-pillar-action-arrow" />
-                  </div>
-                </Link>
+            <p style={{ fontSize: '0.92rem', lineHeight: '1.7', color: 'var(--text-secondary)', marginBottom: '1rem' }}>
+              A search can give us an answer in seconds. A social media post can tell us what a situation means. A short video can offer a solution to a problem that may have taken us years to understand. But human experiences rarely fit into a few lines.
+            </p>
 
-                {/* 2. Emotional Intelligence */}
-                <Link to="/category/emotional-intelligence" className="theme-pillar-card pillar-emotional-intelligence">
-                  <div>
-                    <div className="theme-pillar-icon-box">
-                      <Brain size={18} strokeWidth={1.75} />
-                    </div>
-                    <h4 className="theme-pillar-title">
-                      Emotional Intelligence
-                    </h4>
-                    <p className="theme-pillar-desc">
-                      Understanding psychology, empathy, human nature, and self-awareness.
-                    </p>
-                  </div>
-                  <div className="theme-pillar-action">
-                    <span>Explore</span>
-                    <ArrowRight size={13} className="theme-pillar-action-arrow" />
-                  </div>
-                </Link>
+            <p style={{ fontSize: '0.92rem', lineHeight: '1.7', color: 'var(--text-secondary)', marginBottom: '1.25rem' }}>
+              A disagreement can have many layers. A relationship can hold affection and disappointment at the same time. A decision can be right for one phase of life and wrong for another. Even our own behaviour can surprise us.
+            </p>
 
-                {/* 3. Healing */}
-                <Link to="/category/healing" className="theme-pillar-card pillar-healing">
-                  <div>
-                    <div className="theme-pillar-icon-box">
-                      <HeartPulse size={18} strokeWidth={1.75} />
-                    </div>
-                    <h4 className="theme-pillar-title">
-                      Healing
-                    </h4>
-                    <p className="theme-pillar-desc">
-                      Nurturing resilience, emotional recovery, self-forgiveness, and inner peace.
-                    </p>
-                  </div>
-                  <div className="theme-pillar-action">
-                    <span>Explore</span>
-                    <ArrowRight size={13} className="theme-pillar-action-arrow" />
-                  </div>
-                </Link>
-
-                {/* 4. Wisdom */}
-                <Link to="/category/wisdom" className="theme-pillar-card pillar-wisdom">
-                  <div>
-                    <div className="theme-pillar-icon-box">
-                      <Lightbulb size={18} strokeWidth={1.75} />
-                    </div>
-                    <h4 className="theme-pillar-title">
-                      Wisdom
-                    </h4>
-                    <p className="theme-pillar-desc">
-                      Timeless insights, moral integrity, ethics, and enduring human life lessons.
-                    </p>
-                  </div>
-                  <div className="theme-pillar-action">
-                    <span>Explore</span>
-                    <ArrowRight size={13} className="theme-pillar-action-arrow" />
-                  </div>
-                </Link>
-
-                {/* 5. Spirituality (Wide Spanning Row) */}
-                <Link to="/category/spirituality" className="theme-pillar-card theme-pillar-card-wide pillar-spirituality">
-                  <div className="theme-pillar-wide-left">
-                    <div className="theme-pillar-icon-box">
-                      <Flower2 size={18} strokeWidth={1.75} />
-                    </div>
-                    <div>
-                      <h4 className="theme-pillar-title">
-                        Spirituality
-                      </h4>
-                      <p className="theme-pillar-desc">
-                        Meditations on purpose, transcendence, quiet consciousness, and inner depth.
-                      </p>
-                    </div>
-                  </div>
-                  <div className="theme-pillar-action">
-                    <span>Explore</span>
-                    <ArrowRight size={13} className="theme-pillar-action-arrow" />
-                  </div>
-                </Link>
-
-              </div>
+            {/* Focus Explore Block */}
+            <div style={{
+              padding: '1rem 1.25rem',
+              backgroundColor: 'var(--bg-tertiary)',
+              borderRadius: 'var(--radius-sm)',
+              borderLeft: '3px solid var(--accent-primary)',
+              marginBottom: '1.25rem'
+            }}>
+              <p style={{ fontSize: '0.95rem', fontWeight: '600', color: 'var(--text-primary)', marginBottom: '0.4rem' }}>
+                This is the space ORAANIS wants to explore.
+              </p>
+              <p style={{ fontSize: '0.88rem', lineHeight: '1.65', color: 'var(--text-secondary)', margin: 0 }}>
+                Not the obvious explanation, but what lies underneath it. Not simply what happened, but the different ways it can be understood. Not just the emotion we felt in a moment, but what that emotion may reveal about our expectations, choices, relationships and patterns.
+              </p>
             </div>
 
+            <p style={{ fontSize: '0.92rem', lineHeight: '1.7', color: 'var(--text-secondary)', marginBottom: '1rem' }}>
+              There is also value in encountering a perspective that is different from our own. We do not always have to agree with an idea for it to make us think. Sometimes the most useful thought is the one that makes us pause and reconsider something we had already decided.
+            </p>
+
+            <p style={{ fontSize: '0.92rem', lineHeight: '1.7', color: 'var(--text-secondary)', marginBottom: '1.25rem' }}>
+              ORAANIS brings together such thoughts and perspectives through stories, essays and conversations around the experiences that shape everyday life.
+            </p>
+
+            {/* Philosophical Quote Card */}
+            <div className="why-space-quote-card" style={{ marginBottom: '1.25rem' }}>
+              <p className="why-space-quote-lead" style={{ fontSize: '0.92rem', marginBottom: '0.4rem' }}>
+                The intention is simple: to create something worth spending a few quiet minutes with.
+              </p>
+              <div style={{ fontSize: '0.86rem', lineHeight: '1.6', color: 'var(--text-secondary)', fontStyle: 'italic', marginBottom: '0.5rem' }}>
+                <div>Something that does not demand an immediate reaction.</div>
+                <div>Something that leaves room for your own interpretation.</div>
+              </div>
+              <p className="why-space-quote-core" style={{ fontSize: '0.88rem', marginTop: '0.4rem' }}>
+                Because the most meaningful insights are not always the ones that tell us something new. Sometimes they are the ones that make us look at something familiar in a way we had never considered before.
+              </p>
+            </div>
+
+            <p style={{
+              fontSize: '0.95rem',
+              fontFamily: 'var(--font-serif)',
+              fontWeight: '600',
+              color: 'var(--accent-burgundy, #8B263E)',
+              fontStyle: 'italic',
+              marginBottom: '1.5rem'
+            }}>
+              ORAANIS is that space between reading something and truly thinking about it.
+            </p>
+
+            <div>
+              <Link
+                to="/person-behind-this"
+                className="why-space-story-btn"
+              >
+                <span>Read My Story</span>
+                <ArrowRight size={14} className="story-btn-arrow" />
+              </Link>
+            </div>
           </div>
+
+          {/* Down: Explore by Category (5 Pillars Grid) */}
+          <div className="why-space-categories-block">
+            <div className="explore-theme-header">
+              <div>
+                <h3 className="explore-theme-title">
+                  Explore by Category
+                </h3>
+                <span className="explore-theme-subtitle">5 Pillars of Reflection</span>
+              </div>
+              <div style={{ flex: 1, height: '1px', backgroundColor: 'var(--border-color)', maxWidth: '120px', marginLeft: '1.25rem' }} />
+            </div>
+
+            {/* 5 Theme Cards Grid */}
+            <div className="explore-pillars-horizontal-grid">
+
+              {/* 1. Reflections */}
+              <Link to="/category/reflections" className="theme-pillar-card pillar-reflections">
+                <div>
+                  <div className="theme-pillar-icon-box">
+                    <BookOpen size={20} strokeWidth={1.75} />
+                  </div>
+                  <h4 className="theme-pillar-title">
+                    Reflections
+                  </h4>
+                  <p className="theme-pillar-desc">
+                    Quiet contemplation, personal growth, and lessons learned through life.
+                  </p>
+                </div>
+                <div className="theme-pillar-action">
+                  <span>Explore</span>
+                  <ArrowRight size={13} className="theme-pillar-action-arrow" />
+                </div>
+              </Link>
+
+              {/* 2. Emotional Intelligence */}
+              <Link to="/category/emotional-intelligence" className="theme-pillar-card pillar-emotional-intelligence">
+                <div>
+                  <div className="theme-pillar-icon-box">
+                    <Brain size={20} strokeWidth={1.75} />
+                  </div>
+                  <h4 className="theme-pillar-title">
+                    Emotional Intelligence
+                  </h4>
+                  <p className="theme-pillar-desc">
+                    Understanding psychology, empathy, human nature, and self-awareness.
+                  </p>
+                </div>
+                <div className="theme-pillar-action">
+                  <span>Explore</span>
+                  <ArrowRight size={13} className="theme-pillar-action-arrow" />
+                </div>
+              </Link>
+
+              {/* 3. Healing */}
+              <Link to="/category/healing" className="theme-pillar-card pillar-healing">
+                <div>
+                  <div className="theme-pillar-icon-box">
+                    <HeartPulse size={20} strokeWidth={1.75} />
+                  </div>
+                  <h4 className="theme-pillar-title">
+                    Healing
+                  </h4>
+                  <p className="theme-pillar-desc">
+                    Nurturing resilience, emotional recovery, self-forgiveness, and inner peace.
+                  </p>
+                </div>
+                <div className="theme-pillar-action">
+                  <span>Explore</span>
+                  <ArrowRight size={13} className="theme-pillar-action-arrow" />
+                </div>
+              </Link>
+
+              {/* 4. Wisdom */}
+              <Link to="/category/wisdom" className="theme-pillar-card pillar-wisdom">
+                <div>
+                  <div className="theme-pillar-icon-box">
+                    <Lightbulb size={20} strokeWidth={1.75} />
+                  </div>
+                  <h4 className="theme-pillar-title">
+                    Wisdom
+                  </h4>
+                  <p className="theme-pillar-desc">
+                    Timeless insights, moral integrity, ethics, and enduring human life lessons.
+                  </p>
+                </div>
+                <div className="theme-pillar-action">
+                  <span>Explore</span>
+                  <ArrowRight size={13} className="theme-pillar-action-arrow" />
+                </div>
+              </Link>
+
+              {/* 5. Spirituality */}
+              <Link to="/category/spirituality" className="theme-pillar-card pillar-spirituality">
+                <div>
+                  <div className="theme-pillar-icon-box">
+                    <Flower2 size={20} strokeWidth={1.75} />
+                  </div>
+                  <h4 className="theme-pillar-title">
+                    Spirituality
+                  </h4>
+                  <p className="theme-pillar-desc">
+                    Meditations on purpose, transcendence, quiet consciousness, and inner depth.
+                  </p>
+                </div>
+                <div className="theme-pillar-action">
+                  <span>Explore</span>
+                  <ArrowRight size={13} className="theme-pillar-action-arrow" />
+                </div>
+              </Link>
+            </div>
+          </div>
+
         </div>
       </section>
 
