@@ -7,6 +7,8 @@ import {
   Feather,
   Monitor,
   BookOpen,
+  Brain,
+  HeartPulse,
   Compass,
   Lightbulb,
   Flower2,
@@ -184,93 +186,114 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Right Column: Explore by Theme */}
+            {/* Right Column: Explore by Category (5 Pillars) */}
             <div className="why-space-right">
               <div className="explore-theme-header">
                 <div>
                   <h3 className="explore-theme-title">
-                    Explore by Theme
+                    Explore by Category
                   </h3>
-                  <span className="explore-theme-subtitle">Core Pillars of Reflection</span>
+                  <span className="explore-theme-subtitle">5 Pillars of Reflection</span>
                 </div>
                 <div style={{ flex: 1, height: '1px', backgroundColor: 'var(--border-color)', maxWidth: '120px', marginLeft: '1.25rem' }} />
               </div>
 
-              {/* 4 Theme Cards Grid */}
+              {/* 5 Theme Cards Grid */}
               <div className="explore-theme-grid">
 
-                {/* Card 1: Spirituality & Consciousness */}
-                <Link to="/category/spirituality" className="theme-pillar-card pillar-spirituality">
-                  <div>
-                    <div className="theme-pillar-icon-box">
-                      <Flower2 size={24} strokeWidth={1.75} />
-                    </div>
-                    <h4 className="theme-pillar-title">
-                      Spirituality &<br />Consciousness
-                    </h4>
-                    <p className="theme-pillar-desc">
-                      Purpose, transcendence, and quiet depth for the inner seeker.
-                    </p>
-                  </div>
-                  <div className="theme-pillar-action">
-                    <span>Explore Theme</span>
-                    <ArrowRight size={14} className="theme-pillar-action-arrow" />
-                  </div>
-                </Link>
-
-                {/* Card 2: Wisdom */}
-                <Link to="/category/wisdom" className="theme-pillar-card pillar-wisdom">
-                  <div>
-                    <div className="theme-pillar-icon-box">
-                      <Lightbulb size={24} strokeWidth={1.75} />
-                    </div>
-                    <h4 className="theme-pillar-title">
-                      Wisdom &<br />Clarity
-                    </h4>
-                    <p className="theme-pillar-desc">
-                      Timeless moral clarity and lessons for living with deeper intent.
-                    </p>
-                  </div>
-                  <div className="theme-pillar-action">
-                    <span>Explore Theme</span>
-                    <ArrowRight size={14} className="theme-pillar-action-arrow" />
-                  </div>
-                </Link>
-
-                {/* Card 3: Reflections */}
+                {/* 1. Reflections */}
                 <Link to="/category/reflections" className="theme-pillar-card pillar-reflections">
                   <div>
                     <div className="theme-pillar-icon-box">
-                      <Feather size={24} strokeWidth={1.75} />
+                      <BookOpen size={22} strokeWidth={1.75} />
                     </div>
                     <h4 className="theme-pillar-title">
-                      Reflections &<br />Life Insights
+                      Reflections
                     </h4>
                     <p className="theme-pillar-desc">
-                      What lived experience, empathy, and quiet contemplation teach us.
+                      Quiet contemplation, personal growth, and lessons learned through life.
                     </p>
                   </div>
                   <div className="theme-pillar-action">
-                    <span>Explore Theme</span>
+                    <span>Explore</span>
                     <ArrowRight size={14} className="theme-pillar-action-arrow" />
                   </div>
                 </Link>
 
-                {/* Card 4: Technology & Humanity */}
-                <Link to="/category/technology" className="theme-pillar-card pillar-technology">
+                {/* 2. Emotional Intelligence */}
+                <Link to="/category/emotional-intelligence" className="theme-pillar-card pillar-emotional-intelligence">
                   <div>
                     <div className="theme-pillar-icon-box">
-                      <Monitor size={24} strokeWidth={1.75} />
+                      <Brain size={22} strokeWidth={1.75} />
                     </div>
                     <h4 className="theme-pillar-title">
-                      Technology &<br />Humanity
+                      Emotional Intelligence
                     </h4>
                     <p className="theme-pillar-desc">
-                      Where modern digital change meets the timeless human spirit.
+                      Understanding psychology, empathy, human nature, and self-awareness.
                     </p>
                   </div>
                   <div className="theme-pillar-action">
-                    <span>Explore Theme</span>
+                    <span>Explore</span>
+                    <ArrowRight size={14} className="theme-pillar-action-arrow" />
+                  </div>
+                </Link>
+
+                {/* 3. Healing */}
+                <Link to="/category/healing" className="theme-pillar-card pillar-healing">
+                  <div>
+                    <div className="theme-pillar-icon-box">
+                      <HeartPulse size={22} strokeWidth={1.75} />
+                    </div>
+                    <h4 className="theme-pillar-title">
+                      Healing
+                    </h4>
+                    <p className="theme-pillar-desc">
+                      Nurturing resilience, emotional recovery, self-forgiveness, and inner peace.
+                    </p>
+                  </div>
+                  <div className="theme-pillar-action">
+                    <span>Explore</span>
+                    <ArrowRight size={14} className="theme-pillar-action-arrow" />
+                  </div>
+                </Link>
+
+                {/* 4. Wisdom */}
+                <Link to="/category/wisdom" className="theme-pillar-card pillar-wisdom">
+                  <div>
+                    <div className="theme-pillar-icon-box">
+                      <Lightbulb size={22} strokeWidth={1.75} />
+                    </div>
+                    <h4 className="theme-pillar-title">
+                      Wisdom
+                    </h4>
+                    <p className="theme-pillar-desc">
+                      Timeless insights, moral integrity, ethics, and enduring human life lessons.
+                    </p>
+                  </div>
+                  <div className="theme-pillar-action">
+                    <span>Explore</span>
+                    <ArrowRight size={14} className="theme-pillar-action-arrow" />
+                  </div>
+                </Link>
+
+                {/* 5. Spirituality (Wide Spanning Row) */}
+                <Link to="/category/spirituality" className="theme-pillar-card theme-pillar-card-wide pillar-spirituality">
+                  <div className="theme-pillar-wide-left">
+                    <div className="theme-pillar-icon-box">
+                      <Flower2 size={24} strokeWidth={1.75} />
+                    </div>
+                    <div>
+                      <h4 className="theme-pillar-title">
+                        Spirituality
+                      </h4>
+                      <p className="theme-pillar-desc">
+                        Meditations on purpose, transcendence, quiet consciousness, and inner depth.
+                      </p>
+                    </div>
+                  </div>
+                  <div className="theme-pillar-action">
+                    <span>Explore</span>
                     <ArrowRight size={14} className="theme-pillar-action-arrow" />
                   </div>
                 </Link>

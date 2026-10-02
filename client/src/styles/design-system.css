@@ -1017,114 +1017,197 @@ select {
   transform: translateX(4px);
 }
 
-/* 4 Curated Card Palettes */
-/* 1. Spirituality */
-.pillar-spirituality {
-  background-color: #FAF4EB;
-  border-color: #EDE1CD;
-  color: #3B2818;
-}
-.pillar-spirituality .theme-pillar-icon-box {
-  background-color: rgba(181, 116, 45, 0.14);
-  color: #B5742D;
-}
-.pillar-spirituality:hover {
-  border-color: #D6BD96;
-}
+/* 5 Curated Category Pillar Palettes */
 
-/* 2. Wisdom */
-.pillar-wisdom {
-  background-color: #EEF5EE;
-  border-color: #D4E7D6;
-  color: #163620;
-}
-.pillar-wisdom .theme-pillar-icon-box {
-  background-color: rgba(43, 107, 66, 0.14);
-  color: #2B6B42;
-}
-.pillar-wisdom:hover {
-  border-color: #A9D1AD;
-}
-
-/* 3. Reflections */
+/* 1. Reflections (Teal) */
 .pillar-reflections {
-  background-color: #F7F1F8;
-  border-color: #E8DAEC;
-  color: #38183D;
+  background-color: #EEF7F6;
+  border-color: #D2ECE8;
+  color: #113E39;
 }
 .pillar-reflections .theme-pillar-icon-box {
-  background-color: rgba(125, 63, 136, 0.14);
-  color: #7D3F88;
+  background-color: rgba(13, 148, 136, 0.13);
+  color: #0D9488;
 }
 .pillar-reflections:hover {
-  border-color: #CDAED6;
+  border-color: #A3DCD3;
 }
 
-/* 4. Technology */
-.pillar-technology {
-  background-color: #EEF6F9;
-  border-color: #D0E4EE;
-  color: #123142;
+/* 2. Emotional Intelligence (Green) */
+.pillar-emotional-intelligence {
+  background-color: #EFF8F2;
+  border-color: #D4EEDC;
+  color: #143D1F;
 }
-.pillar-technology .theme-pillar-icon-box {
-  background-color: rgba(36, 101, 135, 0.14);
-  color: #246587;
+.pillar-emotional-intelligence .theme-pillar-icon-box {
+  background-color: rgba(22, 163, 74, 0.13);
+  color: #16A34A;
 }
-.pillar-technology:hover {
-  border-color: #A6CEE1;
+.pillar-emotional-intelligence:hover {
+  border-color: #A6DEC3;
 }
 
-/* Dark Mode Pill Palette overrides */
-[data-theme="dark"] .pillar-spirituality {
-  background-color: #221A13;
-  border-color: #403022;
-  color: #F8EFE4;
+/* 3. Healing (Amber/Orange) */
+.pillar-healing {
+  background-color: #FDF5EC;
+  border-color: #F6E3CC;
+  color: #4A2609;
 }
-[data-theme="dark"] .pillar-spirituality .theme-pillar-icon-box {
-  background-color: rgba(229, 161, 88, 0.18);
-  color: #E5A158;
+.pillar-healing .theme-pillar-icon-box {
+  background-color: rgba(217, 119, 6, 0.13);
+  color: #D97706;
 }
-[data-theme="dark"] .pillar-spirituality:hover {
-  border-color: #6E533A;
+.pillar-healing:hover {
+  border-color: #ECC8A0;
+}
+
+/* 4. Wisdom (Gold/Yellow) */
+.pillar-wisdom {
+  background-color: #FEFBEA;
+  border-color: #F6EEC0;
+  color: #3D3008;
+}
+.pillar-wisdom .theme-pillar-icon-box {
+  background-color: rgba(184, 135, 10, 0.13);
+  color: #B8870A;
+}
+.pillar-wisdom:hover {
+  border-color: #EBD886;
+}
+
+/* 5. Spirituality (Sky Blue) */
+.pillar-spirituality {
+  background-color: #F0F8FE;
+  border-color: #D4ECFD;
+  color: #0F354D;
+}
+.pillar-spirituality .theme-pillar-icon-box {
+  background-color: rgba(2, 132, 199, 0.13);
+  color: #0284C7;
+}
+.pillar-spirituality:hover {
+  border-color: #A3D6FA;
+}
+
+/* Wide Pillar Card for 5th Item Span */
+.theme-pillar-card-wide {
+  grid-column: span 2;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 1.15rem 1.4rem;
+}
+
+.theme-pillar-card-wide .theme-pillar-wide-left {
+  display: flex;
+  align-items: center;
+  gap: 1.15rem;
+}
+
+.theme-pillar-card-wide .theme-pillar-icon-box {
+  margin-bottom: 0;
+  flex-shrink: 0;
+}
+
+.theme-pillar-card-wide .theme-pillar-title {
+  margin-bottom: 0.15rem;
+  font-size: 1.2rem;
+}
+
+.theme-pillar-card-wide .theme-pillar-desc {
+  margin-bottom: 0;
+  font-size: 0.82rem;
+}
+
+.theme-pillar-card-wide .theme-pillar-action {
+  margin-top: 0;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+@media (max-width: 680px) {
+  .theme-pillar-card-wide {
+    grid-column: span 1;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  .theme-pillar-card-wide .theme-pillar-wide-left {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+  .theme-pillar-card-wide .theme-pillar-action {
+    margin-top: auto;
+  }
+}
+
+/* Dark Mode Overrides for the 5 Pillars */
+[data-theme="dark"] .pillar-reflections {
+  background-color: #122422;
+  border-color: #21433E;
+  color: #E6F8F5;
+}
+[data-theme="dark"] .pillar-reflections .theme-pillar-icon-box {
+  background-color: rgba(78, 208, 196, 0.18);
+  color: #4ED0C4;
+}
+[data-theme="dark"] .pillar-reflections:hover {
+  border-color: #356E66;
+}
+
+[data-theme="dark"] .pillar-emotional-intelligence {
+  background-color: #122518;
+  border-color: #20452C;
+  color: #E6F8ED;
+}
+[data-theme="dark"] .pillar-emotional-intelligence .theme-pillar-icon-box {
+  background-color: rgba(89, 217, 135, 0.18);
+  color: #59D987;
+}
+[data-theme="dark"] .pillar-emotional-intelligence:hover {
+  border-color: #347047;
+}
+
+[data-theme="dark"] .pillar-healing {
+  background-color: #26180E;
+  border-color: #452D1B;
+  color: #FDF2E8;
+}
+[data-theme="dark"] .pillar-healing .theme-pillar-icon-box {
+  background-color: rgba(247, 168, 67, 0.18);
+  color: #F7A843;
+}
+[data-theme="dark"] .pillar-healing:hover {
+  border-color: #6E492E;
 }
 
 [data-theme="dark"] .pillar-wisdom {
-  background-color: #142318;
-  border-color: #25422D;
-  color: #E7F6ED;
+  background-color: #241E0E;
+  border-color: #443A1C;
+  color: #FDF9E7;
 }
 [data-theme="dark"] .pillar-wisdom .theme-pillar-icon-box {
-  background-color: rgba(101, 196, 135, 0.18);
-  color: #65C487;
+  background-color: rgba(234, 193, 72, 0.18);
+  color: #EAC148;
 }
 [data-theme="dark"] .pillar-wisdom:hover {
-  border-color: #3A6946;
+  border-color: #6E5F30;
 }
 
-[data-theme="dark"] .pillar-reflections {
-  background-color: #231526;
-  border-color: #412646;
-  color: #F5EBF8;
-}
-[data-theme="dark"] .pillar-reflections .theme-pillar-icon-box {
-  background-color: rgba(202, 136, 216, 0.18);
-  color: #CA88D8;
-}
-[data-theme="dark"] .pillar-reflections:hover {
-  border-color: #6B3F73;
-}
-
-[data-theme="dark"] .pillar-technology {
-  background-color: #13212A;
-  border-color: #233C4C;
+[data-theme="dark"] .pillar-spirituality {
+  background-color: #11212B;
+  border-color: #1F3C50;
   color: #E6F3FA;
 }
-[data-theme="dark"] .pillar-technology .theme-pillar-icon-box {
-  background-color: rgba(95, 176, 217, 0.18);
-  color: #5FB0D9;
+[data-theme="dark"] .pillar-spirituality .theme-pillar-icon-box {
+  background-color: rgba(83, 183, 240, 0.18);
+  color: #53B7F0;
 }
-[data-theme="dark"] .pillar-technology:hover {
-  border-color: #355E77;
+[data-theme="dark"] .pillar-spirituality:hover {
+  border-color: #325F7E;
 }
 
 /* Legacy theme-card fallback */
