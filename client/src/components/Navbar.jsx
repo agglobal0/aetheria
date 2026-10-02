@@ -11,7 +11,7 @@ import {
   Lightbulb, 
   Flower2 
 } from 'lucide-react';
-import { LotusLogo } from './BrandIcons';
+import { OraanisEmblem } from './BrandIcons';
 import ThemeToggle from './ThemeToggle';
 
 // Custom Botanical Leaf Branch Separator matching the reference
@@ -134,7 +134,7 @@ export default function Navbar() {
         gap: '0.5rem'
       }}>
 
-        {/* Brand Logo (Original Logo & Typography) */}
+        {/* Brand Logo (ORAANIS - LIFE LESSONS & WISDOM) */}
         <Link to="/" style={{
           display: 'flex',
           alignItems: 'center',
@@ -143,29 +143,30 @@ export default function Navbar() {
           minWidth: 0,
           flexShrink: 0
         }}>
-          <LotusLogo size={32} color="var(--accent-gold)" />
+          <OraanisEmblem size={38} color="#B38245" />
           <div style={{ display: 'flex', flexDirection: 'column', minWidth: 0 }}>
             <span style={{
               fontFamily: 'var(--font-cormorant)',
-              fontSize: 'clamp(1.05rem, 3.8vw, 1.4rem)',
+              fontSize: 'clamp(1.25rem, 3.8vw, 1.6rem)',
               fontWeight: '700',
-              color: 'var(--text-primary)',
-              lineHeight: '1.1',
-              letterSpacing: '-0.01em',
+              color: 'var(--accent-gold, #A67C46)',
+              lineHeight: '1',
+              letterSpacing: '0.04em',
               whiteSpace: 'nowrap'
             }}>
-              Monika Chopra
+              ORAANIS
             </span>
             <span className="navbar-brand-subtitle" style={{
-              fontSize: '0.65rem',
-              letterSpacing: '0.06em',
+              fontSize: '0.58rem',
+              letterSpacing: '0.16em',
               color: 'var(--text-secondary)',
-              fontWeight: '500',
-              marginTop: '0.1rem',
+              fontWeight: '700',
+              marginTop: '0.2rem',
               lineHeight: '1',
+              textTransform: 'uppercase',
               whiteSpace: 'nowrap'
             }}>
-              ORAANIS <span style={{ opacity: 0.5, margin: '0 0.15rem' }}>|</span> Life Lessons & Wisdom
+              Life Lessons &amp; Wisdom
             </span>
           </div>
         </Link>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { LotusLogo } from './BrandIcons';
+import { OraanisEmblem } from './BrandIcons';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -37,7 +37,7 @@ export default function Footer() {
           borderBottom: '1px solid rgba(255, 255, 255, 0.08)'
         }}>
 
-          {/* Brand with Lotus Logo */}
+          {/* Brand with Oraanis Logo */}
           <Link to="/" style={{
             display: 'flex',
             alignItems: 'center',
@@ -45,25 +45,27 @@ export default function Footer() {
             textDecoration: 'none',
             color: '#FFFFFF'
           }}>
-            <LotusLogo size={36} color="#D4A76A" />
+            <OraanisEmblem size={38} color="#D4A76A" />
             <div style={{ display: 'flex', flexDirection: 'column' }}>
               <span style={{
                 fontFamily: 'var(--font-cormorant)',
-                fontSize: '1.25rem',
-                fontWeight: '600',
-                color: '#FFFFFF',
-                lineHeight: '1.1'
+                fontSize: '1.4rem',
+                fontWeight: '700',
+                color: '#E8CA9B',
+                lineHeight: '1',
+                letterSpacing: '0.04em'
               }}>
-                Monika Chopra
+                ORAANIS
               </span>
               <span style={{
-                fontSize: '0.65rem',
-                letterSpacing: '0.08em',
+                fontSize: '0.58rem',
+                letterSpacing: '0.16em',
                 color: '#A9BAAE',
-                fontWeight: '400',
-                marginTop: '0.15rem'
+                fontWeight: '700',
+                marginTop: '0.2rem',
+                textTransform: 'uppercase'
               }}>
-                Life Lessons <span style={{ opacity: 0.5 }}>|</span> Moral Wisdom
+                Life Lessons &amp; Wisdom
               </span>
             </div>
           </Link>
