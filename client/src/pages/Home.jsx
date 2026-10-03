@@ -85,13 +85,10 @@ export default function Home() {
     <div style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)', overflowX: 'hidden' }}>
 
       {/* =========================================================================
-          1. HERO SECTION (Background Video & Contemplative Quote)
+          1. HERO SECTION (Direct Background Video & Contemplative Quote)
           ========================================================================= */}
       <section
         className="ref-hero"
-        style={{
-          backgroundImage: `url(${heroDeskImg})`
-        }}
       >
         <video
           className="ref-hero-video"
@@ -99,10 +96,9 @@ export default function Home() {
           loop
           muted
           playsInline
-          poster={heroDeskImg}
+          preload="auto"
         >
           <source src="/hero-video.mp4" type="video/mp4" />
-          <source src="https://assets.mixkit.co/videos/preview/mixkit-set-of-plateaus-seen-from-the-sky-in-a-sunset-26070-large.mp4" type="video/mp4" />
         </video>
         <div className="ref-hero-overlay" />
         <div className="container" style={{ position: 'relative', zIndex: 2 }}>
