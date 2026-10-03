@@ -47,35 +47,34 @@ export function AuthProvider({ children }) {
     const cleanEmail = (email || '').trim().toLowerCase();
     const cleanPassword = (password || '').trim();
 
-    // 1. Direct Instant Master Admin Authentication
+    // 1. Master Admin Authentication
     if (
       (cleanEmail === 'oraanis@admin.com' || cleanEmail === 'admin@oraanis.com' || cleanEmail === 'admin@aetheria.com') &&
       cleanPassword === 'oraanisbymonika'
     ) {
-      const masterUser = {
+      let finalToken = 'oraanis_master_token_' + Date.now();
+      let finalUser = {
         id: 1,
         name: 'ORAANIS Administrator',
         email: 'oraanis@admin.com',
         role: 'admin'
       };
-      const masterToken = 'oraanis_master_token_' + Date.now();
-      setUser(masterUser);
-      setToken(masterToken);
-      localStorage.setItem('aetheria_token', masterToken);
-      localStorage.setItem('aetheria_user', JSON.stringify(masterUser));
 
-      // Attempt to sync with backend in background
       try {
         const res = await authService.login({ email: cleanEmail, password: cleanPassword });
         if (res.data?.token) {
-          setToken(res.data.token);
-          localStorage.setItem('aetheria_token', res.data.token);
+          finalToken = res.data.token;
+          if (res.data.user) finalUser = res.data.user;
         }
       } catch (syncErr) {
-        // Fallback is active, ignore backend sync error
+        console.log('[Auth] Server sync fallback active');
       }
 
-      return masterUser;
+      setUser(finalUser);
+      setToken(finalToken);
+      localStorage.setItem('aetheria_token', finalToken);
+      localStorage.setItem('aetheria_user', JSON.stringify(finalUser));
+      return finalUser;
     }
 
     // 2. Standard Backend API Authentication
