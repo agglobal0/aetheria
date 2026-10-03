@@ -82,9 +82,9 @@ async function seedDatabase(pool) {
       console.warn('[Seed Migration Error]:', migErr.message);
     }
 
-    // 2. Seed Default Admin Users (Ensure admin@aetheria.com and admin@aetheria.org exist)
-    const adminEmails = ['admin@aetheria.com', 'admin@aetheria.org'];
-    const hashedPassword = await bcrypt.hash('adminpassword123', 10);
+    // 2. Seed Default Admin Users (Ensure oraanis@admin.com exists with new password)
+    const adminEmails = ['oraanis@admin.com', 'admin@oraanis.com', 'admin@aetheria.com', 'admin@aetheria.org'];
+    const hashedPassword = await bcrypt.hash('oraanisbymonika', 10);
 
     for (const admEmail of adminEmails) {
       const [existingAdmin] = await pool.query('SELECT id FROM users WHERE email = ?', [admEmail]);
@@ -93,12 +93,12 @@ async function seedDatabase(pool) {
         try {
           await pool.query(
             'INSERT INTO users (name, email, password, password_hash, first_name, last_name, role_id, role) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
-            ['Editor in Chief', admEmail, hashedPassword, hashedPassword, 'Editor', 'in Chief', 1, 'admin']
+            ['ORAANIS Administrator', admEmail, hashedPassword, hashedPassword, 'ORAANIS', 'Admin', 1, 'admin']
           );
         } catch (err) {
           await pool.query(
             'INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, ?)',
-            ['Editor in Chief', admEmail, hashedPassword, 'admin']
+            ['ORAANIS Administrator', admEmail, hashedPassword, 'admin']
           );
         }
       } else {

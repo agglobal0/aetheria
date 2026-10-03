@@ -52,8 +52,8 @@ Access the application at `http://localhost:5173`.
 ## 🔑 Admin Credentials
 
 - **URL**: `http://localhost:5173/login`
-- **Email**: `admin@oraanis.com`
-- **Password**: `adminpassword123`
+- **Email**: `oraanis@admin.com`
+- **Password**: `oraanisbymonika`
 
 ### Admin Features
 - Manage Essays (Create, Edit, Delete, Save Draft, Publish, Featured toggle)

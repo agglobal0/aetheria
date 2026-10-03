@@ -134,6 +134,33 @@ const mockPool = {
       return [{ affectedRows: 1 }];
     }
     
+    if (lowerSql.includes('from users where email = ?')) {
+      const email = (params[0] || '').toLowerCase();
+      const bcrypt = require('bcryptjs');
+      const hash = bcrypt.hashSync('oraanisbymonika', 10);
+      if (email === 'oraanis@admin.com' || email === 'admin@oraanis.com' || email === 'admin@aetheria.com') {
+        return [[{
+          id: 1,
+          name: 'ORAANIS Administrator',
+          email: 'oraanis@admin.com',
+          password: hash,
+          role: 'admin',
+          created_at: new Date()
+        }]];
+      }
+      return [[]];
+    }
+
+    if (lowerSql.includes('from users where id = ?')) {
+      return [[{
+        id: 1,
+        name: 'ORAANIS Administrator',
+        email: 'oraanis@admin.com',
+        role: 'admin',
+        created_at: new Date()
+      }]];
+    }
+
     if (lowerSql.includes('select count(*)')) {
       return [[{ count: 1 }]];
     }
