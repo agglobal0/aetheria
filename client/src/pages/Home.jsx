@@ -341,10 +341,86 @@ export default function Home() {
 
 
       {/* =========================================================================
-          4. SECTION: "A Thought to Carry" Watercolor Banner
+          4. SECTION: Contemplative Quote Banners (RAJSAAR Mentor Lens & Monika Chopra)
           ========================================================================= */}
       <section style={{ padding: '0 0 clamp(2.5rem, 5vw, 4.5rem) 0' }}>
         <div className="container">
+          
+          {/* 1. RAJSAAR: Through the Mentor's Lens */}
+          <div className="thought-quote-banner" style={{ marginBottom: '1.5rem' }}>
+            <div style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              flexWrap: 'wrap',
+              gap: '1.5rem',
+              position: 'relative',
+              zIndex: 2
+            }}>
+
+              {/* Left Botanical Motif + Quote */}
+              <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'center', maxWidth: '820px' }}>
+                <div className="ref-botanical-leaf">
+                  <LeafIcon size={44} color="#8B263E" />
+                </div>
+
+                <div>
+                  <div style={{
+                    fontSize: '0.8rem',
+                    fontFamily: 'var(--font-sans)',
+                    fontWeight: '600',
+                    letterSpacing: '0.08em',
+                    color: '#8B263E',
+                    marginBottom: '0.5rem'
+                  }}>
+                    Through the Mentor’s Lens
+                  </div>
+
+                  <blockquote style={{
+                    fontFamily: 'var(--font-serif)',
+                    fontSize: 'clamp(1.05rem, 1.8vw, 1.3rem)',
+                    lineHeight: '1.55',
+                    color: 'var(--text-primary)',
+                    fontStyle: 'italic',
+                    marginBottom: '0.5rem'
+                  }}>
+                    <span style={{ fontSize: '1.8rem', lineHeight: '0', verticalAlign: '-0.35em', marginRight: '0.3rem', color: '#8B263E' }}>“</span>
+                    Life does not always answer our questions; sometimes, it changes the person asking them.
+                    <span style={{ fontSize: '1.8rem', lineHeight: '0', verticalAlign: '-0.35em', marginLeft: '0.3rem', color: '#8B263E' }}>”</span>
+                  </blockquote>
+
+                  <div style={{
+                    fontSize: '0.82rem',
+                    color: 'var(--text-secondary)',
+                    fontStyle: 'italic'
+                  }}>
+                    — RAJSAAR
+                  </div>
+                </div>
+              </div>
+
+              {/* Right Read More Link */}
+              <div style={{ alignSelf: 'center' }}>
+                <Link
+                  to="/rajsaar"
+                  style={{
+                    fontSize: '0.85rem',
+                    fontWeight: '600',
+                    color: '#8B263E',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '0.3rem',
+                    whiteSpace: 'nowrap'
+                  }}
+                >
+                  Read More Thoughts <ArrowRight size={14} />
+                </Link>
+              </div>
+
+            </div>
+          </div>
+
+          {/* 2. Monika Chopra: A Thought to Carry */}
           <div className="thought-quote-banner">
             <div style={{
               display: 'flex',
@@ -384,6 +460,7 @@ export default function Home() {
                   }}>
                     <span style={{ fontSize: '1.8rem', lineHeight: '0', verticalAlign: '-0.35em', marginRight: '0.3rem', color: '#4B6B4F' }}>“</span>
                     Knowing your worth is not about convincing others of your value. It is about no longer needing their recognition to live by it.
+                    <span style={{ fontSize: '1.8rem', lineHeight: '0', verticalAlign: '-0.35em', marginLeft: '0.3rem', color: '#4B6B4F' }}>”</span>
                   </blockquote>
 
                   <div style={{
@@ -416,6 +493,7 @@ export default function Home() {
 
             </div>
           </div>
+
         </div>
       </section>
 
