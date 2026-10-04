@@ -37,6 +37,19 @@ export default function Blogs() {
   }, []);
 
   useEffect(() => {
+    const cat = searchParams.get('category') || '';
+    if (cat !== selectedCategory) {
+      setSelectedCategory(cat);
+      setPage(1);
+    }
+    const q = searchParams.get('search') || '';
+    if (q !== searchQuery) {
+      setSearchQuery(q);
+      setPage(1);
+    }
+  }, [searchParams]);
+
+  useEffect(() => {
     async function fetchBlogs() {
       setLoading(true);
       try {
