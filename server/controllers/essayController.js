@@ -41,11 +41,12 @@ async function getAllEssays(req, res, next) {
         'reflections': ['reflections', 'life-reflection', 'life-reflections'],
         'life-reflection': ['reflections', 'life-reflection', 'life-reflections'],
         'emotional-intelligence': ['emotional-intelligence'],
-        'human-behaviour': ['wisdom', 'human-behaviour', 'human-behavior'],
+        'healing': ['healing'],
         'wisdom': ['wisdom', 'human-behaviour', 'human-behavior'],
+        'human-behaviour': ['wisdom', 'human-behaviour', 'human-behavior'],
+        'spirituality': ['spirituality', 'ethics'],
         'ethics': ['spirituality', 'ethics'],
-        'healing': ['healing', 'reflections'],
-        'spirituality': ['spirituality', 'ethics', 'reflections']
+        'technology': ['technology']
       };
 
       const matchedSlugs = catSynonyms[category] || [category];

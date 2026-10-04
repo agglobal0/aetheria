@@ -59,7 +59,8 @@ export default function Category() {
           'emotional-intelligence': { name: 'Emotional Intelligence', description: 'Exploring psychology, human nature, empathy, social dynamics, and self-awareness.', accent_color: '#2B59C3' },
           'healing': { name: 'Healing', description: 'Nurturing resilience, emotional recovery, self-forgiveness, and inner peace.', accent_color: '#D97706' },
           'wisdom': { name: 'Wisdom', description: 'Timeless insights, moral integrity, ethics, and enduring human life lessons.', accent_color: '#8B263E' },
-          'spirituality': { name: 'Spirituality', description: 'Meditations on purpose, transcendence, quiet consciousness, and inner depth.', accent_color: '#0284C7' }
+          'spirituality': { name: 'Spirituality', description: 'Meditations on purpose, transcendence, quiet consciousness, and inner depth.', accent_color: '#0284C7' },
+          'technology': { name: 'Technology', description: 'Reflections on the evolving balance between humanity and the digital world.', accent_color: '#4B5563' }
         };
 
         if (catRes.data && catRes.data.success) {
@@ -68,25 +69,18 @@ export default function Category() {
           setCategory(fallbackMeta[slug]);
         }
 
-        if (essaysRes.data && essaysRes.data.success && essaysRes.data.data.length > 0) {
-          setEssays(essaysRes.data.data);
-          setTotalPages(essaysRes.data.pagination.totalPages || 1);
+        if (essaysRes.data && essaysRes.data.success) {
+          setEssays(essaysRes.data.data || []);
+          setTotalPages(essaysRes.data.pagination?.totalPages || 1);
         } else {
-          // Fallback to recent published essays so page never shows 0 items
-          const fallbackEssaysRes = await essayService.getAll({ page: 1, limit: 9, status: 'published' });
-          if (fallbackEssaysRes.data && fallbackEssaysRes.data.success) {
-            setEssays(fallbackEssaysRes.data.data);
-            setTotalPages(fallbackEssaysRes.data.pagination.totalPages || 1);
-          }
+          setEssays([]);
+          setTotalPages(1);
         }
 
-        if (popRes.data && popRes.data.success && popRes.data.data.length > 0) {
-          setPopular(popRes.data.data);
+        if (popRes.data && popRes.data.success) {
+          setPopular(popRes.data.data || []);
         } else {
-          const fallbackPop = await essayService.getAll({ sort: 'views', limit: 4, status: 'published' });
-          if (fallbackPop.data && fallbackPop.data.success) {
-            setPopular(fallbackPop.data.data);
-          }
+          setPopular([]);
         }
       } catch (err) {
         console.error('Failed to load category data:', err);
