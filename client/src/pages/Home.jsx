@@ -207,20 +207,10 @@ export default function Home() {
               fontWeight: '700',
               color: 'var(--accent-burgundy, #8B263E)',
               fontStyle: 'italic',
-              margin: '1.75rem 0 1.5rem 0'
+              margin: '1.75rem 0 0 0'
             }}>
               ORAANIS is that space between reading something and truly thinking about it.
             </p>
-
-            <div>
-              <Link
-                to="/person-behind-this"
-                className="why-space-story-btn"
-              >
-                <span>Read My Story</span>
-                <ArrowRight size={14} className="story-btn-arrow" />
-              </Link>
-            </div>
           </div>
 
           {/* Down: Explore by Category (5 Pillars Grid) */}
