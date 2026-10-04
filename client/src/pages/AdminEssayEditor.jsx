@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, useLocation, Link } from 'react-router-dom';
 import {
   Save, ArrowLeft, Eye, Sparkles, Image, HelpCircle,
-  Upload, Link2, Trash2, CheckCircle, RefreshCw, X, Plus
+  Upload, Link2, Trash2, CheckCircle, RefreshCw, X, Plus, Edit3
 } from 'lucide-react';
-import { essayService, categoryService, authorService } from '../services/api';
-import { slugify, calculateReadingTime } from '../utils/helpers';
+import { essayService, categoryService, authorService, authService } from '../services/api';
+import { slugify, calculateReadingTime, formatEssayContent } from '../utils/helpers';
 import Breadcrumbs from '../components/Breadcrumbs';
 
 export default function AdminEssayEditor() {
@@ -24,6 +24,7 @@ export default function AdminEssayEditor() {
   const [bodyImageModalOpen, setBodyImageModalOpen] = useState(false);
   const [bodyImageData, setBodyImageData] = useState({ url: '', caption: '', alt: '' });
   const [isProcessingImage, setIsProcessingImage] = useState(false);
+  const [editorTab, setEditorTab] = useState('write'); // 'write' | 'preview'
 
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
@@ -214,13 +215,20 @@ export default function AdminEssayEditor() {
 
   const handleInsertHtml = (tag) => {
     let snippet = '';
-    if (tag === 'h2') snippet = '<h2>Section Title</h2>\n<p>Write section paragraphs...</p>\n';
-    if (tag === 'quote') snippet = '<blockquote class="editorial-quote">\n  "Insert thought-provoking quote here."\n</blockquote>\n';
-    if (tag === 'list') snippet = '<ul>\n  <li>First point</li>\n  <li>Second point</li>\n</ul>\n';
+    if (tag === 'h2') snippet = '\n\n## Section Title\n\n';
+    if (tag === 'quote') snippet = '\n\n> "Insert thought-provoking reflection or quote here."\n\n';
+    if (tag === 'bold') snippet = ' **bold text** ';
+    if (tag === 'italic') snippet = ' *italic text* ';
+    if (tag === 'list') snippet = '\n\n- First reflection point\n- Second reflection point\n- Third reflection point\n\n';
+    if (tag === 'signoff') {
+      const selectedAuthor = authors.find(a => Number(a.id) === Number(formData.author_id));
+      const authorName = selectedAuthor?.name || 'Monika Chopra';
+      snippet = `\n\n— ${authorName}\n`;
+    }
 
     setFormData(prev => ({
       ...prev,
-      content: prev.content + '\n' + snippet
+      content: (prev.content || '') + snippet
     }));
   };
 
@@ -385,52 +393,171 @@ export default function AdminEssayEditor() {
               />
             </div>
 
-            {/* Quick HTML Snippet Helper Toolbar */}
+            {/* Content Header with Write / Live Preview Mode Tabs */}
             <div style={{
               display: 'flex',
-              gap: '0.5rem',
+              justifyContent: 'space-between',
               alignItems: 'center',
               flexWrap: 'wrap',
-              marginBottom: '0.5rem',
-              padding: '0.5rem 0.75rem',
-              backgroundColor: 'var(--bg-tertiary)',
-              borderRadius: 'var(--radius-sm) var(--radius-sm) 0 0',
-              border: '1px solid var(--border-color)',
-              borderBottom: 'none'
+              gap: '0.5rem',
+              marginBottom: '0.5rem'
             }}>
-              <span style={{ fontSize: '0.75rem', fontWeight: '600', color: 'var(--text-muted)', marginRight: '0.3rem' }}>
-                Rich Format Helpers:
-              </span>
-              <button type="button" onClick={() => handleInsertHtml('h2')} className="btn btn-outline" style={{ padding: '0.25rem 0.6rem', fontSize: '0.75rem' }}>+ H2 Section</button>
-              <button type="button" onClick={() => handleInsertHtml('quote')} className="btn btn-outline" style={{ padding: '0.25rem 0.6rem', fontSize: '0.75rem' }}>+ Pull Quote</button>
-              <button type="button" onClick={() => handleInsertHtml('list')} className="btn btn-outline" style={{ padding: '0.25rem 0.6rem', fontSize: '0.75rem' }}>+ Bullet List</button>
-              <button type="button" onClick={() => setBodyImageModalOpen(true)} className="btn btn-outline" style={{ padding: '0.25rem 0.6rem', fontSize: '0.75rem', display: 'inline-flex', alignItems: 'center', gap: '0.3rem' }}>
-                <Image size={13} /> + Insert Image in Body
-              </button>
+              <label style={{ fontSize: '0.85rem', fontWeight: '700', color: 'var(--text-primary)' }}>
+                Article Body Content *
+              </label>
+
+              {/* Mode Switcher Tabs */}
+              <div style={{
+                display: 'inline-flex',
+                padding: '0.2rem',
+                backgroundColor: 'var(--bg-tertiary)',
+                borderRadius: 'var(--radius-full)',
+                border: '1px solid var(--border-color)',
+                gap: '0.25rem'
+              }}>
+                <button
+                  type="button"
+                  onClick={() => setEditorTab('write')}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.35rem',
+                    padding: '0.35rem 0.85rem',
+                    fontSize: '0.8rem',
+                    fontWeight: editorTab === 'write' ? '600' : '400',
+                    borderRadius: 'var(--radius-full)',
+                    border: 'none',
+                    backgroundColor: editorTab === 'write' ? 'var(--accent-primary)' : 'transparent',
+                    color: editorTab === 'write' ? '#FFFFFF' : 'var(--text-secondary)',
+                    cursor: 'pointer',
+                    transition: 'all 0.15s ease'
+                  }}
+                >
+                  <Edit3 size={13} /> Write & Format
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setEditorTab('preview')}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.35rem',
+                    padding: '0.35rem 0.85rem',
+                    fontSize: '0.8rem',
+                    fontWeight: editorTab === 'preview' ? '600' : '400',
+                    borderRadius: 'var(--radius-full)',
+                    border: 'none',
+                    backgroundColor: editorTab === 'preview' ? 'var(--accent-primary)' : 'transparent',
+                    color: editorTab === 'preview' ? '#FFFFFF' : 'var(--text-secondary)',
+                    cursor: 'pointer',
+                    transition: 'all 0.15s ease'
+                  }}
+                >
+                  <Eye size={13} /> Live Preview
+                </button>
+              </div>
             </div>
 
-            <div style={{ marginBottom: '2rem' }}>
-              <textarea
-                required
-                rows={16}
-                placeholder="Write full long-form article body in HTML/paragraphs..."
-                value={formData.content}
-                onChange={handleContentChange}
-                style={{
-                  width: '100%',
-                  padding: 'clamp(0.85rem, 2vw, 1.25rem)',
-                  fontFamily: 'var(--font-serif)',
-                  fontSize: 'clamp(0.95rem, 2vw, 1.05rem)',
-                  lineHeight: '1.7',
-                  borderRadius: '0 0 var(--radius-sm) var(--radius-sm)',
+            {editorTab === 'write' ? (
+              <div style={{ marginBottom: '2rem' }}>
+                {/* Formatting Toolbar */}
+                <div style={{
+                  display: 'flex',
+                  gap: '0.4rem',
+                  alignItems: 'center',
+                  flexWrap: 'wrap',
+                  padding: '0.5rem 0.75rem',
+                  backgroundColor: 'var(--bg-tertiary)',
+                  borderRadius: 'var(--radius-sm) var(--radius-sm) 0 0',
                   border: '1px solid var(--border-color)',
-                  backgroundColor: 'var(--bg-input)',
-                  color: 'var(--text-primary)',
-                  outline: 'none',
-                  resize: 'vertical'
-                }}
-              />
-            </div>
+                  borderBottom: 'none'
+                }}>
+                  <span style={{ fontSize: '0.75rem', fontWeight: '600', color: 'var(--text-muted)', marginRight: '0.2rem' }}>
+                    Quick Tools:
+                  </span>
+                  <button type="button" onClick={() => handleInsertHtml('h2')} className="btn btn-outline" style={{ padding: '0.2rem 0.55rem', fontSize: '0.75rem' }}>+ Heading (H2)</button>
+                  <button type="button" onClick={() => handleInsertHtml('quote')} className="btn btn-outline" style={{ padding: '0.2rem 0.55rem', fontSize: '0.75rem' }}>+ Pull Quote</button>
+                  <button type="button" onClick={() => handleInsertHtml('bold')} className="btn btn-outline" style={{ padding: '0.2rem 0.55rem', fontSize: '0.75rem' }}>+ Bold</button>
+                  <button type="button" onClick={() => handleInsertHtml('italic')} className="btn btn-outline" style={{ padding: '0.2rem 0.55rem', fontSize: '0.75rem' }}>+ Italic</button>
+                  <button type="button" onClick={() => handleInsertHtml('list')} className="btn btn-outline" style={{ padding: '0.2rem 0.55rem', fontSize: '0.75rem' }}>+ Bullet List</button>
+                  <button type="button" onClick={() => handleInsertHtml('signoff')} className="btn btn-outline" style={{ padding: '0.2rem 0.55rem', fontSize: '0.75rem' }}>+ Sign-off</button>
+                  <button type="button" onClick={() => setBodyImageModalOpen(true)} className="btn btn-outline" style={{ padding: '0.2rem 0.55rem', fontSize: '0.75rem', display: 'inline-flex', alignItems: 'center', gap: '0.3rem' }}>
+                    <Image size={13} /> + Image
+                  </button>
+                </div>
+
+                <textarea
+                  required
+                  rows={18}
+                  placeholder="Write or paste your article naturally...&#10;&#10;• Leave a blank line between paragraphs.&#10;• Add headings with ## Heading Title&#10;• Add quotes with > Quotation&#10;• Add sign-off with — RAJSAAR"
+                  value={formData.content}
+                  onChange={handleContentChange}
+                  style={{
+                    width: '100%',
+                    padding: 'clamp(0.85rem, 2vw, 1.25rem)',
+                    fontFamily: 'var(--font-serif)',
+                    fontSize: 'clamp(0.98rem, 2vw, 1.08rem)',
+                    lineHeight: '1.8',
+                    borderRadius: '0 0 var(--radius-sm) var(--radius-sm)',
+                    border: '1px solid var(--border-color)',
+                    backgroundColor: 'var(--bg-input)',
+                    color: 'var(--text-primary)',
+                    outline: 'none',
+                    resize: 'vertical',
+                    minHeight: '380px'
+                  }}
+                />
+              </div>
+            ) : (
+              /* Live Preview Mode Container */
+              <div style={{
+                marginBottom: '2rem',
+                padding: 'clamp(1.5rem, 3vw, 2.5rem)',
+                backgroundColor: 'var(--bg-secondary)',
+                borderRadius: 'var(--radius-md)',
+                border: '1px solid var(--border-color)',
+                minHeight: '380px'
+              }}>
+                <div style={{
+                  paddingBottom: '1rem',
+                  marginBottom: '1.5rem',
+                  borderBottom: '1px solid var(--border-color)',
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center'
+                }}>
+                  <span style={{ fontSize: '0.75rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--accent-primary)' }}>
+                    Live Published Preview
+                  </span>
+                  <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
+                    Reading time: {formData.reading_time} min
+                  </span>
+                </div>
+
+                {formData.title && (
+                  <h1 className="serif-heading" style={{ fontSize: 'clamp(1.5rem, 3vw, 2.2rem)', marginBottom: '0.75rem' }}>
+                    {formData.title}
+                  </h1>
+                )}
+
+                {formData.subtitle && (
+                  <p style={{ fontFamily: 'var(--font-serif)', fontStyle: 'italic', color: 'var(--text-secondary)', marginBottom: '1.5rem', fontSize: '1.05rem' }}>
+                    {formData.subtitle}
+                  </p>
+                )}
+
+                {formData.content ? (
+                  <div
+                    className="editorial-body"
+                    dangerouslySetInnerHTML={{ __html: formatEssayContent(formData.content, formData.title) }}
+                  />
+                ) : (
+                  <p style={{ color: 'var(--text-muted)', fontStyle: 'italic' }}>
+                    No content written yet. Switch to "Write & Format" tab to start writing.
+                  </p>
+                )}
+              </div>
+            )}
 
             {/* SEO Settings Panel */}
             <div style={{

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Clock, Eye, Calendar, ArrowLeft, ArrowRight } from 'lucide-react';
 import { essayService } from '../services/api';
-import { formatDate } from '../utils/helpers';
+import { formatDate, formatEssayContent } from '../utils/helpers';
 import Breadcrumbs from '../components/Breadcrumbs';
 import ReadingProgress from '../components/ReadingProgress';
 import SocialShare from '../components/SocialShare';
@@ -194,7 +194,7 @@ export default function SingleEssay() {
           {/* Formatted Longform Article Body */}
           <div
             className="editorial-body"
-            dangerouslySetInnerHTML={{ __html: essay.content }}
+            dangerouslySetInnerHTML={{ __html: formatEssayContent(essay.content, essay.title) }}
           />
 
           {/* Bottom Social Share */}
