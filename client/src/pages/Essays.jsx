@@ -63,8 +63,17 @@ export default function Essays() {
         });
 
         if (res.data.success) {
-          setEssays(res.data.data);
-          setTotalPages(res.data.pagination.totalPages);
+          const rawData = res.data.data || [];
+          const filtered = selectedCategory
+            ? rawData.filter(e => {
+                const s = (e.category_slug || '').toLowerCase();
+                const n = (e.category_name || '').toLowerCase();
+                const target = selectedCategory.toLowerCase();
+                return s === target || n === target || String(e.category_id) === target;
+              })
+            : rawData;
+          setEssays(filtered);
+          setTotalPages(res.data.pagination?.totalPages || 1);
         }
       } catch (err) {
         console.error('Failed to fetch essays:', err);

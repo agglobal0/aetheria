@@ -70,7 +70,16 @@ export default function Category() {
         }
 
         if (essaysRes.data && essaysRes.data.success) {
-          setEssays(essaysRes.data.data || []);
+          const rawData = essaysRes.data.data || [];
+          const filtered = slug
+            ? rawData.filter(e => {
+                const s = (e.category_slug || '').toLowerCase();
+                const n = (e.category_name || '').toLowerCase();
+                const target = slug.toLowerCase();
+                return s === target || n === target || String(e.category_id) === target;
+              })
+            : rawData;
+          setEssays(filtered);
           setTotalPages(essaysRes.data.pagination?.totalPages || 1);
         } else {
           setEssays([]);
@@ -78,7 +87,16 @@ export default function Category() {
         }
 
         if (popRes.data && popRes.data.success) {
-          setPopular(popRes.data.data || []);
+          const rawPop = popRes.data.data || [];
+          const filteredPop = slug
+            ? rawPop.filter(e => {
+                const s = (e.category_slug || '').toLowerCase();
+                const n = (e.category_name || '').toLowerCase();
+                const target = slug.toLowerCase();
+                return s === target || n === target || String(e.category_id) === target;
+              })
+            : rawPop;
+          setPopular(filteredPop);
         } else {
           setPopular([]);
         }
