@@ -46,9 +46,9 @@ export default function EssayCard({ essay, layout = 'grid' }) {
               fontWeight: '700',
               padding: '0.15rem 0.55rem',
               borderRadius: 'var(--radius-full)',
-              backgroundColor: isBlog ? 'rgba(43, 89, 195, 0.1)' : 'rgba(139, 38, 62, 0.1)',
-              color: isBlog ? '#2B59C3' : '#8B263E',
-              letterSpacing: '0.02em',
+              backgroundColor: isBlog ? 'rgba(58, 80, 107, 0.12)' : 'rgba(28, 37, 65, 0.08)',
+              color: isBlog ? 'var(--accent-teal)' : 'var(--text-primary)',
+              letterSpacing: '0.04em',
               textTransform: 'uppercase'
             }}>
               {isBlog ? 'Reflective Blog' : 'Academic Essay'}
@@ -118,9 +118,9 @@ export default function EssayCard({ essay, layout = 'grid' }) {
             fontWeight: '700',
             padding: '0.15rem 0.5rem',
             borderRadius: 'var(--radius-full)',
-            backgroundColor: isBlog ? 'rgba(43, 89, 195, 0.1)' : 'rgba(139, 38, 62, 0.1)',
-            color: isBlog ? '#2B59C3' : '#8B263E',
-            letterSpacing: '0.02em',
+            backgroundColor: isBlog ? 'rgba(58, 80, 107, 0.12)' : 'rgba(28, 37, 65, 0.08)',
+            color: isBlog ? 'var(--accent-teal)' : 'var(--text-primary)',
+            letterSpacing: '0.04em',
             textTransform: 'uppercase'
           }}>
             {isBlog ? 'Reflective Blog' : 'Academic Essay'}

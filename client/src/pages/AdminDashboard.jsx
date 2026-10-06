@@ -32,7 +32,7 @@ export default function AdminDashboard() {
   // Category Form Modal State
   const [catModalOpen, setCatModalOpen] = useState(false);
   const [editingCat, setEditingCat] = useState(null);
-  const [catFormData, setCatFormData] = useState({ name: '', slug: '', description: '', accent_color: '#8B263E' });
+  const [catFormData, setCatFormData] = useState({ name: '', slug: '', description: '', accent_color: '#3A506B' });
 
   useEffect(() => {
     if (authLoading) return;
@@ -125,7 +125,7 @@ export default function AdminDashboard() {
       }
       setCatModalOpen(false);
       setEditingCat(null);
-      setCatFormData({ name: '', slug: '', description: '', accent_color: '#8B263E' });
+      setCatFormData({ name: '', slug: '', description: '', accent_color: '#3A506B' });
       loadDashboardData();
     } catch (err) {
       alert('Failed to save category');
@@ -401,8 +401,8 @@ export default function AdminDashboard() {
                           borderRadius: 'var(--radius-sm)',
                           fontSize: '0.75rem',
                           fontWeight: '600',
-                          backgroundColor: isRajsaar ? 'rgba(166, 124, 70, 0.15)' : 'rgba(139, 38, 62, 0.12)',
-                          color: isRajsaar ? 'var(--accent-life-reflection)' : 'var(--accent-burgundy, #8B263E)'
+                          backgroundColor: isRajsaar ? 'rgba(58, 80, 107, 0.15)' : 'rgba(28, 37, 65, 0.12)',
+                          color: isRajsaar ? 'var(--accent-teal)' : 'var(--accent-primary)'
                         }}>
                           {authorName}
                         </span>
@@ -480,8 +480,8 @@ export default function AdminDashboard() {
                           borderRadius: 'var(--radius-sm)',
                           fontSize: '0.75rem',
                           fontWeight: '600',
-                          backgroundColor: isRajsaar ? 'rgba(166, 124, 70, 0.15)' : 'rgba(139, 38, 62, 0.12)',
-                          color: isRajsaar ? 'var(--accent-life-reflection)' : 'var(--accent-burgundy, #8B263E)'
+                          backgroundColor: isRajsaar ? 'rgba(58, 80, 107, 0.15)' : 'rgba(28, 37, 65, 0.12)',
+                          color: isRajsaar ? 'var(--accent-teal)' : 'var(--accent-primary)'
                         }}>
                           {authorName}
                         </span>
@@ -542,10 +542,10 @@ export default function AdminDashboard() {
               padding: '1rem',
               backgroundColor: 'var(--bg-tertiary)',
               borderRadius: 'var(--radius-sm)',
-              borderLeft: '4px solid #8B263E'
+              borderLeft: '4px solid var(--accent-teal)'
             }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.4rem' }}>
-                <FileText size={18} style={{ color: '#8B263E' }} />
+                <FileText size={18} style={{ color: 'var(--accent-teal)' }} />
                 <h3 style={{ fontSize: '1rem', fontWeight: '700', margin: 0 }}>
                   Academic & Philosophical Essays
                 </h3>
@@ -559,10 +559,10 @@ export default function AdminDashboard() {
               padding: '1rem',
               backgroundColor: 'var(--bg-tertiary)',
               borderRadius: 'var(--radius-sm)',
-              borderLeft: '4px solid #2B59C3'
+              borderLeft: '4px solid var(--accent-primary)'
             }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.4rem' }}>
-                <BookOpen size={18} style={{ color: '#2B59C3' }} />
+                <BookOpen size={18} style={{ color: 'var(--accent-primary)' }} />
                 <h3 style={{ fontSize: '1rem', fontWeight: '700', margin: 0 }}>
                   Reflective Blogs & Life Lessons
                 </h3>
@@ -582,7 +582,7 @@ export default function AdminDashboard() {
                 Each category houses both comprehensive Academic Essays and accessible Reflective Blogs.
               </span>
             </div>
-            <button onClick={() => { setEditingCat(null); setCatFormData({ name: '', slug: '', description: '', accent_color: '#8B263E' }); setCatModalOpen(true); }} className="btn btn-primary" style={{ padding: '0.5rem 1rem', fontSize: '0.85rem' }}>
+            <button onClick={() => { setEditingCat(null); setCatFormData({ name: '', slug: '', description: '', accent_color: '#3A506B' }); setCatModalOpen(true); }} className="btn btn-primary" style={{ padding: '0.5rem 1rem', fontSize: '0.85rem' }}>
               <Plus size={16} /> Add Category
             </button>
           </div>
@@ -596,12 +596,12 @@ export default function AdminDashboard() {
                   <th style={{ padding: '0.9rem 1rem' }}>Description</th>
                   <th style={{ padding: '0.9rem 0.75rem', textAlign: 'center' }}>
                     <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.3rem' }}>
-                      <FileText size={14} style={{ color: '#8B263E' }} /> Essays
+                      <FileText size={14} style={{ color: 'var(--accent-teal)' }} /> Essays
                     </span>
                   </th>
                   <th style={{ padding: '0.9rem 0.75rem', textAlign: 'center' }}>
                     <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.3rem' }}>
-                      <BookOpen size={14} style={{ color: '#2B59C3' }} /> Blogs
+                      <BookOpen size={14} style={{ color: 'var(--accent-primary)' }} /> Blogs
                     </span>
                   </th>
                   <th style={{ padding: '0.9rem 0.75rem', textAlign: 'center' }}>Total</th>
@@ -621,8 +621,8 @@ export default function AdminDashboard() {
                         borderRadius: 'var(--radius-full)',
                         fontSize: '0.8rem',
                         fontWeight: '700',
-                        backgroundColor: 'rgba(139, 38, 62, 0.12)',
-                        color: '#8B263E'
+                        backgroundColor: 'rgba(58, 80, 107, 0.12)',
+                        color: 'var(--accent-teal)'
                       }}>
                         {cat.essay_count || 0}
                       </span>
@@ -634,8 +634,8 @@ export default function AdminDashboard() {
                         borderRadius: 'var(--radius-full)',
                         fontSize: '0.8rem',
                         fontWeight: '700',
-                        backgroundColor: 'rgba(43, 89, 195, 0.12)',
-                        color: '#2B59C3'
+                        backgroundColor: 'rgba(28, 37, 65, 0.12)',
+                        color: 'var(--accent-primary)'
                       }}>
                         {cat.blog_count || 0}
                       </span>
@@ -742,8 +742,8 @@ export default function AdminDashboard() {
                         fontSize: '0.72rem',
                         padding: '0.15rem 0.5rem',
                         borderRadius: 'var(--radius-full)',
-                        backgroundColor: 'rgba(166, 124, 70, 0.15)',
-                        color: 'var(--accent-life-reflection, #A67C46)',
+                        backgroundColor: 'rgba(58, 80, 107, 0.12)',
+                        color: 'var(--accent-teal)',
                         fontWeight: '600'
                       }}>
                         {p.topic}

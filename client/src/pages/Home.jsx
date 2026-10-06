@@ -105,7 +105,7 @@ export default function Home() {
           <div className="ref-hero-content animate-fade-in">
             {/* Top Leaf Accent */}
             <div style={{ marginBottom: '1.25rem', display: 'flex', justifyContent: 'center' }}>
-              <LeafIcon size={26} color="#7A937D" />
+              <LeafIcon size={26} color="var(--accent-teal)" />
             </div>
 
             {/* Main Headline */}
@@ -141,7 +141,7 @@ export default function Home() {
           {/* Top: Why This Space? Full Editorial Card */}
           <div className="why-space-full-card">
             <div className="why-space-pill-badge">
-              <LeafIcon size={13} color="var(--accent-primary)" />
+              <LeafIcon size={13} color="var(--accent-teal)" />
               <span>An Invitation to Pause</span>
             </div>
 
@@ -164,7 +164,7 @@ export default function Home() {
             {/* Focus Explore Block - Clean Left Border Accent */}
             <div style={{
               padding: '0.35rem 0 0.35rem 1.35rem',
-              borderLeft: '2.5px solid var(--accent-primary)',
+              borderLeft: '2.5px solid var(--accent-teal)',
               margin: '1.75rem 0'
             }}>
               <p style={{ fontSize: '1.05rem', fontWeight: '600', color: 'var(--text-primary)', marginBottom: '0.5rem' }}>
@@ -187,7 +187,7 @@ export default function Home() {
             <div style={{
               margin: '1.75rem 0',
               paddingLeft: '1.35rem',
-              borderLeft: '2px solid rgba(139, 38, 62, 0.4)'
+              borderLeft: '2px solid rgba(58, 80, 107, 0.3)'
             }}>
               <p style={{ fontSize: '0.98rem', color: 'var(--text-primary)', fontWeight: '600', marginBottom: '0.5rem' }}>
                 The intention is simple: to create something worth spending a few quiet minutes with.
@@ -205,7 +205,7 @@ export default function Home() {
               fontSize: '1.05rem',
               fontFamily: 'var(--font-serif)',
               fontWeight: '700',
-              color: 'var(--accent-burgundy, #8B263E)',
+              color: 'var(--accent-teal)',
               fontStyle: 'italic',
               margin: '1.75rem 0 0 0'
             }}>
@@ -351,7 +351,7 @@ export default function Home() {
               {/* Left Botanical Motif + Quote */}
               <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'center', maxWidth: '820px' }}>
                 <div className="ref-botanical-leaf">
-                  <LeafIcon size={44} color="#8B263E" />
+                  <LeafIcon size={44} color="var(--accent-teal)" />
                 </div>
 
                 <div>
@@ -360,7 +360,7 @@ export default function Home() {
                     fontFamily: 'var(--font-sans)',
                     fontWeight: '600',
                     letterSpacing: '0.08em',
-                    color: '#8B263E',
+                    color: 'var(--accent-teal)',
                     marginBottom: '0.5rem'
                   }}>
                     Through the Mentor’s Lens
@@ -374,9 +374,9 @@ export default function Home() {
                     fontStyle: 'italic',
                     marginBottom: '0.5rem'
                   }}>
-                    <span style={{ fontSize: '1.8rem', lineHeight: '0', verticalAlign: '-0.35em', marginRight: '0.3rem', color: '#8B263E' }}>“</span>
+                    <span style={{ fontSize: '1.8rem', lineHeight: '0', verticalAlign: '-0.35em', marginRight: '0.3rem', color: 'var(--accent-teal)' }}>“</span>
                     Life does not always answer our questions; sometimes, it changes the person asking them.
-                    <span style={{ fontSize: '1.8rem', lineHeight: '0', verticalAlign: '-0.35em', marginLeft: '0.3rem', color: '#8B263E' }}>”</span>
+                    <span style={{ fontSize: '1.8rem', lineHeight: '0', verticalAlign: '-0.35em', marginLeft: '0.3rem', color: 'var(--accent-teal)' }}>”</span>
                   </blockquote>
 
                   <div style={{
@@ -396,7 +396,7 @@ export default function Home() {
                   style={{
                     fontSize: '0.85rem',
                     fontWeight: '600',
-                    color: '#8B263E',
+                    color: 'var(--accent-teal)',
                     display: 'inline-flex',
                     alignItems: 'center',
                     gap: '0.3rem',
@@ -425,7 +425,7 @@ export default function Home() {
               {/* Left Botanical Motif + Quote */}
               <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'center', maxWidth: '820px' }}>
                 <div className="ref-botanical-leaf">
-                  <LeafIcon size={44} color="#658869" />
+                  <LeafIcon size={44} color="var(--accent-teal)" />
                 </div>
 
                 <div>
@@ -434,7 +434,7 @@ export default function Home() {
                     fontFamily: 'var(--font-sans)',
                     fontWeight: '600',
                     letterSpacing: '0.08em',
-                    color: '#4B6B4F',
+                    color: 'var(--accent-teal)',
                     marginBottom: '0.5rem'
                   }}>
                     A Thought to Carry
@@ -448,9 +448,9 @@ export default function Home() {
                     fontStyle: 'italic',
                     marginBottom: '0.5rem'
                   }}>
-                    <span style={{ fontSize: '1.8rem', lineHeight: '0', verticalAlign: '-0.35em', marginRight: '0.3rem', color: '#4B6B4F' }}>“</span>
+                    <span style={{ fontSize: '1.8rem', lineHeight: '0', verticalAlign: '-0.35em', marginRight: '0.3rem', color: 'var(--accent-teal)' }}>“</span>
                     Knowing your worth is not about convincing others of your value. It is about no longer needing their recognition to live by it.
-                    <span style={{ fontSize: '1.8rem', lineHeight: '0', verticalAlign: '-0.35em', marginLeft: '0.3rem', color: '#4B6B4F' }}>”</span>
+                    <span style={{ fontSize: '1.8rem', lineHeight: '0', verticalAlign: '-0.35em', marginLeft: '0.3rem', color: 'var(--accent-teal)' }}>”</span>
                   </blockquote>
 
                   <div style={{
@@ -470,7 +470,7 @@ export default function Home() {
                   style={{
                     fontSize: '0.85rem',
                     fontWeight: '600',
-                    color: '#345239',
+                    color: 'var(--accent-teal)',
                     display: 'inline-flex',
                     alignItems: 'center',
                     gap: '0.3rem',
@@ -570,8 +570,8 @@ export default function Home() {
                     fontWeight: '700',
                     letterSpacing: '0.08em',
                     textTransform: 'uppercase',
-                    color: 'var(--accent-burgundy, #8B263E)',
-                    backgroundColor: 'rgba(139, 38, 62, 0.08)',
+                    color: 'var(--accent-teal)',
+                    backgroundColor: 'rgba(58, 80, 107, 0.08)',
                     padding: '0.2rem 0.6rem',
                     borderRadius: '4px',
                     marginBottom: '0.5rem'
@@ -655,8 +655,8 @@ export default function Home() {
                     fontWeight: '700',
                     letterSpacing: '0.08em',
                     textTransform: 'uppercase',
-                    color: 'var(--accent-life-reflection, #A67C46)',
-                    backgroundColor: 'rgba(166, 124, 70, 0.12)',
+                    color: 'var(--accent-teal)',
+                    backgroundColor: 'rgba(58, 80, 107, 0.08)',
                     padding: '0.2rem 0.6rem',
                     borderRadius: '4px',
                     marginBottom: '0.5rem'
@@ -778,8 +778,8 @@ export default function Home() {
                   width: '38px',
                   height: '38px',
                   borderRadius: '50%',
-                  backgroundColor: '#F3EAE0',
-                  color: '#8A5E35',
+                  backgroundColor: 'rgba(58, 80, 107, 0.08)',
+                  color: 'var(--accent-teal)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
@@ -803,8 +803,8 @@ export default function Home() {
                   width: '38px',
                   height: '38px',
                   borderRadius: '50%',
-                  backgroundColor: '#FCEFE6',
-                  color: '#B0653B',
+                  backgroundColor: 'rgba(28, 37, 65, 0.08)',
+                  color: 'var(--accent-primary)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
@@ -828,8 +828,8 @@ export default function Home() {
                   width: '38px',
                   height: '38px',
                   borderRadius: '50%',
-                  backgroundColor: '#E7F2E8',
-                  color: '#387346',
+                  backgroundColor: 'rgba(58, 80, 107, 0.08)',
+                  color: 'var(--accent-teal)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
@@ -853,8 +853,8 @@ export default function Home() {
                   width: '38px',
                   height: '38px',
                   borderRadius: '50%',
-                  backgroundColor: '#EFE7F2',
-                  color: '#7B4285',
+                  backgroundColor: 'rgba(169, 188, 208, 0.18)',
+                  color: 'var(--accent-teal)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
@@ -931,7 +931,7 @@ export default function Home() {
                 fontStyle: 'italic',
                 fontSize: '0.98rem',
                 lineHeight: '1.65',
-                color: '#D4E2D7'
+                color: 'var(--accent-inner)'
               }}>
                 <div>From experience to reflection.</div>
                 <div>From reflection to wisdom.</div>
@@ -945,8 +945,8 @@ export default function Home() {
                 width: '42px',
                 height: '42px',
                 borderRadius: '50%',
-                backgroundColor: 'rgba(184, 107, 39, 0.1)',
-                color: '#9C6634',
+                backgroundColor: 'rgba(58, 80, 107, 0.1)',
+                color: 'var(--accent-teal)',
                 display: 'inline-flex',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -978,8 +978,8 @@ export default function Home() {
                 <div style={{
                   padding: '1rem 0.85rem',
                   borderRadius: '8px',
-                  backgroundColor: 'rgba(56, 115, 70, 0.12)',
-                  color: '#245E33',
+                  backgroundColor: 'rgba(58, 80, 107, 0.1)',
+                  color: 'var(--accent-teal)',
                   fontSize: '0.85rem',
                   display: 'flex',
                   flexDirection: 'column',
@@ -990,7 +990,7 @@ export default function Home() {
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontWeight: '600' }}>
                     <CheckCircle2 size={18} /> Thank you for subscribing!
                   </div>
-                  <div style={{ fontSize: '0.78rem', color: '#2D6B3D', textAlign: 'center' }}>
+                  <div style={{ fontSize: '0.78rem', color: 'var(--text-secondary)', textAlign: 'center' }}>
                     {feedbackMessage}
                   </div>
                   <button
@@ -999,7 +999,7 @@ export default function Home() {
                       marginTop: '0.35rem',
                       fontSize: '0.74rem',
                       textDecoration: 'underline',
-                      color: '#245E33',
+                      color: 'var(--accent-teal)',
                       cursor: 'pointer'
                     }}
                   >
@@ -1083,7 +1083,7 @@ export default function Home() {
               </div>
 
               <div style={{ marginTop: '0.75rem', opacity: 0.6 }}>
-                <LeafIcon size={16} color="#658869" />
+                <LeafIcon size={16} color="var(--accent-teal)" />
               </div>
             </div>
 
@@ -1115,7 +1115,7 @@ export default function Home() {
 
               <div style={{
                 fontSize: '0.82rem',
-                color: '#D4E2D7',
+                color: 'var(--accent-inner)',
                 marginBottom: '1.5rem'
               }}>
                 Read slowly. Think deeply.<br />
@@ -1127,7 +1127,7 @@ export default function Home() {
                 fontStyle: 'italic',
                 fontSize: '1.35rem',
                 fontWeight: '600',
-                color: '#F4ECE0',
+                color: '#FFFFFF',
                 lineHeight: '1.3'
               }}>
                 Because sometimes,<br />

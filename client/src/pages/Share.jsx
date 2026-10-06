@@ -387,7 +387,7 @@ export default function Share() {
               gap: '0.85rem',
               alignItems: 'flex-start'
             }}>
-              <Feather size={20} color="var(--accent-life-reflection, #A67C46)" style={{ flexShrink: 0, marginTop: '2px' }} />
+              <Feather size={20} color="var(--accent-teal)" style={{ flexShrink: 0, marginTop: '2px' }} />
               <div>
                 <h4 style={{ fontSize: '0.88rem', fontWeight: '700', color: 'var(--text-primary)', marginBottom: '0.2rem' }}>
                   Real Lived Wisdom
@@ -407,7 +407,7 @@ export default function Share() {
               gap: '0.85rem',
               alignItems: 'flex-start'
             }}>
-              <Heart size={20} color="var(--accent-burgundy, #8B263E)" style={{ flexShrink: 0, marginTop: '2px' }} />
+              <Heart size={20} color="var(--accent-teal)" style={{ flexShrink: 0, marginTop: '2px' }} />
               <div>
                 <h4 style={{ fontSize: '0.88rem', fontWeight: '700', color: 'var(--text-primary)', marginBottom: '0.2rem' }}>
                   Shared Human Connection
@@ -462,10 +462,10 @@ export default function Share() {
                 {submitStatus === 'success' && (
                   <div style={{
                     padding: '0.9rem 1rem',
-                    backgroundColor: 'rgba(56, 115, 70, 0.1)',
-                    border: '1px solid rgba(56, 115, 70, 0.3)',
+                    backgroundColor: 'rgba(58, 80, 107, 0.1)',
+                    border: '1px solid rgba(58, 80, 107, 0.3)',
                     borderRadius: '8px',
-                    color: '#2B6638',
+                    color: 'var(--accent-teal)',
                     fontSize: '0.84rem',
                     display: 'flex',
                     alignItems: 'flex-start',
@@ -480,10 +480,10 @@ export default function Share() {
                 {submitStatus === 'error' && (
                   <div style={{
                     padding: '0.9rem 1rem',
-                    backgroundColor: 'rgba(180, 40, 40, 0.08)',
-                    border: '1px solid rgba(180, 40, 40, 0.25)',
+                    backgroundColor: 'rgba(28, 37, 65, 0.08)',
+                    border: '1px solid rgba(28, 37, 65, 0.25)',
                     borderRadius: '8px',
-                    color: '#B42828',
+                    color: 'var(--accent-primary)',
                     fontSize: '0.84rem',
                     display: 'flex',
                     alignItems: 'flex-start',
@@ -735,7 +735,7 @@ export default function Share() {
                 boxShadow: '0 4px 16px rgba(0,0,0,0.02)'
               }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', marginBottom: '0.8rem' }}>
-                  <Sparkles size={16} color="var(--accent-life-reflection, #A67C46)" />
+                  <Sparkles size={16} color="var(--accent-teal)" />
                   <h4 style={{ fontSize: '0.92rem', fontWeight: '700', color: 'var(--text-primary)' }}>
                     Reflection Starters
                   </h4>
@@ -901,7 +901,7 @@ export default function Share() {
                           transition: 'transform 0.2s ease, border-color 0.2s ease',
                           position: 'relative'
                         }}
-                        onMouseEnter={(e) => e.currentTarget.style.borderColor = 'rgba(166, 124, 70, 0.4)'}
+                        onMouseEnter={(e) => e.currentTarget.style.borderColor = 'var(--accent-teal)'}
                         onMouseLeave={(e) => e.currentTarget.style.borderColor = 'var(--border-color)'}
                       >
                         
@@ -919,7 +919,7 @@ export default function Share() {
                             letterSpacing: '0.08em',
                             textTransform: 'uppercase',
                             color: 'var(--accent-primary)',
-                            backgroundColor: 'rgba(139, 38, 62, 0.08)',
+                            backgroundColor: 'rgba(58, 80, 107, 0.12)',
                             padding: '0.2rem 0.6rem',
                             borderRadius: '4px'
                           }}>
@@ -969,8 +969,8 @@ export default function Share() {
                               width: '26px',
                               height: '26px',
                               borderRadius: '50%',
-                              backgroundColor: item.is_anonymous ? 'rgba(166, 124, 70, 0.15)' : 'rgba(139, 38, 62, 0.12)',
-                              color: item.is_anonymous ? 'var(--accent-life-reflection, #A67C46)' : 'var(--accent-primary)',
+                              backgroundColor: item.is_anonymous ? 'rgba(58, 80, 107, 0.15)' : 'rgba(28, 37, 65, 0.12)',
+                              color: item.is_anonymous ? 'var(--accent-teal)' : 'var(--accent-primary)',
                               display: 'flex',
                               alignItems: 'center',
                               justifyContent: 'center',
@@ -1001,14 +1001,14 @@ export default function Share() {
                                 padding: '0.3rem 0.65rem',
                                 fontSize: '0.78rem',
                                 fontWeight: '600',
-                                color: isLiked ? '#B42828' : 'var(--text-secondary)',
-                                backgroundColor: isLiked ? 'rgba(180, 40, 40, 0.08)' : 'transparent',
+                                color: isLiked ? 'var(--accent-teal)' : 'var(--text-secondary)',
+                                backgroundColor: isLiked ? 'rgba(58, 80, 107, 0.12)' : 'transparent',
                                 cursor: isLiked ? 'default' : 'pointer',
                                 transition: 'all 0.2s ease'
                               }}
                               title={isLiked ? 'You resonated with this reflection' : 'Reflect with this perspective'}
                             >
-                              <Heart size={14} fill={isLiked ? '#B42828' : 'none'} color={isLiked ? '#B42828' : 'currentColor'} />
+                              <Heart size={14} fill={isLiked ? 'var(--accent-teal)' : 'none'} color={isLiked ? 'var(--accent-teal)' : 'currentColor'} />
                               <span>{item.likes || 0}</span>
                             </button>
 
@@ -1025,8 +1025,8 @@ export default function Share() {
                                 borderRadius: '20px',
                                 padding: '0.3rem 0.65rem',
                                 fontSize: '0.78rem',
-                                color: isCopied ? '#2B6638' : 'var(--text-secondary)',
-                                backgroundColor: isCopied ? 'rgba(56, 115, 70, 0.1)' : 'transparent',
+                                color: isCopied ? 'var(--accent-teal)' : 'var(--text-secondary)',
+                                backgroundColor: isCopied ? 'rgba(58, 80, 107, 0.12)' : 'transparent',
                                 cursor: 'pointer',
                                 transition: 'all 0.2s ease'
                               }}

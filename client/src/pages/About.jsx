@@ -203,7 +203,7 @@ export default function About() {
               Emotional intelligence is not about becoming less emotional. It is about becoming more aware of what our emotions are telling us and choosing how we respond.
             </p>
 
-            <p style={{ marginBottom: '2.5rem', fontWeight: '600', color: 'var(--accent-burgundy, #8B263E)' }}>
+            <p style={{ marginBottom: '2.5rem', fontWeight: '600', color: 'var(--accent-teal)' }}>
               Sometimes maturity is knowing what deserves a reaction, what deserves a conversation, and what deserves our silence.
             </p>
 
@@ -469,7 +469,7 @@ export default function About() {
               fontSize: '1.15rem',
               fontFamily: 'var(--font-serif)',
               fontWeight: '700',
-              color: 'var(--accent-burgundy, #8B263E)',
+              color: 'var(--accent-teal)',
               letterSpacing: '0.04em',
               margin: '2rem 0 3rem 0'
             }}>

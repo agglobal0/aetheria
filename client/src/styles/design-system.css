@@ -38,25 +38,26 @@
   --nav-bg: rgba(248, 250, 252, 0.94);
   --hero-glow: radial-gradient(circle at 50% 30%, rgba(58, 80, 107, 0.12), rgba(169, 188, 208, 0.08) 50%, transparent 75%);
 
-  /* Category Accents (Harmonized with Conscious Teal, Reflection Blue, and Inner Light) */
+  /* Category Accents (Strictly using Premium ORAANIS 5-Color System) */
   --accent-reflections: #3A506B;
   --accent-reflections-bg: rgba(58, 80, 107, 0.10);
   --accent-emotional-intelligence: #1C2541;
   --accent-emotional-intelligence-bg: rgba(28, 37, 65, 0.09);
-  --accent-healing: #2C7A86;
-  --accent-healing-bg: rgba(44, 122, 134, 0.10);
+  --accent-healing: #3A506B;
+  --accent-healing-bg: rgba(58, 80, 107, 0.10);
   --accent-wisdom: #0B132B;
   --accent-wisdom-bg: rgba(11, 19, 43, 0.08);
-  --accent-spirituality: #457B9D;
-  --accent-spirituality-bg: rgba(69, 123, 157, 0.12);
+  --accent-spirituality: #3A506B;
+  --accent-spirituality-bg: rgba(58, 80, 107, 0.10);
   --accent-ethics: #1C2541;
   --accent-ethics-bg: rgba(28, 37, 65, 0.09);
   --accent-human-behaviour: #3A506B;
   --accent-human-behaviour-bg: rgba(58, 80, 107, 0.10);
   --accent-life-reflection: #3A506B;
   --accent-life-reflection-bg: rgba(58, 80, 107, 0.10);
-  --accent-technology: #2E6F89;
-  --accent-technology-bg: rgba(46, 111, 137, 0.10);
+  --accent-technology: #1C2541;
+  --accent-technology-bg: rgba(28, 37, 65, 0.09);
+  --accent-burgundy: #1C2541;
 
   /* Shadows */
   --shadow-sm: 0 2px 10px rgba(11, 19, 43, 0.04);
@@ -78,157 +79,46 @@
 }
 
 /* ==========================================================================
-   PALETTE SCHEMES (data-palette)
+   DARK MODE THEME (Deep Midnight, Reflection Blue, Inner Light, Pure Light)
    ========================================================================== */
-
-/* 1. Premium ORAANIS (Default Light & Dark) */
-[data-palette="oraanis"] {
-  --bg-primary: #F8FAFC;
-  --bg-secondary: #FFFFFF;
-  --bg-tertiary: #EEF2F6;
-  --text-primary: #0B132B;
-  --text-secondary: #1C2541;
-  --text-muted: #536B88;
-  --border-color: #E2E8F0;
-  --border-hover: #A9BCD0;
-  --accent-primary: #1C2541;
-  --accent-hover: #0B132B;
-  --accent-teal: #3A506B;
-  --accent-inner: #A9BCD0;
-  --accent-light: rgba(58, 80, 107, 0.08);
-  --nav-bg: rgba(248, 250, 252, 0.94);
-  --hero-glow: radial-gradient(circle at 50% 30%, rgba(58, 80, 107, 0.12), rgba(169, 188, 208, 0.08) 50%, transparent 75%);
-}
-
-[data-theme="dark"][data-palette="oraanis"],
 [data-theme="dark"] {
   --bg-primary: #0B132B;
   --bg-secondary: #1C2541;
-  --bg-tertiary: #253354;
-  --bg-input: #151F38;
+  --bg-tertiary: #151F38;
+  --bg-input: #0B132B;
   --text-primary: #F8FAFC;
   --text-secondary: #A9BCD0;
-  --text-muted: #6E87A4;
+  --text-muted: #A9BCD0;
   --border-color: #273756;
   --border-hover: #3A506B;
   --accent-primary: #A9BCD0;
   --accent-hover: #F8FAFC;
   --accent-teal: #3A506B;
   --accent-inner: #A9BCD0;
+  --accent-gold: #A9BCD0;
   --accent-light: rgba(169, 188, 208, 0.14);
   --nav-bg: rgba(11, 19, 43, 0.94);
-  --hero-glow: radial-gradient(circle at 50% 30%, rgba(58, 80, 107, 0.25), rgba(28, 37, 65, 0.4) 60%, transparent 80%);
-}
+  --hero-glow: radial-gradient(circle at 50% 30%, rgba(58, 80, 107, 0.35), rgba(28, 37, 65, 0.5) 60%, transparent 80%);
 
-/* 2. Warm Amber Wisdom */
-[data-palette="amber"] {
-  --bg-primary: #FAF6F0;
-  --bg-secondary: #FFFFFF;
-  --bg-tertiary: #F3EBE0;
-  --text-primary: #2C221E;
-  --text-secondary: #6B5D54;
-  --border-color: #E8DEC3;
-  --accent-primary: #B86B27;
-  --accent-hover: #96531B;
-  --accent-light: rgba(184, 107, 39, 0.12);
-  --hero-glow: radial-gradient(circle at 50% 30%, rgba(212, 160, 89, 0.18), transparent 70%);
-}
-
-[data-theme="dark"][data-palette="amber"] {
-  --bg-primary: #141210;
-  --bg-secondary: #1E1A16;
-  --bg-tertiary: #28231D;
-  --bg-input: #231E19;
-  --text-primary: #F7ECE1;
-  --text-secondary: #C4B5A5;
-  --text-muted: #857667;
-  --border-color: #383026;
-  --border-hover: #54483B;
-  --accent-primary: #E09F53;
-  --accent-hover: #F2B46D;
-  --accent-light: rgba(224, 159, 83, 0.18);
-  --nav-bg: rgba(20, 18, 16, 0.92);
-  --hero-glow: radial-gradient(circle at 50% 30%, rgba(224, 159, 83, 0.12), transparent 70%);
-}
-
-/* 3. Emerald Growth (Forest & Teal) */
-[data-palette="emerald"] {
-  --bg-primary: #F4F7F4;
-  --bg-secondary: #FFFFFF;
-  --bg-tertiary: #E6EFE7;
-  --text-primary: #122B1E;
-  --text-secondary: #426050;
-  --border-color: #D0DFC3;
-  --accent-primary: #1B6B48;
-  --accent-hover: #125235;
-  --accent-light: rgba(27, 107, 72, 0.12);
-  --hero-glow: radial-gradient(circle at 50% 30%, rgba(27, 107, 72, 0.15), transparent 70%);
-}
-
-[data-theme="dark"][data-palette="emerald"] {
-  --bg-primary: #0B1712;
-  --bg-secondary: #13241C;
-  --bg-tertiary: #1A3026;
-  --bg-input: #152B20;
-  --text-primary: #E4F5ED;
-  --text-secondary: #A1C7B5;
-  --text-muted: #648D7A;
-  --border-color: #244537;
-  --border-hover: #3A6652;
-  --accent-primary: #52C993;
-  --accent-hover: #75DCAB;
-  --accent-light: rgba(82, 201, 147, 0.18);
-  --nav-bg: rgba(11, 23, 18, 0.92);
-  --hero-glow: radial-gradient(circle at 50% 30%, rgba(82, 201, 147, 0.12), transparent 70%);
-}
-
-/* 4. Deep Midnight */
-[data-palette="midnight"] {
-  --bg-primary: #0B132B;
-  --bg-secondary: #1C2541;
-  --bg-tertiary: #253354;
-  --bg-input: #151F38;
-  --text-primary: #F8FAFC;
-  --text-secondary: #A9BCD0;
-  --text-muted: #64748B;
-  --border-color: #273756;
-  --border-hover: #3A506B;
-  --accent-primary: #3A506B;
-  --accent-hover: #A9BCD0;
-  --accent-light: rgba(58, 80, 107, 0.18);
-  --nav-bg: rgba(11, 19, 43, 0.94);
-  --hero-glow: radial-gradient(circle at 50% 30%, rgba(58, 80, 107, 0.25), transparent 70%);
-}
-
-/* 5. Terracotta Reflection (Earth & Warm Rose) */
-[data-palette="terracotta"] {
-  --bg-primary: #FAF5F3;
-  --bg-secondary: #FFFFFF;
-  --bg-tertiary: #F5EAE6;
-  --text-primary: #381E19;
-  --text-secondary: #704B44;
-  --border-color: #EBDAD5;
-  --accent-primary: #C05638;
-  --accent-hover: #9E4025;
-  --accent-light: rgba(192, 86, 56, 0.12);
-  --hero-glow: radial-gradient(circle at 50% 30%, rgba(192, 86, 56, 0.15), transparent 70%);
-}
-
-[data-theme="dark"][data-palette="terracotta"] {
-  --bg-primary: #1C1210;
-  --bg-secondary: #2B1D19;
-  --bg-tertiary: #382723;
-  --bg-input: #2D1E1A;
-  --text-primary: #FDF0ED;
-  --text-secondary: #D4B6B0;
-  --text-muted: #8E6D66;
-  --border-color: #45302B;
-  --border-hover: #634741;
-  --accent-primary: #E87A5D;
-  --accent-hover: #F2957C;
-  --accent-light: rgba(232, 122, 93, 0.18);
-  --nav-bg: rgba(28, 18, 16, 0.92);
-  --hero-glow: radial-gradient(circle at 50% 30%, rgba(232, 122, 93, 0.12), transparent 70%);
+  --accent-reflections: #A9BCD0;
+  --accent-reflections-bg: rgba(169, 188, 208, 0.14);
+  --accent-emotional-intelligence: #A9BCD0;
+  --accent-emotional-intelligence-bg: rgba(169, 188, 208, 0.14);
+  --accent-healing: #A9BCD0;
+  --accent-healing-bg: rgba(169, 188, 208, 0.14);
+  --accent-wisdom: #A9BCD0;
+  --accent-wisdom-bg: rgba(169, 188, 208, 0.14);
+  --accent-spirituality: #A9BCD0;
+  --accent-spirituality-bg: rgba(169, 188, 208, 0.14);
+  --accent-ethics: #A9BCD0;
+  --accent-ethics-bg: rgba(169, 188, 208, 0.14);
+  --accent-human-behaviour: #A9BCD0;
+  --accent-human-behaviour-bg: rgba(169, 188, 208, 0.14);
+  --accent-life-reflection: #A9BCD0;
+  --accent-life-reflection-bg: rgba(169, 188, 208, 0.14);
+  --accent-technology: #A9BCD0;
+  --accent-technology-bg: rgba(169, 188, 208, 0.14);
+  --accent-burgundy: #A9BCD0;
 }
 
 
@@ -390,13 +280,13 @@ img {
   font-size: 1.15rem;
   margin-top: 2.5rem;
   margin-bottom: 1.5rem;
-  color: var(--accent-burgundy, #8B263E);
+  color: var(--accent-teal, #3A506B);
   font-style: italic;
   letter-spacing: 0.02em;
 }
 
 [data-theme="dark"] .editorial-signoff {
-  color: #D4A76A;
+  color: #A9BCD0;
 }
 
 @media (max-width: 640px) {

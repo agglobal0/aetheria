@@ -88,8 +88,8 @@ export default function SingleEssay() {
                 fontWeight: '700',
                 padding: '0.2rem 0.65rem',
                 borderRadius: 'var(--radius-full)',
-                backgroundColor: essay.type === 'blog' ? 'rgba(43, 89, 195, 0.12)' : 'rgba(139, 38, 62, 0.12)',
-                color: essay.type === 'blog' ? '#2B59C3' : '#8B263E',
+                backgroundColor: essay.type === 'blog' ? 'rgba(58, 80, 107, 0.12)' : 'rgba(28, 37, 65, 0.08)',
+                color: essay.type === 'blog' ? 'var(--accent-teal)' : 'var(--text-primary)',
                 letterSpacing: '0.04em',
                 textTransform: 'uppercase'
               }}>
@@ -249,7 +249,7 @@ export default function SingleEssay() {
                   {authorBio}
                 </p>
                 <div style={{ marginTop: '0.5rem' }}>
-                  <Link to={authorLink} style={{ fontSize: '0.825rem', fontWeight: '600', color: 'var(--accent-burgundy, #8B263E)', textDecoration: 'none' }}>
+                  <Link to={authorLink} style={{ fontSize: '0.825rem', fontWeight: '600', color: 'var(--accent-teal)', textDecoration: 'none' }}>
                     View Profile & All Essays by {authorName} →
                   </Link>
                 </div>

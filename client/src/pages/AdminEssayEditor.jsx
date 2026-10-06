@@ -829,8 +829,8 @@ export default function AdminEssayEditor() {
                     gap: '0.75rem',
                     padding: '0.75rem 0.85rem',
                     borderRadius: 'var(--radius-sm)',
-                    border: `1.5px solid ${formData.type === 'essay' ? '#8B263E' : 'var(--border-color)'}`,
-                    backgroundColor: formData.type === 'essay' ? 'rgba(139, 38, 62, 0.08)' : 'var(--bg-input)',
+                    border: `1.5px solid ${formData.type === 'essay' ? 'var(--accent-teal)' : 'var(--border-color)'}`,
+                    backgroundColor: formData.type === 'essay' ? 'rgba(58, 80, 107, 0.08)' : 'var(--bg-input)',
                     cursor: 'pointer',
                     transition: 'all 0.2s ease'
                   }}>
@@ -843,7 +843,7 @@ export default function AdminEssayEditor() {
                       style={{ marginTop: '0.2rem' }}
                     />
                     <div>
-                      <strong style={{ display: 'block', fontSize: '0.875rem', color: formData.type === 'essay' ? '#8B263E' : 'var(--text-primary)' }}>
+                      <strong style={{ display: 'block', fontSize: '0.875rem', color: formData.type === 'essay' ? 'var(--accent-teal)' : 'var(--text-primary)' }}>
                         Academic Essay
                       </strong>
                       <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', lineHeight: '1.35', display: 'block', marginTop: '0.15rem' }}>
@@ -858,8 +858,8 @@ export default function AdminEssayEditor() {
                     gap: '0.75rem',
                     padding: '0.75rem 0.85rem',
                     borderRadius: 'var(--radius-sm)',
-                    border: `1.5px solid ${formData.type === 'blog' ? '#2B59C3' : 'var(--border-color)'}`,
-                    backgroundColor: formData.type === 'blog' ? 'rgba(43, 89, 195, 0.08)' : 'var(--bg-input)',
+                    border: `1.5px solid ${formData.type === 'blog' ? 'var(--accent-primary)' : 'var(--border-color)'}`,
+                    backgroundColor: formData.type === 'blog' ? 'rgba(28, 37, 65, 0.08)' : 'var(--bg-input)',
                     cursor: 'pointer',
                     transition: 'all 0.2s ease'
                   }}>
@@ -872,7 +872,7 @@ export default function AdminEssayEditor() {
                       style={{ marginTop: '0.2rem' }}
                     />
                     <div>
-                      <strong style={{ display: 'block', fontSize: '0.875rem', color: formData.type === 'blog' ? '#2B59C3' : 'var(--text-primary)' }}>
+                      <strong style={{ display: 'block', fontSize: '0.875rem', color: formData.type === 'blog' ? 'var(--accent-primary)' : 'var(--text-primary)' }}>
                         Reflective Blog Post
                       </strong>
                       <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', lineHeight: '1.35', display: 'block', marginTop: '0.15rem' }}>

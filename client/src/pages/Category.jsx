@@ -55,12 +55,12 @@ export default function Category() {
         ]);
 
         const fallbackMeta = {
-          'reflections': { name: 'Reflections', description: 'Thoughtful examinations of time, personal growth, quiet wisdom, and life reflections.', accent_color: '#A67C46' },
-          'emotional-intelligence': { name: 'Emotional Intelligence', description: 'Exploring psychology, human nature, empathy, social dynamics, and self-awareness.', accent_color: '#2B59C3' },
-          'healing': { name: 'Healing', description: 'Nurturing resilience, emotional recovery, self-forgiveness, and inner peace.', accent_color: '#D97706' },
-          'wisdom': { name: 'Wisdom', description: 'Timeless insights, moral integrity, ethics, and enduring human life lessons.', accent_color: '#8B263E' },
-          'spirituality': { name: 'Spirituality', description: 'Meditations on purpose, transcendence, quiet consciousness, and inner depth.', accent_color: '#0284C7' },
-          'technology': { name: 'Technology', description: 'Reflections on the evolving balance between humanity and the digital world.', accent_color: '#4B5563' }
+          'reflections': { name: 'Reflections', description: 'Thoughtful examinations of time, personal growth, quiet wisdom, and life reflections.', accent_color: '#3A506B' },
+          'emotional-intelligence': { name: 'Emotional Intelligence', description: 'Exploring psychology, human nature, empathy, social dynamics, and self-awareness.', accent_color: '#1C2541' },
+          'healing': { name: 'Healing', description: 'Nurturing resilience, emotional recovery, self-forgiveness, and inner peace.', accent_color: '#3A506B' },
+          'wisdom': { name: 'Wisdom', description: 'Timeless insights, moral integrity, ethics, and enduring human life lessons.', accent_color: '#0B132B' },
+          'spirituality': { name: 'Spirituality', description: 'Meditations on purpose, transcendence, quiet consciousness, and inner depth.', accent_color: '#3A506B' },
+          'technology': { name: 'Technology', description: 'Reflections on the evolving balance between humanity and the digital world.', accent_color: '#1C2541' }
         };
 
         if (catRes.data && catRes.data.success) {
@@ -188,7 +188,7 @@ export default function Category() {
               border: '1px solid var(--border-color)',
               textAlign: 'center'
             }}>
-              <span style={{ fontSize: '1.8rem', fontWeight: '700', fontFamily: 'var(--font-serif)', color: '#8B263E', display: 'block', lineHeight: '1.1' }}>
+              <span style={{ fontSize: '1.8rem', fontWeight: '700', fontFamily: 'var(--font-serif)', color: 'var(--accent-teal)', display: 'block', lineHeight: '1.1' }}>
                 {category.essay_count || 0}
               </span>
               <span style={{ fontSize: '0.7rem', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: '700', color: 'var(--text-muted)' }}>
@@ -203,7 +203,7 @@ export default function Category() {
               border: '1px solid var(--border-color)',
               textAlign: 'center'
             }}>
-              <span style={{ fontSize: '1.8rem', fontWeight: '700', fontFamily: 'var(--font-serif)', color: '#2B59C3', display: 'block', lineHeight: '1.1' }}>
+              <span style={{ fontSize: '1.8rem', fontWeight: '700', fontFamily: 'var(--font-serif)', color: 'var(--accent-primary)', display: 'block', lineHeight: '1.1' }}>
                 {category.blog_count || 0}
               </span>
               <span style={{ fontSize: '0.7rem', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: '700', color: 'var(--text-muted)' }}>
