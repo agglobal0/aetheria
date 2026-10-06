@@ -219,10 +219,7 @@ export default function Rajsaar() {
                 alignItems: 'center'
               }}>
                 <Link to="/essays" className="btn-dark-green">
-                  Explore Reflections <ArrowRight size={15} />
-                </Link>
-                <Link to="/person-behind-this" className="btn-warm-pill">
-                  <Compass size={16} /> The Person Behind This
+                  Explore Essays <ArrowRight size={15} />
                 </Link>
                 <Link to="/about" className="btn-warm-pill">
                   <BookOpen size={16} /> About ORAANIS

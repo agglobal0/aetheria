@@ -295,14 +295,11 @@ export default function Author() {
                 justifyContent: 'center',
                 alignItems: 'center'
               }}>
-                <Link to="/essays" className="btn btn-dark-green" style={{ padding: '0.75rem 1.6rem', fontSize: '0.92rem' }}>
+                <Link to="/essays" className="btn-dark-green">
                   Explore Essays <ArrowRight size={16} />
                 </Link>
-                <Link to="/about" className="btn btn-secondary" style={{ padding: '0.75rem 1.6rem', fontSize: '0.92rem' }}>
+                <Link to="/about" className="btn-warm-pill">
                   <BookOpen size={16} /> About ORAANIS
-                </Link>
-                <Link to="/share" className="btn btn-secondary" style={{ padding: '0.75rem 1.6rem', fontSize: '0.92rem' }}>
-                  <Feather size={16} /> Share Perspective
                 </Link>
               </div>
             </div>

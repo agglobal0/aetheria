@@ -122,10 +122,10 @@ export default function Home() {
             {/* CTA Buttons */}
             <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center' }}>
               <Link to="/essays" className="btn-dark-green">
-                Explore Reflections <ArrowRight size={16} />
+                Explore Essays <ArrowRight size={16} />
               </Link>
               <Link to="/about" className="btn-warm-pill">
-                My Story
+                <BookOpen size={16} /> About ORAANIS
               </Link>
             </div>
           </div>
