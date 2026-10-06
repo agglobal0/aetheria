@@ -21,10 +21,10 @@ export default function Footer() {
 
   return (
     <footer style={{
-      backgroundColor: '#16281E',
-      color: '#E3EBE4',
+      backgroundColor: '#0B132B',
+      color: '#F8FAFC',
       padding: '3rem 0 2.25rem 0',
-      borderTop: '1px solid #233B2D',
+      borderTop: '1px solid #1C2541',
       fontSize: '0.85rem'
     }}>
       <div className="container">
@@ -61,23 +61,23 @@ export default function Footer() {
               fontFamily: 'var(--font-cormorant)',
               fontStyle: 'italic',
               fontSize: '0.95rem',
-              color: '#9CB2A2',
+              color: '#A9BCD0',
               letterSpacing: '0.02em'
             }}>
               Good thoughts. Better tomorrows.
             </span>
 
             {/* Social Icons */}
-            <div style={{ display: 'flex', gap: '0.85rem', alignItems: 'center', color: '#D4A76A' }}>
+            <div style={{ display: 'flex', gap: '0.85rem', alignItems: 'center', color: '#A9BCD0' }}>
               {/* Instagram */}
               <a
                 href="https://www.instagram.com/oraanis2026"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram"
-                style={{ color: 'inherit', padding: '0.35rem', display: 'inline-flex', transition: 'transform 0.2s ease, opacity 0.2s ease' }}
-                onMouseEnter={(e) => { e.currentTarget.style.opacity = '0.8'; e.currentTarget.style.transform = 'translateY(-2px)'; }}
-                onMouseLeave={(e) => { e.currentTarget.style.opacity = '1'; e.currentTarget.style.transform = 'translateY(0)'; }}
+                style={{ color: 'inherit', padding: '0.35rem', display: 'inline-flex', transition: 'transform 0.2s ease, color 0.2s ease' }}
+                onMouseEnter={(e) => { e.currentTarget.style.color = '#FFFFFF'; e.currentTarget.style.transform = 'translateY(-2px)'; }}
+                onMouseLeave={(e) => { e.currentTarget.style.color = '#A9BCD0'; e.currentTarget.style.transform = 'translateY(0)'; }}
               >
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
@@ -92,9 +92,9 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Facebook"
-                style={{ color: 'inherit', padding: '0.35rem', display: 'inline-flex', transition: 'transform 0.2s ease, opacity 0.2s ease' }}
-                onMouseEnter={(e) => { e.currentTarget.style.opacity = '0.8'; e.currentTarget.style.transform = 'translateY(-2px)'; }}
-                onMouseLeave={(e) => { e.currentTarget.style.opacity = '1'; e.currentTarget.style.transform = 'translateY(0)'; }}
+                style={{ color: 'inherit', padding: '0.35rem', display: 'inline-flex', transition: 'transform 0.2s ease, color 0.2s ease' }}
+                onMouseEnter={(e) => { e.currentTarget.style.color = '#FFFFFF'; e.currentTarget.style.transform = 'translateY(-2px)'; }}
+                onMouseLeave={(e) => { e.currentTarget.style.color = '#A9BCD0'; e.currentTarget.style.transform = 'translateY(0)'; }}
               >
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/>
@@ -113,15 +113,15 @@ export default function Footer() {
           gap: '1rem 1.75rem',
           justifyContent: 'center',
           padding: '1.5rem 0',
-          borderTop: '1px solid rgba(255, 255, 255, 0.08)',
-          borderBottom: '1px solid rgba(255, 255, 255, 0.08)'
+          borderTop: '1px solid rgba(169, 188, 208, 0.12)',
+          borderBottom: '1px solid rgba(169, 188, 208, 0.12)'
         }}>
           {footerLinks.map((link, idx) => (
             <Link
               key={idx}
               to={link.path}
               style={{
-                color: '#CAD8CD',
+                color: '#A9BCD0',
                 fontSize: '0.85rem',
                 fontWeight: '400',
                 transition: 'color 0.2s ease',
@@ -129,7 +129,7 @@ export default function Footer() {
                 padding: '0.2rem 0'
               }}
               onMouseEnter={(e) => e.currentTarget.style.color = '#FFFFFF'}
-              onMouseLeave={(e) => e.currentTarget.style.color = '#CAD8CD'}
+              onMouseLeave={(e) => e.currentTarget.style.color = '#A9BCD0'}
             >
               {link.name}
             </Link>
@@ -145,15 +145,15 @@ export default function Footer() {
           gap: '0.75rem',
           paddingTop: '1.5rem',
           fontSize: '0.75rem',
-          color: '#7F9685'
+          color: '#6E87A4'
         }}>
           <div>
             © {currentYear} Monika Chopra. All rights reserved.
           </div>
           <div style={{ display: 'flex', gap: '1.25rem', flexWrap: 'wrap' }}>
-            <Link to="/about" style={{ color: '#7F9685', textDecoration: 'none' }}>Privacy</Link>
-            <Link to="/about" style={{ color: '#7F9685', textDecoration: 'none' }}>Terms</Link>
-            <Link to="/contact" style={{ color: '#7F9685', textDecoration: 'none' }}>Editorial Inquiries</Link>
+            <Link to="/about" style={{ color: '#6E87A4', textDecoration: 'none' }} onMouseEnter={e => e.currentTarget.style.color = '#A9BCD0'} onMouseLeave={e => e.currentTarget.style.color = '#6E87A4'}>Privacy</Link>
+            <Link to="/about" style={{ color: '#6E87A4', textDecoration: 'none' }} onMouseEnter={e => e.currentTarget.style.color = '#A9BCD0'} onMouseLeave={e => e.currentTarget.style.color = '#6E87A4'}>Terms</Link>
+            <Link to="/contact" style={{ color: '#6E87A4', textDecoration: 'none' }} onMouseEnter={e => e.currentTarget.style.color = '#A9BCD0'} onMouseLeave={e => e.currentTarget.style.color = '#6E87A4'}>Editorial Inquiries</Link>
           </div>
         </div>
       </div>

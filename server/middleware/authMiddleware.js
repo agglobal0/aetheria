@@ -47,7 +47,13 @@ function requireRole(role) {
   };
 }
 
+const requireAuth = authenticateToken;
+const requireAdmin = requireRole('admin');
+
 module.exports = {
   authenticateToken,
-  requireRole
+  requireRole,
+  requireAuth,
+  requireAdmin
 };
+

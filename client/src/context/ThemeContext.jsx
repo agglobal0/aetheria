@@ -3,9 +3,10 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 const ThemeContext = createContext();
 
 export const PALETTES = [
+  { id: 'oraanis', name: 'Premium ORAANIS', color: '#1C2541' },
   { id: 'amber', name: 'Warm Amber Wisdom', color: '#B86B27' },
-  { id: 'emerald', name: 'Emerald Purpose', color: '#1B6B48' },
-  { id: 'midnight', name: 'Midnight Starlight', color: '#F59E0B' },
+  { id: 'emerald', name: 'Emerald Growth', color: '#1B6B48' },
+  { id: 'midnight', name: 'Deep Midnight', color: '#0B132B' },
   { id: 'terracotta', name: 'Terracotta Reflection', color: '#C05638' }
 ];
 
@@ -15,7 +16,7 @@ export function ThemeProvider({ children }) {
   });
 
   const [palette, setPalette] = useState(() => {
-    return localStorage.getItem('aetheria_palette') || 'amber';
+    return localStorage.getItem('aetheria_palette') || 'oraanis';
   });
 
   useEffect(() => {

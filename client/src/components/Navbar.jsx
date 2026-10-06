@@ -16,11 +16,11 @@ import ThemeToggle from './ThemeToggle';
 
 // Custom Botanical Leaf Branch Separator matching the reference
 const LeafSeparator = () => (
-  <span className="navbar-leaf-sep" aria-hidden="true" style={{ display: 'inline-flex', alignItems: 'center', margin: '0 0.4rem', opacity: 0.75, flexShrink: 0 }}>
+  <span className="navbar-leaf-sep" aria-hidden="true" style={{ display: 'inline-flex', alignItems: 'center', margin: '0 0.4rem', opacity: 0.65, flexShrink: 0 }}>
     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M12 22C12 22 12.5 15 16 11C18.5 8 21.5 6.5 21.5 6.5C21.5 6.5 19.5 10 16.5 12.5C14 14.5 12 22 12 22Z" fill="#7FA98E" fillOpacity="0.45" stroke="#5E8B6F" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round"/>
-      <path d="M12 22C12 22 11.5 16 8 13.5C5.5 11.5 2.5 11 2.5 11C2.5 11 5.5 9 9.5 11.5C11 12.5 12 22 12 22Z" fill="#7FA98E" fillOpacity="0.45" stroke="#5E8B6F" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round"/>
-      <path d="M12 22V11" stroke="#5E8B6F" strokeWidth="1.3" strokeLinecap="round"/>
+      <path d="M12 22C12 22 12.5 15 16 11C18.5 8 21.5 6.5 21.5 6.5C21.5 6.5 19.5 10 16.5 12.5C14 14.5 12 22 12 22Z" fill="#A9BCD0" fillOpacity="0.45" stroke="#3A506B" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round"/>
+      <path d="M12 22C12 22 11.5 16 8 13.5C5.5 11.5 2.5 11 2.5 11C2.5 11 5.5 9 9.5 11.5C11 12.5 12 22 12 22Z" fill="#A9BCD0" fillOpacity="0.45" stroke="#3A506B" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round"/>
+      <path d="M12 22V11" stroke="#3A506B" strokeWidth="1.3" strokeLinecap="round"/>
     </svg>
   </span>
 );
@@ -84,32 +84,32 @@ export default function Navbar() {
     {
       name: 'Reflections',
       path: '/category/reflections',
-      icon: <BookOpen size={15} color="#0D9488" />,
-      bg: '#E6F4F1'
+      icon: <BookOpen size={15} color="#3A506B" />,
+      bg: 'rgba(58, 80, 107, 0.12)'
     },
     {
       name: 'Emotional Intelligence',
       path: '/category/emotional-intelligence',
-      icon: <Brain size={15} color="#16A34A" />,
-      bg: '#EAF7EE'
+      icon: <Brain size={15} color="#1C2541" />,
+      bg: 'rgba(28, 37, 65, 0.10)'
     },
     {
       name: 'Healing',
       path: '/category/healing',
-      icon: <HeartPulse size={15} color="#D97706" />,
-      bg: '#FDF2E9'
+      icon: <HeartPulse size={15} color="#2C7A86" />,
+      bg: 'rgba(44, 122, 134, 0.12)'
     },
     {
       name: 'Wisdom',
       path: '/category/wisdom',
-      icon: <Lightbulb size={15} color="#CA8A04" />,
-      bg: '#FEF9C3'
+      icon: <Lightbulb size={15} color="#3A506B" />,
+      bg: 'rgba(58, 80, 107, 0.14)'
     },
     {
       name: 'Spirituality',
       path: '/category/spirituality',
-      icon: <Flower2 size={15} color="#0284C7" />,
-      bg: '#E0F2FE'
+      icon: <Flower2 size={15} color="#457B9D" />,
+      bg: 'rgba(69, 123, 157, 0.14)'
     }
   ];
 

@@ -19,48 +19,50 @@
   --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 
-  /* Reference Palette: Warm Organic Wisdom */
-  --bg-primary: #FAF7F2;
+  /* Reference Palette: Premium ORAANIS (Depth, Clarity, Growth) */
+  --bg-primary: #F8FAFC;
   --bg-secondary: #FFFFFF;
-  --bg-tertiary: #F3ECE2;
+  --bg-tertiary: #EEF2F6;
   --bg-input: #FFFFFF;
-  --text-primary: #2C2621;
-  --text-secondary: #5C5248;
-  --text-muted: #8F8276;
-  --border-color: #E6DCce;
-  --border-hover: #D1C3B2;
-  --accent-primary: #3B5340;
-  --accent-hover: #2B3D2F;
-  --accent-gold: #C28B47;
-  --accent-light: rgba(59, 83, 64, 0.08);
-  --nav-bg: rgba(253, 251, 247, 0.95);
-  --hero-glow: radial-gradient(circle at 50% 30%, rgba(212, 160, 89, 0.15), transparent 70%);
+  --text-primary: #0B132B;
+  --text-secondary: #1C2541;
+  --text-muted: #536B88;
+  --border-color: #E2E8F0;
+  --border-hover: #A9BCD0;
+  --accent-primary: #1C2541;
+  --accent-hover: #0B132B;
+  --accent-teal: #3A506B;
+  --accent-inner: #A9BCD0;
+  --accent-gold: #3A506B;
+  --accent-light: rgba(58, 80, 107, 0.08);
+  --nav-bg: rgba(248, 250, 252, 0.94);
+  --hero-glow: radial-gradient(circle at 50% 30%, rgba(58, 80, 107, 0.12), rgba(169, 188, 208, 0.08) 50%, transparent 75%);
 
-  /* Category Accents */
-  --accent-reflections: #A67C46;
-  --accent-reflections-bg: rgba(166, 124, 70, 0.12);
-  --accent-emotional-intelligence: #2B59C3;
-  --accent-emotional-intelligence-bg: rgba(43, 89, 195, 0.12);
-  --accent-healing: #D97706;
-  --accent-healing-bg: rgba(217, 119, 6, 0.12);
-  --accent-wisdom: #8B263E;
-  --accent-wisdom-bg: rgba(139, 38, 62, 0.12);
-  --accent-spirituality: #0284C7;
-  --accent-spirituality-bg: rgba(2, 132, 199, 0.12);
-  --accent-ethics: #9B2C3B;
-  --accent-ethics-bg: rgba(155, 44, 59, 0.09);
-  --accent-human-behaviour: #2563EB;
-  --accent-human-behaviour-bg: rgba(37, 99, 235, 0.09);
-  --accent-life-reflection: #A67C46;
-  --accent-life-reflection-bg: rgba(166, 124, 70, 0.12);
-  --accent-technology: #0D9488;
-  --accent-technology-bg: rgba(13, 148, 136, 0.09);
+  /* Category Accents (Harmonized with Conscious Teal, Reflection Blue, and Inner Light) */
+  --accent-reflections: #3A506B;
+  --accent-reflections-bg: rgba(58, 80, 107, 0.10);
+  --accent-emotional-intelligence: #1C2541;
+  --accent-emotional-intelligence-bg: rgba(28, 37, 65, 0.09);
+  --accent-healing: #2C7A86;
+  --accent-healing-bg: rgba(44, 122, 134, 0.10);
+  --accent-wisdom: #0B132B;
+  --accent-wisdom-bg: rgba(11, 19, 43, 0.08);
+  --accent-spirituality: #457B9D;
+  --accent-spirituality-bg: rgba(69, 123, 157, 0.12);
+  --accent-ethics: #1C2541;
+  --accent-ethics-bg: rgba(28, 37, 65, 0.09);
+  --accent-human-behaviour: #3A506B;
+  --accent-human-behaviour-bg: rgba(58, 80, 107, 0.10);
+  --accent-life-reflection: #3A506B;
+  --accent-life-reflection-bg: rgba(58, 80, 107, 0.10);
+  --accent-technology: #2E6F89;
+  --accent-technology-bg: rgba(46, 111, 137, 0.10);
 
   /* Shadows */
-  --shadow-sm: 0 2px 10px rgba(184, 107, 39, 0.04);
-  --shadow-md: 0 8px 26px rgba(44, 34, 30, 0.06);
-  --shadow-lg: 0 16px 45px rgba(44, 34, 30, 0.09);
-  --shadow-gold: 0 8px 30px rgba(184, 107, 39, 0.18);
+  --shadow-sm: 0 2px 10px rgba(11, 19, 43, 0.04);
+  --shadow-md: 0 8px 26px rgba(11, 19, 43, 0.06);
+  --shadow-lg: 0 16px 45px rgba(11, 19, 43, 0.09);
+  --shadow-gold: 0 8px 30px rgba(58, 80, 107, 0.18);
 
   /* Layout */
   --max-width: 1240px;
@@ -79,7 +81,46 @@
    PALETTE SCHEMES (data-palette)
    ========================================================================== */
 
-/* 1. Warm Amber Wisdom (Default Light & Dark) */
+/* 1. Premium ORAANIS (Default Light & Dark) */
+[data-palette="oraanis"] {
+  --bg-primary: #F8FAFC;
+  --bg-secondary: #FFFFFF;
+  --bg-tertiary: #EEF2F6;
+  --text-primary: #0B132B;
+  --text-secondary: #1C2541;
+  --text-muted: #536B88;
+  --border-color: #E2E8F0;
+  --border-hover: #A9BCD0;
+  --accent-primary: #1C2541;
+  --accent-hover: #0B132B;
+  --accent-teal: #3A506B;
+  --accent-inner: #A9BCD0;
+  --accent-light: rgba(58, 80, 107, 0.08);
+  --nav-bg: rgba(248, 250, 252, 0.94);
+  --hero-glow: radial-gradient(circle at 50% 30%, rgba(58, 80, 107, 0.12), rgba(169, 188, 208, 0.08) 50%, transparent 75%);
+}
+
+[data-theme="dark"][data-palette="oraanis"],
+[data-theme="dark"] {
+  --bg-primary: #0B132B;
+  --bg-secondary: #1C2541;
+  --bg-tertiary: #253354;
+  --bg-input: #151F38;
+  --text-primary: #F8FAFC;
+  --text-secondary: #A9BCD0;
+  --text-muted: #6E87A4;
+  --border-color: #273756;
+  --border-hover: #3A506B;
+  --accent-primary: #A9BCD0;
+  --accent-hover: #F8FAFC;
+  --accent-teal: #3A506B;
+  --accent-inner: #A9BCD0;
+  --accent-light: rgba(169, 188, 208, 0.14);
+  --nav-bg: rgba(11, 19, 43, 0.94);
+  --hero-glow: radial-gradient(circle at 50% 30%, rgba(58, 80, 107, 0.25), rgba(28, 37, 65, 0.4) 60%, transparent 80%);
+}
+
+/* 2. Warm Amber Wisdom */
 [data-palette="amber"] {
   --bg-primary: #FAF6F0;
   --bg-secondary: #FFFFFF;
@@ -93,8 +134,7 @@
   --hero-glow: radial-gradient(circle at 50% 30%, rgba(212, 160, 89, 0.18), transparent 70%);
 }
 
-[data-theme="dark"][data-palette="amber"],
-[data-theme="dark"] {
+[data-theme="dark"][data-palette="amber"] {
   --bg-primary: #141210;
   --bg-secondary: #1E1A16;
   --bg-tertiary: #28231D;
@@ -111,7 +151,7 @@
   --hero-glow: radial-gradient(circle at 50% 30%, rgba(224, 159, 83, 0.12), transparent 70%);
 }
 
-/* 2. Emerald Growth (Forest & Gold) */
+/* 3. Emerald Growth (Forest & Teal) */
 [data-palette="emerald"] {
   --bg-primary: #F4F7F4;
   --bg-secondary: #FFFFFF;
@@ -142,25 +182,25 @@
   --hero-glow: radial-gradient(circle at 50% 30%, rgba(82, 201, 147, 0.12), transparent 70%);
 }
 
-/* 3. Midnight Starlight (Royal Velvet & Gold) */
+/* 4. Deep Midnight */
 [data-palette="midnight"] {
-  --bg-primary: #0F172A;
-  --bg-secondary: #1E293B;
-  --bg-tertiary: #334155;
-  --bg-input: #1E293B;
+  --bg-primary: #0B132B;
+  --bg-secondary: #1C2541;
+  --bg-tertiary: #253354;
+  --bg-input: #151F38;
   --text-primary: #F8FAFC;
-  --text-secondary: #94A3B8;
+  --text-secondary: #A9BCD0;
   --text-muted: #64748B;
-  --border-color: #334155;
-  --border-hover: #475569;
-  --accent-primary: #F59E0B;
-  --accent-hover: #FBBF24;
-  --accent-light: rgba(245, 158, 11, 0.18);
-  --nav-bg: rgba(15, 23, 42, 0.92);
-  --hero-glow: radial-gradient(circle at 50% 30%, rgba(245, 158, 11, 0.15), transparent 70%);
+  --border-color: #273756;
+  --border-hover: #3A506B;
+  --accent-primary: #3A506B;
+  --accent-hover: #A9BCD0;
+  --accent-light: rgba(58, 80, 107, 0.18);
+  --nav-bg: rgba(11, 19, 43, 0.94);
+  --hero-glow: radial-gradient(circle at 50% 30%, rgba(58, 80, 107, 0.25), transparent 70%);
 }
 
-/* 4. Terracotta Reflection (Earth & Warm Rose) */
+/* 5. Terracotta Reflection (Earth & Warm Rose) */
 [data-palette="terracotta"] {
   --bg-primary: #FAF5F3;
   --bg-secondary: #FFFFFF;
@@ -685,12 +725,12 @@ select {
 .ref-hero-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(250, 247, 242, 0.35) 0%, rgba(250, 247, 242, 0.18) 45%, rgba(250, 247, 242, 0.42) 100%);
+  background: linear-gradient(180deg, rgba(248, 250, 252, 0.55) 0%, rgba(248, 250, 252, 0.28) 45%, rgba(248, 250, 252, 0.68) 100%);
   z-index: 1;
 }
 
 [data-theme="dark"] .ref-hero-overlay {
-  background: linear-gradient(180deg, rgba(20, 18, 16, 0.45) 0%, rgba(20, 18, 16, 0.25) 45%, rgba(20, 18, 16, 0.55) 100%);
+  background: linear-gradient(180deg, rgba(11, 19, 43, 0.65) 0%, rgba(11, 19, 43, 0.45) 45%, rgba(11, 19, 43, 0.8) 100%);
 }
 
 @media (max-width: 768px) {
@@ -698,10 +738,10 @@ select {
     min-height: 480px;
   }
   .ref-hero-overlay {
-    background: rgba(250, 247, 242, 0.45);
+    background: rgba(248, 250, 252, 0.6);
   }
   [data-theme="dark"] .ref-hero-overlay {
-    background: rgba(20, 18, 16, 0.55);
+    background: rgba(11, 19, 43, 0.7);
   }
 }
 
@@ -734,11 +774,11 @@ select {
   letter-spacing: -0.01em;
   overflow-wrap: break-word;
   text-align: center;
-  text-shadow: 0 1px 16px rgba(255, 255, 255, 0.8), 0 2px 6px rgba(0, 0, 0, 0.08);
+  text-shadow: 0 1px 16px rgba(255, 255, 255, 0.85), 0 2px 6px rgba(11, 19, 43, 0.08);
 }
 
 [data-theme="dark"] .ref-hero-title {
-  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.9), 0 1px 4px rgba(0, 0, 0, 0.9);
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.95), 0 1px 4px rgba(0, 0, 0, 0.9);
 }
 
 .ref-hero-desc {
@@ -752,7 +792,7 @@ select {
   margin-left: auto;
   margin-right: auto;
   font-weight: 500;
-  text-shadow: 0 1px 12px rgba(255, 255, 255, 0.9);
+  text-shadow: 0 1px 12px rgba(255, 255, 255, 0.95);
 }
 
 [data-theme="dark"] .ref-hero-desc {
@@ -763,34 +803,46 @@ select {
 
 /* Reference Buttons */
 .btn-dark-green {
-  background-color: #273C2C;
-  color: #FFFFFF !important;
+  background-color: #1C2541;
+  color: #F8FAFC !important;
   border-radius: var(--radius-full);
   padding: 0.75rem 1.6rem;
   font-size: 0.9rem;
   font-weight: 500;
-  box-shadow: 0 4px 14px rgba(39, 60, 44, 0.25);
+  box-shadow: 0 4px 14px rgba(11, 19, 43, 0.22);
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
   transition: all 0.25s ease;
-  border: 1px solid #273C2C;
+  border: 1px solid #3A506B;
   min-height: 42px;
   touch-action: manipulation;
   text-decoration: none;
 }
 
 .btn-dark-green:hover {
-  background-color: #1c2b20;
+  background-color: #0B132B;
+  border-color: #A9BCD0;
   transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(39, 60, 44, 0.35);
+  box-shadow: 0 6px 18px rgba(11, 19, 43, 0.35);
+}
+
+[data-theme="dark"] .btn-dark-green {
+  background-color: #3A506B;
+  border-color: #A9BCD0;
+  color: #F8FAFC !important;
+}
+
+[data-theme="dark"] .btn-dark-green:hover {
+  background-color: #1C2541;
+  border-color: #F8FAFC;
 }
 
 .btn-warm-pill {
-  background-color: #F8F3EC;
-  color: var(--text-primary) !important;
-  border: 1px solid #D6C8B5;
+  background-color: #FFFFFF;
+  color: #0B132B !important;
+  border: 1px solid #A9BCD0;
   border-radius: var(--radius-full);
   padding: 0.75rem 1.6rem;
   font-size: 0.9rem;
@@ -805,15 +857,20 @@ select {
 }
 
 [data-theme="dark"] .btn-warm-pill {
-  background-color: #24201B;
-  border-color: #4A4035;
-  color: #EDE3D8 !important;
+  background-color: #1C2541;
+  border-color: #3A506B;
+  color: #F8FAFC !important;
 }
 
 .btn-warm-pill:hover {
-  background-color: #EFE6D9;
-  border-color: #BFAEA0;
+  background-color: #EEF2F6;
+  border-color: #3A506B;
   transform: translateY(-2px);
+}
+
+[data-theme="dark"] .btn-warm-pill:hover {
+  background-color: #253354;
+  border-color: #A9BCD0;
 }
 
 @media (max-width: 480px) {
@@ -870,15 +927,16 @@ select {
 }
 
 .why-space-quote-card {
-  background: linear-gradient(135deg, rgba(92, 122, 96, 0.08) 0%, rgba(212, 160, 89, 0.06) 100%);
-  border-left: 3px solid var(--accent-primary);
+  background: linear-gradient(135deg, rgba(58, 80, 107, 0.07) 0%, rgba(169, 188, 208, 0.12) 100%);
+  border-left: 3px solid #3A506B;
   border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
   padding: 0.95rem 1.15rem;
   margin-bottom: 1.25rem;
 }
 
 [data-theme="dark"] .why-space-quote-card {
-  background: linear-gradient(135deg, rgba(92, 122, 96, 0.15) 0%, rgba(212, 160, 89, 0.1) 100%);
+  background: linear-gradient(135deg, rgba(58, 80, 107, 0.2) 0%, rgba(28, 37, 65, 0.35) 100%);
+  border-left-color: #A9BCD0;
 }
 
 .why-space-quote-lead {
@@ -1070,76 +1128,76 @@ select {
   transform: translateX(3px);
 }
 
-/* 5 Curated Category Pillar Palettes */
+/* 5 Curated Category Pillar Palettes (Premium ORAANIS Harmonized) */
 
-/* 1. Reflections (Teal) */
+/* 1. Reflections (Conscious Teal) */
 .pillar-reflections {
-  background-color: #EEF7F6;
-  border-color: #D2ECE8;
-  color: #113E39;
+  background-color: #F0F4F8;
+  border-color: #D4E0EB;
+  color: #0B132B;
 }
 .pillar-reflections .theme-pillar-icon-box {
-  background-color: rgba(13, 148, 136, 0.13);
-  color: #0D9488;
+  background-color: rgba(58, 80, 107, 0.12);
+  color: #3A506B;
 }
 .pillar-reflections:hover {
-  border-color: #A3DCD3;
+  border-color: #A9BCD0;
 }
 
-/* 2. Emotional Intelligence (Green) */
+/* 2. Emotional Intelligence (Reflection Blue) */
 .pillar-emotional-intelligence {
-  background-color: #EFF8F2;
-  border-color: #D4EEDC;
-  color: #143D1F;
+  background-color: #EDF2F7;
+  border-color: #CAD8E6;
+  color: #0B132B;
 }
 .pillar-emotional-intelligence .theme-pillar-icon-box {
-  background-color: rgba(22, 163, 74, 0.13);
-  color: #16A34A;
+  background-color: rgba(28, 37, 65, 0.12);
+  color: #1C2541;
 }
 .pillar-emotional-intelligence:hover {
-  border-color: #A6DEC3;
+  border-color: #A9BCD0;
 }
 
-/* 3. Healing (Amber/Orange) */
+/* 3. Healing (Serene Slate Teal) */
 .pillar-healing {
-  background-color: #FDF5EC;
-  border-color: #F6E3CC;
-  color: #4A2609;
+  background-color: #EEF6F8;
+  border-color: #CDE3E7;
+  color: #0B132B;
 }
 .pillar-healing .theme-pillar-icon-box {
-  background-color: rgba(217, 119, 6, 0.13);
-  color: #D97706;
+  background-color: rgba(44, 122, 134, 0.12);
+  color: #2C7A86;
 }
 .pillar-healing:hover {
-  border-color: #ECC8A0;
+  border-color: #A9BCD0;
 }
 
-/* 4. Wisdom (Gold/Yellow) */
+/* 4. Wisdom (Deep Midnight / Slate) */
 .pillar-wisdom {
-  background-color: #FEFBEA;
-  border-color: #F6EEC0;
-  color: #3D3008;
+  background-color: #EFF3F8;
+  border-color: #D0DCE7;
+  color: #0B132B;
 }
 .pillar-wisdom .theme-pillar-icon-box {
-  background-color: rgba(184, 135, 10, 0.13);
-  color: #B8870A;
+  background-color: rgba(58, 80, 107, 0.14);
+  color: #3A506B;
 }
 .pillar-wisdom:hover {
-  border-color: #EBD886;
+  border-color: #A9BCD0;
 }
 
-/* 5. Spirituality (Sky Blue) */
+/* 5. Spirituality (Inner Light Blue) */
 .pillar-spirituality {
-  background-color: #F0F8FE;
-  border-color: #D4ECFD;
-  color: #0F354D;
+  background-color: #F1F5FA;
+  border-color: #D5E1ED;
+  color: #0B132B;
 }
 .pillar-spirituality .theme-pillar-icon-box {
-  background-color: rgba(2, 132, 199, 0.13);
-  color: #0284C7;
+  background-color: rgba(69, 123, 157, 0.12);
+  color: #457B9D;
 }
 .pillar-spirituality:hover {
-  border-color: #A3D6FA;
+  border-color: #A9BCD0;
 }
 
 /* Wide Pillar Card for 5th Item Span */
@@ -1199,68 +1257,68 @@ select {
 
 /* Dark Mode Overrides for the 5 Pillars */
 [data-theme="dark"] .pillar-reflections {
-  background-color: #122422;
-  border-color: #21433E;
-  color: #E6F8F5;
+  background-color: #151E33;
+  border-color: #273756;
+  color: #F8FAFC;
 }
 [data-theme="dark"] .pillar-reflections .theme-pillar-icon-box {
-  background-color: rgba(78, 208, 196, 0.18);
-  color: #4ED0C4;
+  background-color: rgba(169, 188, 208, 0.18);
+  color: #A9BCD0;
 }
 [data-theme="dark"] .pillar-reflections:hover {
-  border-color: #356E66;
+  border-color: #3A506B;
 }
 
 [data-theme="dark"] .pillar-emotional-intelligence {
-  background-color: #122518;
-  border-color: #20452C;
-  color: #E6F8ED;
+  background-color: #18243C;
+  border-color: #2D4063;
+  color: #F8FAFC;
 }
 [data-theme="dark"] .pillar-emotional-intelligence .theme-pillar-icon-box {
-  background-color: rgba(89, 217, 135, 0.18);
-  color: #59D987;
+  background-color: rgba(169, 188, 208, 0.18);
+  color: #A9BCD0;
 }
 [data-theme="dark"] .pillar-emotional-intelligence:hover {
-  border-color: #347047;
+  border-color: #3A506B;
 }
 
 [data-theme="dark"] .pillar-healing {
-  background-color: #26180E;
-  border-color: #452D1B;
-  color: #FDF2E8;
+  background-color: #13252E;
+  border-color: #234653;
+  color: #F8FAFC;
 }
 [data-theme="dark"] .pillar-healing .theme-pillar-icon-box {
-  background-color: rgba(247, 168, 67, 0.18);
-  color: #F7A843;
+  background-color: rgba(120, 201, 214, 0.18);
+  color: #78C9D6;
 }
 [data-theme="dark"] .pillar-healing:hover {
-  border-color: #6E492E;
+  border-color: #3A506B;
 }
 
 [data-theme="dark"] .pillar-wisdom {
-  background-color: #241E0E;
-  border-color: #443A1C;
-  color: #FDF9E7;
+  background-color: #162238;
+  border-color: #293E60;
+  color: #F8FAFC;
 }
 [data-theme="dark"] .pillar-wisdom .theme-pillar-icon-box {
-  background-color: rgba(234, 193, 72, 0.18);
-  color: #EAC148;
+  background-color: rgba(169, 188, 208, 0.18);
+  color: #A9BCD0;
 }
 [data-theme="dark"] .pillar-wisdom:hover {
-  border-color: #6E5F30;
+  border-color: #3A506B;
 }
 
 [data-theme="dark"] .pillar-spirituality {
-  background-color: #11212B;
-  border-color: #1F3C50;
-  color: #E6F3FA;
+  background-color: #17263E;
+  border-color: #2B4468;
+  color: #F8FAFC;
 }
 [data-theme="dark"] .pillar-spirituality .theme-pillar-icon-box {
-  background-color: rgba(83, 183, 240, 0.18);
-  color: #53B7F0;
+  background-color: rgba(169, 188, 208, 0.2);
+  color: #A9BCD0;
 }
 [data-theme="dark"] .pillar-spirituality:hover {
-  border-color: #325F7E;
+  border-color: #3A506B;
 }
 
 /* Legacy theme-card fallback */
@@ -1328,19 +1386,19 @@ select {
   pointer-events: none;
 }
 
-/* Thought to Carry Watercolor Banner */
+/* Thought to Carry Banner */
 .thought-quote-banner {
-  background: linear-gradient(90deg, #E6EFE6 0%, #EFF4ED 50%, #E6EFE6 100%);
+  background: linear-gradient(90deg, #EDF2F7 0%, #F8FAFC 50%, #EDF2F7 100%);
   border-radius: 14px;
   padding: 2.5rem 3rem;
   position: relative;
   overflow: hidden;
-  border: 1px solid #D8E5D8;
+  border: 1px solid #D4E0EB;
 }
 
 [data-theme="dark"] .thought-quote-banner {
-  background: linear-gradient(90deg, #18261C 0%, #1D2E22 50%, #18261C 100%);
-  border-color: #29402F;
+  background: linear-gradient(90deg, #121C33 0%, #1C2541 50%, #121C33 100%);
+  border-color: #2B3B5C;
 }
 
 @media (max-width: 768px) {
@@ -1404,7 +1462,7 @@ select {
 .misty-mountains-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(14, 25, 20, 0.76) 0%, rgba(14, 25, 20, 0.88) 100%);
+  background: linear-gradient(180deg, rgba(11, 19, 43, 0.8) 0%, rgba(11, 19, 43, 0.94) 100%);
   z-index: 1;
 }
 
@@ -1414,12 +1472,13 @@ select {
 }
 
 .newsletter-float-card {
-  background: #FAF7F2;
-  color: #2C2621;
+  background: #FFFFFF;
+  color: #0B132B;
   border-radius: 16px;
   padding: 2.2rem 1.8rem;
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 16px 40px rgba(11, 19, 43, 0.12);
   text-align: center;
+  border: 1px solid #E2E8F0;
 }
 
 @media (max-width: 540px) {
@@ -1429,8 +1488,10 @@ select {
 }
 
 [data-theme="dark"] .newsletter-float-card {
-  background: #201C18;
-  color: #FAF4EB;
+  background: #1C2541;
+  color: #F8FAFC;
+  border-color: #3A506B;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
 }
 
 /* Navbar dropdown & active */

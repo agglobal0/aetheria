@@ -18,7 +18,7 @@ export function BrandLogo({ height = 40, variant = "auto", className = "" }) {
   );
 }
 
-export function OraanisEmblem({ size = 38, color = "#C2A366", style = {} }) {
+export function OraanisEmblem({ size = 38, color = "#3A506B", style = {} }) {
   return (
     <svg 
       width={size} 
@@ -54,11 +54,11 @@ export function OraanisEmblem({ size = 38, color = "#C2A366", style = {} }) {
   );
 }
 
-export function LotusLogo({ size = 38, color = "#C2A366", style = {} }) {
+export function LotusLogo({ size = 38, color = "#3A506B", style = {} }) {
   return <OraanisEmblem size={size} color={color} style={style} />;
 }
 
-export function LeafIcon({ size = 18, color = "#5A7A5E", style = {} }) {
+export function LeafIcon({ size = 18, color = "#3A506B", style = {} }) {
   return (
     <svg
       width={size}
@@ -77,7 +77,7 @@ export function LeafIcon({ size = 18, color = "#5A7A5E", style = {} }) {
   );
 }
 
-export function LeafBullet({ size = 15, color = "#6C8A6F" }) {
+export function LeafBullet({ size = 15, color = "#3A506B" }) {
   return (
     <svg width={size} height={size} viewBox="0 0 20 20" fill={color} style={{ flexShrink: 0, marginTop: '3px' }}>
       <path d="M17.4 3.6c-4.8-.8-10.2 2-12.7 6.4C3.2 12.6 3.6 15 4.5 16.5c.3.5.9.6 1.4.3.4-.3.5-.9.3-1.4-.6-1.1-.9-3 0-5.1 2-4.1 6.8-6.4 10.6-5.8.6.1 1.1-.3 1.2-.9.1-.6-.3-1.1-.9-1.2l.3 1.2z" />
