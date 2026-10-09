@@ -97,6 +97,9 @@ export default function Home() {
           muted
           playsInline
           preload="auto"
+          aria-hidden="true"
+          tabIndex="-1"
+          disablePictureInPicture
         >
           <source src="/hero-video.mp4" type="video/mp4" />
         </video>
