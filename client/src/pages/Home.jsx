@@ -682,7 +682,7 @@ export default function Home() {
                     marginBottom: '0.5rem',
                     letterSpacing: '0.02em'
                   }}>
-                    Observer • Thinker • Educator • Voice of Experience
+                    A Different Angle or a Revolving Mirror
                   </div>
                   <p style={{
                     fontSize: '0.83rem',
@@ -690,7 +690,7 @@ export default function Home() {
                     color: 'var(--text-secondary)',
                     marginBottom: '0.5rem'
                   }}>
-                    An educator and mentor who writes from the vantage point of quiet observation, character, and life discipline.
+                    An educator, mentor, and academic leader who decodes the subtle layers between perception, human nature, and reality.
                   </p>
                   <p style={{
                     fontSize: '0.82rem',
@@ -699,7 +699,7 @@ export default function Home() {
                     marginBottom: '1rem',
                     fontStyle: 'italic'
                   }}>
-                    "A chosen writing identity distanced from titles, giving thought its own space to breathe."
+                    "Not an attempt to explain life, but an invitation to look at it more closely."
                   </p>
                   <Link
                     to="/rajsaar"

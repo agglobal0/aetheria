@@ -223,7 +223,7 @@ export default function SingleEssay() {
             const authorName = isRajsaar ? 'RAJSAAR' : (essay.author_name || 'Monika Chopra');
             const authorLink = isRajsaar ? '/rajsaar' : '/person-behind-this';
             const authorBio = isRajsaar 
-              ? "Observer • Thinker • Educator • Voice of Experience — reflections born from quiet observation, character, mentorship, and life lessons."
+              ? "Educator, mentor, academic leader, and keen observer of human nature — offering an invitation to look at life, choices, and institutions more closely."
               : (essay.author_bio || 'Writer and Educator exploring human behaviour, emotional intelligence, wisdom, and life reflections.');
 
             return (
