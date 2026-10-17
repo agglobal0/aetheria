@@ -118,7 +118,8 @@ export default function Rajsaar() {
           <div style={{
             fontSize: 'clamp(1rem, 2vw, 1.085rem)',
             lineHeight: '1.9',
-            color: 'var(--text-primary)'
+            color: 'var(--text-primary)',
+            textAlign: 'justify'
           }}>
 
             <p style={{ marginBottom: '1.5rem' }}>

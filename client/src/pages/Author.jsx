@@ -120,7 +120,8 @@ export default function Author() {
             lineHeight: '1.9',
             color: 'var(--text-primary)',
             borderTop: '1px solid var(--border-color)',
-            paddingTop: '2.5rem'
+            paddingTop: '2.5rem',
+            textAlign: 'justify'
           }}>
 
             <p style={{ marginBottom: '1.25rem' }}>

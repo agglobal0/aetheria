@@ -76,7 +76,8 @@ export default function About() {
           <div style={{
             fontSize: 'clamp(1rem, 2vw, 1.075rem)',
             lineHeight: '1.85',
-            color: 'var(--text-primary)'
+            color: 'var(--text-primary)',
+            textAlign: 'justify'
           }}>
 
             <p style={{ marginBottom: '1.35rem' }}>

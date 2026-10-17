@@ -147,6 +147,35 @@ body {
   overflow-x: hidden;
 }
 
+p,
+.editorial-body,
+.editorial-body p,
+.editorial-prose,
+.editorial-prose p,
+article p,
+.reading-container p,
+.why-space-full-card p,
+.author-showcase-card p,
+.theme-pillar-desc {
+  text-align: justify;
+  text-justify: inter-word;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+}
+
+/* Retain center alignment for explicitly centered headers, banners, hero text and empty states */
+[style*="text-align: center"] p,
+[style*="text-align:center"] p,
+.text-center,
+.text-center p,
+header[style*="text-align: center"] p,
+header[style*="text-align:center"] p,
+.ref-hero-title,
+.ref-hero p,
+.quote-banner p {
+  text-align: center;
+}
+
 a {
   color: inherit;
   text-decoration: none;
@@ -220,11 +249,15 @@ img {
   color: var(--text-primary);
   overflow-wrap: break-word;
   word-break: break-word;
+  text-align: justify;
+  text-justify: inter-word;
 }
 
 .editorial-body p {
   margin-bottom: 1.6rem;
   line-height: 1.85;
+  text-align: justify;
+  text-justify: inter-word;
 }
 
 .editorial-body h2 {
@@ -273,6 +306,8 @@ img {
   color: var(--text-primary);
   background-color: var(--accent-light);
   border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  text-align: justify;
+  text-justify: inter-word;
 }
 
 .editorial-signoff {

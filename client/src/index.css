@@ -90,6 +90,8 @@ h2 {
 }
 p {
   margin: 0;
+  text-align: justify;
+  text-justify: inter-word;
 }
 
 code,
