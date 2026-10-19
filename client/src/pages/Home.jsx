@@ -17,7 +17,8 @@ import {
   Mail,
   CheckCircle2,
   AlertCircle,
-  Loader2
+  Loader2,
+  Sparkles
 } from 'lucide-react';
 import { LeafIcon, LeafBullet } from '../components/BrandIcons';
 import SEO from '../components/SEO';
