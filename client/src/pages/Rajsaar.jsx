@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, Compass, Eye, BookOpen, Feather } from 'lucide-react';
 import { rajsaarWritingImg } from '../assets/images';
 import Breadcrumbs from '../components/Breadcrumbs';
+import SEO from '../components/SEO';
 
 export default function Rajsaar() {
   useEffect(() => {
@@ -17,6 +18,12 @@ export default function Rajsaar() {
       fontFamily: 'var(--font-sans)',
       color: 'var(--text-primary)'
     }}>
+      <SEO
+        title="RAJSAAR — A Different Angle or a Revolving Mirror | ORAANIS"
+        description="Perspectives by RAJSAAR: an educator, mentor, and academic leader deciphering the subtle layers between perception, human nature, and reality."
+        canonical="/rajsaar"
+        author="RAJSAAR"
+      />
       <div className="container" style={{ maxWidth: '820px', margin: '0 auto', padding: '0 clamp(1.25rem, 4vw, 2rem)' }}>
         
         {/* Breadcrumb Navigation */}

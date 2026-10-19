@@ -10,6 +10,7 @@ import CommentSection from '../components/CommentSection';
 import NewsletterForm from '../components/NewsletterForm';
 import EssayCard from '../components/EssayCard';
 import LoadingSkeleton from '../components/LoadingSkeleton';
+import SEO from '../components/SEO';
 
 export default function SingleEssay() {
   const { slug } = useParams();
@@ -68,8 +69,24 @@ export default function SingleEssay() {
     }
   };
 
+  const isRajsaar = essay.author_slug === 'rajsaar' || 
+    (essay.author_name && essay.author_name.toLowerCase().includes('rajsaar')) || 
+    essay.author_id === 2;
+  const authorName = isRajsaar ? 'RAJSAAR' : (essay.author_name || 'Monika Chopra');
+  const seoDesc = essay.seo_description || essay.excerpt || (essay.content ? essay.content.replace(/<[^>]+>/g, '').replace(/[#*`_]/g, '').trim().slice(0, 160) : '');
+
   return (
     <div>
+      <SEO
+        title={essay.title}
+        description={seoDesc}
+        canonical={`/essay/${essay.slug}`}
+        type="article"
+        author={authorName}
+        image={essay.featured_image}
+        publishedTime={essay.published_at}
+        modifiedTime={essay.updated_at || essay.published_at}
+      />
       <ReadingProgress />
 
       <article style={{ padding: 'clamp(1.5rem, 4vw, 2.5rem) 0 clamp(3rem, 6vw, 5rem) 0' }}>

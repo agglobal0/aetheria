@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Compass, Feather, BookOpen } from 'lucide-react';
 import Breadcrumbs from '../components/Breadcrumbs';
+import SEO from '../components/SEO';
 import { profPortraitImg } from '../assets/images';
 
 export default function Author() {
@@ -11,6 +12,12 @@ export default function Author() {
 
   return (
     <div style={{ backgroundColor: 'var(--bg-primary)', minHeight: '100vh', padding: 'clamp(1.5rem, 3vw, 2.5rem) 0 clamp(4rem, 8vw, 7rem) 0' }}>
+      <SEO
+        title="Monika Chopra — Educator, Observer & Founder of ORAANIS"
+        description="Meet Monika Chopra: an educator, mentor, and writer who created ORAANIS to give everyday observations, emotional wisdom, and unspoken reflections a thoughtful space."
+        canonical="/person-behind-this"
+        author="Monika Chopra"
+      />
       <div className="container" style={{ maxWidth: '820px', margin: '0 auto', padding: '0 clamp(1.25rem, 4vw, 2rem)' }}>
         
         {/* Breadcrumb Navigation */}

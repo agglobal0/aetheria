@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Send, CheckCircle, AlertCircle } from 'lucide-react';
 import { contactService } from '../services/api';
 import Breadcrumbs from '../components/Breadcrumbs';
+import SEO from '../components/SEO';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -43,6 +44,11 @@ export default function Contact() {
 
   return (
     <div className="container" style={{ padding: 'clamp(2rem, 4vw, 3rem) clamp(0.875rem, 3vw, 1.5rem) clamp(3rem, 6vw, 6rem) clamp(0.875rem, 3vw, 1.5rem)' }}>
+      <SEO
+        title="Contact ORAANIS — Get in Touch with Monika Chopra & RAJSAAR"
+        description="Reach out to the ORAANIS editorial team for reflections, inquiries, feedback, and thoughtful correspondence."
+        canonical="/contact"
+      />
       <Breadcrumbs items={[{ label: 'Editorial Contact' }]} />
 
       <div style={{ maxWidth: '680px', margin: '0 auto' }}>

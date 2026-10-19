@@ -22,6 +22,7 @@ import {
   Quote
 } from 'lucide-react';
 import Breadcrumbs from '../components/Breadcrumbs';
+import SEO from '../components/SEO';
 import { perspectiveService } from '../services/api';
 
 const TOPIC_CATEGORIES = [
@@ -300,6 +301,11 @@ export default function Share() {
 
   return (
     <div className="share-page-wrapper" style={{ minHeight: '100vh', backgroundColor: 'var(--bg-primary)' }}>
+      <SEO
+        title="Share Your Perspective — Real Lived Wisdom | ORAANIS"
+        description="A quiet, safe platform to read and contribute reflections, confessions, and life lessons anonymously or with your name."
+        canonical="/share"
+      />
       
       {/* 1. Hero Header */}
       <section style={{

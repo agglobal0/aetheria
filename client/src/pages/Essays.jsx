@@ -6,6 +6,7 @@ import EssayCard from '../components/EssayCard';
 import Pagination from '../components/Pagination';
 import LoadingSkeleton from '../components/LoadingSkeleton';
 import EmptyState from '../components/EmptyState';
+import SEO from '../components/SEO';
 
 export default function Essays() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -105,6 +106,11 @@ export default function Essays() {
 
   return (
     <div className="container" style={{ padding: 'clamp(2rem, 4vw, 3rem) clamp(0.875rem, 3vw, 1.5rem) 5rem clamp(0.875rem, 3vw, 1.5rem)' }}>
+      <SEO
+        title="Academic & Philosophical Essays — ORAANIS | Thoughtful Discourses"
+        description="Long-form, structured scholarly discourses exploring moral philosophy, human nature, ethical frameworks, and societal transformations by Monika Chopra and RAJSAAR."
+        canonical="/essays"
+      />
 
       {/* Header */}
       <div style={{ marginBottom: 'clamp(2rem, 4vw, 3rem)', textAlign: 'center' }}>

@@ -6,6 +6,7 @@ import EssayCard from '../components/EssayCard';
 import Pagination from '../components/Pagination';
 import LoadingSkeleton from '../components/LoadingSkeleton';
 import EmptyState from '../components/EmptyState';
+import SEO from '../components/SEO';
 
 export default function Blogs() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -106,6 +107,11 @@ export default function Blogs() {
 
   return (
     <div className="container" style={{ padding: 'clamp(2rem, 4vw, 3rem) clamp(0.875rem, 3vw, 1.5rem) 5rem clamp(0.875rem, 3vw, 1.5rem)' }}>
+      <SEO
+        title="Reflective Blogs & Everyday Lessons — ORAANIS | Monika Chopra"
+        description="Conversational reflections, daily observations, and practical wisdom by Monika Chopra on human relationships, empathy, and navigating life’s subtle moments."
+        canonical="/blogs"
+      />
 
       {/* Header Banner */}
       <div style={{ marginBottom: 'clamp(2rem, 4vw, 3rem)', textAlign: 'center' }}>

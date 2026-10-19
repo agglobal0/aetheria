@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, User } from 'lucide-react';
 import { LeafIcon } from '../components/BrandIcons';
 import Breadcrumbs from '../components/Breadcrumbs';
+import SEO from '../components/SEO';
 
 export default function About() {
   useEffect(() => {
@@ -17,6 +18,11 @@ export default function About() {
       fontFamily: 'var(--font-sans)',
       color: 'var(--text-primary)'
     }}>
+      <SEO
+        title="About ORAANIS — Bringing Inner Stories Into the Light"
+        description="Discover the philosophy behind ORAANIS: a quiet space to pause, read, reflect, and understand what life and human experience quietly teach us."
+        canonical="/about"
+      />
       <div className="container" style={{ maxWidth: '820px', margin: '0 auto', padding: '0 clamp(1.25rem, 4vw, 2rem)' }}>
         
         {/* Breadcrumb Navigation */}

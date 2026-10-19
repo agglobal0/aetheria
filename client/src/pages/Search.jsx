@@ -6,6 +6,7 @@ import EssayCard from '../components/EssayCard';
 import Breadcrumbs from '../components/Breadcrumbs';
 import LoadingSkeleton from '../components/LoadingSkeleton';
 import EmptyState from '../components/EmptyState';
+import SEO from '../components/SEO';
 
 export default function Search() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -48,6 +49,11 @@ export default function Search() {
 
   return (
     <div className="container" style={{ padding: 'clamp(2rem, 4vw, 3rem) clamp(0.875rem, 3vw, 1.5rem) 5rem clamp(0.875rem, 3vw, 1.5rem)' }}>
+      <SEO
+        title={query ? `Search: "${query}" — ORAANIS` : 'Search Essays & Reflections — ORAANIS'}
+        description="Search through ORAANIS essays, reflective blogs, and wisdom archives by Monika Chopra and RAJSAAR."
+        canonical="/search"
+      />
       <Breadcrumbs items={[{ label: 'Search Results' }]} />
 
       <div style={{ maxWidth: '680px', margin: '0 auto clamp(2rem, 4vw, 3.5rem) auto', textAlign: 'center' }}>

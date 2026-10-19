@@ -20,6 +20,7 @@ import {
   Loader2
 } from 'lucide-react';
 import { LeafIcon, LeafBullet } from '../components/BrandIcons';
+import SEO from '../components/SEO';
 import { newsletterService } from '../services/api';
 import {
   heroDeskImg,
@@ -83,6 +84,11 @@ export default function Home() {
 
   return (
     <div style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)', overflowX: 'hidden' }}>
+      <SEO
+        title="ORAANIS — Where Experience Becomes Wisdom | Monika Chopra"
+        description="A quiet, contemplative editorial space by Monika Chopra and RAJSAAR exploring human behaviour, emotional intelligence, life reflections, ethics, and wisdom."
+        canonical="/"
+      />
 
       {/* =========================================================================
           1. HERO SECTION (Direct Background Video & Contemplative Quote)

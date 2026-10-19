@@ -7,6 +7,7 @@ import FeaturedEssay from '../components/FeaturedEssay';
 import Breadcrumbs from '../components/Breadcrumbs';
 import LoadingSkeleton from '../components/LoadingSkeleton';
 import Pagination from '../components/Pagination';
+import SEO from '../components/SEO';
 
 export default function Category() {
   const { slug } = useParams();
@@ -132,6 +133,11 @@ export default function Category() {
 
   return (
     <div className="container" style={{ padding: 'clamp(2rem, 4vw, 2.5rem) clamp(0.875rem, 3vw, 1.5rem) 5rem clamp(0.875rem, 3vw, 1.5rem)' }}>
+      <SEO
+        title={`${category.name} — Essays & Reflections`}
+        description={category.description || `Explore thoughtful essays and reflective musings on ${category.name} on ORAANIS.`}
+        canonical={`/category/${slug}`}
+      />
       <Breadcrumbs items={[{ label: 'Categories', link: '/essays' }, { label: category.name }]} />
 
       {/* Category Landing Banner */}
