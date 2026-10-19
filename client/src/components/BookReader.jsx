@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
-import * as pdfjsLib from 'pdfjs-dist';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   ChevronLeft,
   ChevronRight,
@@ -10,22 +9,17 @@ import {
   ZoomOut,
   BookOpen,
   List,
+  LayoutGrid,
   Volume2,
   VolumeX,
-  Sparkles,
   ShieldCheck,
   Columns2,
   Square
 } from 'lucide-react';
 
-// Initialize PDF.js worker
-if (typeof window !== 'undefined') {
-  pdfjsLib.GlobalWorkerOptions.workerSrc = '/pdf.worker.min.mjs';
-}
-
 // Table of Contents for REFLECTIONS — Part 1
 const BOOK_TOC = [
-  { title: 'Front Cover', page: 1, chapter: 'Intro' },
+  { title: 'Front Cover', page: 1, chapter: 'Cover' },
   { title: 'A Note to the Reader', page: 2, chapter: 'Intro' },
   { title: 'Ex Libris (This Book Belongs To)', page: 3, chapter: 'Intro' },
   { title: 'Title Page', page: 5, chapter: 'Intro' },
@@ -100,68 +94,63 @@ const BOOK_TOC = [
   { title: 'Back Cover', page: 82, chapter: 'Closing' }
 ];
 
-// Synthesize a gentle, tactile paper rustle sound using Web Audio API (Zero assets required)
+const TOTAL_PAGES = 82;
+
+// Real-time paper turn sound generator
 const playPageFlipSound = () => {
   try {
     const AudioContext = window.AudioContext || window.webkitAudioContext;
     if (!AudioContext) return;
     const ctx = new AudioContext();
-    const bufferSize = ctx.sampleRate * 0.12;
+    const bufferSize = ctx.sampleRate * 0.14;
     const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
     const data = buffer.getChannelData(0);
     for (let i = 0; i < bufferSize; i++) {
-      data[i] = (Math.random() * 2 - 1) * Math.exp(-i / (bufferSize * 0.3));
+      data[i] = (Math.random() * 2 - 1) * Math.exp(-i / (bufferSize * 0.35));
     }
     const noise = ctx.createBufferSource();
     noise.buffer = buffer;
     const filter = ctx.createBiquadFilter();
     filter.type = 'bandpass';
-    filter.frequency.setValueAtTime(800, ctx.currentTime);
-    filter.frequency.exponentialRampToValueAtTime(300, ctx.currentTime + 0.12);
-    filter.Q.value = 1.2;
+    filter.frequency.setValueAtTime(850, ctx.currentTime);
+    filter.frequency.exponentialRampToValueAtTime(320, ctx.currentTime + 0.14);
+    filter.Q.value = 1.3;
 
     const gain = ctx.createGain();
-    gain.gain.setValueAtTime(0.08, ctx.currentTime);
-    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.12);
+    gain.gain.setValueAtTime(0.09, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.14);
 
     noise.connect(filter);
     filter.connect(gain);
     gain.connect(ctx.destination);
     noise.start();
   } catch {
-    // Graceful fallback if audio is blocked
+    // Ignore audio errors
   }
 };
 
 export default function BookReader({
-  bookUrl = '/books/reflections-part-1.pdf',
   bookTitle = 'REFLECTIONS — Part 1',
   bookAuthor = 'Monika Chopra',
   initialPage = 1,
   onClose
 }) {
-  const [pdfDoc, setPdfDoc] = useState(null);
-  const [totalPages, setTotalPages] = useState(82);
   const [currentPage, setCurrentPage] = useState(initialPage);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
   const [zoom, setZoom] = useState(1);
-  const [isSpread, setIsSpread] = useState(true); // 2-page spread on desktop
-  const [isTurning, setIsTurning] = useState(false);
-  const [turnDirection, setTurnDirection] = useState('next'); // 'next' or 'prev'
+  const [isSpread, setIsSpread] = useState(true);
+  const [isFlipping, setIsFlipping] = useState(false);
+  const [flipDirection, setFlipDirection] = useState('next');
   const [showToc, setShowToc] = useState(false);
+  const [showThumbnails, setShowThumbnails] = useState(false);
   const [soundEnabled, setSoundEnabled] = useState(true);
   const [isFullscreen, setIsFullscreen] = useState(false);
 
   const containerRef = useRef(null);
-  const canvasLeftRef = useRef(null);
-  const canvasRightRef = useRef(null);
-  const canvasSingleRef = useRef(null);
 
-  // Auto-detect screen size: on mobile/small tablet default to single-page
+  // Auto-detect mobile screen: default to single page mode
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth < 860) {
+      if (window.innerWidth < 880) {
         setIsSpread(false);
       }
     };
@@ -170,31 +159,20 @@ export default function BookReader({
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // Strict Content Protection: block context menu, drag, and print shortcuts
+  // Keyboard navigation & anti-copy shortcuts
   useEffect(() => {
-    const handleContextMenu = (e) => {
-      e.preventDefault();
-      return false;
-    };
-
     const handleKeyDown = (e) => {
-      // Escape to close
       if (e.key === 'Escape') {
-        if (showToc) {
-          setShowToc(false);
-        } else if (onClose) {
-          onClose();
-        }
-      }
-      // Arrow navigation
-      if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') {
+        if (showThumbnails) setShowThumbnails(false);
+        else if (showToc) setShowToc(false);
+        else if (onClose) onClose();
+      } else if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
         e.preventDefault();
         turnNext();
       } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
         e.preventDefault();
         turnPrev();
       }
-      // Prevent Save, Print, and Inspect shortcuts
       if ((e.ctrlKey || e.metaKey) && (e.key === 's' || e.key === 'p' || e.key === 'u')) {
         e.preventDefault();
         return false;
@@ -202,145 +180,35 @@ export default function BookReader({
     };
 
     window.addEventListener('keydown', handleKeyDown);
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-    };
-  }, [currentPage, totalPages, isSpread, showToc, onClose]);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [currentPage, isSpread, showToc, showThumbnails, onClose]);
 
-  // Load PDF Document
-  useEffect(() => {
-    let isCancelled = false;
-    setLoading(true);
-    setError(null);
-
-    const loadingTask = pdfjsLib.getDocument({
-      url: bookUrl,
-      cMapUrl: 'https://cdn.jsdelivr.net/npm/pdfjs-dist@6.4.299/cmaps/',
-      cMapPacked: true
-    });
-
-    loadingTask.promise
-      .then((doc) => {
-        if (!isCancelled) {
-          setPdfDoc(doc);
-          setTotalPages(doc.numPages);
-          setLoading(false);
-        }
-      })
-      .catch((err) => {
-        console.error('Error loading book PDF:', err);
-        if (!isCancelled) {
-          setError('Unable to load book. Please verify your connection and try again.');
-          setLoading(false);
-        }
-      });
-
-    return () => {
-      isCancelled = true;
-    };
-  }, [bookUrl]);
-
-  // Render a specific page onto a canvas
-  const renderPdfPage = useCallback(
-    async (pageNumber, canvasElement) => {
-      if (!pdfDoc || !canvasElement || pageNumber < 1 || pageNumber > totalPages) {
-        if (canvasElement) {
-          const ctx = canvasElement.getContext('2d');
-          if (ctx) ctx.clearRect(0, 0, canvasElement.width, canvasElement.height);
-        }
-        return;
-      }
-
-      try {
-        const page = await pdfDoc.getPage(pageNumber);
-        const pixelRatio = window.devicePixelRatio || 1.5;
-        // Base viewport scaled to standard reader dimensions
-        const baseViewport = page.getViewport({ scale: 1 });
-        
-        // Target height calculation based on window
-        const targetHeight = isSpread 
-          ? Math.min(window.innerHeight * 0.76, 750) 
-          : Math.min(window.innerHeight * 0.8, 850);
-        
-        const scale = (targetHeight / baseViewport.height) * zoom;
-        const viewport = page.getViewport({ scale: scale * pixelRatio });
-
-        canvasElement.width = viewport.width;
-        canvasElement.height = viewport.height;
-        canvasElement.style.width = `${viewport.width / pixelRatio}px`;
-        canvasElement.style.height = `${viewport.height / pixelRatio}px`;
-
-        const ctx = canvasElement.getContext('2d', { alpha: false });
-        ctx.imageSmoothingEnabled = true;
-        ctx.imageSmoothingQuality = 'high';
-
-        const renderContext = {
-          canvasContext: ctx,
-          viewport: viewport
-        };
-
-        await page.render(renderContext).promise;
-      } catch (err) {
-        if (err?.name !== 'RenderingCancelledException') {
-          console.warn(`Render page ${pageNumber} notice:`, err);
-        }
-      }
-    },
-    [pdfDoc, totalPages, zoom, isSpread]
-  );
-
-  // Re-render pages on page change, mode change, or zoom
-  useEffect(() => {
-    if (!pdfDoc || loading) return;
-
-    if (isSpread) {
-      // In 2-page spread:
-      // Page 1 is the front cover (displayed on right side or solo)
-      // Pages 2-3 are left & right, 4-5, etc.
-      let leftP = currentPage;
-      let rightP = currentPage + 1;
-
-      // Special case: if on page 1 (cover), show cover centered or right
-      if (currentPage === 1) {
-        renderPdfPage(0, canvasLeftRef.current);
-        renderPdfPage(1, canvasRightRef.current);
-      } else {
-        // Ensure even on left, odd on right for authentic book spine
-        const normalizedLeft = currentPage % 2 === 0 ? currentPage : currentPage - 1;
-        renderPdfPage(normalizedLeft, canvasLeftRef.current);
-        renderPdfPage(normalizedLeft + 1 <= totalPages ? normalizedLeft + 1 : 0, canvasRightRef.current);
-      }
-    } else {
-      // Single page view
-      renderPdfPage(currentPage, canvasSingleRef.current);
-    }
-  }, [pdfDoc, currentPage, isSpread, zoom, loading, renderPdfPage, totalPages]);
-
-  // Turn page actions with sound and CSS flip animation
+  // Turn Next Page
   const turnNext = () => {
-    if (isTurning) return;
-    const increment = isSpread ? (currentPage === 1 ? 1 : 2) : 1;
-    if (currentPage + increment <= totalPages + (isSpread ? 1 : 0)) {
-      setTurnDirection('next');
-      setIsTurning(true);
+    if (isFlipping) return;
+    const step = isSpread ? (currentPage === 1 ? 1 : 2) : 1;
+    if (currentPage + step <= TOTAL_PAGES + (isSpread ? 1 : 0)) {
+      setFlipDirection('next');
+      setIsFlipping(true);
       if (soundEnabled) playPageFlipSound();
 
       setTimeout(() => {
         setCurrentPage((prev) => {
           const next = prev + (isSpread ? (prev === 1 ? 1 : 2) : 1);
-          return Math.min(next, totalPages);
+          return Math.min(next, TOTAL_PAGES);
         });
-        setIsTurning(false);
-      }, 280);
+        setIsFlipping(false);
+      }, 260);
     }
   };
 
+  // Turn Previous Page
   const turnPrev = () => {
-    if (isTurning) return;
-    const decrement = isSpread ? (currentPage === 2 ? 1 : 2) : 1;
+    if (isFlipping) return;
+    const step = isSpread ? (currentPage === 2 ? 1 : 2) : 1;
     if (currentPage > 1) {
-      setTurnDirection('prev');
-      setIsTurning(true);
+      setFlipDirection('prev');
+      setIsFlipping(true);
       if (soundEnabled) playPageFlipSound();
 
       setTimeout(() => {
@@ -348,19 +216,21 @@ export default function BookReader({
           const next = prev - (isSpread ? (prev <= 2 ? 1 : 2) : 1);
           return Math.max(1, next);
         });
-        setIsTurning(false);
-      }, 280);
+        setIsFlipping(false);
+      }, 260);
     }
   };
 
-  const jumpToPage = (p) => {
-    const target = Math.max(1, Math.min(Number(p), totalPages));
+  // Jump to specific page
+  const jumpToPage = (target) => {
+    const p = Math.max(1, Math.min(Number(target), TOTAL_PAGES));
     if (soundEnabled) playPageFlipSound();
-    setCurrentPage(target);
+    setCurrentPage(p);
     setShowToc(false);
+    setShowThumbnails(false);
   };
 
-  // Fullscreen toggle
+  // Fullscreen
   const toggleFullscreen = () => {
     if (!document.fullscreenElement) {
       containerRef.current?.requestFullscreen().catch(() => {});
@@ -371,11 +241,15 @@ export default function BookReader({
     }
   };
 
-  // Find active chapter title
-  const currentTocEntry = BOOK_TOC.reduce((acc, item) => {
+  // Active chapter
+  const activeToc = BOOK_TOC.reduce((acc, item) => {
     if (currentPage >= item.page) return item;
     return acc;
   }, BOOK_TOC[0]);
+
+  // Helper for 2-page spread page numbers
+  const leftPageNum = currentPage === 1 ? null : (currentPage % 2 === 0 ? currentPage : currentPage - 1);
+  const rightPageNum = currentPage === 1 ? 1 : (leftPageNum ? leftPageNum + 1 : null);
 
   return (
     <div
@@ -384,7 +258,6 @@ export default function BookReader({
       aria-modal="true"
       aria-label="ORAANIS Digital Book Reader"
       onContextMenu={(e) => { e.preventDefault(); return false; }}
-      onDragStart={(e) => { e.preventDefault(); return false; }}
       style={{
         position: 'fixed',
         inset: 0,
@@ -399,40 +272,41 @@ export default function BookReader({
         fontFamily: 'var(--font-primary, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif)'
       }}
     >
-      {/* Print protection style injection */}
+      {/* Protection & Animations */}
       <style>{`
         @media print {
           body * { display: none !important; }
         }
-        .flipbook-spine-shadow {
-          box-shadow: inset 18px 0 35px -10px rgba(11, 19, 43, 0.45);
+        .reader-anim-box {
+          transition: transform 0.26s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.26s ease;
         }
-        .flipbook-left-spine {
-          box-shadow: inset -18px 0 35px -10px rgba(11, 19, 43, 0.45);
+        .anim-flip-next {
+          transform: perspective(2400px) rotateY(-7deg) scale(0.985);
+          opacity: 0.9;
         }
-        .book-canvas-wrap {
-          transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.28s ease;
+        .anim-flip-prev {
+          transform: perspective(2400px) rotateY(7deg) scale(0.985);
+          opacity: 0.9;
         }
-        .turning-next {
-          transform: perspective(2200px) rotateY(-8deg) scale(0.985);
-          opacity: 0.88;
-        }
-        .turning-prev {
-          transform: perspective(2200px) rotateY(8deg) scale(0.985);
-          opacity: 0.88;
-        }
-        .reader-btn:hover {
+        .book-reader-btn:hover {
           background-color: #1C2541 !important;
           color: #F8FAFC !important;
           transform: translateY(-1px);
         }
-        .reader-btn:active {
-          transform: translateY(0);
+        .book-page-img {
+          display: block;
+          max-height: clamp(480px, 78vh, 850px);
+          width: auto;
+          height: auto;
+          object-fit: contain;
+          pointer-events: none;
+          user-select: none;
+          -webkit-user-drag: none;
         }
       `}</style>
 
       {/* =========================================================================
-          TOP CONTROL BAR
+          TOP TOOLBAR
           ========================================================================= */}
       <header
         style={{
@@ -442,13 +316,13 @@ export default function BookReader({
           padding: '0.65rem 1.25rem',
           backgroundColor: '#0B132B',
           borderBottom: '1px solid #1C2541',
-          zIndex: 10,
+          zIndex: 20,
           flexShrink: 0,
           gap: '1rem'
         }}
       >
-        {/* Left: Book Meta & Chapter */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem', minWidth: 0 }}>
+        {/* Left: Book Branding */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', minWidth: 0 }}>
           <div
             style={{
               width: '32px',
@@ -463,47 +337,45 @@ export default function BookReader({
               flexShrink: 0
             }}
           >
-            <BookOpen size={18} />
+            <BookOpen size={17} />
           </div>
 
           <div style={{ minWidth: 0 }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-              <span style={{ fontSize: '0.92rem', fontWeight: '600', color: '#F8FAFC', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+              <span style={{ fontSize: '0.92rem', fontWeight: '700', color: '#F8FAFC', whiteSpace: 'nowrap' }}>
                 {bookTitle}
               </span>
               <span
                 style={{
-                  fontSize: '0.7rem',
+                  fontSize: '0.68rem',
                   padding: '0.12rem 0.5rem',
                   borderRadius: '12px',
                   backgroundColor: 'rgba(58, 80, 107, 0.4)',
                   color: '#A9BCD0',
                   border: '1px solid rgba(169, 188, 208, 0.25)',
                   whiteSpace: 'nowrap',
-                  display: 'none',
                   textTransform: 'uppercase',
                   letterSpacing: '0.04em'
                 }}
-                className="desktop-only-badge"
               >
-                {currentTocEntry.chapter}
+                {activeToc.chapter}
               </span>
             </div>
             <div style={{ fontSize: '0.74rem', color: '#A9BCD0', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-              {bookAuthor} • <span style={{ fontStyle: 'italic' }}>{currentTocEntry.title}</span>
+              {bookAuthor} • <span style={{ fontStyle: 'italic' }}>{activeToc.title}</span>
             </div>
           </div>
         </div>
 
-        {/* Center: In-site Protected Badge */}
+        {/* Center: Protected Badge */}
         <div
           style={{
             display: 'flex',
             alignItems: 'center',
             gap: '0.4rem',
-            padding: '0.28rem 0.75rem',
+            padding: '0.28rem 0.8rem',
             borderRadius: '999px',
-            backgroundColor: 'rgba(28, 37, 65, 0.8)',
+            backgroundColor: 'rgba(28, 37, 65, 0.85)',
             border: '1px solid #3A506B',
             fontSize: '0.74rem',
             color: '#A9BCD0'
@@ -514,12 +386,35 @@ export default function BookReader({
           <span style={{ whiteSpace: 'nowrap' }}>Exclusive Online Edition</span>
         </div>
 
-        {/* Right: Controls & Actions */}
+        {/* Right: Controls */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', flexShrink: 0 }}>
-          {/* Table of Contents button */}
+          {/* All Pages Thumbnail Grid Drawer Toggle */}
           <button
-            onClick={() => setShowToc(!showToc)}
-            className="reader-btn"
+            onClick={() => { setShowThumbnails(!showThumbnails); setShowToc(false); }}
+            className="book-reader-btn"
+            title="View All 82 Pages (Thumbnail Grid)"
+            style={{
+              background: showThumbnails ? '#1C2541' : 'transparent',
+              border: '1px solid #3A506B',
+              borderRadius: '6px',
+              color: showThumbnails ? '#F8FAFC' : '#A9BCD0',
+              padding: '0.45rem 0.65rem',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '0.35rem',
+              fontSize: '0.78rem',
+              cursor: 'pointer',
+              transition: 'all 0.2s ease'
+            }}
+          >
+            <LayoutGrid size={15} />
+            <span style={{ whiteSpace: 'nowrap' }}>All Pages</span>
+          </button>
+
+          {/* Table of Contents Toggle */}
+          <button
+            onClick={() => { setShowToc(!showToc); setShowThumbnails(false); }}
+            className="book-reader-btn"
             title="Table of Contents"
             style={{
               background: showToc ? '#1C2541' : 'transparent',
@@ -535,15 +430,15 @@ export default function BookReader({
               transition: 'all 0.2s ease'
             }}
           >
-            <List size={16} />
-            <span style={{ display: 'none' }} className="desktop-btn-label">Contents</span>
+            <List size={15} />
+            <span style={{ whiteSpace: 'nowrap' }}>Contents</span>
           </button>
 
-          {/* Spread / Single view toggle (hidden on mobile) */}
+          {/* Spread / Single View Toggle */}
           <button
             onClick={() => setIsSpread(!isSpread)}
-            className="reader-btn"
-            title={isSpread ? 'Switch to Single Page' : 'Switch to 2-Page Spread'}
+            className="book-reader-btn"
+            title={isSpread ? 'Switch to Single Page Mode' : 'Switch to 2-Page Book Spread'}
             style={{
               background: 'transparent',
               border: '1px solid #3A506B',
@@ -557,57 +452,53 @@ export default function BookReader({
               transition: 'all 0.2s ease'
             }}
           >
-            {isSpread ? <Square size={16} /> : <Columns2 size={16} />}
+            {isSpread ? <Square size={15} /> : <Columns2 size={15} />}
           </button>
 
-          {/* Zoom controls */}
-          <div style={{ display: 'none', alignItems: 'center', border: '1px solid #3A506B', borderRadius: '6px', overflow: 'hidden' }} className="desktop-zoom-wrap">
+          {/* Zoom Controls */}
+          <div style={{ display: 'flex', alignItems: 'center', border: '1px solid #3A506B', borderRadius: '6px', overflow: 'hidden' }}>
             <button
               onClick={() => setZoom((z) => Math.max(0.75, z - 0.15))}
-              className="reader-btn"
+              className="book-reader-btn"
               title="Zoom Out"
               style={{ background: 'transparent', border: 'none', color: '#A9BCD0', padding: '0.45rem', cursor: 'pointer' }}
             >
-              <ZoomOut size={15} />
+              <ZoomOut size={14} />
             </button>
-            <span style={{ fontSize: '0.72rem', color: '#A9BCD0', padding: '0 0.35rem', minWidth: '40px', textAlign: 'center' }}>
+            <span style={{ fontSize: '0.72rem', color: '#A9BCD0', padding: '0 0.3rem', minWidth: '38px', textAlign: 'center' }}>
               {Math.round(zoom * 100)}%
             </span>
             <button
-              onClick={() => setZoom((z) => Math.min(1.75, z + 0.15))}
-              className="reader-btn"
+              onClick={() => setZoom((z) => Math.min(1.5, z + 0.15))}
+              className="book-reader-btn"
               title="Zoom In"
               style={{ background: 'transparent', border: 'none', color: '#A9BCD0', padding: '0.45rem', cursor: 'pointer' }}
             >
-              <ZoomIn size={15} />
+              <ZoomIn size={14} />
             </button>
           </div>
 
-          {/* Sound toggle */}
+          {/* Sound Toggle */}
           <button
             onClick={() => setSoundEnabled(!soundEnabled)}
-            className="reader-btn"
-            title={soundEnabled ? 'Mute Page Flip Sound' : 'Enable Page Flip Sound'}
+            className="book-reader-btn"
+            title={soundEnabled ? 'Mute Page Turn Sound' : 'Enable Page Turn Sound'}
             style={{
               background: 'transparent',
               border: '1px solid #3A506B',
               borderRadius: '6px',
               color: soundEnabled ? '#A9BCD0' : '#64748b',
               padding: '0.45rem',
-              display: 'inline-flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              cursor: 'pointer',
-              transition: 'all 0.2s ease'
+              cursor: 'pointer'
             }}
           >
-            {soundEnabled ? <Volume2 size={16} /> : <VolumeX size={16} />}
+            {soundEnabled ? <Volume2 size={15} /> : <VolumeX size={15} />}
           </button>
 
-          {/* Fullscreen toggle */}
+          {/* Fullscreen Toggle */}
           <button
             onClick={toggleFullscreen}
-            className="reader-btn"
+            className="book-reader-btn"
             title={isFullscreen ? 'Exit Fullscreen' : 'Fullscreen'}
             style={{
               background: 'transparent',
@@ -615,21 +506,17 @@ export default function BookReader({
               borderRadius: '6px',
               color: '#A9BCD0',
               padding: '0.45rem',
-              display: 'inline-flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              cursor: 'pointer',
-              transition: 'all 0.2s ease'
+              cursor: 'pointer'
             }}
           >
-            {isFullscreen ? <Minimize2 size={16} /> : <Maximize2 size={16} />}
+            {isFullscreen ? <Minimize2 size={15} /> : <Maximize2 size={15} />}
           </button>
 
-          {/* Close Reader */}
+          {/* Close */}
           {onClose && (
             <button
               onClick={onClose}
-              className="reader-btn"
+              className="book-reader-btn"
               title="Close Reader (Esc)"
               style={{
                 background: '#1C2541',
@@ -643,7 +530,6 @@ export default function BookReader({
                 fontSize: '0.8rem',
                 fontWeight: '600',
                 cursor: 'pointer',
-                transition: 'all 0.2s ease',
                 marginLeft: '0.25rem'
               }}
             >
@@ -655,7 +541,7 @@ export default function BookReader({
       </header>
 
       {/* =========================================================================
-          MAIN READER STAGE / CANVAS AREA
+          STAGE CONTAINER (PAGES / SPREAD / DRAWER)
           ========================================================================= */}
       <div
         style={{
@@ -675,14 +561,14 @@ export default function BookReader({
               top: 0,
               bottom: 0,
               left: 0,
-              width: 'min(360px, 85vw)',
+              width: 'min(380px, 85vw)',
               backgroundColor: '#0B132B',
               borderRight: '1px solid #1C2541',
-              zIndex: 30,
+              zIndex: 35,
               display: 'flex',
               flexDirection: 'column',
-              boxShadow: '8px 0 30px rgba(0,0,0,0.5)',
-              animation: 'slideInLeft 0.25s ease'
+              boxShadow: '8px 0 35px rgba(0,0,0,0.6)',
+              animation: 'slideInLeft 0.22s ease'
             }}
           >
             <div
@@ -695,12 +581,12 @@ export default function BookReader({
               }}
             >
               <div>
-                <h4 style={{ margin: 0, fontSize: '0.95rem', color: '#F8FAFC', fontWeight: '600' }}>Table of Contents</h4>
-                <p style={{ margin: '0.2rem 0 0 0', fontSize: '0.72rem', color: '#A9BCD0' }}>82 Pages • 8 Core Chapters</p>
+                <h4 style={{ margin: 0, fontSize: '0.95rem', color: '#F8FAFC', fontWeight: '700' }}>Table of Contents</h4>
+                <p style={{ margin: '0.15rem 0 0 0', fontSize: '0.72rem', color: '#A9BCD0' }}>82 Pages • 8 Core Chapters</p>
               </div>
               <button
                 onClick={() => setShowToc(false)}
-                style={{ background: 'none', border: 'none', color: '#A9BCD0', cursor: 'pointer', padding: '0.25rem' }}
+                style={{ background: 'none', border: 'none', color: '#A9BCD0', cursor: 'pointer' }}
               >
                 <X size={18} />
               </button>
@@ -708,8 +594,8 @@ export default function BookReader({
 
             <div style={{ flex: 1, overflowY: 'auto', padding: '0.75rem' }}>
               {BOOK_TOC.map((item, idx) => {
-                const isActive = currentPage === item.page || (isSpread && currentPage + 1 === item.page);
-                const isChapterHeader = item.title.startsWith('0') || item.chapter === 'Intro' || item.chapter === 'Closing';
+                const isActive = currentPage === item.page || (isSpread && rightPageNum === item.page);
+                const isHeading = item.title.startsWith('0') || item.chapter === 'Cover' || item.chapter === 'Closing';
 
                 return (
                   <button
@@ -721,12 +607,12 @@ export default function BookReader({
                       alignItems: 'center',
                       justifyContent: 'space-between',
                       padding: '0.55rem 0.75rem',
-                      marginBottom: '0.25rem',
+                      marginBottom: '0.2rem',
                       borderRadius: '6px',
                       border: 'none',
                       backgroundColor: isActive ? '#1C2541' : 'transparent',
-                      color: isActive ? '#F8FAFC' : '#A9BCD0',
-                      fontWeight: isActive || isChapterHeader ? '600' : '400',
+                      color: isActive ? '#F8FAFC' : (isHeading ? '#F8FAFC' : '#A9BCD0'),
+                      fontWeight: isActive || isHeading ? '700' : '400',
                       fontSize: '0.82rem',
                       textAlign: 'left',
                       cursor: 'pointer',
@@ -744,8 +630,8 @@ export default function BookReader({
                     </span>
                     <span
                       style={{
-                        fontSize: '0.72rem',
-                        padding: '0.1rem 0.4rem',
+                        fontSize: '0.7rem',
+                        padding: '0.1rem 0.45rem',
                         borderRadius: '4px',
                         backgroundColor: isActive ? '#3A506B' : 'rgba(28, 37, 65, 0.6)',
                         color: '#F8FAFC',
@@ -761,10 +647,111 @@ export default function BookReader({
           </aside>
         )}
 
-        {/* Previous page arrow button (clickable hover overlay) */}
+        {/* All Pages Thumbnail Grid Drawer (Shows all 82 pages at once) */}
+        {showThumbnails && (
+          <aside
+            style={{
+              position: 'absolute',
+              top: 0,
+              bottom: 0,
+              left: 0,
+              right: 0,
+              backgroundColor: 'rgba(11, 19, 43, 0.97)',
+              backdropFilter: 'blur(12px)',
+              zIndex: 35,
+              display: 'flex',
+              flexDirection: 'column',
+              padding: '1.25rem 2rem'
+            }}
+          >
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.25rem', borderBottom: '1px solid #1C2541', paddingBottom: '0.75rem' }}>
+              <div>
+                <h3 style={{ margin: 0, fontSize: '1.2rem', color: '#F8FAFC' }}>All 82 Pages of Reflections</h3>
+                <p style={{ margin: '0.2rem 0 0 0', fontSize: '0.8rem', color: '#A9BCD0' }}>Click any page to jump immediately</p>
+              </div>
+              <button
+                onClick={() => setShowThumbnails(false)}
+                style={{
+                  background: '#1C2541',
+                  border: '1px solid #3A506B',
+                  borderRadius: '6px',
+                  color: '#F8FAFC',
+                  padding: '0.4rem 0.8rem',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '0.35rem',
+                  cursor: 'pointer'
+                }}
+              >
+                <X size={16} />
+                <span>Close Grid</span>
+              </button>
+            </div>
+
+            <div
+              style={{
+                flex: 1,
+                overflowY: 'auto',
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fill, minmax(130px, 1fr))',
+                gap: '1rem',
+                padding: '0.5rem 0'
+              }}
+            >
+              {Array.from({ length: TOTAL_PAGES }, (_, i) => i + 1).map((pNum) => {
+                const isCurrent = currentPage === pNum || (isSpread && (leftPageNum === pNum || rightPageNum === pNum));
+                return (
+                  <div
+                    key={pNum}
+                    onClick={() => jumpToPage(pNum)}
+                    style={{
+                      cursor: 'pointer',
+                      borderRadius: '6px',
+                      overflow: 'hidden',
+                      border: isCurrent ? '2px solid #D4AF37' : '1px solid #1C2541',
+                      boxShadow: isCurrent ? '0 0 14px rgba(212, 175, 55, 0.4)' : '0 4px 10px rgba(0,0,0,0.3)',
+                      backgroundColor: '#1C2541',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      transition: 'transform 0.15s ease'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.transform = 'scale(1.05)';
+                      e.currentTarget.style.borderColor = '#A9BCD0';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.transform = 'scale(1)';
+                      e.currentTarget.style.borderColor = isCurrent ? '#D4AF37' : '#1C2541';
+                    }}
+                  >
+                    <img
+                      src={`/books/reflections/page-${pNum}.jpg`}
+                      alt={`Page ${pNum}`}
+                      loading="lazy"
+                      style={{ width: '100%', height: 'auto', display: 'block' }}
+                    />
+                    <div
+                      style={{
+                        padding: '0.3rem',
+                        textAlign: 'center',
+                        fontSize: '0.72rem',
+                        color: isCurrent ? '#D4AF37' : '#A9BCD0',
+                        fontWeight: isCurrent ? '700' : '500'
+                      }}
+                    >
+                      Page {pNum}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </aside>
+        )}
+
+        {/* Previous Page Floating Button */}
         <button
           onClick={turnPrev}
-          disabled={currentPage <= 1 || isTurning}
+          disabled={currentPage <= 1 || isFlipping}
           title="Previous Page (Left Arrow)"
           aria-label="Previous Page"
           style={{
@@ -772,11 +759,11 @@ export default function BookReader({
             left: '1rem',
             top: '50%',
             transform: 'translateY(-50%)',
-            zIndex: 20,
+            zIndex: 25,
             width: '46px',
             height: '46px',
             borderRadius: '50%',
-            backgroundColor: 'rgba(28, 37, 65, 0.75)',
+            backgroundColor: 'rgba(28, 37, 65, 0.8)',
             backdropFilter: 'blur(8px)',
             border: '1px solid #3A506B',
             color: currentPage <= 1 ? '#475569' : '#F8FAFC',
@@ -784,70 +771,68 @@ export default function BookReader({
             alignItems: 'center',
             justifyContent: 'center',
             cursor: currentPage <= 1 ? 'not-allowed' : 'pointer',
-            boxShadow: '0 4px 15px rgba(0,0,0,0.3)',
+            boxShadow: '0 6px 18px rgba(0,0,0,0.4)',
             transition: 'all 0.2s ease',
-            opacity: currentPage <= 1 ? 0.3 : 0.9
+            opacity: currentPage <= 1 ? 0.25 : 0.95
           }}
           onMouseEnter={(e) => {
             if (currentPage > 1) {
-              e.currentTarget.style.opacity = '1';
               e.currentTarget.style.backgroundColor = '#1C2541';
               e.currentTarget.style.transform = 'translateY(-50%) scale(1.08)';
             }
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.opacity = currentPage <= 1 ? '0.3' : '0.9';
-            e.currentTarget.style.backgroundColor = 'rgba(28, 37, 65, 0.75)';
+            e.currentTarget.style.backgroundColor = 'rgba(28, 37, 65, 0.8)';
             e.currentTarget.style.transform = 'translateY(-50%) scale(1)';
           }}
         >
           <ChevronLeft size={24} />
         </button>
 
-        {/* Next page arrow button (clickable hover overlay) */}
+        {/* Next Page Floating Button */}
         <button
           onClick={turnNext}
-          disabled={currentPage >= totalPages || isTurning}
-          title="Next Page (Right Arrow / Spacebar)"
+          disabled={currentPage >= TOTAL_PAGES || isFlipping}
+          title="Next Page (Right Arrow)"
           aria-label="Next Page"
           style={{
             position: 'absolute',
             right: '1rem',
             top: '50%',
             transform: 'translateY(-50%)',
-            zIndex: 20,
+            zIndex: 25,
             width: '46px',
             height: '46px',
             borderRadius: '50%',
-            backgroundColor: 'rgba(28, 37, 65, 0.75)',
+            backgroundColor: 'rgba(28, 37, 65, 0.8)',
             backdropFilter: 'blur(8px)',
             border: '1px solid #3A506B',
-            color: currentPage >= totalPages ? '#475569' : '#F8FAFC',
+            color: currentPage >= TOTAL_PAGES ? '#475569' : '#F8FAFC',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            cursor: currentPage >= totalPages ? 'not-allowed' : 'pointer',
-            boxShadow: '0 4px 15px rgba(0,0,0,0.3)',
+            cursor: currentPage >= TOTAL_PAGES ? 'not-allowed' : 'pointer',
+            boxShadow: '0 6px 18px rgba(0,0,0,0.4)',
             transition: 'all 0.2s ease',
-            opacity: currentPage >= totalPages ? 0.3 : 0.9
+            opacity: currentPage >= TOTAL_PAGES ? 0.25 : 0.95
           }}
           onMouseEnter={(e) => {
-            if (currentPage < totalPages) {
-              e.currentTarget.style.opacity = '1';
+            if (currentPage < TOTAL_PAGES) {
               e.currentTarget.style.backgroundColor = '#1C2541';
               e.currentTarget.style.transform = 'translateY(-50%) scale(1.08)';
             }
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.opacity = currentPage >= totalPages ? '0.3' : '0.9';
-            e.currentTarget.style.backgroundColor = 'rgba(28, 37, 65, 0.75)';
+            e.currentTarget.style.backgroundColor = 'rgba(28, 37, 65, 0.8)';
             e.currentTarget.style.transform = 'translateY(-50%) scale(1)';
           }}
         >
           <ChevronRight size={24} />
         </button>
 
-        {/* Center: The Book Presentation Stage */}
+        {/* =========================================================================
+            BOOK PRESENTATION CANVAS / STAGE
+            ========================================================================= */}
         <div
           style={{
             flex: 1,
@@ -858,202 +843,220 @@ export default function BookReader({
             position: 'relative'
           }}
         >
-          {loading && (
-            <div style={{ textAlign: 'center', padding: '2rem' }}>
+          <div
+            className={`reader-anim-box ${isFlipping ? (flipDirection === 'next' ? 'anim-flip-next' : 'anim-flip-prev') : ''}`}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              transform: `scale(${zoom})`,
+              transformOrigin: 'center center',
+              transition: 'transform 0.2s ease'
+            }}
+          >
+            {/* Case A: Page 1 Cover (Centred like a physical closed hardcover book) */}
+            {currentPage === 1 ? (
               <div
+                onClick={turnNext}
+                title="Click cover to open book"
                 style={{
-                  width: '42px',
-                  height: '42px',
-                  border: '3px solid #3A506B',
-                  borderTopColor: '#A9BCD0',
-                  borderRadius: '50%',
-                  animation: 'spin 0.8s linear infinite',
-                  margin: '0 auto 1rem auto'
-                }}
-              />
-              <p style={{ margin: 0, fontSize: '0.9rem', color: '#A9BCD0' }}>Opening ORAANIS Reflections...</p>
-            </div>
-          )}
-
-          {error && (
-            <div style={{ textAlign: 'center', padding: '2rem', maxWidth: '420px' }}>
-              <p style={{ color: '#f87171', fontSize: '0.95rem', marginBottom: '1rem' }}>{error}</p>
-              <button
-                onClick={() => window.location.reload()}
-                style={{
-                  backgroundColor: '#1C2541',
-                  border: '1px solid #3A506B',
-                  color: '#F8FAFC',
-                  padding: '0.5rem 1rem',
-                  borderRadius: '6px',
-                  cursor: 'pointer'
+                  position: 'relative',
+                  borderRadius: '6px 12px 12px 6px',
+                  overflow: 'hidden',
+                  boxShadow: '0 30px 70px -15px rgba(0, 0, 0, 0.85), 0 0 1px 1px rgba(212, 175, 55, 0.35)',
+                  cursor: 'pointer',
+                  border: '1px solid #7D2D44'
                 }}
               >
-                Reload
-              </button>
-            </div>
-          )}
-
-          {/* Book Canvas Container with 3D Book Appearance */}
-          {!loading && !error && (
-            <div
-              className={`book-canvas-wrap ${isTurning ? (turnDirection === 'next' ? 'turning-next' : 'turning-prev') : ''}`}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                boxShadow: '0 25px 65px -15px rgba(0, 0, 0, 0.75), 0 0 1px 1px rgba(58, 80, 107, 0.25)',
-                borderRadius: '6px',
-                overflow: 'hidden',
-                backgroundColor: '#1C2541',
-                position: 'relative'
-              }}
-            >
-              {isSpread ? (
-                /* Two-Page Spread (Left & Right Pages with Realistic Center Spine Crease) */
+                <img
+                  src="/books/reflections/page-1.jpg"
+                  alt="REFLECTIONS Part 1 Cover"
+                  className="book-page-img"
+                  style={{
+                    boxShadow: 'inset 0 0 15px rgba(0,0,0,0.3)'
+                  }}
+                />
+                {/* Book Spine Crease Gradient */}
                 <div
                   style={{
+                    position: 'absolute',
+                    top: 0,
+                    bottom: 0,
+                    left: 0,
+                    width: '28px',
+                    background: 'linear-gradient(to right, rgba(0,0,0,0.6) 0%, rgba(255,255,255,0.08) 50%, rgba(0,0,0,0.3) 100%)',
+                    pointerEvents: 'none'
+                  }}
+                />
+                {/* Floating "Click to Open" badge */}
+                <div
+                  style={{
+                    position: 'absolute',
+                    bottom: '16px',
+                    left: '50%',
+                    transform: 'translateX(-50%)',
+                    backgroundColor: 'rgba(11, 19, 43, 0.9)',
+                    backdropFilter: 'blur(8px)',
+                    color: '#F8FAFC',
+                    padding: '0.4rem 1rem',
+                    borderRadius: '999px',
+                    fontSize: '0.74rem',
+                    fontWeight: '700',
+                    border: '1px solid #D4AF37',
                     display: 'flex',
                     alignItems: 'center',
-                    justifyContent: 'center',
-                    position: 'relative'
+                    gap: '0.4rem',
+                    boxShadow: '0 4px 14px rgba(0,0,0,0.5)',
+                    whiteSpace: 'nowrap'
                   }}
                 >
-                  {/* Left Page */}
+                  <BookOpen size={13} color="#D4AF37" />
+                  <span>Click to Open & Read Inside</span>
+                </div>
+              </div>
+            ) : isSpread ? (
+              /* Case B: Two-Page Spread (Open book on desktop) */
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  boxShadow: '0 30px 70px -15px rgba(0, 0, 0, 0.85), 0 0 1px 1px rgba(58, 80, 107, 0.35)',
+                  borderRadius: '6px',
+                  overflow: 'hidden',
+                  backgroundColor: '#1C2541'
+                }}
+              >
+                {/* Left Page */}
+                {leftPageNum && leftPageNum <= TOTAL_PAGES ? (
                   <div
-                    style={{
-                      position: 'relative',
-                      backgroundColor: currentPage === 1 ? '#0B132B' : '#FAF8F5',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      cursor: 'pointer'
-                    }}
                     onClick={turnPrev}
                     title="Click left page to turn back"
+                    style={{ position: 'relative', cursor: 'pointer', backgroundColor: '#FAF8F5' }}
                   >
-                    <canvas
-                      ref={canvasLeftRef}
+                    <img
+                      src={`/books/reflections/page-${leftPageNum}.jpg`}
+                      alt={`Page ${leftPageNum}`}
+                      className="book-page-img"
+                    />
+                    {/* Left Spine Fold Shadow */}
+                    <div
                       style={{
-                        display: 'block',
-                        boxShadow: 'inset -2px 0 8px rgba(0,0,0,0.08)'
+                        position: 'absolute',
+                        top: 0,
+                        bottom: 0,
+                        right: 0,
+                        width: '32px',
+                        background: 'linear-gradient(to left, rgba(0,0,0,0.22) 0%, rgba(0,0,0,0.06) 60%, rgba(0,0,0,0) 100%)',
+                        pointerEvents: 'none'
                       }}
                     />
-                    {/* Left Spine Fold Gradient */}
-                    {currentPage > 1 && (
-                      <div
-                        style={{
-                          position: 'absolute',
-                          top: 0,
-                          bottom: 0,
-                          right: 0,
-                          width: '28px',
-                          background: 'linear-gradient(to left, rgba(0,0,0,0.18) 0%, rgba(0,0,0,0.05) 50%, rgba(0,0,0,0) 100%)',
-                          pointerEvents: 'none'
-                        }}
-                      />
-                    )}
+                    {/* Page Number Pill */}
+                    <div
+                      style={{
+                        position: 'absolute',
+                        bottom: '8px',
+                        left: '12px',
+                        fontSize: '0.68rem',
+                        color: 'rgba(0,0,0,0.45)',
+                        fontWeight: '600',
+                        pointerEvents: 'none'
+                      }}
+                    >
+                      {leftPageNum}
+                    </div>
                   </div>
+                ) : null}
 
-                  {/* Center Book Spine Divider */}
-                  <div
-                    style={{
-                      width: '2px',
-                      alignSelf: 'stretch',
-                      backgroundColor: '#0B132B',
-                      boxShadow: '0 0 6px rgba(0,0,0,0.6)',
-                      zIndex: 5
-                    }}
-                  />
+                {/* Center Book Spine Crease Divider */}
+                <div
+                  style={{
+                    width: '3px',
+                    alignSelf: 'stretch',
+                    backgroundColor: '#070C1A',
+                    boxShadow: '0 0 8px rgba(0,0,0,0.8)',
+                    zIndex: 5
+                  }}
+                />
 
-                  {/* Right Page */}
+                {/* Right Page */}
+                {rightPageNum && rightPageNum <= TOTAL_PAGES ? (
                   <div
-                    style={{
-                      position: 'relative',
-                      backgroundColor: '#FAF8F5',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      cursor: 'pointer'
-                    }}
                     onClick={turnNext}
                     title="Click right page to turn forward"
+                    style={{ position: 'relative', cursor: 'pointer', backgroundColor: '#FAF8F5' }}
                   >
-                    <canvas
-                      ref={canvasRightRef}
-                      style={{
-                        display: 'block',
-                        boxShadow: 'inset 2px 0 8px rgba(0,0,0,0.08)'
-                      }}
+                    <img
+                      src={`/books/reflections/page-${rightPageNum}.jpg`}
+                      alt={`Page ${rightPageNum}`}
+                      className="book-page-img"
                     />
-                    {/* Right Spine Fold Gradient */}
+                    {/* Right Spine Fold Shadow */}
                     <div
                       style={{
                         position: 'absolute',
                         top: 0,
                         bottom: 0,
                         left: 0,
-                        width: '28px',
-                        background: 'linear-gradient(to right, rgba(0,0,0,0.18) 0%, rgba(0,0,0,0.05) 50%, rgba(0,0,0,0) 100%)',
+                        width: '32px',
+                        background: 'linear-gradient(to right, rgba(0,0,0,0.22) 0%, rgba(0,0,0,0.06) 60%, rgba(0,0,0,0) 100%)',
                         pointerEvents: 'none'
                       }}
                     />
+                    {/* Page Number Pill */}
+                    <div
+                      style={{
+                        position: 'absolute',
+                        bottom: '8px',
+                        right: '12px',
+                        fontSize: '0.68rem',
+                        color: 'rgba(0,0,0,0.45)',
+                        fontWeight: '600',
+                        pointerEvents: 'none'
+                      }}
+                    >
+                      {rightPageNum}
+                    </div>
                   </div>
-                </div>
-              ) : (
-                /* Single Page Mode */
-                <div
-                  style={{
-                    position: 'relative',
-                    backgroundColor: '#FAF8F5',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center'
-                  }}
-                >
-                  <canvas
-                    ref={canvasSingleRef}
-                    style={{
-                      display: 'block'
-                    }}
-                  />
-                  {/* Subtle paper edge shadow */}
-                  <div
-                    style={{
-                      position: 'absolute',
-                      inset: 0,
-                      boxShadow: 'inset 0 0 12px rgba(0,0,0,0.06)',
-                      pointerEvents: 'none'
-                    }}
-                  />
-                </div>
-              )}
-
-              {/* Bottom Subtle Watermark Protection (Non-intrusive) */}
+                ) : null}
+              </div>
+            ) : (
+              /* Case C: Single Page Mode */
               <div
                 style={{
-                  position: 'absolute',
-                  bottom: '6px',
-                  left: '50%',
-                  transform: 'translateX(-50%)',
-                  fontSize: '0.65rem',
-                  letterSpacing: '0.08em',
-                  color: 'rgba(28, 37, 65, 0.45)',
-                  textTransform: 'uppercase',
-                  pointerEvents: 'none',
-                  whiteSpace: 'nowrap',
-                  fontWeight: '500'
+                  position: 'relative',
+                  borderRadius: '6px',
+                  overflow: 'hidden',
+                  boxShadow: '0 25px 65px -15px rgba(0, 0, 0, 0.8), 0 0 1px 1px rgba(58, 80, 107, 0.35)',
+                  backgroundColor: '#FAF8F5'
                 }}
               >
-                ORAANIS • Protected Digital Reader
+                <img
+                  src={`/books/reflections/page-${currentPage}.jpg`}
+                  alt={`Page ${currentPage}`}
+                  className="book-page-img"
+                />
+                <div
+                  style={{
+                    position: 'absolute',
+                    bottom: '8px',
+                    right: '12px',
+                    fontSize: '0.68rem',
+                    color: 'rgba(0,0,0,0.45)',
+                    fontWeight: '600',
+                    pointerEvents: 'none'
+                  }}
+                >
+                  {currentPage}
+                </div>
               </div>
-            </div>
-          )}
+            )}
+          </div>
         </div>
       </div>
 
       {/* =========================================================================
-          BOTTOM SCRUBBER & NAVIGATION BAR
+          BOTTOM SCRUBBER & JUMP BAR
           ========================================================================= */}
       <footer
         style={{
@@ -1066,12 +1069,12 @@ export default function BookReader({
           flexShrink: 0
         }}
       >
-        {/* Scrubber slider and Page Number */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', maxWidth: '800px', width: '100%', margin: '0 auto' }}>
+        {/* Slider & Prev/Next */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', maxWidth: '820px', width: '100%', margin: '0 auto' }}>
           <button
             onClick={turnPrev}
-            disabled={currentPage <= 1 || isTurning}
-            className="reader-btn"
+            disabled={currentPage <= 1 || isFlipping}
+            className="book-reader-btn"
             style={{
               background: 'transparent',
               border: '1px solid #3A506B',
@@ -1086,47 +1089,47 @@ export default function BookReader({
             ← Prev
           </button>
 
-          {/* Range Slider for rapid scrubbing */}
+          {/* Rapid scrubber slider */}
           <div style={{ flex: 1, display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
             <input
               type="range"
               min="1"
-              max={totalPages}
+              max={TOTAL_PAGES}
               value={currentPage}
               onChange={(e) => jumpToPage(e.target.value)}
               aria-label="Book page slider"
               style={{
                 width: '100%',
-                accentColor: '#A9BCD0',
+                accentColor: '#D4AF37',
                 cursor: 'pointer'
               }}
             />
             <span
               style={{
-                fontSize: '0.8rem',
+                fontSize: '0.82rem',
                 color: '#F8FAFC',
-                fontWeight: '600',
+                fontWeight: '700',
                 whiteSpace: 'nowrap',
-                minWidth: '90px',
+                minWidth: '95px',
                 textAlign: 'right'
               }}
             >
-              Page {currentPage} of {totalPages}
+              Page {currentPage} of {TOTAL_PAGES}
             </span>
           </div>
 
           <button
             onClick={turnNext}
-            disabled={currentPage >= totalPages || isTurning}
-            className="reader-btn"
+            disabled={currentPage >= TOTAL_PAGES || isFlipping}
+            className="book-reader-btn"
             style={{
               background: 'transparent',
               border: '1px solid #3A506B',
               borderRadius: '6px',
-              color: currentPage >= totalPages ? '#475569' : '#A9BCD0',
+              color: currentPage >= TOTAL_PAGES ? '#475569' : '#A9BCD0',
               padding: '0.35rem 0.65rem',
               fontSize: '0.78rem',
-              cursor: currentPage >= totalPages ? 'not-allowed' : 'pointer',
+              cursor: currentPage >= TOTAL_PAGES ? 'not-allowed' : 'pointer',
               whiteSpace: 'nowrap'
             }}
           >
@@ -1140,13 +1143,13 @@ export default function BookReader({
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            gap: '0.4rem',
+            gap: '0.35rem',
             overflowX: 'auto',
             paddingBottom: '0.2rem',
             scrollbarWidth: 'none'
           }}
         >
-          <span style={{ fontSize: '0.68rem', color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.04em', marginRight: '0.25rem' }}>
+          <span style={{ fontSize: '0.68rem', color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.04em', marginRight: '0.2rem' }}>
             Jump to:
           </span>
           {[
@@ -1167,12 +1170,13 @@ export default function BookReader({
               key={idx}
               onClick={() => jumpToPage(ch.p)}
               style={{
-                background: currentPage === ch.p ? '#3A506B' : '#1C2541',
+                background: currentPage === ch.p ? '#D4AF37' : '#1C2541',
                 border: 'none',
                 borderRadius: '4px',
-                color: currentPage === ch.p ? '#F8FAFC' : '#A9BCD0',
+                color: currentPage === ch.p ? '#0B132B' : '#A9BCD0',
                 padding: '0.2rem 0.5rem',
                 fontSize: '0.68rem',
+                fontWeight: currentPage === ch.p ? '700' : '500',
                 cursor: 'pointer',
                 whiteSpace: 'nowrap',
                 transition: 'all 0.15s ease'

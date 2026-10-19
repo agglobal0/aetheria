@@ -194,14 +194,9 @@ export default function Books() {
                     position: 'relative',
                     aspectRatio: '1 / 1.48',
                     borderRadius: '8px 14px 14px 8px',
-                    backgroundColor: '#4A1525',
-                    backgroundImage: 'linear-gradient(135deg, #5B1B2F 0%, #3B0E1C 100%)',
-                    boxShadow: '16px 22px 45px -8px rgba(11, 19, 43, 0.45), 2px 0 10px rgba(0,0,0,0.3)',
+                    boxShadow: '18px 24px 50px -8px rgba(11, 19, 43, 0.55), 2px 0 10px rgba(0,0,0,0.4)',
                     cursor: 'pointer',
-                    padding: '2.25rem 1.8rem',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'space-between',
+                    overflow: 'hidden',
                     border: '1px solid #7D2D44',
                     transition: 'all 0.35s cubic-bezier(0.2, 0.8, 0.2, 1)',
                     transform: 'rotateY(-10deg) rotateX(4deg)',
@@ -209,13 +204,19 @@ export default function Books() {
                   }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.transform = 'rotateY(0deg) rotateX(0deg) translateY(-8px)';
-                    e.currentTarget.style.boxShadow = '22px 30px 60px -8px rgba(11, 19, 43, 0.55), 4px 0 16px rgba(0,0,0,0.4)';
+                    e.currentTarget.style.boxShadow = '24px 32px 65px -8px rgba(11, 19, 43, 0.65), 4px 0 16px rgba(0,0,0,0.5)';
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.transform = 'rotateY(-10deg) rotateX(4deg)';
-                    e.currentTarget.style.boxShadow = '16px 22px 45px -8px rgba(11, 19, 43, 0.45), 2px 0 10px rgba(0,0,0,0.3)';
+                    e.currentTarget.style.boxShadow = '18px 24px 50px -8px rgba(11, 19, 43, 0.55), 2px 0 10px rgba(0,0,0,0.4)';
                   }}
                 >
+                  <img
+                    src="/books/reflections/page-1.jpg"
+                    alt="REFLECTIONS Part 1 by Monika Chopra"
+                    style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                  />
+
                   {/* Book Spine Crease Illusion */}
                   <div
                     style={{
@@ -223,147 +224,36 @@ export default function Books() {
                       top: 0,
                       bottom: 0,
                       left: 0,
-                      width: '24px',
-                      background: 'linear-gradient(to right, rgba(0,0,0,0.5) 0%, rgba(255,255,255,0.06) 50%, rgba(0,0,0,0.3) 100%)',
-                      borderRadius: '8px 0 0 8px',
+                      width: '26px',
+                      background: 'linear-gradient(to right, rgba(0,0,0,0.55) 0%, rgba(255,255,255,0.08) 50%, rgba(0,0,0,0.25) 100%)',
                       pointerEvents: 'none'
                     }}
                   />
-
-                  {/* Gold Filigree Double Border */}
-                  <div
-                    style={{
-                      position: 'absolute',
-                      inset: '14px',
-                      border: '1px solid #D4AF37',
-                      borderRadius: '4px',
-                      pointerEvents: 'none',
-                      opacity: 0.85
-                    }}
-                  />
-                  <div
-                    style={{
-                      position: 'absolute',
-                      inset: '18px',
-                      border: '1px solid rgba(212, 175, 55, 0.4)',
-                      borderRadius: '3px',
-                      pointerEvents: 'none'
-                    }}
-                  />
-
-                  {/* Top: Emblem & Publisher */}
-                  <div style={{ textAlign: 'center', zIndex: 2 }}>
-                    <div style={{ color: '#D4AF37', marginBottom: '0.4rem', letterSpacing: '0.3em', fontSize: '0.78rem', textTransform: 'uppercase' }}>
-                      O R A A N I S
-                    </div>
-                    {/* Lotus Icon */}
-                    <div style={{ display: 'inline-flex', color: '#D4AF37', margin: '0.25rem 0' }}>
-                      <svg width="34" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.3">
-                        <path d="M12 21C12 21 12.5 14 16 10C18.5 7 21.5 5.5 21.5 5.5C21.5 5.5 19.5 9 16.5 11.5C14 13.5 12 21 12 21Z" fill="#D4AF37" fillOpacity="0.3"/>
-                        <path d="M12 21C12 21 11.5 15 8 12.5C5.5 10.5 2.5 10 2.5 10C2.5 10 5.5 8 9.5 10.5C11 11.5 12 21 12 21Z" fill="#D4AF37" fillOpacity="0.3"/>
-                        <path d="M12 21V10" stroke="#D4AF37" strokeWidth="1.5"/>
-                      </svg>
-                    </div>
-                  </div>
-
-                  {/* Center: Book Title & Subtitle */}
-                  <div style={{ textAlign: 'center', zIndex: 2, padding: '1rem 0.5rem' }}>
-                    <h2
-                      style={{
-                        fontFamily: 'var(--font-heading)',
-                        fontSize: 'clamp(1.7rem, 2.8vw, 2.3rem)',
-                        fontWeight: '700',
-                        color: '#FBF8F3',
-                        letterSpacing: '0.12em',
-                        textTransform: 'uppercase',
-                        margin: '0 0 0.5rem 0',
-                        lineHeight: 1.1
-                      }}
-                    >
-                      REFLECTIONS
-                    </h2>
-                    <div
-                      style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        gap: '0.65rem',
-                        color: '#D4AF37',
-                        fontFamily: 'var(--font-heading)',
-                        fontStyle: 'italic',
-                        fontSize: '1.15rem',
-                        margin: '0.4rem 0 1.1rem 0'
-                      }}
-                    >
-                      <span style={{ width: '28px', height: '1px', backgroundColor: '#D4AF37', opacity: 0.6 }} />
-                      <span>Part 1</span>
-                      <span style={{ width: '28px', height: '1px', backgroundColor: '#D4AF37', opacity: 0.6 }} />
-                    </div>
-                    <p
-                      style={{
-                        fontFamily: 'var(--font-heading)',
-                        fontStyle: 'italic',
-                        color: '#E8D7C3',
-                        fontSize: '0.88rem',
-                        lineHeight: 1.45,
-                        margin: '0 auto',
-                        maxWidth: '220px'
-                      }}
-                    >
-                      On life, people, and the quiet lessons that shape us
-                    </p>
-                  </div>
-
-                  {/* Bottom: Author & Motto */}
-                  <div style={{ textAlign: 'center', zIndex: 2 }}>
-                    <div
-                      style={{
-                        fontFamily: 'var(--font-heading)',
-                        fontSize: '1.1rem',
-                        fontWeight: '600',
-                        color: '#FBF8F3',
-                        letterSpacing: '0.08em',
-                        marginBottom: '0.35rem'
-                      }}
-                    >
-                      Monika Chopra
-                    </div>
-                    <div
-                      style={{
-                        color: '#D4AF37',
-                        fontSize: '0.66rem',
-                        letterSpacing: '0.22em',
-                        textTransform: 'uppercase',
-                        opacity: 0.95
-                      }}
-                    >
-                      R E A D • R E F L E C T • B E C O M E
-                    </div>
-                  </div>
 
                   {/* Click To Open Floating Indicator */}
                   <div
                     style={{
                       position: 'absolute',
-                      bottom: '-16px',
+                      bottom: '14px',
                       left: '50%',
                       transform: 'translateX(-50%)',
-                      backgroundColor: '#0B132B',
+                      backgroundColor: 'rgba(11, 19, 43, 0.92)',
+                      backdropFilter: 'blur(8px)',
                       color: '#F8FAFC',
-                      padding: '0.35rem 0.85rem',
+                      padding: '0.4rem 1rem',
                       borderRadius: '999px',
-                      fontSize: '0.72rem',
-                      fontWeight: '600',
-                      border: '1px solid #3A506B',
+                      fontSize: '0.74rem',
+                      fontWeight: '700',
+                      border: '1px solid #D4AF37',
                       whiteSpace: 'nowrap',
                       display: 'flex',
                       alignItems: 'center',
                       gap: '0.4rem',
-                      boxShadow: '0 4px 12px rgba(0,0,0,0.3)',
+                      boxShadow: '0 4px 14px rgba(0,0,0,0.5)',
                       zIndex: 3
                     }}
                   >
-                    <BookOpen size={13} color="#A9BCD0" />
+                    <BookOpen size={13} color="#D4AF37" />
                     <span>Click to Open FlipBook</span>
                   </div>
                 </div>
