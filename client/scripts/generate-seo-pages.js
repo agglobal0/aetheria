@@ -23,6 +23,12 @@ const routes = [
     canonical: 'https://oraanis.com/about'
   },
   {
+    path: 'books',
+    title: 'Books & Publications — REFLECTIONS Part 1 | Monika Chopra | ORAANIS',
+    description: 'Read REFLECTIONS — Part 1: On life, people, and the quiet lessons that shape us by Monika Chopra. An interactive, animated digital publication available exclusively on ORAANIS.',
+    canonical: 'https://oraanis.com/books'
+  },
+  {
     path: 'blogs',
     title: 'Reflective Blogs & Everyday Lessons — ORAANIS | Monika Chopra',
     description: 'Conversational reflections, daily observations, and practical wisdom by Monika Chopra on human relationships, empathy, and navigating life’s subtle moments.',

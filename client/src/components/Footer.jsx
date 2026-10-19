@@ -10,6 +10,7 @@ export default function Footer() {
     { name: 'About', path: '/about' },
     { name: 'The Person Behind This', path: '/person-behind-this' },
     { name: 'RAJSAAR', path: '/rajsaar' },
+    { name: 'Books', path: '/books' },
     { name: 'Share', path: '/share' },
     { name: 'Connect', path: '/contact' },
     { name: 'Reflections', path: '/category/reflections' },

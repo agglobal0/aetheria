@@ -377,6 +377,29 @@ export default function Navbar() {
 
           <LeafSeparator />
 
+          {/* Books */}
+          <Link
+            to="/books"
+            style={{
+              fontSize: '0.88rem',
+              fontWeight: location.pathname === '/books' ? '600' : '500',
+              color: location.pathname === '/books' ? 'var(--accent-primary)' : 'var(--text-secondary)',
+              textDecoration: 'none',
+              padding: '0.4rem 0.5rem',
+              transition: 'all 0.2s ease',
+              whiteSpace: 'nowrap',
+              borderBottom: location.pathname === '/books' ? '2px solid var(--accent-primary)' : '2px solid transparent'
+            }}
+            onMouseEnter={(e) => e.currentTarget.style.color = 'var(--text-primary)'}
+            onMouseLeave={(e) => {
+              if (location.pathname !== '/books') e.currentTarget.style.color = 'var(--text-secondary)';
+            }}
+          >
+            Books
+          </Link>
+
+          <LeafSeparator />
+
           {/* 5. Share */}
           <Link
             to="/share"
@@ -667,6 +690,21 @@ export default function Navbar() {
                 </div>
               )}
             </div>
+
+            <Link
+              to="/books"
+              onClick={() => setMobileMenuOpen(false)}
+              className="mobile-nav-link"
+              style={{
+                fontSize: '0.95rem',
+                fontWeight: location.pathname === '/books' ? '600' : '500',
+                color: location.pathname === '/books' ? 'var(--accent-primary)' : 'inherit',
+                padding: '0.75rem 1rem'
+              }}
+            >
+              <span>Books & Reflections</span>
+              <span style={{ fontSize: '1rem', opacity: 0.5 }}>›</span>
+            </Link>
 
             <Link
               to="/share"

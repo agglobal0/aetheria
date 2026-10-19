@@ -20,6 +20,7 @@ import About from './pages/About';
 import Author from './pages/Author';
 import Rajsaar from './pages/Rajsaar';
 import Share from './pages/Share';
+import Books from './pages/Books';
 import Contact from './pages/Contact';
 import Login from './pages/Login';
 import AdminDashboard from './pages/AdminDashboard';
@@ -47,6 +48,7 @@ export default function App() {
                 <Route path="/share" element={<Share />} />
                 <Route path="/confessions" element={<Share />} />
                 <Route path="/perspectives" element={<Share />} />
+                <Route path="/books" element={<Books />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/login" element={<Login />} />
                 

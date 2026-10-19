@@ -21,6 +21,7 @@ import {
 } from 'lucide-react';
 import { LeafIcon, LeafBullet } from '../components/BrandIcons';
 import SEO from '../components/SEO';
+import BookReader from '../components/BookReader';
 import { newsletterService } from '../services/api';
 import {
   heroDeskImg,
@@ -35,6 +36,7 @@ import {
 } from '../assets/images';
 
 export default function Home() {
+  const [isReaderOpen, setIsReaderOpen] = useState(false);
   const [email, setEmail] = useState('');
   const [subscribeStatus, setSubscribeStatus] = useState('idle'); // 'idle' | 'loading' | 'success' | 'error'
   const [feedbackMessage, setFeedbackMessage] = useState('');
@@ -884,6 +886,403 @@ export default function Home() {
             </div>
           </div>
 
+        </div>
+      </section>
+
+      {/* Interactive FlipBook Modal Reader */}
+      {isReaderOpen && (
+        <BookReader
+          bookUrl="/books/reflections-part-1.pdf"
+          bookTitle="REFLECTIONS — Part 1"
+          bookAuthor="Monika Chopra"
+          initialPage={1}
+          onClose={() => setIsReaderOpen(false)}
+        />
+      )}
+
+      {/* =========================================================================
+          FEATURED PUBLICATION: REFLECTIONS — Part 1 (Interactive FlipBook)
+          ========================================================================= */}
+      <section
+        className="home-featured-book-section"
+        style={{
+          padding: '4.75rem 0',
+          backgroundColor: '#0B132B',
+          color: '#F8FAFC',
+          position: 'relative',
+          overflow: 'hidden',
+          borderTop: '1px solid #1C2541',
+          borderBottom: '1px solid #1C2541'
+        }}
+      >
+        {/* Subtle Background Glow */}
+        <div
+          style={{
+            position: 'absolute',
+            top: '50%',
+            left: '25%',
+            transform: 'translate(-50%, -50%)',
+            width: '550px',
+            height: '550px',
+            borderRadius: '50%',
+            background: 'radial-gradient(circle, rgba(58, 80, 107, 0.25) 0%, rgba(11, 19, 43, 0) 70%)',
+            pointerEvents: 'none'
+          }}
+        />
+
+        <div className="container" style={{ position: 'relative', zIndex: 2 }}>
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+              gap: 'clamp(2rem, 5vw, 4.5rem)',
+              alignItems: 'center'
+            }}
+          >
+            {/* Left: 3D Hardcover Book Mockup */}
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
+              <div
+                style={{
+                  perspective: '1200px',
+                  width: 'min(330px, 85vw)'
+                }}
+              >
+                <div
+                  onClick={() => setIsReaderOpen(true)}
+                  style={{
+                    position: 'relative',
+                    aspectRatio: '1 / 1.48',
+                    borderRadius: '8px 14px 14px 8px',
+                    backgroundColor: '#4A1525',
+                    backgroundImage: 'linear-gradient(135deg, #5B1B2F 0%, #3B0E1C 100%)',
+                    boxShadow: '18px 25px 50px -10px rgba(0, 0, 0, 0.7), 2px 0 10px rgba(0,0,0,0.3)',
+                    cursor: 'pointer',
+                    padding: '2rem 1.6rem',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'space-between',
+                    border: '1px solid #7D2D44',
+                    transition: 'all 0.35s cubic-bezier(0.2, 0.8, 0.2, 1)',
+                    transform: 'rotateY(-10deg) rotateX(3deg)',
+                    transformOrigin: 'left center'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform = 'rotateY(0deg) rotateX(0deg) translateY(-8px)';
+                    e.currentTarget.style.boxShadow = '24px 32px 65px -10px rgba(0, 0, 0, 0.85), 4px 0 16px rgba(0,0,0,0.4)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = 'rotateY(-10deg) rotateX(3deg)';
+                    e.currentTarget.style.boxShadow = '18px 25px 50px -10px rgba(0, 0, 0, 0.7), 2px 0 10px rgba(0,0,0,0.3)';
+                  }}
+                >
+                  {/* Book Spine Crease Illusion */}
+                  <div
+                    style={{
+                      position: 'absolute',
+                      top: 0,
+                      bottom: 0,
+                      left: 0,
+                      width: '22px',
+                      background: 'linear-gradient(to right, rgba(0,0,0,0.5) 0%, rgba(255,255,255,0.06) 50%, rgba(0,0,0,0.3) 100%)',
+                      borderRadius: '8px 0 0 8px',
+                      pointerEvents: 'none'
+                    }}
+                  />
+
+                  {/* Gold Filigree Double Border */}
+                  <div
+                    style={{
+                      position: 'absolute',
+                      inset: '12px',
+                      border: '1px solid #D4AF37',
+                      borderRadius: '4px',
+                      pointerEvents: 'none',
+                      opacity: 0.85
+                    }}
+                  />
+                  <div
+                    style={{
+                      position: 'absolute',
+                      inset: '16px',
+                      border: '1px solid rgba(212, 175, 55, 0.4)',
+                      borderRadius: '3px',
+                      pointerEvents: 'none'
+                    }}
+                  />
+
+                  {/* Top: Emblem */}
+                  <div style={{ textAlign: 'center', zIndex: 2 }}>
+                    <div style={{ color: '#D4AF37', letterSpacing: '0.28em', fontSize: '0.72rem', textTransform: 'uppercase' }}>
+                      O R A A N I S
+                    </div>
+                    <div style={{ display: 'inline-flex', color: '#D4AF37', margin: '0.2rem 0' }}>
+                      <svg width="30" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.3">
+                        <path d="M12 21C12 21 12.5 14 16 10C18.5 7 21.5 5.5 21.5 5.5C21.5 5.5 19.5 9 16.5 11.5C14 13.5 12 21 12 21Z" fill="#D4AF37" fillOpacity="0.3"/>
+                        <path d="M12 21C12 21 11.5 15 8 12.5C5.5 10.5 2.5 10 2.5 10C2.5 10 5.5 8 9.5 10.5C11 11.5 12 21 12 21Z" fill="#D4AF37" fillOpacity="0.3"/>
+                        <path d="M12 21V10" stroke="#D4AF37" strokeWidth="1.5"/>
+                      </svg>
+                    </div>
+                  </div>
+
+                  {/* Center: Book Title */}
+                  <div style={{ textAlign: 'center', zIndex: 2 }}>
+                    <h3
+                      style={{
+                        fontFamily: 'var(--font-heading)',
+                        fontSize: 'clamp(1.5rem, 2.5vw, 2rem)',
+                        fontWeight: '700',
+                        color: '#FBF8F3',
+                        letterSpacing: '0.12em',
+                        textTransform: 'uppercase',
+                        margin: '0 0 0.4rem 0',
+                        lineHeight: 1.1
+                      }}
+                    >
+                      REFLECTIONS
+                    </h3>
+                    <div
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        gap: '0.5rem',
+                        color: '#D4AF37',
+                        fontFamily: 'var(--font-heading)',
+                        fontStyle: 'italic',
+                        fontSize: '1rem',
+                        margin: '0.3rem 0 0.8rem 0'
+                      }}
+                    >
+                      <span style={{ width: '22px', height: '1px', backgroundColor: '#D4AF37', opacity: 0.6 }} />
+                      <span>Part 1</span>
+                      <span style={{ width: '22px', height: '1px', backgroundColor: '#D4AF37', opacity: 0.6 }} />
+                    </div>
+                    <p
+                      style={{
+                        fontFamily: 'var(--font-heading)',
+                        fontStyle: 'italic',
+                        color: '#E8D7C3',
+                        fontSize: '0.82rem',
+                        lineHeight: 1.4,
+                        margin: '0 auto',
+                        maxWidth: '200px'
+                      }}
+                    >
+                      On life, people, and the quiet lessons that shape us
+                    </p>
+                  </div>
+
+                  {/* Bottom: Author & Motto */}
+                  <div style={{ textAlign: 'center', zIndex: 2 }}>
+                    <div
+                      style={{
+                        fontFamily: 'var(--font-heading)',
+                        fontSize: '1rem',
+                        fontWeight: '600',
+                        color: '#FBF8F3',
+                        letterSpacing: '0.06em',
+                        marginBottom: '0.25rem'
+                      }}
+                    >
+                      Monika Chopra
+                    </div>
+                    <div
+                      style={{
+                        color: '#D4AF37',
+                        fontSize: '0.62rem',
+                        letterSpacing: '0.2em',
+                        textTransform: 'uppercase',
+                        opacity: 0.95
+                      }}
+                    >
+                      READ • REFLECT • BECOME
+                    </div>
+                  </div>
+
+                  {/* Floating Action Badge */}
+                  <div
+                    style={{
+                      position: 'absolute',
+                      bottom: '-14px',
+                      left: '50%',
+                      transform: 'translateX(-50%)',
+                      backgroundColor: '#1C2541',
+                      color: '#F8FAFC',
+                      padding: '0.3rem 0.8rem',
+                      borderRadius: '999px',
+                      fontSize: '0.7rem',
+                      fontWeight: '600',
+                      border: '1px solid #3A506B',
+                      whiteSpace: 'nowrap',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '0.35rem',
+                      boxShadow: '0 4px 12px rgba(0,0,0,0.5)',
+                      zIndex: 3
+                    }}
+                  >
+                    <BookOpen size={12} color="#A9BCD0" />
+                    <span>Click to Open Book</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Right: Book Overview & Controls */}
+            <div>
+              <div
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '0.45rem',
+                  padding: '0.25rem 0.75rem',
+                  borderRadius: '999px',
+                  backgroundColor: 'rgba(58, 80, 107, 0.35)',
+                  border: '1px solid #3A506B',
+                  color: '#A9BCD0',
+                  fontSize: '0.74rem',
+                  fontWeight: '600',
+                  letterSpacing: '0.05em',
+                  textTransform: 'uppercase',
+                  marginBottom: '1.1rem'
+                }}
+              >
+                <Sparkles size={13} color="#A9BCD0" />
+                <span>New Book Release • Digital Edition 2026</span>
+              </div>
+
+              <h2
+                style={{
+                  fontFamily: 'var(--font-heading)',
+                  fontSize: 'clamp(2rem, 3.5vw, 2.8rem)',
+                  fontWeight: '700',
+                  lineHeight: 1.18,
+                  marginBottom: '0.5rem',
+                  color: '#F8FAFC'
+                }}
+              >
+                REFLECTIONS — Part 1
+              </h2>
+
+              <p
+                style={{
+                  fontFamily: 'var(--font-heading)',
+                  fontStyle: 'italic',
+                  fontSize: '1.15rem',
+                  color: '#A9BCD0',
+                  marginBottom: '1.25rem'
+                }}
+              >
+                On life, people, and the quiet lessons that shape us
+              </p>
+
+              <p
+                style={{
+                  fontSize: '0.94rem',
+                  lineHeight: 1.75,
+                  color: '#A9BCD0',
+                  marginBottom: '1.5rem',
+                  textAlign: 'justify'
+                }}
+              >
+                "Life rarely announces its lessons. They arrive through ordinary conversations,
+                unexpected silences, changing relationships, difficult choices, and moments we understand
+                only much later." In forty-three short reflections and eight quiet pauses, Monika Chopra invites
+                you to read page by page, question gently, and look beyond appearances.
+              </p>
+
+              {/* 4 Feature Badges */}
+              <div
+                style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))',
+                  gap: '0.75rem',
+                  marginBottom: '2rem'
+                }}
+              >
+                <div style={{ backgroundColor: '#1C2541', border: '1px solid #3A506B', borderRadius: '8px', padding: '0.75rem' }}>
+                  <div style={{ fontSize: '0.7rem', color: '#A9BCD0', textTransform: 'uppercase', letterSpacing: '0.04em' }}>Format</div>
+                  <div style={{ fontSize: '1.05rem', fontWeight: '700', color: '#F8FAFC', marginTop: '0.15rem' }}>Animated Book</div>
+                </div>
+
+                <div style={{ backgroundColor: '#1C2541', border: '1px solid #3A506B', borderRadius: '8px', padding: '0.75rem' }}>
+                  <div style={{ fontSize: '0.7rem', color: '#A9BCD0', textTransform: 'uppercase', letterSpacing: '0.04em' }}>Pages</div>
+                  <div style={{ fontSize: '1.05rem', fontWeight: '700', color: '#F8FAFC', marginTop: '0.15rem' }}>82 Pages</div>
+                </div>
+
+                <div style={{ backgroundColor: '#1C2541', border: '1px solid #3A506B', borderRadius: '8px', padding: '0.75rem' }}>
+                  <div style={{ fontSize: '0.7rem', color: '#A9BCD0', textTransform: 'uppercase', letterSpacing: '0.04em' }}>Chapters</div>
+                  <div style={{ fontSize: '1.05rem', fontWeight: '700', color: '#F8FAFC', marginTop: '0.15rem' }}>8 Parts + Pauses</div>
+                </div>
+
+                <div style={{ backgroundColor: '#1C2541', border: '1px solid #3A506B', borderRadius: '8px', padding: '0.75rem' }}>
+                  <div style={{ fontSize: '0.7rem', color: '#A9BCD0', textTransform: 'uppercase', letterSpacing: '0.04em' }}>Reading Mode</div>
+                  <div style={{ fontSize: '1.05rem', fontWeight: '700', color: '#A9BCD0', marginTop: '0.15rem' }}>In-Site Only</div>
+                </div>
+              </div>
+
+              {/* Action Buttons */}
+              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' }}>
+                <button
+                  onClick={() => setIsReaderOpen(true)}
+                  style={{
+                    backgroundColor: '#F8FAFC',
+                    color: '#0B132B',
+                    border: 'none',
+                    borderRadius: '8px',
+                    padding: '0.85rem 1.85rem',
+                    fontSize: '0.94rem',
+                    fontWeight: '700',
+                    cursor: 'pointer',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '0.65rem',
+                    boxShadow: '0 4px 15px rgba(0,0,0,0.3)',
+                    transition: 'all 0.2s ease'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = '#A9BCD0';
+                    e.currentTarget.style.transform = 'translateY(-2px)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = '#F8FAFC';
+                    e.currentTarget.style.transform = 'translateY(0)';
+                  }}
+                >
+                  <BookOpen size={18} />
+                  <span>Open & Read Book</span>
+                </button>
+
+                <Link
+                  to="/books"
+                  style={{
+                    color: '#A9BCD0',
+                    textDecoration: 'none',
+                    fontSize: '0.9rem',
+                    fontWeight: '600',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '0.4rem',
+                    padding: '0.85rem 1.25rem',
+                    borderRadius: '8px',
+                    border: '1px solid #3A506B',
+                    transition: 'all 0.2s ease'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.color = '#F8FAFC';
+                    e.currentTarget.style.backgroundColor = '#1C2541';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.color = '#A9BCD0';
+                    e.currentTarget.style.backgroundColor = 'transparent';
+                  }}
+                >
+                  <span>Explore Chapters & Overview</span>
+                  <ArrowRight size={15} />
+                </Link>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
